@@ -1,0 +1,3 @@
+[submodule "docs/templates"]
+	path = docs/templates
+	url = https://github.com/pharos-oss/docs-templates
