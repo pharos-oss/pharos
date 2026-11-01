@@ -1,8 +1,8 @@
 #import "../../templates/common.typ" : table-style, palette-primary
 = Introduzione
-
+Il presente documento definisce le specifiche e i requisiti per *"Pharos"*, una piattaforma web progettata per abilitare il safeguarding all'interno del contesto accademico.
 == Scopo del sistema 
-Il presente documento definisce le specifiche e i requisiti per *"Pharos"*, una piattaforma web progettata per abilitare il safeguarding all'interno del contesto accademico. Lo scopo primario del sistema è fornire all'intera comunità universitaria uno strumento digitale integrato e confidenziale per prevenire, documentare e contrastare fenomeni di violenza di genere, stalking, mobbing, straining e abusi. Offrendo un ambiente sicuro e procedurizzato, Pharos supporta le vittime nel percorso di presa di consapevolezza, tracciamento degli eventi e richiesta di assistenza istituzionale, concretizzando operativamente il principio fondante del progetto: "Mai più soli".
+ Lo scopo primario del sistema è fornire all'intera comunità universitaria uno strumento digitale integrato e confidenziale per prevenire, documentare e contrastare fenomeni di violenza di genere, stalking, mobbing, straining e abusi. Offrendo un ambiente sicuro e procedurizzato, Pharos supporta le vittime nel percorso di presa di consapevolezza, tracciamento degli eventi e richiesta di assistenza istituzionale, concretizzando operativamente il principio fondante del progetto: "Mai più soli".
 
 == Ambito del sistema (Scope)
 Il sistema Pharos gestirà l'intero ciclo di tutela istituzionale interno all'ateneo. Pertanto, i confini del sistema includono le seguenti funzionalità:
@@ -15,7 +15,7 @@ Il sistema Pharos gestirà l'intero ciclo di tutela istituzionale interno all'at
 
 -*L'integrazione di un modulo accessorio basato su intelligenza artificiale per la classificazione semantica automatica delle segnalazioni.*
 
-Il sistema Pharos, d'altronde, non funge da sostituto formale alle denunce presso le Forze dell'ordine, ma opera esclusivamente come strumento di supporto psicologico, documentazione preventiva e raccordo istituzionale con figure di garanzia interne, quali il Consigliere di Fiducia o il CUG.
+Il sistema Pharos, d'altronde, non funge da sostituto formale alle denunce presso le Forze dell'ordine, ma opera esclusivamente come strumento di supporto psicologico, documentazione preventiva e raccordo istituzionale con figure di garanzia interne, quali il Consigliere di Fiducia e il CUG.
 
 == Obiettivi e criteri di successo 
 La progettazione di Pharos risponde alle criticità sistemiche evidenziate dallo studio europeo UniSAFE, secondo cui, sebbene il 62% della comunità accademica abbia subito violenze, il tasso di segnalazione istituzionale è fermo al 13%. Il successo della piattaforma, quindi, è legato al raggiungimento dei seguenti obiettivi misurabili:
@@ -49,7 +49,21 @@ La progettazione di Pharos risponde alle criticità sistemiche evidenziate dallo
   [Consigliere di Fiducia], [Figura istituzionale di riferimento a cui inviare segnalazioni protette relative a molestie o mobbing]
 )
 
-== Riferimenti 
-
+== Riferimenti
+- *UniSAFE Survey - Gender-based violence and institutional responses (Version 1.0.0):* Lipinsky, A., Schredl, C., Baumann, H., Humbert, A. L., Tanwar, J., Bondestam, F., Freund, F., & Lomazzi, V. (2022).  [Data set]. GESIS, Cologne. DOI: https://doi.org/10.7802/2475.
+- *Linee Guida del CUG (Comitato Unico di Garanzia):* Documentazione e regolamenti interni di Ateneo relativi alle procedure di supporto, segnalazione e tutela del benessere lavorativo e studentesco.
+- *GDPR (Regolamento UE 2016/679)*: Regolamento Generale sulla Protezione dei Dati. Riferimento normativo fondamentale per la definizione dei requisiti non funzionali di privacy, crittografia e anonimato delle segnalazioni gestite dal sistema.
+- *Object-Oriented Software Engineering: Using UML, Patterns, and Java (Bruegge, B., & Dutoit, A. H.)*: Testo accademico adottato come linea guida metodologica per la strutturazione dei casi d'uso, dei modelli di sistema (Modello a Oggetti e Dinamico) e per la stesura della documentazione.
 
 == Panoramica del documento 
+Il presente *Requirements Analysis Document* (RAD) ha lo scopo di formalizzare i requisiti funzionali e non funzionali della piattaforma *Pharos*, il comportamento atteso del sistema, stabilendo i confini del dominio applicativo, e fornendo una base concordata tra il team di sviluppo e gli stakeholder.
+
+Il testo si rivolge principalmente ai docenti, nonché al team di sviluppo come guida architetturale per le successive fasi di progettazione, implementazione e testing.
+
+Il documento è strutturato in modo da fornire una scomposizione progressiva delle specifiche della piattaforma Pharos, partendo dal contesto generale per arrivare alla formalizzazione tecnica dei modelli. I capitoli successivi sono organizzati come segue:
+
+- *Capitolo 1 - Introduzione*: Definisce lo scopo del sistema, l'ambito di sistema, gli obiettivi e criteri di successo, Definizioni, acronimi e abbreviazioni, riferimenti bibliografici e la presente struttura documentale.
+- *Capitolo 2 - Il Sistema Attuale*: Analizza i processi attualmente in uso presso l'Ateneo per la gestione delle segnalazioni e le relative criticità.
+- *Capitolo 3 - Il Sistema Proposto*: Descrive in dettaglio la panoramica della nuova architettura, formalizzando i Requisiti Funzionali e i Requisiti Non Funzionali.
+- *Capitolo 4 - Modelli del Sistema*: Fornisce la vista formale orientata agli oggetti tramite Scenari, Casi d'Uso UML, Modello degli Oggetti (Class Diagram), Modello Dinamico (Sequence Diagram) e Mockup delle Interfacce Utente.
+- *Capitolo 5 - Glossario*: Raccoglie i termini tecnici, le entità di dominio e i concetti metodologici a supporto della comprensione del testo.
