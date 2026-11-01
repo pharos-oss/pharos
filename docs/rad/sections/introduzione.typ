@@ -1,3 +1,4 @@
+#import "../../templates/common.typ" : table-style, palette-primary
 = Introduzione
 
 == Scopo del sistema 
@@ -32,7 +33,23 @@ La progettazione di Pharos risponde alle criticità sistemiche evidenziate dallo
 ]
 
 == Definizioni, acronimi e abbreviazioni 
+#table(
+  columns: 2,
+  ..table-style(palette-primary),
+  inset: 10pt,
+  align:horizon,
+  table.header(
+   [*Nome*], 
+   [*Definizione*],
+  ),
+  [Safeguarding accademico],  [Insieme delle misure preventive e di intervento progettate per tutelare la comunità universitaria contro abusi e violenze],
+  [Diario delle evidenze], [Spazio confidenziale all'interno della piattaforma in cui la vittima può registrare, datare e raccogliere prove relative agli episodi di mobbing o molestie],
+  [Triage guidato], [Percorso interattivo iniziale che aiuta l'utente a classificare l'episodio e ad acquisire consapevolezza sulla sua natura],
+  [CUG], [Comitato Unico di Garanzia, organo accademico preposto alla tutela delle pari opportunità e al benessere lavorativo],
+  [Consigliere di Fiducia], [Figura istituzionale di riferimento a cui inviare segnalazioni protette relative a molestie o mobbing]
+)
 
 == Riferimenti 
+
 
 == Panoramica del documento 
