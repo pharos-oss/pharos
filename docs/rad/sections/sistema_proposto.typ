@@ -21,3 +21,8 @@ In conclusione, Pharos agisce come un intermediario di fiducia: da un lato abbas
   image("../assets/images/AD_01_consiglieredifiducia.png"),
   caption: ["AD_01 Activity Diagram dal punto di vista del Consigliere di fiducia"]
 )
+
+#figure(
+  image("../assets/images/AD_02_utente.png"),
+  caption: ["AD_02 Activity Diagram dal punto di vista dell'utente"]
+)
