@@ -58,7 +58,7 @@ La progettazione di Pharos risponde alle criticità sistemiche evidenziate dallo
 == Panoramica del documento 
 Il presente *Requirements Analysis Document* (RAD) ha lo scopo di formalizzare i requisiti funzionali e non funzionali della piattaforma *Pharos*, il comportamento atteso del sistema, stabilendo i confini del dominio applicativo, e fornendo una base concordata tra il team di sviluppo e gli stakeholder.
 
-Il testo si rivolge principalmente ai docenti, nonché al team di sviluppo come guida architetturale per le successive fasi di progettazione, implementazione e testing.
+Il testo si rivolge principalmente ai docenti e agli stakeholders interni ed esterni(studenti e personale accademico, Consigliere di Fiducia, CUG), nonché al team di sviluppo come guida architetturale per le successive fasi di progettazione, implementazione e testing.
 
 Il documento è strutturato in modo da fornire una scomposizione progressiva delle specifiche della piattaforma Pharos, partendo dal contesto generale per arrivare alla formalizzazione tecnica dei modelli. I capitoli successivi sono organizzati come segue:
 
