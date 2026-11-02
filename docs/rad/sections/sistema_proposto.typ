@@ -17,3 +17,7 @@ Il nuovo processo si articola in un flusso lineare, concepito per tutelare le pa
 In conclusione, Pharos agisce come un intermediario di fiducia: da un lato abbassa la barriera psicologica della denuncia fornendo un ambiente sicuro per l'utente, dall'altro dota l'Istituzione di uno strumento organizzato per monitorare il benessere accademico e intervenire in modo tempestivo.
 
 == Diagrammi delle attività
+#figure(
+  image("../assets/images/AD_01_consiglieredifiducia.png"),
+  caption: ["AD_01 Activity Diagram dal punto di vista del Consigliere di fiducia"]
+)
