@@ -16,7 +16,7 @@ Il sistema attualmente in uso presso l'Università degli Studi di Salerno per la
     columns: (1fr, 1fr),
     ..table-style(palette-primary),
     align: left + horizon,
-    inset: (y: 7pt, x: 8pt),
+    inset: (y: 6pt, x: 8pt),
     stroke: 0.6pt + palette-primary.lighten(55%),
 
     table.cell(colspan: 2, fill: palette-primary, inset: (y: 9pt, x: 8pt))[#text(fill: white, size: 1.1em)[*Nome Scenario:* SC_1 Segnalazione manuale via e-mail]],
@@ -51,7 +51,7 @@ Il sistema attualmente in uso presso l'Università degli Studi di Salerno per la
     columns: (1fr, 1fr),
     ..table-style(palette-primary),
     align: left + horizon,
-    inset: (y: 7pt, x: 8pt),
+    inset: (y: 3.4pt, x: 8pt),
     stroke: 0.6pt + palette-primary.lighten(55%),
 
     table.cell(colspan: 2, fill: palette-primary, inset: (y: 9pt, x: 8pt))[#text(fill: white, size: 1.1em)[*Nome Scenario:* SC_1 Alternativo Segnalazione manuale con richiesta di integrazioni]],
