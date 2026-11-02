@@ -62,7 +62,7 @@ Il testo si rivolge principalmente ai docenti, nonché al team di sviluppo come 
 
 Il documento è strutturato in modo da fornire una scomposizione progressiva delle specifiche della piattaforma Pharos, partendo dal contesto generale per arrivare alla formalizzazione tecnica dei modelli. I capitoli successivi sono organizzati come segue:
 
-- *Capitolo 1 - Introduzione*: Definisce lo scopo del sistema, l'ambito di sistema, gli obiettivi e criteri di successo, Definizioni, acronimi e abbreviazioni, riferimenti bibliografici e la presente struttura documentale.
+- *Capitolo 1 - Introduzione*: Definisce lo scopo del sistema, l'ambito di sistema, gli obiettivi e criteri di successo, definizioni, acronimi e abbreviazioni, riferimenti bibliografici e la presente struttura documentale.
 - *Capitolo 2 - Il Sistema Attuale*: Analizza i processi attualmente in uso presso l'Ateneo per la gestione delle segnalazioni e le relative criticità.
 - *Capitolo 3 - Il Sistema Proposto*: Descrive in dettaglio la panoramica della nuova architettura, formalizzando i Requisiti Funzionali e i Requisiti Non Funzionali.
 - *Capitolo 4 - Modelli del Sistema*: Fornisce la vista formale orientata agli oggetti tramite Scenari, Casi d'Uso UML, Modello degli Oggetti (Class Diagram), Modello Dinamico (Sequence Diagram) e Mockup delle Interfacce Utente.
