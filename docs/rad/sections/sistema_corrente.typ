@@ -83,3 +83,13 @@ Il sistema attualmente in uso presso l'Università degli Studi di Salerno per la
 ]
 
 == Activity Diagram 
+
+#figure(
+image("../assets/images/AD_1.png", width: 50%),
+caption: ["AD_1 Activity Diagram scenario 1"],
+)
+
+#figure(
+image("../assets/images/AD_1_Alternativo.png", width: 50%),
+caption: ["AD_1 Activity Diagram scenario alternativo 1"],
+)
