@@ -1,6 +1,6 @@
 #import "../../templates/common.typ" : table-style, palette-primary
 
-= Introduzione
+= Introduzione <introduzione>
 Il presente documento definisce le specifiche e i requisiti per *"Pharos"*, una piattaforma web progettata per abilitare il safeguarding all'interno del contesto accademico.
 
 == Scopo del sistema 
@@ -21,6 +21,8 @@ Il sistema Pharos gestirà l'intero ciclo di tutela istituzionale interno all'at
 
 Il sistema Pharos, d'altronde, non funge da sostituto formale alle denunce presso le Forze dell'ordine, ma opera esclusivamente come strumento di supporto psicologico, documentazione preventiva e raccordo istituzionale con figure di garanzia interne, quali il Consigliere di Fiducia e il CUG.
 
+#pagebreak()
+
 == Obiettivi e criteri di successo 
 La progettazione di Pharos risponde alle criticità sistemiche evidenziate dallo studio europeo UniSAFE, secondo cui, sebbene il 62% della comunità accademica abbia subito violenze, il tasso di segnalazione istituzionale è fermo al 13%. Il successo della piattaforma, quindi, è legato al raggiungimento dei seguenti obiettivi misurabili:
 
@@ -30,11 +32,9 @@ La progettazione di Pharos risponde alle criticità sistemiche evidenziate dallo
 
 3. *Offrire un canale di comunicazione confidenziale e protetto capace di abbattere le resistenze legate al timore di ritorsioni, fattore che attualmente dissuade il 12% delle vittime.*
 
-#block(breakable: false)[
 4. *Contrastare la percezione di inefficacia istituzionale, fattore che attualmente frena il 26% delle vittime, convinte dell'inutilità della segnalazione, garantendo la totale trasparenza dell'iter e la tracciabilità della pratica da parte dell'utente."*
 
 5. *Colmare il divario di segnalazione tra le diverse componenti accademiche, focalizzandosi sulle fasce più vulnerabili, in particolare gli studenti, il cui tasso di denuncia (7%) risulta attualmente molto inferiore rispetto a quello del personale universitario (23%).*
-]
 
 == Definizioni, acronimi e abbreviazioni 
 #table(
@@ -54,10 +54,15 @@ La progettazione di Pharos risponde alle criticità sistemiche evidenziate dallo
 )
 
 == Riferimenti
-- *UniSAFE Survey - Gender-based violence and institutional responses (Version 1.0.0):* Lipinsky, A., Schredl, C., Baumann, H., Humbert, A. L., Tanwar, J., Bondestam, F., Freund, F., & Lomazzi, V. (2022).  [Data set]. GESIS, Cologne. DOI: https://doi.org/10.7802/2475.
-- *Linee Guida del CUG (Comitato Unico di Garanzia):* Documentazione e regolamenti interni di Ateneo relativi alle procedure di supporto, segnalazione e tutela del benessere lavorativo e studentesco.
-- *GDPR (Regolamento UE 2016/679)*: Regolamento Generale sulla Protezione dei Dati. Riferimento normativo fondamentale per la definizione dei requisiti non funzionali di privacy, crittografia e anonimato delle segnalazioni gestite dal sistema.
-- *Object-Oriented Software Engineering: Using UML, Patterns, and Java (Bruegge, B., & Dutoit, A. H.)*: Testo accademico adottato come linea guida metodologica per la strutturazione dei casi d'uso, dei modelli di sistema (Modello a Oggetti e Dinamico) e per la stesura della documentazione.
+- *Statement of Work (SoW) - Progetto Pharos:* Documento fondativo del progetto. Costituisce la fonte primaria per la definizione dello scope, dei vincoli, delle esclusioni e degli obiettivi di progetto concordati.
+
+- *UniSAFE Survey - Gender-based violence and institutional responses (Version 1.0.0):* Lipinsky, A., Schredl, C., Baumann, H., Humbert, A. L., Tanwar, J., Bondestam, F., Freund, F., & Lomazzi, V. (2022). [Data set]. GESIS, Cologne. DOI: #link("https://doi.org/10.7802/2475")[10.7802/2475].
+
+- *Linee Guida del CUG (Comitato Unico di Garanzia):* Documentazione e regolamenti interni di Ateneo relativi alle procedure di supporto, segnalazione e tutela del benessere lavorativo e studentesco. Disponibili sul portale istituzionale: #link("https://cug.unisa.it/normativa-di-riferimento")[Sezione CUG di Ateneo].
+
+- *GDPR (Regolamento UE 2016/679):* Regolamento Generale sulla Protezione dei Dati. Riferimento normativo fondamentale per la definizione dei requisiti non funzionali di privacy, crittografia e anonimato delle segnalazioni gestite dal sistema. Testo ufficiale: #link("https://eur-lex.europa.eu/eli/reg/2016/679/oj")[EUR-Lex: Regolamento (UE) 2016/679].
+
+- *Object-Oriented Software Engineering: Using UML, Patterns, and Java:* Bruegge, B., & Dutoit, A. H. (2013). Pearson, 3ª Edizione. Testo accademico adottato come linea guida metodologica per la strutturazione dei casi d'uso, dei modelli di sistema (Modello a Oggetti e Dinamico) e per la stesura della documentazione. ISBN: 978-1292024011.
 
 == Panoramica del documento 
 Il presente *Requirements Analysis Document* (RAD) ha lo scopo di formalizzare i requisiti funzionali e non funzionali della piattaforma *Pharos*, il comportamento atteso del sistema, stabilendo i confini del dominio applicativo, e fornendo una base concordata tra il team di sviluppo e gli stakeholder.
@@ -66,8 +71,8 @@ Il testo si rivolge principalmente ai docenti e agli stakeholders interni ed est
 
 Il documento è strutturato in modo da fornire una scomposizione progressiva delle specifiche della piattaforma Pharos, partendo dal contesto generale per arrivare alla formalizzazione tecnica dei modelli. I capitoli successivi sono organizzati come segue:
 
-- *Capitolo 1 - Introduzione*: Definisce lo scopo del sistema, l'ambito di sistema, gli obiettivi e criteri di successo, definizioni, acronimi e abbreviazioni, riferimenti bibliografici e la presente struttura documentale.
-- *Capitolo 2 - Il Sistema Attuale*: Analizza i processi attualmente in uso presso l'Ateneo per la gestione delle segnalazioni e le relative criticità.
-- *Capitolo 3 - Il Sistema Proposto*: Descrive in dettaglio la panoramica della nuova architettura, formalizzando i Requisiti Funzionali e i Requisiti Non Funzionali.
-- *Capitolo 4 - Modelli del Sistema*: Fornisce la vista formale orientata agli oggetti tramite Scenari, Casi d'Uso UML, Modello degli Oggetti (Class Diagram), Modello Dinamico (Sequence Diagram) e Mockup delle Interfacce Utente.
-- *Capitolo 5 - Glossario*: Raccoglie i termini tecnici, le entità di dominio e i concetti metodologici a supporto della comprensione del testo.
+- @introduzione: *Introduzione*: Definisce lo scopo del sistema, l'ambito di sistema, gli obiettivi e criteri di successo, definizioni, acronimi e abbreviazioni, riferimenti bibliografici e la presente struttura documentale.
+
+- @sis_corrente: *Sistema Attuale*: Analizza i processi attualmente in uso presso l'Ateneo per la gestione delle segnalazioni e le relative criticità. 
+
+- @sis_proposto: *Sistema Proposto*: Descrive in dettaglio la panoramica della nuova architettura, formalizzando i Requisiti Funzionali e i Requisiti Non Funzionali.

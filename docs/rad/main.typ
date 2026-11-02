@@ -35,6 +35,8 @@
   metadata: metadata,
   revision-history: revision-history,
 )
+#show link: it => text(fill: blue, underline(it)) 
+#show ref: set text(fill: blue)
 
 #include "sections/introduzione.typ"
 
