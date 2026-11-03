@@ -16,7 +16,7 @@
 // No "Versione" row: the template adds it from the last revision-history entry.
 #let metadata = (
   ("Riferimento", "RAD_Pharos"),
-  ("Data", "31/10/2026"),
+  ("Data", "01/11/2026"),
   ("Destinatario", ""),
   ("Presentato da", ""),
   ("Approvato da", ""),
@@ -25,7 +25,7 @@
 // One row per change: (date, version, description, authors).
 // The last row's version is the one shown in the footer.
 #let revision-history = (
-  
+  ("01/11/2026", "0.1", "Stesura introduzione del documento", "Gianmarco Raimondi, Carmine Saggese"),
 )
 
 #show: doc-template.with(
@@ -35,6 +35,8 @@
   metadata: metadata,
   revision-history: revision-history,
 )
+#show link: it => text(fill: blue, underline(it)) 
+#show ref: set text(fill: blue)
 
 #include "sections/introduzione.typ"
 
