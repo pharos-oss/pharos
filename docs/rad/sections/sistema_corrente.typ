@@ -8,7 +8,7 @@
   stroke: (left: 3pt + palette-primary),
 )
 
-= Sistema Corrente
+= Sistema Corrente <sis_corrente>
 
 #v(1em)
 
