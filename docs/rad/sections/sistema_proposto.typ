@@ -1,9 +1,9 @@
 = Sistema Proposto <sis_proposto>
 
 == Panoramica del sistema proposto
-La piattaforma *Pharos* si pone l'obiettivo di modernizzare e rendere sicuro il processo di gestione delle segnalazioni all'interno dell'Ateneo. Attualmente, l'iter si basa su canali frammentati (moduli cartacei, email ordinarie, colloqui diretti), i quali presentano forti criticità per quanto riguarda la tutela dell'identità del segnalante, la tracciabilità delle pratiche e il carico burocratico. 
+La piattaforma *Pharos* si pone l'obiettivo di modernizzare e rendere sicuro il processo di gestione delle segnalazioni all'interno dell'Ateneo. Attualmente, l'iter si basa su canali frammentati (moduli cartacei, email ordinarie, colloqui diretti), i quali presentano forti criticità per quanto riguarda la tutela dell'identità del segnalante, la tracciabilità delle pratiche e il carico burocratico.
 
-Il sistema proposto supera queste limitazioni introducendo un processo interamente digitale, progettato per garantire il completo anonimato dell'utente e, al contempo, offrire agli organi preposti (come il Consigliere di fiducia) uno strumento di analisi dei dati riguardanti le segnalazioni e relativi tools di esportazione file e creazione grafici. L'innovazione principale di Pharos consiste nel separare in modo netto l'identità di chi effettua la segnalazione dal contenuto della segnalazione stessa.
+Il sistema proposto supera queste limitazioni introducendo un processo interamente digitale, progettato per garantire la totale confidenzialità dell'utente e, al contempo, offrire agli organi preposti (come il Consigliere di fiducia) uno strumento di analisi dei dati e relative funzioni di esportazione e creazione grafici. L'innovazione principale di Pharos consiste nel separare in modo netto l'identità di chi effettua la denuncia dal contenuto della segnalazione stessa, assicurando che i dati personali siano rigorosamente protetti e accessibili solo agli operatori autorizzati per la presa in carico della pratica.
 
 Il nuovo processo si articola in un flusso lineare, concepito per tutelare le parti coinvolte tramite i seguenti passaggi chiave:
 
