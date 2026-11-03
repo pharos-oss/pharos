@@ -76,6 +76,6 @@ Come evidenziato dall'analisi dei bisogni di business, questo modello presenta d
 #v(0.5em)
 
 #figure(
-  image("../assets/images/AD_Unico.jpg", width: 50%),
-
+  image("../assets/images/AD_Unico.png", width: 50%),
+  caption: ["AD_Unico Activity Diagram dello scenario"]
 )
