@@ -7,22 +7,15 @@ Il sistema proposto supera queste limitazioni introducendo un processo interamen
 
 Il nuovo processo si articola in un flusso lineare, concepito per tutelare le parti coinvolte tramite i seguenti passaggi chiave:
 
-
-1. *Annotazione dell'evento sul diario delle evidenze:* L'utente successivamente all'avvenirsi della violenza segna sul suo personale diario le possibili prove.
-2. *Consultazione con il  modulo AI:* Successivamte l'utente per accertarsi e ricevere una prima assistenza, può consultare il modello AI per comprendere la gravità. Questo modello inoltre classifica il tipo di violenza e propone l'aquis burocratico nella compilazione del form di segnalazione.
-3. *Inoltro della Segnalazione:* L'utente (studente o dipendente) accede alla piattaforma e viene guidato nella compilazione di un modulo standardizzato. Il sistema acquisisce esclusivamente le informazioni relative all'evento, ignorando qualsiasi dato riconducibile al dispositivo o all'identità del mittente.
-4. *Presa in Carico e Gestione:* Le segnalazioni inoltrate confluiscono in un'area riservata a disposizione degli operatori autorizzati(Consigliere di fiducia). Il personale preposto può così esaminare i casi in forma anonima, analizzare i dati e creare i report statistici e mantenere un registro ordinato senza dispersione documentale.
-
+1. *Annotazione dell'evento sul diario delle evidenze:* In seguito all'accaduto, l'utente ha la possibilità di annotare sul proprio diario personale le dinamiche e le possibili prove dell'evento.
+2. *Consultazione con il modulo AI:* Successivamente, per inquadrare l'accaduto e ricevere una prima assistenza, l'utente può interagire con il modulo di intelligenza artificiale integrato per valutare la gravità dell'evento. Il modello, inoltre, classifica la tipologia di violenza e fornisce supporto sull'iter burocratico necessario per la compilazione del form di segnalazione.
+3. *Inoltro della Segnalazione:* L'utente accede alla piattaforma e compila un modulo standardizzato. Il sistema acquisisce la segnalazione mantenendo i dati anagrafici del mittente strettamente confidenziali e logicamente separati dai fatti narrati.
+4. *Presa in Carico e Gestione:* Le segnalazioni inoltrate confluiscono in un'area riservata a disposizione del Consigliere di fiducia. Il personale preposto può così esaminare i casi garantendo la massima riservatezza, analizzare i dati, creare report statistici e mantenere un registro ordinato senza dispersione documentale.
 
 In conclusione, Pharos agisce come un intermediario di fiducia: da un lato abbassa la barriera psicologica della denuncia fornendo un ambiente sicuro per l'utente, dall'altro dota l'Istituzione di uno strumento organizzato per monitorare il benessere accademico e intervenire in modo tempestivo.
 
-== Diagrammi delle attività
+== Diagramma delle attività
 #figure(
-  image("../assets/images/AD_01_consiglieredifiducia.png"),
-  caption: ["AD_01 Activity Diagram dal punto di vista del Consigliere di fiducia"]
-)
-
-#figure(
-  image("../assets/images/AD_02_utente.png"),
-  caption: ["AD_02 Activity Diagram dal punto di vista dell'utente"]
+  image("../assets/images/AD_01_UtenteConsigliere.png"),
+  caption: ["AD_01 Activity Diagram dal punto di vista dell'utente e del Consigliere di fiducia"]
 )
