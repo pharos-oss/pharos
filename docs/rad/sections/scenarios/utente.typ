@@ -68,7 +68,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
   *Partecipanti*: Giulia (Utente)
 
-  *Obiettivi*: ottenere una valutazione orientativa tramite intelligenza artificiale sugli episodi annotati nel diario per comprendere la situazione e decidere se avviare una segnalazione formale.
+  *Obiettivo*: ottenere una valutazione orientativa tramite intelligenza artificiale sugli episodi annotati nel diario per comprendere la situazione e decidere se avviare una segnalazione formale.
 
   *Flusso di eventi*:
 
