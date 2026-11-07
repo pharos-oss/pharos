@@ -234,7 +234,6 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   - 4.a2 *Sistema*: Reindirizza l'Utente all'elenco generale delle segnalazioni.
 
   #v(1em)
-
   *Note*: NA \
   *Special Requirements*: Una volta portata nello stato «Archiviata», la segnalazione non può essere riaperta in alcun modo.
 ]
