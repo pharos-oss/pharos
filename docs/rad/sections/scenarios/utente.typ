@@ -18,6 +18,8 @@
 
   *Partecipanti:* Giulia (Utente)
 
+  *Obiettivo:* verificare lo stato di avanzamento e la cronologia degli aggiornamenti della propria segnalazione.
+
   *Flusso di eventi:*
 
   + Una settimana dopo l’invio, Giulia vuole sapere a che punto è la propria segnalazione. Accede a Pharos e apre l’elenco delle proprie segnalazioni.
@@ -34,6 +36,8 @@
   #v(0.3em)
 
   *Partecipanti:* Marco (Utente), Elena (Consigliere di Fiducia)
+
+  *Obiettivo:* salvare temporaneamente una segnalazione in bozza cifrata per poterla completare ed inviare in un secondo momento.
 
   *Flusso di eventi:*
 
@@ -55,6 +59,8 @@
 
   *Partecipanti:* Marco (Utente)
 
+  *Obiettivo:* registrare un nuovo evento nel diario personale allegando un file, gestendo la correzione in caso di errore per superamento della dimensione massima consentita.
+
   *Flusso di eventi:*
 
   + Marco, dipendente tecnico amministrativo, vuole conservare nel diario la registrazione audio di una riunione in cui il proprio responsabile si è rivolto a lui in modo umiliante. Accede a Pharos e aggiunge un nuovo evento.
@@ -73,6 +79,8 @@
   #v(0.3em)
 
   *Partecipanti:* Giulia (Utente), Elena (Consigliere di Fiducia)
+
+  *Obiettivo:* rinunciare al proseguimento della gestione della segnalazione, richiedendone l'archiviazione e l'interruzione dell'iter.
 
   *Flusso di eventi:*
 
