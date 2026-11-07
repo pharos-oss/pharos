@@ -33,7 +33,7 @@
 
   + Marco inizia a compilare una segnalazione per mobbing ma, durante la stesura, viene interrotto e deve allontanarsi.
   + Marco sceglie di salvare la segnalazione come bozza.
-  + Il sistema salva la bozza in forma cifrata, visibile solo a Marco e non inviata al Consigliere di Fiducia.
+  + Il sistema salva la bozza, visibile solo a Marco e non inviata al Consigliere di Fiducia.
   + Il giorno successivo Marco accede a Pharos e apre la sezione delle proprie segnalazioni.
   + Il sistema mostra la bozza con la data dell’ultimo salvataggio.
   + Marco riapre la bozza, completa la descrizione, allega dal diario due eventi e conferma l’invio.
