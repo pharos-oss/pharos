@@ -46,7 +46,7 @@
   + La dott.ssa Bianchi seleziona lo stato "In lavorazione" e aggiunge una nota visibile a Giulia: "Colloquio conoscitivo fissato per il 20/11 alle ore 10:00".
   + Il sistema registra il nuovo stato nella cronologia della pratica e notifica Giulia.
 
-  Flusso alternativo (passo 2): se nel frattempo Giulia ha rinunciato al proseguimento dell'iter, il sistema mostra la pratica nello stato "Archiviata" e non ne consente la modifica.
+  *Flusso alternativo (passo 2):* se nel frattempo Giulia ha rinunciato al proseguimento dell'iter, il sistema mostra la pratica nello stato "Archiviata" e non ne consente la modifica.
 ]
 
 #v(1.5em)
