@@ -16,9 +16,9 @@
 
   #v(0.3em)
 
-  Partecipanti: Giulia (Utente)
+  *Partecipanti:* Giulia (Utente)
 
-  Flusso di eventi:
+  *Flusso di eventi:*
 
   + Una settimana dopo l’invio, Giulia vuole sapere a che punto è la propria segnalazione. Accede a Pharos e apre l’elenco delle proprie segnalazioni.
   + Il sistema mostra le segnalazioni di Giulia con il relativo stato attuale.
@@ -26,16 +26,16 @@
   + Il sistema mostra la cronologia degli stati con le relative date («Inviata», «Presa in carico», «In lavorazione») e la nota del Consigliere di Fiducia: «Colloquio conoscitivo fissato per il 20/11 alle ore 10:00».
 ]
 
-#v(1.5em)
+#v(5em)
 
 #scenario-box[
   === SC_U_06 Segnalazione salvata in bozza e ripresa
 
   #v(0.3em)
 
-  Partecipanti: Marco (Utente), Elena (Consigliere di Fiducia)
+  *Partecipanti:* Marco (Utente), Elena (Consigliere di Fiducia)
 
-  Flusso di eventi:
+  *Flusso di eventi:*
 
   + Marco inizia a compilare una segnalazione per mobbing ma, durante la stesura, viene interrotto e deve allontanarsi.
   + Marco sceglie di salvare la segnalazione come bozza.
@@ -53,9 +53,9 @@
 
   #v(0.3em)
 
-  Partecipanti: Marco (Utente)
+  *Partecipanti:* Marco (Utente)
 
-  Flusso di eventi:
+  *Flusso di eventi:*
 
   + Marco, dipendente tecnico amministrativo, vuole conservare nel diario la registrazione audio di una riunione in cui il proprio responsabile si è rivolto a lui in modo umiliante. Accede a Pharos e aggiunge un nuovo evento.
   + Il sistema mostra il modulo per l’inserimento dell’evento.
@@ -72,9 +72,9 @@
 
   #v(0.3em)
 
-  Partecipanti: Giulia (Utente), Elena (Consigliere di Fiducia)
+  *Partecipanti:* Giulia (Utente), Elena (Consigliere di Fiducia)
 
-  Flusso di eventi:
+  *Flusso di eventi:*
 
   + La segnalazione di Giulia è stata presa in carico ed esaminata dal Consigliere di Fiducia. Giulia decide di non proseguire con l’iter, quindi accede a Pharos, apre la segnalazione e sceglie di non continuare.
   + Il sistema avvisa Giulia che la segnalazione verrà archiviata e l’iter interrotto, e le chiede conferma.
