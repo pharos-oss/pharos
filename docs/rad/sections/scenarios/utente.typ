@@ -38,6 +38,39 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
   + Il sistema salva l’evento in forma cifrata, registra la data e l’ora di inserimento e lo mostra nel diario.
   + Il sistema chiede a Giulia se desidera segnalare l’evento al Consigliere di Fiducia. Giulia sceglie di non farlo per il momento: l’evento resta salvato nel diario e il sistema la riporta alla Home.
 ]
+
+
+
+  #v(0.3em)
+#callout-box(title:"SC_U_03 Risposta a una richiesta di integrazioni")[
+  *Partecipanti*: Marco (Utente), Elena (Consigliere di Fiducia)
+
+  *Flusso di eventi*:
+
+  + Marco riceve una notifica: la sua segnalazione è passata allo stato «In attesa di integrazioni». Accede a Pharos e apre la segnalazione.
+  + Il sistema mostra la richiesta della dott.ssa Elena Bianchi: le email ricevute dal responsabile nel mese di settembre.
+  + Marco seleziona dal diario due eventi con le email allegate, aggiunge una breve nota e invia le integrazioni.
+  + Il sistema allega il materiale alla segnalazione, la riporta nello stato «In lavorazione» e notifica la dott.ssa Elena Bianchi.
+  + Il sistema conferma a Marco l’avvenuto invio.
+]
+
+#v(1.5em)
+
+#callout-box(title:"SC_U_04 Triage guidato tramite il modulo AI")[
+
+  #v(0.3em)
+
+  *Partecipanti*: Giulia (Utente)
+
+  *Flusso di eventi*:
+
+  + Giulia ha annotato nel diario tre episodi che coinvolgono la stessa persona e non sa se possano essere considerati molestia. Seleziona gli eventi e avvia il triage guidato.
+  + Il sistema informa Giulia che il triage è solo orientativo, che viene svolto da un sistema di intelligenza artificiale, non sostituisce il Consigliere di Fiducia e non comporta alcun invio, e le chiede conferma.
+  + Giulia conferma.
+  + Il sistema trasmette al modulo AI il testo degli eventi selezionati, privato dei dati identificativi.
+  + Il sistema mostra a Giulia la valutazione della gravità, la tipologia di violenza più probabile («molestia morale») e i passi dell’iter di segnalazione.
+  + Il sistema chiede a Giulia se desidera inviare una segnalazione al Consigliere di Fiducia. Giulia sceglie di procedere.
+]
 // da questa sezione si inseriscono gli scenari utente da 5-8
 #callout-box(title: "SC_U_05 Consultazione dello stato di una segnalazione")[
 
