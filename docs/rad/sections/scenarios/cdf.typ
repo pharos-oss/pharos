@@ -4,7 +4,7 @@
 
   #v(0.3em)
 
-  *Partecipanti:* Elena: Consigliere di Fiducia, Giulia: Utente
+  *Partecipanti:* Elena (Consigliere di Fiducia), Giulia (Utente)
 
   *Obiettivo:* prendere in carico una nuova segnalazione consultando in un unico punto la descrizione e le evidenze in ordine cronologico.
 
@@ -25,7 +25,7 @@
 
   #v(0.3em)
 
-  *Partecipanti:* Elena: Consigliere di Fiducia, Giulia: Utente
+  *Partecipanti:* Elena (Consigliere di Fiducia), Giulia (Utente)
 
   *Obiettivo:* tenere informata la vittima sull'avanzamento della pratica, garantendo la trasparenza dell'iter.
 
@@ -45,7 +45,7 @@
 
   #v(0.3em)
 
-  *Partecipanti:* Elena: Consigliere di Fiducia, Marco: Utente
+  *Partecipanti:* Elena (Consigliere di Fiducia), Marco (Utente)
 
   *Obiettivo:* concludere formalmente la pratica, registrandone l'esito e conservandone traccia.
 
@@ -65,7 +65,7 @@
 
   #v(0.3em)
 
-  *Partecipanti:* Elena: Consigliere di Fiducia
+  *Partecipanti:* Elena (Consigliere di Fiducia)
 
   *Obiettivo:* fornire al CUG dati aggregati sul fenomeno senza compromettere la riservatezza delle vittime.
 
