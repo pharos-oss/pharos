@@ -37,3 +37,37 @@
 ]
 
 #v(1.5em)
+
+#scenario-box[
+  === SC_U_07 Annotazione di un evento con allegato non conforme
+
+  #v(0.3em)
+
+  Partecipanti: Marco (Utente)
+
+  Flusso di eventi:
+
+  + Marco, dipendente tecnico amministrativo, vuole conservare nel diario la registrazione audio di una riunione in cui il proprio responsabile si è rivolto a lui in modo umiliante. Accede a Pharos e aggiunge un nuovo evento.
+  + Il sistema mostra il modulo per l’inserimento dell’evento.
+  + Marco compila data, luogo e descrizione e allega il file audio, di 140 MB.
+  + Il sistema rileva che il file supera la dimensione massima consentita (50 MB) e lo rifiuta, indicando il limite e i formati ammessi. I dati già inseriti restano nel modulo.
+  + Marco allega una versione compressa della registrazione, di 38 MB.
+  + Il sistema verifica il nuovo allegato, salva l’evento in forma cifrata e lo mostra nel diario.
+]
+
+#v(1.5em)
+
+#scenario-box[
+  === SC_U_08 Rinuncia al proseguimento dell’iter
+
+  #v(0.3em)
+
+  Partecipanti: Giulia (Utente), Elena (Consigliere di Fiducia)
+
+  Flusso di eventi:
+
+  + La segnalazione di Giulia è stata presa in carico ed esaminata dal Consigliere di Fiducia. Giulia decide di non proseguire con l’iter, quindi accede a Pharos, apre la segnalazione e sceglie di non continuare.
+  + Il sistema avvisa Giulia che la segnalazione verrà archiviata e l’iter interrotto, e le chiede conferma.
+  + Giulia conferma.
+  + Il sistema imposta lo stato «Archiviata», rende la segnalazione consultabile in sola lettura e notifica la dott.ssa Elena Bianchi.
+]
