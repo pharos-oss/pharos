@@ -77,4 +77,4 @@ Il documento è strutturato in modo da fornire una scomposizione progressiva del
 
 - @sis_proposto: *Sistema Proposto*: Descrive in dettaglio la panoramica della nuova architettura, formalizzando i Requisiti Funzionali e i Requisiti Non Funzionali.
 
-- @modelli_sistema: *Modelli di Sistema*: descrive il comportamento e la struttura di Pharos attraverso scenari, casi d'uso, modello a oggetti e modello dinamico.
+- @modelli_sistema: *Modelli di Sistema*: descrive il comportamento e la struttura di Pharos attraverso scenari, casi d'uso, modello a oggetti, modello dinamico e mockup di interfaccia utente.
