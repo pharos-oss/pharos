@@ -13,11 +13,11 @@
 
   #v(0.3em)
 
-  Partecipanti: Elena: Consigliere di Fiducia, Giulia: Utente
+  *Partecipanti:* Elena: Consigliere di Fiducia, Giulia: Utente
 
-  Obiettivo: prendere in carico una nuova segnalazione consultando in un unico punto la descrizione e le evidenze in ordine cronologico.
+  *Obiettivo:* prendere in carico una nuova segnalazione consultando in un unico punto la descrizione e le evidenze in ordine cronologico.
 
-  Flusso di eventi:
+  *Flusso di eventi:*
 
   + La dott.ssa Elena Bianchi riceve la notifica di una nuova segnalazione e accede alla propria area riservata.
   + Il sistema mostra l'elenco delle segnalazioni ricevute, evidenziando quelle nuove.
@@ -35,11 +35,11 @@
 
   #v(0.3em)
 
-  Partecipanti: Elena: Consigliere di Fiducia, Giulia: Utente
+  *Partecipanti:* Elena: Consigliere di Fiducia, Giulia: Utente
 
-  Obiettivo: tenere informata la vittima sull'avanzamento della pratica, garantendo la trasparenza dell'iter.
+  *Obiettivo:* tenere informata la vittima sull'avanzamento della pratica, garantendo la trasparenza dell'iter.
 
-  Flusso di eventi:
+  *Flusso di eventi:*
 
   + La dott.ssa Elena Bianchi decide di fissare un colloquio conoscitivo con Giulia per concordare la gestione dell'iter e apre la relativa pratica.
   + Il sistema mostra lo stato attuale ("Presa in carico") e gli stati successivi ammessi.
