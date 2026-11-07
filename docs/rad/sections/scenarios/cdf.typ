@@ -1,8 +1,11 @@
 #import "../../../templates/common.typ": callout-box
 
+#pagebreak()
+
+=== Consigliere di Fiducia
 #callout-box(title: "SC_CDF_01 Presa in carico di una nuova segnalazione")[
 
-  #v(0.3em)
+  #v(0.5em)
 
   *Partecipanti:* Elena (Consigliere di Fiducia), Giulia (Utente)
 
