@@ -1,15 +1,6 @@
-#import "../../../templates/common.typ": palette-primary
+#import "../../../templates/common.typ": callout-box
 
-#let scenario-box = block.with(
-  width: 100%,
-  inset: 12pt,
-  radius: 4pt,
-  fill: palette-primary.lighten(93%),
-  stroke: (left: 3pt + palette-primary),
-)
-
-#scenario-box[
-  === SC_CDF_01 Presa in carico di una nuova segnalazione
+#callout-box(title: "SC_CDF_01 Presa in carico di una nuova segnalazione")[
 
   #v(0.3em)
 
@@ -30,8 +21,7 @@
 
 #v(1.5em)
 
-#scenario-box[
-  === SC_CDF_02 Aggiornamento dello stato della pratica
+#callout-box(title: "SC_CDF_02 Aggiornamento dello stato della pratica")[
 
   #v(0.3em)
 
@@ -51,8 +41,7 @@
 
 #v(1.5em)
 
-#scenario-box[
-  === SC_CDF_03 Chiusura e archiviazione della pratica
+#callout-box(title: "SC_CDF_03 Chiusura e archiviazione della pratica")[
 
   #v(0.3em)
 
@@ -72,8 +61,7 @@
 
 #v(1.5em)
 
-#scenario-box[
-  === SC_CDF_04 Generazione di un report statistico
+#callout-box(title: "SC_CDF_04 Generazione di un report statistico")[
 
   #v(0.3em)
 
