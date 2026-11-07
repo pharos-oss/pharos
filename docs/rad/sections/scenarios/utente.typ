@@ -9,6 +9,8 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
   *Partecipanti*: Giulia (Utente), Elena (Consigliere di Fiducia)
 
+  *Obiettivo*:Inviare una segnalazione formale al Consigliere di Fiducia tramite la compilazione del modulo standardizzato, includendo eventuali eventi precedentemente annotati.
+
   *Flusso di eventi*:
 
   + Giulia decide di segnalare gli episodi annotati nel diario e avvia la compilazione del modulo standardizzato di segnalazione.
@@ -28,6 +30,8 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
   *Partecipanti*: Giulia (Utente)
 
+  *Obiettivo*:tenere traccia di un evento nel proprio diario delle evidenze in modo privato, senza avviare una segnalazione.
+
   *Flusso di eventi*:
 
   + Giulia, studentessa del terzo anno, ha vissuto un episodio spiacevole con un collega di laboratorio e vuole tenerne traccia, senza aver ancora deciso se segnalarlo. Accede a Pharos e apre il proprio diario delle evidenze.
@@ -45,6 +49,8 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 #callout-box(title:"SC_U_03 Risposta a una richiesta di integrazioni")[
   *Partecipanti*: Marco (Utente), Elena (Consigliere di Fiducia)
 
+  *Obiettivo*:fornire le informazioni e i documenti aggiuntivi richiesti dal Consigliere di Fiducia per proseguire la lavorazione di una segnalazione.
+
   *Flusso di eventi*:
 
   + Marco riceve una notifica: la sua segnalazione è passata allo stato «In attesa di integrazioni». Accede a Pharos e apre la segnalazione.
@@ -61,6 +67,8 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
   #v(0.3em)
 
   *Partecipanti*: Giulia (Utente)
+
+  *Obiettivi*: ottenere una valutazione orientativa tramite intelligenza artificiale sugli episodi annotati nel diario per comprendere la situazione e decidere se avviare una segnalazione formale.
 
   *Flusso di eventi*:
 
