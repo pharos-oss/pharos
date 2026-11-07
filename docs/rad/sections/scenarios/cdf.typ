@@ -1,0 +1,1 @@
+// questa sezione è riservata agl scenari relativi al consigliere di fiducia
