@@ -27,7 +27,7 @@
 
   *Partecipanti:* Marco (Utente), Elena (Consigliere di Fiducia)
 
-  *Obiettivo:* salvare temporaneamente una segnalazione in bozza cifrata per poterla completare ed inviare in un secondo momento.
+  *Obiettivo:* salvare temporaneamente una segnalazione in bozza per poterla completare ed inviare in un secondo momento.
 
   *Flusso di eventi:*
 
@@ -54,10 +54,10 @@
 
   + Marco, dipendente tecnico amministrativo, vuole conservare nel diario la registrazione audio di una riunione in cui il proprio responsabile si è rivolto a lui in modo umiliante. Accede a Pharos e aggiunge un nuovo evento.
   + Il sistema mostra il modulo per l’inserimento dell’evento.
-  + Marco compila data, luogo e descrizione e allega il file audio, di 140 MB.
-  + Il sistema rileva che il file supera la dimensione massima consentita (50 MB) e lo rifiuta, indicando il limite e i formati ammessi. I dati già inseriti restano nel modulo.
-  + Marco allega una versione compressa della registrazione, di 38 MB.
-  + Il sistema verifica il nuovo allegato, salva l’evento in forma cifrata e lo mostra nel diario.
+  + Marco compila data, luogo e descrizione e allega il file audio, ma non è conforme.
+  + Il sistema rileva che il file supera la dimensione massima consentita e lo rifiuta, indicando il limite e i formati ammessi. I dati già inseriti restano nel modulo.
+  + Marco allega una versione compressa della registrazione conforme.
+  + Il sistema verifica il nuovo allegato, salva l’evento e lo mostra nel diario.
 ]
 
 #v(1.3em)
