@@ -38,14 +38,6 @@
 #show link: it => text(fill: blue, underline(it)) 
 #show ref: set text(fill: blue)
 
-#let scenario-box = block.with(
-  width: 100%,
-  inset: 12pt,
-  radius: 4pt,
-  fill: palette-primary.lighten(93%),
-  stroke: (left: 3pt + palette-primary),
-)
-
 #include "sections/introduzione.typ"
 
 #include "sections/sistema_corrente.typ"
