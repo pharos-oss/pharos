@@ -1,18 +1,9 @@
-#import "../../../templates/common.typ": palette-primary
-
-#let scenario-box = block.with(
-  width: 100%,
-  inset: 12pt,
-  radius: 4pt,
-  fill: palette-primary.lighten(93%),
-  stroke: (left: 3pt + palette-primary),
-)
+#import "../../../templates/common.typ": callout-box
 
 // da questa sezione si inseriscono gli scenari utente da 1-4
 
 // da questa sezione si inseriscono gli scenari utente da 5-8
-#scenario-box[
-  === SC_U_05 Consultazione dello stato di una segnalazione
+#callout-box(title: "SC_U_05 Consultazione dello stato di una segnalazione")[
 
   #v(0.3em)
 
@@ -30,8 +21,7 @@
 
 #v(5em)
 
-#scenario-box[
-  === SC_U_06 Segnalazione salvata in bozza e ripresa
+#callout-box(title: "SC_U_06 Segnalazione salvata in bozza e ripresa")[
 
   #v(0.3em)
 
@@ -52,8 +42,7 @@
 
 #v(1.5em)
 
-#scenario-box[
-  === SC_U_07 Annotazione di un evento con allegato non conforme
+#callout-box(title: "SC_U_07 Annotazione di un evento con allegato non conforme")[
 
   #v(0.3em)
 
@@ -71,10 +60,9 @@
   + Il sistema verifica il nuovo allegato, salva l’evento in forma cifrata e lo mostra nel diario.
 ]
 
-#v(1.5em)
+#v(1.3em)
 
-#scenario-box[
-  === SC_U_08 Rinuncia al proseguimento dell’iter
+#callout-box(title: "SC_U_08 Rinuncia al proseguimento dell’iter")[
 
   #v(0.3em)
 
