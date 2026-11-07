@@ -9,7 +9,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
   *Partecipanti*: Giulia (Utente), Elena (Consigliere di Fiducia)
 
-  *Obiettivo*:Inviare una segnalazione formale al Consigliere di Fiducia tramite la compilazione del modulo standardizzato, includendo eventuali eventi precedentemente annotati.
+  *Obiettivo*: inviare una segnalazione formale al Consigliere di Fiducia tramite la compilazione del modulo standardizzato, includendo eventuali eventi precedentemente annotati.
 
   *Flusso di eventi*:
 
@@ -30,7 +30,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
   *Partecipanti*: Giulia (Utente)
 
-  *Obiettivo*:tenere traccia di un evento nel proprio diario delle evidenze in modo privato, senza avviare una segnalazione.
+  *Obiettivo*: tenere traccia di un evento nel proprio diario delle evidenze in modo privato, senza avviare una segnalazione.
 
   *Flusso di eventi*:
 
@@ -49,7 +49,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 #callout-box(title:"SC_U_03 Risposta a una richiesta di integrazioni")[
   *Partecipanti*: Marco (Utente), Elena (Consigliere di Fiducia)
 
-  *Obiettivo*:fornire le informazioni e i documenti aggiuntivi richiesti dal Consigliere di Fiducia per proseguire la lavorazione di una segnalazione.
+  *Obiettivo*: fornire le informazioni e i documenti aggiuntivi richiesti dal Consigliere di Fiducia per proseguire la lavorazione di una segnalazione.
 
   *Flusso di eventi*:
 
