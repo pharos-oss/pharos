@@ -1,3 +1,13 @@
+#import "../../../templates/common.typ": palette-primary
+
+#let scenario-box = block.with(
+  width: 100%,
+  inset: 12pt,
+  radius: 4pt,
+  fill: palette-primary.lighten(93%),
+  stroke: (left: 3pt + palette-primary),
+)
+
 // da questa sezione si inseriscono gli scenari utente da 1-4
 
 // da questa sezione si inseriscono gli scenari utente da 5-8
