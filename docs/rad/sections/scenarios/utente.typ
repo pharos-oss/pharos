@@ -1,19 +1,10 @@
 
-#import "../../../templates/common.typ": palette-primary
-
-#let scenario-box = block.with(
-  width: 100%,
-  inset: 12pt,
-  radius: 4pt,
-  fill: palette-primary.lighten(93%),
-  stroke: (left: 3pt + palette-primary),
-)
+#import "../../../templates/common.typ":callout-box
 
 // da questa sezione si inseriscono gli scenari utente da 1-4
 Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario gestione utente (SC_U) e Scenario gestione consigliere di fiducia (SC_CDF)
 
-#scenario-box[
-  === SC_U_01 Invio di una segnalazione al Consigliere di Fiducia
+#callout-box(title:"SC_U_01 Invio di una segnalazione al Consigliere di Fiducia")[
 
   #v(0.3em)
 
@@ -32,8 +23,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
 #v(1.5em)
 
-#scenario-box[
-  === SC_U_02 Annotazione di un evento nel diario
+#callout-box(title:"SC_U_02 Annotazione di un evento nel diario")[
 
   #v(0.3em)
 
