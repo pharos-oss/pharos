@@ -6,11 +6,11 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
 
 === Caso d'uso: Utente
 
-#v(2em)
+#v(0.5em)
 
 #align(center)[
   #figure(
-    image("../../assets/images/UD_Utente.png", width: 110%), 
+    image("../../assets/images/UD_Utente.png", width: 90%), 
     caption: ["UD_Utente Use case diagram dell'utente"]
   )
 ]
