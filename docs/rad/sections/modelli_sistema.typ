@@ -6,5 +6,7 @@ Nella presente sezione sono descritti i diversi modelli del sistema *Pharos*, or
 
 #include "scenarios/cdf.typ"
 
+#pagebreak()
+
 == Casi d'uso 
 #include "use_cases/utente.typ"

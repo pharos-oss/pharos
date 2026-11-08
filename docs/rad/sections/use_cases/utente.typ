@@ -1,5 +1,20 @@
 #import "../../../templates/common.typ": callout-box
 
+Nella presente sezione sono presentati i diversi casi d’uso del sistema, divisi per le varie gestioni. 
+
+#v(4em)
+
+=== Casi d'uso: Utente
+
+#v(11em)
+
+#figure(
+  image("../../assets/images/UD_Utente.png", width: 110%), 
+  caption: ["UD_Utente Use case diagram dell'utente"]
+)
+
+#pagebreak()
+
 #callout-box(title: "UC_01 Invio di integrazioni per una segnalazione")[
   *Identificativo:* UC_01 \
   *Nome:* Invio di integrazioni per una segnalazione \
@@ -26,8 +41,8 @@
 
   *Rilevanza/User Priority:* Elevata \
   *Frequenza stimata:* Bassa \
-  *Extension point:* NA \
-  *Generalization of:* NA
+  *Extension point:* N/A \
+  *Generalization of:* N/A
 
   #v(1em)
   *FLUSSO DI EVENTI PRINCIPALE / MAIN SCENARIO*
@@ -45,11 +60,11 @@
   - 4.a3 *Utente:* Allega una versione conforme o rimuove l'allegato e procede nuovamente all'invio.
 
   #v(1em)
-  *Note:* NA \
+  *Note:* N/A \
   *Special Requirements:* I materiali allegati tramite integrazione (inclusi gli eventi selezionati dal diario) devono risultare inaccessibili in chiaro e seguire le policy di cifratura del sistema.
 ]
 
-#v(2em)
+#pagebreak()
 
 #callout-box(title: "UC_02 Esecuzione del triage guidato tramite IA")[
   *Identificativo:* UC_02 \
@@ -76,8 +91,8 @@
 
   *Rilevanza/User Priority:* Media \
   *Frequenza stimata:* Bassa \
-  *Extension point:* NA \
-  *Generalization of:* NA
+  *Extension point:* N/A \
+  *Generalization of:* N/A
 
   #v(1em)
   *FLUSSO DI EVENTI PRINCIPALE / MAIN SCENARIO*
@@ -97,5 +112,5 @@
   - 8.a2 *Sistema:* Chiude il modulo di triage, mantiene gli eventi salvati nel diario e riporta l'Utente alla Home.
 
   #v(1em)
-  *Note:* NA \
+  *Note:* N/A \
 ]
