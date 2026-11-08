@@ -2,16 +2,20 @@
 
 Nella presente sezione sono presentati i diversi casi d’uso del sistema, divisi per le varie gestioni. 
 
-#pagebreak()
+#v(2em)
 
-#heading(level: 3)[#text(size: 15pt, fill: black)[Casi d'uso: Utente]]
+=== Caso d'uso: Utente
 
-#align(center + horizon)[
+#v(2em)
+
+#align(center)[
   #figure(
     image("../../assets/images/UD_Utente.png", width: 110%), 
     caption: ["UD_Utente Use case diagram dell'utente"]
   )
 ]
+
+#v(3em)
 
 #pagebreak()
 
@@ -59,7 +63,7 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   - 4.a2 *Sistema:* Rifiuta il file mostrando un errore sui limiti ammessi e mantiene gli altri dati inseriti.
   - 4.a3 *Utente:* Allega una versione conforme o rimuove l'allegato e procede nuovamente all'invio.
 
-  #v(0.1em)
+  #v(0.5em)
   *Note:* N/A \
   *Special Requirements:* I materiali allegati tramite integrazione (inclusi gli eventi selezionati dal diario) devono risultare inaccessibili in chiaro e seguire le policy di cifratura del sistema.
 ]
