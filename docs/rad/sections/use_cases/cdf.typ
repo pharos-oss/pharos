@@ -2,10 +2,10 @@
 
 === Casi d'uso: Consigliere Di Fiducia
 
-#v(19em)
+#v(4em)
 
 #figure(
-  image("../../assets/images/Diagramma UC.png", width: 115%),
+ image("../../assets/images/Diagramma UC.png", width: 115%),
   caption: ["Diagramma Caso D'uso CDF"]
 )
 
@@ -13,7 +13,6 @@
 
 #callout-box(title: "UC_CDF_1 Prendere in carico una segnalazione")[
   *Identificativo:* UC_CDF_1 \
-  *Scenario:* SC_CDF_01 \
   *Nome:* Prendere in carico una segnalazione \
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
@@ -50,7 +49,7 @@
   7. *Sistema (Notifiche):* Notifica l'Utente.
 
   #v(1em)
-  *I Scenario/Flusso di eventi Alternativo: Nessuna nuova segnalazione*
+  *I Scenario/Flusso di eventi Alternativo: Nessuna nuova segnalazione (Rif. SC_CDF_01)*
   - 2.a1 *Sistema:* Informa che non ci sono nuove segnalazioni.
 
   #v(1em)
@@ -62,7 +61,6 @@
 
 #callout-box(title: "UC_CDF_2 Chiudere una pratica")[
   *Identificativo:* UC_CDF_2 \
-  *Scenario:* SC_CDF_03 \
   *Nome:* Chiudere una pratica \
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
@@ -97,7 +95,7 @@
   5. *Sistema (Notifiche):* Notifica l'Utente.
 
   #v(1em)
-  *I Scenario/Flusso di eventi Alternativo: Esito non selezionato*
+  *I Scenario/Flusso di eventi Alternativo: Esito non selezionato (Rif. SC_CDF_03)*
   - 3.a1 *Sistema:* Chiede di selezionare l'esito della pratica.
 
   #v(1em)
