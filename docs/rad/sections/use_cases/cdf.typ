@@ -1,5 +1,16 @@
 #import "../../../templates/common.typ": callout-box
 
+=== Casi d'uso: Consigliere Di Fiducia
+
+#v(19em)
+
+#figure(
+  image("Diagramma UC.png", width: 115%),
+  caption: ["Diagramma Caso D'uso CDF"]
+)
+
+#pagebreak()
+
 #callout-box(title: "UC_CDF_1 Prendere in carico una segnalazione")[
   *Identificativo:* UC_CDF_1 \
   *Nome:* Prendere in carico una segnalazione \
@@ -24,8 +35,8 @@
 
   *Rilevanza/User Priority:* Elevata \
   *Frequenza stimata:* 5/giorno \
-  *Extension point:* NA \
-  *Generalization of:* NA \
+  *Extension point:* N/A \
+  *Generalization of:* N/A \
 
   #v(1em)
   *FLUSSO DI EVENTI PRINCIPALE / MAIN SCENARIO*
@@ -42,7 +53,7 @@
   - 2.a1 *Sistema:* Informa che non ci sono nuove segnalazioni.
 
   #v(1em)
-  *Note:* NA \
+  *Note:* N/A \
   *Special Requirements:* Ogni accesso del Consigliere di Fiducia a una segnalazione viene registrato.
 ]
 
@@ -72,8 +83,8 @@
 
   *Rilevanza/User Priority:* Elevata \
   *Frequenza stimata:* 2/giorno \
-  *Extension point:* NA \
-  *Generalization of:* NA
+  *Extension point:* N/A \
+  *Generalization of:* N/A
 
   #v(1em)
   *FLUSSO DI EVENTI PRINCIPALE / MAIN SCENARIO*
@@ -88,13 +99,6 @@
   - 3.a1 *Sistema:* Chiede di selezionare l'esito della pratica.
 
   #v(1em)
-  *Note:* NA \
-  *Special Requirements:* NA
+  *Note:* N/A \
+  *Special Requirements:* N/A
 ]
-
-#pagebreak()
-
-#figure(
-  image("Diagramma UC.png", width: 90%),
-  caption: ["Diagramma Caso D'uso CDF"]
-)
