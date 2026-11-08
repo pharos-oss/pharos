@@ -3,6 +3,10 @@
 // da questa sezione si inseriscono gli scenari utente da 1-4
 Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario gestione utente (SC_U) e Scenario gestione consigliere di fiducia (SC_CDF)
 
+#pagebreak()
+
+=== Utente
+
 #callout-box(title:"SC_U_01 Invio di una segnalazione al Consigliere di Fiducia")[
 
   #v(0.3em)
@@ -36,14 +40,14 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
   + Giulia, studentessa del terzo anno, ha vissuto un episodio spiacevole con un collega di laboratorio e vuole tenerne traccia, senza aver ancora deciso se segnalarlo. Accede a Pharos e apre il proprio diario delle evidenze.
   + Il sistema mostra gli eventi già annotati in ordine cronologico e la possibilità di aggiungerne uno nuovo.
-  + Giulia aggiunge un nuovo evento: indica data, ora e luogo (laboratorio dell’edificio F3) e descrive brevemente l’accaduto.
+  + Giulia aggiunge un nuovo evento: indica data, ora e luogo e descrive brevemente l’accaduto.
   + Giulia allega lo screenshot di un messaggio ricevuto in chat.
   + Il sistema verifica che i campi obbligatori siano compilati e che l’allegato rispetti formato e dimensione consentiti.
   + Il sistema salva l’evento in forma cifrata, registra la data e l’ora di inserimento e lo mostra nel diario.
   + Il sistema chiede a Giulia se desidera segnalare l’evento al Consigliere di Fiducia. Giulia sceglie di non farlo per il momento: l’evento resta salvato nel diario e il sistema la riporta alla Home.
 ]
 
-
+#pagebreak()
 
   #v(0.3em)
 #callout-box(title:"SC_U_03 Risposta a una richiesta di integrazioni")[
