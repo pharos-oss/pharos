@@ -1,11 +1,13 @@
 #import "../../../templates/common.typ": callout-box
 
+#pagebreak()
+
 === Casi d'uso: Consigliere Di Fiducia
 
-#v(4em)
+#v(6em)
 
 #figure(
- image("../../assets/images/Diagramma UC.png", width: 115%),
+ image("../../assets/images/UC_CDF.png", width: 115%),
   caption: ["Diagramma Caso D'uso CDF"]
 )
 
