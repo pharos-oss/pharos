@@ -2,16 +2,16 @@
 
 Nella presente sezione sono presentati i diversi casi d’uso del sistema, divisi per le varie gestioni. 
 
-#v(4em)
+#pagebreak()
 
-=== Casi d'uso: Utente
+#heading(level: 3)[#text(size: 15pt, fill: black)[Casi d'uso: Utente]]
 
-#v(11em)
-
-#figure(
-  image("../../assets/images/UD_Utente.png", width: 110%), 
-  caption: ["UD_Utente Use case diagram dell'utente"]
-)
+#align(center + horizon)[
+  #figure(
+    image("../../assets/images/UD_Utente.png", width: 110%), 
+    caption: ["UD_Utente Use case diagram dell'utente"]
+  )
+]
 
 #pagebreak()
 
@@ -59,7 +59,7 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   - 4.a2 *Sistema:* Rifiuta il file mostrando un errore sui limiti ammessi e mantiene gli altri dati inseriti.
   - 4.a3 *Utente:* Allega una versione conforme o rimuove l'allegato e procede nuovamente all'invio.
 
-  #v(1em)
+  #v(0.1em)
   *Note:* N/A \
   *Special Requirements:* I materiali allegati tramite integrazione (inclusi gli eventi selezionati dal diario) devono risultare inaccessibili in chiaro e seguire le policy di cifratura del sistema.
 ]
@@ -94,7 +94,7 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   *Extension point:* N/A \
   *Generalization of:* N/A
 
-  #v(1em)
+  #v(0.5em)
   *FLUSSO DI EVENTI PRINCIPALE / MAIN SCENARIO*
   1. *Utente:* Accede al diario, seleziona gli eventi di interesse (Rif. SC_U_02) e avvia il triage guidato.
   2. *Sistema:* Informa l'Utente che il triage è solo orientativo, svolto da un sistema di intelligenza artificiale, non sostituisce il Consigliere di Fiducia e non comporta alcun invio automatico. Richiede conferma.
@@ -106,11 +106,12 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   8. *Utente:* Sceglie di procedere con l'invio della segnalazione.
   9. *Sistema:* Reindirizza l'Utente al modulo di segnalazione precompilando i dati degli eventi analizzati (Rif. SC_U_01).
 
-  #v(1em)
+  #v(0.5em)
   *I Scenario/Flusso di eventi Alternativo: Mantenimento nel diario senza segnalazione (Rif. SC_U_02)*
   - 8.a1 *Utente:* Sceglie di non avviare la segnalazione per il momento.
   - 8.a2 *Sistema:* Chiude il modulo di triage, mantiene gli eventi salvati nel diario e riporta l'Utente alla Home.
 
-  #v(1em)
+  #v(0.5em)
   *Note:* N/A \
+  *Special requirments*: Il processo di anonimizzazione (rimozione dei dati identificativi) prima della trasmissione al modulo AI deve essere rigoroso per prevenire l'esposizione di dati personali sensibili. Inoltre, i dati inviati non devono essere memorizzati o utilizzati per l'addestramento del modello AI.
 ]
