@@ -91,3 +91,10 @@
   *Note:* NA \
   *Special Requirements:* NA
 ]
+
+#pagebreak()
+
+#figure(
+  image("Diagramma UC.png", width: 90%),
+  caption: ["Diagramma Caso D'uso CDF"]
+)
