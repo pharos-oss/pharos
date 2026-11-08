@@ -5,7 +5,7 @@
 #v(19em)
 
 #figure(
-  image("Diagramma UC.png", width: 115%),
+  image("../../assets/images/Diagramma UC.png", width: 115%),
   caption: ["Diagramma Caso D'uso CDF"]
 )
 
@@ -13,6 +13,7 @@
 
 #callout-box(title: "UC_CDF_1 Prendere in carico una segnalazione")[
   *Identificativo:* UC_CDF_1 \
+  *Scenario:* SC_CDF_01 \
   *Nome:* Prendere in carico una segnalazione \
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
@@ -61,6 +62,7 @@
 
 #callout-box(title: "UC_CDF_2 Chiudere una pratica")[
   *Identificativo:* UC_CDF_2 \
+  *Scenario:* SC_CDF_03 \
   *Nome:* Chiudere una pratica \
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
