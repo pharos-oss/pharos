@@ -5,28 +5,24 @@
   *Nome:* Invio di integrazioni per una segnalazione \
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
-  *Autore:* Carmine Saggese, Alessia D'amico \
+  *Autore:* Carmine Saggese, Alessia D'Amico \
   *Descrizione:* Lo UC descrive il processo mediante il quale l'Utente, a seguito di una notifica, fornisce informazioni e documenti aggiuntivi richiesti dal Consigliere di Fiducia per proseguire la lavorazione di una segnalazione.
 
   *Attore Principale:* Utente (È interessato a fornire il materiale mancante per far procedere l'iter della segnalazione) \
   *Attori secondari:* Consigliere di Fiducia, Sistema (Notifiche)
 
   *Entry Condition:* \
-  Un Utente ha effettuato l'accesso al sistema \
-  *AND* \
-  L'Utente possiede una segnalazione passata allo stato «In attesa di integrazioni»
+  - Un Utente ha effettuato l'accesso al sistema \
+  - L'Utente possiede una segnalazione passata allo stato «In attesa di integrazioni»
 
-  *Exit condition (On success):* \
-  Il materiale integrativo viene allegato alla segnalazione \
-  *AND* \
-  La segnalazione torna nello stato «In lavorazione» \
-  *AND* \
-  Il Sistema notifica il Consigliere di Fiducia
+  *Exit condition (On success):* \ 
+  - Il materiale integrativo viene allegato alla segnalazione \
+  - La segnalazione torna nello stato «In lavorazione» \
+  - Il Sistema notifica il Consigliere di Fiducia \
 
   *Exit condition (On failure):* \
-  Le integrazioni non vengono salvate \
-  *AND* \
-  Il Sistema mostra all'Utente un messaggio di errore
+  - Le integrazioni non vengono salvate \
+  - Il Sistema mostra all'Utente un messaggio di errore \
 
   *Rilevanza/User Priority:* Elevata \
   *Frequenza stimata:* Bassa \
@@ -60,26 +56,23 @@
   *Nome:* Esecuzione del triage guidato tramite Intelligenza Artificiale \
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
-  *Autore:* Alessia D'amico, Carmine Saggese \
+  *Autore:* Alessia D'Amico, Carmine Saggese \
   *Descrizione:* Lo UC descrive l'utilizzo del modulo di Intelligenza Artificiale da parte dell'Utente per ottenere una valutazione orientativa su episodi annotati nel diario, al fine di decidere se avviare una segnalazione formale.
 
   *Attore Principale:* Utente (Interessato a comprendere la gravità di uno o più eventi e orientarsi sulle decisioni da prendere) \
   *Attori secondari:* Sistema (Modulo AI)
 
   *Entry Condition:* \
-  Un Utente ha effettuato l'accesso al sistema \
-  *AND* \
-  L'Utente ha annotato nel diario almeno un episodio
+  - Un Utente ha effettuato l'accesso al sistema \
+  - L'Utente ha annotato nel diario almeno un episodio \
 
   *Exit condition (On success):* \
-  Il Sistema mostra all'Utente l'esito orientativo della valutazione \
-  *AND* \
-  L'Utente sceglie se procedere o meno con una segnalazione formale
+  - Il Sistema mostra all'Utente l'esito orientativo della valutazione \
+  - L'Utente sceglie se procedere o meno con una segnalazione formale \
 
   *Exit condition (On failure):* \
-  La valutazione non viene fornita a causa di un disservizio del modulo AI \
-  *AND* \
-  Il Sistema mostra un messaggio di errore e ripristina lo stato iniziale
+  - La valutazione non viene fornita a causa di un disservizio del modulo AI \
+  - Il Sistema mostra un messaggio di errore e ripristina lo stato iniziale \
 
   *Rilevanza/User Priority:* Media \
   *Frequenza stimata:* Bassa \
@@ -105,5 +98,4 @@
 
   #v(1em)
   *Note:* NA \
-  *Special Requirements:* Il sistema deve garantire che il testo trasmesso al modulo AI sia completamente privato di dati identificativi per tutelare la privacy dell'Utente.
 ]
