@@ -66,7 +66,7 @@
   *Nome:* Chiudere una pratica \
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
-  *Autore:* Mario Senatore \
+  *Autore:* Mario Senatore, Francesco Imbriaco \
   *Descrizione:* Lo UC descrive il processo mediante il quale il Consigliere di Fiducia chiude una pratica indicandone l'esito e la archivia in sola lettura.
 
   *Attore Principale:* Consigliere di Fiducia (È interessato a concludere formalmente la lavorazione di una pratica e archiviarla) \
