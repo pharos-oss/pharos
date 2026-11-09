@@ -26,6 +26,14 @@
 // The last row's version is the one shown in the footer.
 #let revision-history = (
   ("01/11/2026", "0.1", "Stesura introduzione del documento", "Gianmarco Raimondi, Carmine Saggese"),
+  ("03/11/2026", "0.2", "Descrizione del sistema corrente", "Carmine Saggese, Francesco Imbriaco, Leonardo Trotta"),
+  ("03/11/2026", "0.2", "Definizione del sistema proposto", "Alessia D'Amico, Gianmarco Raimondi, Mario Senatore"),
+  ("06/11/2026", "0.3", "Stesura degli scenari utente 1 - 4", "Alessia D'Amico, Leonardo Trotta"),
+  ("06/11/2026", "0.3", "Stesura degli scenari utente 5 - 8", "Carmine Saggese, Mario Senatore"),
+  ("06/11/2026", "0.3", "Stesura degli scenari CDF", "Gianmarco Raimondi, Francesco Imbriaco"),
+  ("07/11/2026", "0.4", "Definizione dei casi d'uso utente 1 - 2", "Carmine Saggese, Alessia D'Amico"),
+  ("07/11/2026", "0.4", "Definizione dei casi d'uso utente 3 - 4", "Gianmarco Raimondi, Mario Senatore"),
+  ("07/11/2026", "0.4", "Definizione dei casi d'uso CDF", "Mario Senatore, Francesco Imbriaco")
 )
 
 #show: doc-template.with(

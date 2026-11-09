@@ -8,3 +8,5 @@ Nella presente sezione sono descritti i diversi modelli del sistema *Pharos*, or
 
 == Casi d'uso 
 #include "use_cases/utente.typ"
+
+#include "use_cases/cdf.typ"
