@@ -18,7 +18,7 @@
   *Nome:* Prendere in carico una segnalazione \
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
-  *Autore:* Francesco Imbriaco \
+  *Autore:* Francesco Imbriaco, Mario Senatore \
   *Descrizione:* Lo UC descrive il processo mediante il quale il Consigliere di Fiducia esamina le segnalazioni ricevute e prende in carico una nuova segnalazione nello stato «Inviata».
 
   *Attore Principale:* Consigliere di Fiducia (È interessato a esaminare e prendere in carico le nuove segnalazioni per avviarne la lavorazione) \
