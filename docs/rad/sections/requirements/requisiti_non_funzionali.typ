@@ -48,13 +48,11 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     text(fill: readable-text(palette-primary))[*Difficoltà*],
     text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RNF_A_01*], [Cifratura End-to-End], [#block(breakable: false)[Il sistema deve garantire la cifratura in locale dei dati del diario personale, assicurando che l'infrastruttura di base non acceda mai ai contenuti in chiaro.]], [Elevata], [Difficile], [SC_U_02, SC_U_07],
+    [*RNF_A_01*], [Cifratura locale], [#block(breakable: false)[Il sistema deve garantire la cifratura in locale dei dati del diario personale. Per l'inoltro delle pratiche si utilizza la cifratura End-to-End, assicurando che i dati (inclusi quelli anagrafici necessari alla gestione) siano visibili in chiaro esclusivamente all'utente e al Consigliere di Fiducia.]], [Elevata], [Difficile], [SC_U_02, SC_U_07],
     
-    [*RNF_A_02*], [Segregazione dei dati], [#block(breakable: false)[I dati anagrafici dell'utente devono rimanere architetturalmente e logicamente separati dai testi della segnalazione per limitare l'esposizione in caso di data breach.]], [Elevata], [Media], [SC_U_01],
-    
-    [*RNF_A_03*], [Integrità dello storico], [#block(breakable: false)[Le pratiche passate in stato "Chiusa" o "Archiviata" devono divenire tecnicamente di sola lettura a livello di database per garantirne la validità legale nel tempo.]], [Elevata], [Media], [SC_U_08, SC_CDF_03],
+    [*RNF_A_02*], [Integrità dello storico], [#block(breakable: false)[Le pratiche passate in stato "Chiusa" o "Archiviata" devono divenire tecnicamente di sola lettura a livello di database per garantirne la validità legale nel tempo.]], [Elevata], [Media], [SC_U_08, SC_CDF_03],
 
-    [*RNF_A_04*], [Funzionamento Offline del Diario], [#block(breakable: false)[L'applicazione mobile deve consentire all'utente di registrare e cifrare localmente gli eventi nel diario anche in assenza di connettività, sincronizzandoli col server alla successiva riconnessione.]], [Media], [Difficile], [SC_U_02, UC_03]
+    [*RNF_A_03*], [Funzionamento Offline], [#block(breakable: false)[L'applicazione mobile deve consentire la consultazione offline della rubrica e della mappa dei servizi territoriali. Deve inoltre permettere di registrare e cifrare localmente gli eventi nel diario, sincronizzandoli col server alla successiva riconnessione.]], [Media], [Difficile], [SC_U_02, UC_03]
   )
 ]
 
@@ -76,9 +74,9 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     text(fill: readable-text(palette-primary))[*Difficoltà*],
     text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RNF_P_01*], [Tempi di risposta Modulo IA], [#block(breakable: false)[L'interrogazione del modulo IA per il Triage Guidato deve restituire l'esito e la tipologia di violenza all'utente entro un tempo massimo di 5 secondi.]], [Media], [Media], [SC_U_04],
+    [*RNF_P_01*], [Tempi di risposta Modulo IA], [#block(breakable: false)[L'interrogazione del modulo IA per il Triage Guidato deve restituire l'esito e la tipologia di violenza all'utente entro un tempo massimo di 5 secondi.]], [Bassa], [Media], [SC_U_04],
     
-    [*RNF_P_02*], [Supporto alla concorrenza], [#block(breakable: false)[Il sistema deve essere in grado di gestire picchi di traffico fino a 2.000 utenti concorrenti senza degradare i tempi di caricamento delle pagine oltre i 2 secondi.]], [Elevata], [Media], [Tutti]
+    [*RNF_P_02*], [Supporto alla concorrenza], [#block(breakable: false)[Il sistema deve essere in grado di gestire fluidamente il flusso di traffico previsto. Lato Consigliere di Fiducia, i tempi per il caricamento delle pratiche e delle pagine del gestionale non devono superare i 2 secondi]], [Elevata], [Media], [Tutti]
   )
 ]
 
@@ -100,7 +98,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     text(fill: readable-text(palette-primary))[*Difficoltà*],
     text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RNF_S_01*], [Log Centralizzato], [#block(breakable: false)[Il sistema deve tracciare errori e malfunzionamenti tramite un sistema di logging centralizzato per agevolare il debugging da parte degli amministratori.]], [Elevata], [Media], [Tutti]
+    [*RNF_S_01*], [Log Centralizzato e privacy], [#block(breakable: false)[Il sistema traccia errori tramite logging centralizzato. I dati di telemetria devono essere anonimizzati o pseudonimizzati limitando le informazioni raccolte, per evitare di poter risalire all'identità di un utente segnalante tramite correlazione da timestamp.]], [Elevata], [Media], [Tutti]
   )
 ]
 
@@ -124,9 +122,9 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     text(fill: readable-text(palette-primary))[*Difficoltà*],
     text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RNF_IM_01*], [Piattaforma ibrida divisa per ruoli], [#block(breakable: false)[Il sistema deve essere fruibile tramite applicazione web per il Consigliere di Fiducia e gli Admin, e tramite app mobile per gli utenti. Le funzionalità devono essere equiparate e supportate su entrambe le piattaforme.]], [Elevata], [Media], [Tutti],
+    [*RNF_IM_01*], [Multi-tenancy], [#block(breakable: false)[Il sistema deve essere fruibile tramite applicazione web per il Consigliere di Fiducia e gli Admin, e tramite app mobile per gli utenti. Le funzionalità devono essere equiparate e supportate su entrambe le piattaforme.]], [Bassa], [Media], [Tutti],
 
-    [*RNF_IM_02*], [Implementazione Modulo IA Zero-Retention], [#block(breakable: false)[Il modulo IA per il triage deve essere implementato tramite modelli ospitati in locale (on-premise) o API enterprise configurate in modalità "stateless", per garantire tecnicamente il blocco della conservazione dati e del riaddestramento.]], [Elevata], [Difficile], [SC_U_04, UC_02]
+    [*RNF_IM_02*], [Implementazione Modulo IA Zero-Retention], [#block(breakable: false)[Il modulo IA per il triage deve essere implementato tramite modelli ospitati in locale (on-premise) o API enterprise configurate in modalità "stateless", per garantire tecnicamente il blocco della conservazione dati e del riaddestramento.]], [Bassa], [Difficile], [SC_U_04, UC_02]
   )
 ]
 
@@ -216,8 +214,8 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     text(fill: readable-text(palette-primary))[*Difficoltà*],
     text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RNF_L_01*], [Conformità IA (AI Act / GDPR)], [#block(breakable: false)[Il provider LLM del modulo di intelligenza artificiale non deve in alcun modo memorizzare i prompt in input né utilizzarli per il riaddestramento del modello.]], [Elevata], [Difficile], [SC_U_04],
+    [*RNF_L_01*], [Conformità IA (AI Act / GDPR)], [#block(breakable: false)[Il provider LLM del modulo di intelligenza artificiale non deve in alcun modo memorizzare i prompt in input né utilizzarli per il riaddestramento del modello.]], [Bassa], [Difficile], [SC_U_04],
     
-    [*RNF_L_02*], [Audit Log inalterabile], [#block(breakable: false)[Il sistema deve registrare in un log immodificabile (WORM) ogni singolo accesso e operazione effettuata dal CDF sui dati sensibili degli utenti.]], [Elevata], [Media], [SC_CDF_01, SC_CDF_02, UC_CDF_1, UC_CDF_2]
+    [*RNF_L_02*], [Audit Log inalterabile], [#block(breakable: false)[Il sistema deve registrare in un log immodificabile (WORM) ogni singolo accesso e operazione effettuata dal Consigliere di Fiducia sui dati sensibili degli utenti.]], [Elevata], [Media], [SC_CDF_01, SC_CDF_02, UC_CDF_1, UC_CDF_2]
   )
 ]
