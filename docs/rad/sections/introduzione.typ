@@ -75,6 +75,8 @@ Il documento è strutturato in modo da fornire una scomposizione progressiva del
 
 - @sis_corrente: *Sistema Attuale*: Analizza i processi attualmente in uso presso l'Ateneo per la gestione delle segnalazioni e le relative criticità. 
 
-- @sis_proposto: *Sistema Proposto*: Descrive in dettaglio la panoramica della nuova architettura, formalizzando i Requisiti Funzionali e i Requisiti Non Funzionali.
+- @sis_proposto: *Sistema Proposto*: Descrive in dettaglio la panoramica della nuova architettura. 
+
+- @requisiti_sistema: *Requisiti di Sistema*: Riassume i requisiti del sistema proposto, formalizzando i Requisiti Funzionali e i Requisiti Non Funzionali.
 
 - @modelli_sistema: *Modello di Sistema*: descrive il comportamento e la struttura di Pharos attraverso scenari, casi d'uso, modello a oggetti, modello dinamico e mockup di interfaccia utente.
