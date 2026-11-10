@@ -1,7 +1,5 @@
 #import "../../../templates/common.typ": callout-box
 
-#pagebreak()
-
 === Casi d'uso: Consigliere Di Fiducia
 
 #v(6em)

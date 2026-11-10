@@ -3,8 +3,6 @@
 // da questa sezione si inseriscono gli scenari utente da 1-4
 Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario gestione utente (SC_U) e Scenario gestione consigliere di fiducia (SC_CDF)
 
-#pagebreak()
-
 === Utente
 
 #callout-box(title:"SC_U_01 Invio di una segnalazione al Consigliere di Fiducia")[
