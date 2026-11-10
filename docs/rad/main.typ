@@ -32,7 +32,7 @@
   ("06/11/2026", "0.3", "Stesura degli scenari utente 5 - 8", "Carmine Saggese, Mario Senatore"),
   ("06/11/2026", "0.3", "Stesura degli scenari CDF", "Gianmarco Raimondi, Francesco Imbriaco"),
   ("07/11/2026", "0.4", "Definizione dei casi d'uso utente 1 - 2", "Carmine Saggese, Alessia D'Amico"),
-  ("07/11/2026", "0.4", "Definizione dei casi d'uso utente 3 - 4", "Gianmarco Raimondi, Mario Senatore"),
+  ("07/11/2026", "0.4", "Definizione dei casi d'uso utente 3 - 4", "Gianmarco Raimondi, Leonardo Trotta"),
   ("07/11/2026", "0.4", "Definizione dei casi d'uso CDF", "Mario Senatore, Francesco Imbriaco"),
   ("09/11/2026", "0.5", "Stesura dei requisiti funzionali e non funzionali", "Tutti")
 )
