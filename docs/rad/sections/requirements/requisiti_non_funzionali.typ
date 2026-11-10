@@ -26,7 +26,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     
     [*RNF_U_03*], [Accessibilità WCAG 2.1], [#block(breakable: false)[L'interfaccia utente web/mobile deve rispettare i criteri di accessibilità WCAG 2.1 livello AA per garantire la corretta fruizione anche a utenti con disabilità.]], [Elevata], [Media], [Tutti],
 
-    [*RNF_U_04*], [Chiusura rapida (Panic Button)], [#block(breakable: false)[L'app mobile deve fornire una funzionalità di oscuramento o uscita immediata per proteggere la privacy dell'Utente qualora venga interrotto durante la scrittura nel diario o la consultazione della pratica.]], [Elevata], [Media], [Generale, UC_03, UC_04]
+    [*RNF_U_04*], [Chiusura rapida (Panic Button)], [#block(breakable: false)[L'app mobile deve fornire una funzionalità di oscuramento o uscita immediata per proteggere la privacy dell'utente qualora venga interrotto durante la scrittura nel diario o la consultazione della pratica.]], [Elevata], [Media], [Generale, UC_03, UC_04]
   )
 ]
 
@@ -54,7 +54,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     
     [*RNF_A_03*], [Integrità dello storico], [#block(breakable: false)[Le pratiche passate in stato "Chiusa" o "Archiviata" devono divenire tecnicamente di sola lettura a livello di database per garantirne la validità legale nel tempo.]], [Elevata], [Media], [SC_U_08, SC_CDF_03],
 
-    [*RNF_A_04*], [Funzionamento Offline del Diario], [#block(breakable: false)[L'applicazione mobile deve consentire all'Utente di registrare e cifrare localmente gli eventi nel diario anche in assenza di connettività, sincronizzandoli col server alla successiva riconnessione.]], [Media], [Difficile], [SC_U_02, UC_03]
+    [*RNF_A_04*], [Funzionamento Offline del Diario], [#block(breakable: false)[L'applicazione mobile deve consentire all'utente di registrare e cifrare localmente gli eventi nel diario anche in assenza di connettività, sincronizzandoli col server alla successiva riconnessione.]], [Media], [Difficile], [SC_U_02, UC_03]
   )
 ]
 
@@ -124,7 +124,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     text(fill: readable-text(palette-primary))[*Difficoltà*],
     text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RNF_IM_01*], [Piattaforma ibrida divisa per ruoli], [#block(breakable: false)[Il sistema deve essere fruibile tramite applicazione web per Consigliere di Fiducia e Admin, e tramite app mobile per gli Utenti. Le funzionalità devono essere equiparate e supportate su entrambe le piattaforme.]], [Elevata], [Media], [Tutti],
+    [*RNF_IM_01*], [Piattaforma ibrida divisa per ruoli], [#block(breakable: false)[Il sistema deve essere fruibile tramite applicazione web per il Consigliere di Fiducia e gli Admin, e tramite app mobile per gli utenti. Le funzionalità devono essere equiparate e supportate su entrambe le piattaforme.]], [Elevata], [Media], [Tutti],
 
     [*RNF_IM_02*], [Implementazione Modulo IA Zero-Retention], [#block(breakable: false)[Il modulo IA per il triage deve essere implementato tramite modelli ospitati in locale (on-premise) o API enterprise configurate in modalità "stateless", per garantire tecnicamente il blocco della conservazione dati e del riaddestramento.]], [Elevata], [Difficile], [SC_U_04, UC_02]
   )

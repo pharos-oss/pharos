@@ -20,9 +20,9 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     text(fill: readable-text(palette-primary))[*Priorità*],
     text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RF_GU_01*], [Registrazione evento nel diario], [#block(breakable: false)[Il sistema deve consentire all'utente di annotare privatamente un evento nel proprio diario indicando data, ora, luogo, descrizione, ed eventuali allegati multimediali.]], [Utente], [Elevata], [SC_U_02, SC_U_07, UC_03],
+    [*RF_GU_01*], [Registrazione evento nel diario], [#block(breakable: false)[Il sistema deve consentire all'utente di annotare privatamente un evento nel proprio diario indicando data, ora, luogo, descrizione, e inserendo eventuali allegati multimediali.]], [Utente], [Elevata], [SC_U_02, SC_U_07, UC_03],
     
-    [*RF_GU_02*], [Cifratura del diario], [#block(breakable: false)[Il sistema deve salvare tutti gli eventi e gli allegati del diario in chiave cifrata, rendendoli inaccessibili finchè non viene inviata una segnalazione.]], [Sistema], [Elevata], [SC_U_02, UC_03],
+    [*RF_GU_02*], [Cifratura del diario], [#block(breakable: false)[Il sistema deve salvare tutti gli eventi e gli allegati del diario in forma cifrata, rendendoli inaccessibili finché non viene inviata una segnalazione.]], [Sistema], [Elevata], [SC_U_02, UC_03],
     
     [*RF_GU_03*], [Modifica ed eliminazione eventi], [#block(breakable: false)[Il sistema deve consentire all'utente di modificare o eliminare eventi dal diario personale prima che siano inclusi in una segnalazione formale.]], [Utente], [Media], [Generale],
     
@@ -40,7 +40,7 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     
     [*RF_GU_10*], [Triage guidato IA], [#block(breakable: false)[Il sistema deve permettere all'utente di inviare eventi del diario a un modulo IA per una valutazione indicativa di gravità e tipologia di molestia.]], [Utente], [Media], [SC_U_04, UC_02],
     
-    [*RF_GU_11*], [Anonimizzazione dati IA], [#block(breakable: false)[Il sistema deve rimuovere automaticamente tutti i dati identificativi dal testo prima di inviarlo al modulo AI per il triage.]], [Sistema], [Elevata], [SC_U_04, UC_02]
+    [*RF_GU_11*], [Anonimizzazione dati IA], [#block(breakable: false)[Il sistema deve rimuovere automaticamente tutti i dati identificativi dal testo prima di inviarlo al modulo IA per il triage.]], [Sistema], [Elevata], [SC_U_04, UC_02]
   )
 ]
 
@@ -76,7 +76,7 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
 
     [*RF_GCDF_06*], [Chiusura e archiviazione], [#block(breakable: false)[Il sistema deve permettere al CDF di chiudere formalmente una pratica, indicandone l'esito finale e bloccando ulteriori modifiche bilaterali.]], [CDF], [Elevata], [SC_CDF_03, UC_CDF_2],
     
-    [*RF_GCDF_07*], [Gestione assenza temporanea], [#block(breakable: false)[Il sistema deve permettere al CDF di impostare un periodo di indisponibilità, attivando un avviso automatico per gli utenti riguardo l'allungamento dei tempi di risposta.]], [CDF], [Bassa], [Aggiuntivo],
+    [*RF_GCDF_07*], [Gestione assenza temporanea], [#block(breakable: false)[Il sistema deve permettere al CDF di impostare un periodo di indisponibilità, attivando un avviso automatico per gli utenti riguardo all'allungamento dei tempi di risposta.]], [CDF], [Bassa], [Aggiuntivo],
     
     [*RF_GCDF_08*], [Generazione report aggregati], [#block(breakable: false)[Il sistema deve permettere di generare report statistici anonimi indicando periodo di riferimento, tipologia di violenza e componente accademica.]], [CDF], [Media], [SC_CDF_04, UC_CDF_2],
     
