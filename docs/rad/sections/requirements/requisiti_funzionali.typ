@@ -40,7 +40,7 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     
     [*RF_GU_10*], [Triage IA anonimizzato], [#block(breakable: false)[Il sistema deve permettere all'utente di inviare eventi del diario a un modulo IA per una valutazione indicativa di gravità e tipologia di molestia. I dati devono essere automaticamente resi anonimi dal sistema prima dell'invio al modulo. ]], [Utente], [Bassa], [SC_U_04, UC_02],
     
-    [*RF_GU_11*], [Servizi territoriali e rubrica], [#block(breakable: false)[Il sistema deve fornire all'utente indicazioni sulle strutture territoriali di assistenza in zona (es. forze dell'ordine, centri antiviolenza) e una rubrica di primo contatto per supporto esterno all'Ateneo.]], [Sistema], [Elevata], [SC_U_04, UC_02]
+    [*RF_GU_11*], [Servizi territoriali e rubrica], [#block(breakable: false)[Il sistema deve fornire all'utente indicazioni sulle strutture territoriali di assistenza in zona (es. forze dell'ordine, centri antiviolenza) e una rubrica di primo contatto per supporto esterno all'Ateneo.]], [Sistema], [Elevata], 
   )
 ]
 
