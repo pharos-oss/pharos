@@ -51,3 +51,49 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     [*RNF_A_03*], [Integrità dello storico], [Le pratiche passate in stato "Chiusa" o "Archiviata" devono divenire tecnicamente di sola lettura a livello di database per garantirne la validità legale nel tempo.], [Elevata], [Media]
   )
 ]
+
+#v(4em)
+
+=== Prestazioni
+
+#align(center)[
+  #table(
+    ..table-style(palette-primary),
+    columns: (auto, auto, auto, auto, auto),
+    inset: 8pt,
+    align: (x, y) => if x == 2 { left } else { center + horizon },
+
+    text(fill: readable-text(palette-primary))[*Identificativo*],
+    text(fill: readable-text(palette-primary))[*Nome*],
+    text(fill: readable-text(palette-primary))[*Descrizione*],
+    text(fill: readable-text(palette-primary))[*Priorità*],
+    text(fill: readable-text(palette-primary))[*Difficoltà*],
+
+    [*RNF_P_01*], [Tempi di risposta Modulo IA], [L'interrogazione del modulo IA per il Triage Guidato deve restituire l'esito e la tipologia di violenza all'utente entro un tempo massimo di 5 secondi.], [Media], [Media],
+    
+    [*RNF_P_02*], [Supporto alla concorrenza], [Il sistema deve essere in grado di gestire picchi di traffico fino a 2.000 utenti concorrenti senza degradare i tempi di caricamento delle pagine oltre i 2 secondi.], [Elevata], [Media]
+  )
+]
+
+#v(1.5em)
+
+=== Legali 
+
+#align(center)[
+  #table(
+    ..table-style(palette-primary),
+    columns: (auto, auto, auto, auto, auto),
+    inset: 8pt,
+    align: (x, y) => if x == 2 { left } else { center + horizon },
+
+    text(fill: readable-text(palette-primary))[*Identificativo*],
+    text(fill: readable-text(palette-primary))[*Nome*],
+    text(fill: readable-text(palette-primary))[*Descrizione*],
+    text(fill: readable-text(palette-primary))[*Priorità*],
+    text(fill: readable-text(palette-primary))[*Difficoltà*],
+
+    [*RNF_L_01*], [Conformità IA (AI Act / GDPR)], [Il provider LLM del modulo di intelligenza artificiale non deve in alcun modo memorizzare i prompt in input né utilizzarli per il riaddestramento del modello.], [Elevata], [Difficile],
+    
+    [*RNF_L_02*], [Audit Log inalterabile], [Il sistema deve registrare in un log immodificabile (WORM) ogni singolo accesso e operazione effettuata dal CDF sui dati sensibili degli utenti.], [Elevata], [Media]
+  )
+]
