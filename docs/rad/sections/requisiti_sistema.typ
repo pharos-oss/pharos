@@ -6,5 +6,7 @@ Nella presente sezione saranno riassunti i requisiti del sistema proposto. Perta
 == Requisiti funzionali
 #include "requirements/requisiti_funzionali.typ"
 
+#pagebreak()
+
 == Requisiti non funzionali
 #include "requirements/requisiti_non_funzionali.typ"
