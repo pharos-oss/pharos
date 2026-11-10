@@ -31,11 +31,11 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
 
     [*RF_GU_06*], [Consultazione stato segnalazione], [Il sistema deve permettere all'Utente di visualizzare la cronologia, lo stato di avanzamento e le note visibili della propria segnalazione.], [Utente], [Elevata],
     
-    [*RF_GU_07*], [Ricezione notifiche di stato], [Il sistema deve inviare una notifica (email o in-app) all'Utente ad ogni aggiornamento di stato della propria segnalazione da parte del CDF.], [Sistema], [Media],
+    [*RF_GU_07*], [Ricezione notifiche di stato], [#block(breakable: false)[Il sistema deve inviare una notifica (email o in-app) all'Utente ad ogni aggiornamento di stato della propria segnalazione da parte del CDF.]], [Sistema], [Media],
     
     [*RF_GU_08*], [Invio integrazioni], [Il sistema deve permettere all'Utente di rispondere a una richiesta del CDF aggiungendo allegati, nuovi eventi o note esplicative alla pratica in corso.], [Utente], [Elevata],
     
-    [*RF_GU_09*], [Interruzione dell'iter], [#block(breakable: false)[Il sistema deve permettere all'Utente di ritirare una propria segnalazione in corso, causando l'archiviazione della pratica in sola lettura.]], [Utente], [Elevata],
+    [*RF_GU_09*], [Interruzione dell'iter], [Il sistema deve permettere all'Utente di ritirare una propria segnalazione in corso, causando l'archiviazione della pratica in sola lettura.], [Utente], [Elevata],
     
     [*RF_GU_10*], [Triage guidato IA], [Il sistema deve permettere di sottoporre eventi del diario a un modulo IA per una valutazione orientativa su gravità e tipologia di molestia.], [Utente], [Media],
     
@@ -68,5 +68,13 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     [*RF_GCDF_04*], [Avanzamento iter e note], [Il sistema deve permettere al CDF di aggiornare lo stato di una pratica e inserire note e appuntamenti che diverranno visibili all'Utente.], [CDF], [Elevata],
     
     [*RF_GCDF_05*], [Richiesta integrazioni], [Il sistema deve consentire al CDF di impostare lo stato su "In attesa di integrazioni" specificando le informazioni o i documenti mancanti all'Utente.], [CDF], [Media],
+
+    [*RF_GCDF_06*], [Chiusura e archiviazione], [Il sistema deve permettere al CDF di chiudere formalmente una pratica, indicandone l'esito finale e bloccando ulteriori modifiche bilaterali.], [CDF], [Elevata],
+    
+    [*RF_GCDF_07*], [Delega temporanea], [Il sistema deve permettere al CDF di delegare temporaneamente l'accesso e la gestione delle pratiche a un sostituto autorizzato (es. per ferie/malattia).], [CDF], [Bassa],
+    
+    [*RF_GCDF_08*], [Generazione report aggregati], [Il sistema deve permettere di generare report statistici anonimi indicando periodo di riferimento, tipologia di violenza e componente accademica.], [CDF], [Media],
+    
+    [*RF_GCDF_09*], [Esportazione report], [Il sistema deve permettere al CDF di esportare i report statistici e i grafici generati in formato PDF e CSV.], [CDF], [Media]
 )
 ]
