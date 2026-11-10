@@ -42,3 +42,31 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     [*RF_GU_11*], [Anonimizzazione dati IA], [Il sistema deve rimuovere automaticamente tutti i dati identificativi dal testo prima di trasmetterlo al modulo AI per il triage.], [Sistema], [Elevata]
  )
 ]
+
+#v(1.5em)
+=== Gestione Consigliere di Fiducia
+
+#align(center)[
+  #table(
+    ..table-style(palette-primary),
+    columns: (auto, auto, auto, auto, auto),
+    inset: 8pt,
+    align: (x, y) => if x == 2 { left } else { center + horizon },
+
+    text(fill: readable-text(palette-primary))[*Identificativo*],
+    text(fill: readable-text(palette-primary))[*Nome*],
+    text(fill: readable-text(palette-primary))[*Descrizione*],
+    text(fill: readable-text(palette-primary))[*Attori*],
+    text(fill: readable-text(palette-primary))[*Priorità*],
+
+    [*RF_GCDF_01*], [Visualizzazione segnalazioni], [Il sistema deve mostrare al CDF l'elenco delle segnalazioni ricevute, evidenziando in modo chiaro le nuove richieste da prendere in carico.], [CDF], [Elevata],
+    
+    [*RF_GCDF_02*], [Ricerca e filtri avanzati], [Il sistema deve permettere al CDF di filtrare le segnalazioni per stato, data, ID pratica e tipologia di violenza.], [CDF], [Media],
+    
+    [*RF_GCDF_03*], [Presa in carico], [Il sistema deve permettere al CDF di visionare i dettagli e gli allegati di una nuova segnalazione e di modificarne lo stato in "Presa in carico".], [CDF], [Elevata],
+    
+    [*RF_GCDF_04*], [Avanzamento iter e note], [Il sistema deve permettere al CDF di aggiornare lo stato di una pratica e inserire note e appuntamenti che diverranno visibili all'Utente.], [CDF], [Elevata],
+    
+    [*RF_GCDF_05*], [Richiesta integrazioni], [Il sistema deve consentire al CDF di impostare lo stato su "In attesa di integrazioni" specificando le informazioni o i documenti mancanti all'Utente.], [CDF], [Media],
+)
+]
