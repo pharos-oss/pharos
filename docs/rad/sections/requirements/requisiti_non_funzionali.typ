@@ -1,6 +1,6 @@
 #import "../../../templates/common.typ": palette-primary, readable-text, table-style
 
-Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per categorie di qualità: *Usabilità*, *Affidabilità*, *Prestazioni* e *Legali*.
+Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per categorie di qualità: *Usabilità*, *Affidabilità*, *Prestazioni*, *Supportabilità*, *Implementazione*, *Interfacce*, *Operatività*, *Rilascio* e *Legali*.
 
 #v(1em)
 
@@ -9,21 +9,24 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
 #align(center)[
   #table(
     ..table-style(palette-primary),
-    columns: (auto, auto, auto, auto, auto),
-    inset: 8pt,
+    columns: (auto, auto, auto, auto, auto, auto),
+    inset: (x: 5pt, y: 8pt),
     align: (x, y) => if x == 2 { left } else { center + horizon },
 
-    text(fill: readable-text(palette-primary))[*Identificativo*],
+    text(fill: readable-text(palette-primary))[*ID*],
     text(fill: readable-text(palette-primary))[*Nome*],
     text(fill: readable-text(palette-primary))[*Descrizione*],
     text(fill: readable-text(palette-primary))[*Priorità*],
     text(fill: readable-text(palette-primary))[*Difficoltà*],
+    text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RNF_U_01*], [Interfaccia Triage Esplicita], [L'interfaccia deve chiarire in ogni passaggio che la valutazione IA è solo orientativa e non sostituisce in alcun modo l'inoltro formale della pratica al CDF.], [Elevata], [Facile],
+    [*RNF_U_01*], [Interfaccia Triage Esplicita], [L'interfaccia deve chiarire in ogni passaggio che la valutazione IA è solo orientativa e non sostituisce in alcun modo l'inoltro formale della pratica al CDF.], [Elevata], [Facile], [SC_U_04],
     
-    [*RNF_U_02*], [Feedback sui file], [In caso di caricamento di allegati non conformi, il sistema deve comunicare istantaneamente il limite violato (dimensione/formato) mantenendo i campi testuali già compilati.], [Elevata], [Media],
+    [*RNF_U_02*], [Feedback sui file], [In caso di caricamento di allegati non conformi, il sistema deve comunicare istantaneamente il limite violato (dimensione/formato) mantenendo i campi testuali già compilati.], [Elevata], [Media], [SC_U_07],
     
-    [*RNF_U_03*], [Accessibilità WCAG 2.1], [L'interfaccia utente web/mobile deve rispettare i criteri di accessibilità WCAG 2.1 livello AA per garantire la corretta fruizione anche a utenti con disabilità.], [Elevata], [Media]
+    [*RNF_U_03*], [Accessibilità WCAG 2.1], [L'interfaccia utente web/mobile deve rispettare i criteri di accessibilità WCAG 2.1 livello AA per garantire la corretta fruizione anche a utenti con disabilità.], [Elevata], [Media], [Tutti],
+
+    [*RNF_U_04*], [Chiusura rapida (Panic Button)], [L'app mobile deve fornire una funzionalità di oscuramento o uscita immediata per proteggere la privacy dell'Utente qualora venga interrotto durante la scrittura nel diario o la consultazione della pratica.], [Elevata], [Media], [Generale, UC_03, UC_04]
   )
 ]
 
@@ -34,21 +37,24 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
 #align(center)[
   #table(
     ..table-style(palette-primary),
-    columns: (auto, auto, auto, auto, auto),
-    inset: 8pt,
+    columns: (auto, auto, auto, auto, auto, auto),
+    inset: (x: 5pt, y: 8pt),
     align: (x, y) => if x == 2 { left } else { center + horizon },
 
-    text(fill: readable-text(palette-primary))[*Identificativo*],
+    text(fill: readable-text(palette-primary))[*ID*],
     text(fill: readable-text(palette-primary))[*Nome*],
     text(fill: readable-text(palette-primary))[*Descrizione*],
     text(fill: readable-text(palette-primary))[*Priorità*],
     text(fill: readable-text(palette-primary))[*Difficoltà*],
+    text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RNF_A_01*], [Cifratura End-to-End], [Il sistema deve garantire la cifratura in locale dei dati del diario personale, assicurando che l'infrastruttura di base non acceda mai ai contenuti in chiaro.], [Elevata], [Difficile],
+    [*RNF_A_01*], [Cifratura End-to-End], [Il sistema deve garantire la cifratura in locale dei dati del diario personale, assicurando che l'infrastruttura di base non acceda mai ai contenuti in chiaro.], [Elevata], [Difficile], [SC_U_02, SC_U_07],
     
-    [*RNF_A_02*], [Segregazione dei dati], [I dati anagrafici dell'utente devono rimanere architetturalmente e logicamente separati dai testi della segnalazione per limitare l'esposizione in caso di data breach.], [Elevata], [Media],
+    [*RNF_A_02*], [Segregazione dei dati], [I dati anagrafici dell'utente devono rimanere architetturalmente e logicamente separati dai testi della segnalazione per limitare l'esposizione in caso di data breach.], [Elevata], [Media], [SC_U_01],
     
-    [*RNF_A_03*], [Integrità dello storico], [Le pratiche passate in stato "Chiusa" o "Archiviata" devono divenire tecnicamente di sola lettura a livello di database per garantirne la validità legale nel tempo.], [Elevata], [Media]
+    [*RNF_A_03*], [Integrità dello storico], [Le pratiche passate in stato "Chiusa" o "Archiviata" devono divenire tecnicamente di sola lettura a livello di database per garantirne la validità legale nel tempo.], [Elevata], [Media], [SC_U_08, SC_CDF_03],
+
+    [*RNF_A_04*], [Funzionamento Offline del Diario], [L'applicazione mobile deve consentire all'Utente di registrare e cifrare localmente gli eventi nel diario anche in assenza di connettività, sincronizzandoli col server alla successiva riconnessione.], [Media], [Difficile], [SC_U_02, UC_03]
   )
 ]
 
@@ -59,41 +65,163 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
 #align(center)[
   #table(
     ..table-style(palette-primary),
-    columns: (auto, auto, auto, auto, auto),
+    columns: (auto, auto, auto, auto, auto, auto),
     inset: 8pt,
     align: (x, y) => if x == 2 { left } else { center + horizon },
 
-    text(fill: readable-text(palette-primary))[*Identificativo*],
+    text(fill: readable-text(palette-primary))[*ID*],
     text(fill: readable-text(palette-primary))[*Nome*],
     text(fill: readable-text(palette-primary))[*Descrizione*],
     text(fill: readable-text(palette-primary))[*Priorità*],
     text(fill: readable-text(palette-primary))[*Difficoltà*],
+    text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RNF_P_01*], [Tempi di risposta Modulo IA], [L'interrogazione del modulo IA per il Triage Guidato deve restituire l'esito e la tipologia di violenza all'utente entro un tempo massimo di 5 secondi.], [Media], [Media],
+    [*RNF_P_01*], [Tempi di risposta Modulo IA], [L'interrogazione del modulo IA per il Triage Guidato deve restituire l'esito e la tipologia di violenza all'utente entro un tempo massimo di 5 secondi.], [Media], [Media], [SC_U_04],
     
-    [*RNF_P_02*], [Supporto alla concorrenza], [Il sistema deve essere in grado di gestire picchi di traffico fino a 2.000 utenti concorrenti senza degradare i tempi di caricamento delle pagine oltre i 2 secondi.], [Elevata], [Media]
+    [*RNF_P_02*], [Supporto alla concorrenza], [Il sistema deve essere in grado di gestire picchi di traffico fino a 2.000 utenti concorrenti senza degradare i tempi di caricamento delle pagine oltre i 2 secondi.], [Elevata], [Media], [Tutti]
   )
 ]
 
 #v(1.5em)
+
+=== Supportabilità
+
+#align(center)[
+  #table(
+    ..table-style(palette-primary),
+    columns: (auto, auto, auto, auto, auto, auto),
+    inset: 8pt,
+    align: (x, y) => if x == 2 { left } else { center + horizon },
+
+    text(fill: readable-text(palette-primary))[*ID*],
+    text(fill: readable-text(palette-primary))[*Nome*],
+    text(fill: readable-text(palette-primary))[*Descrizione*],
+    text(fill: readable-text(palette-primary))[*Priorità*],
+    text(fill: readable-text(palette-primary))[*Difficoltà*],
+    text(fill: readable-text(palette-primary))[*Scenari / UC*],
+
+    [*RNF_S_01*], [Log Centralizzato], [Il sistema deve tracciare errori e malfunzionamenti tramite un sistema di logging centralizzato per agevolare il debugging da parte degli amministratori.], [Elevata], [Media], [Tutti]
+  )
+]
+
+#v(1.5em)
+
+#pagebreak()
+
+=== Implementazione 
+
+#align(center)[
+  #table(
+    ..table-style(palette-primary),
+    columns: (auto, auto, auto, auto, auto, auto),
+    inset: 8pt,
+    align: (x, y) => if x == 2 { left } else { center + horizon },
+
+    text(fill: readable-text(palette-primary))[*ID*],
+    text(fill: readable-text(palette-primary))[*Nome*],
+    text(fill: readable-text(palette-primary))[*Descrizione*],
+    text(fill: readable-text(palette-primary))[*Priorità*],
+    text(fill: readable-text(palette-primary))[*Difficoltà*],
+    text(fill: readable-text(palette-primary))[*Scenari / UC*],
+
+    [*RNF_IM_01*], [Piattaforma ibrida divisa per ruoli], [Il sistema deve essere fruibile tramite applicazione web per Consigliere di Fiducia e Admin, e tramite app mobile per gli Utenti. Le funzionalità devono essere pariteticamente presenti e supportate su entrambe le piattaforme.], [Elevata], [Media], [Tutti],
+
+    [*RNF_IM_02*], [Implementazione Modulo IA Zero-Retention], [Il modulo IA per il triage deve essere implementato tramite modelli ospitati in locale (on-premise) o API enterprise configurate in modalità "stateless", per garantire tecnicamente il blocco della conservazione dati e del riaddestramento.], [Elevata], [Difficile], [SC_U_04, UC_02]
+  )
+]
+
+#v(1.5em)
+
+=== Interfacce
+
+#align(center)[
+  #table(
+    ..table-style(palette-primary),
+    columns: (auto, auto, auto, auto, auto, auto),
+    inset: 8pt,
+    align: (x, y) => if x == 2 { left } else { center + horizon },
+
+    text(fill: readable-text(palette-primary))[*ID*],
+    text(fill: readable-text(palette-primary))[*Nome*],
+    text(fill: readable-text(palette-primary))[*Descrizione*],
+    text(fill: readable-text(palette-primary))[*Priorità*],
+    text(fill: readable-text(palette-primary))[*Difficoltà*],
+    text(fill: readable-text(palette-primary))[*Scenari / UC*],
+
+    [*RNF_IF_01*], [Integrazione Single Sign-On], [Il sistema deve integrarsi con il provider di identità di Ateneo (SSO/Shibboleth) per consentire l'accesso con le credenziali universitarie istituzionali.], [Elevata], [Difficile], [Tutti]
+  )
+]
+
+#v(1.5em)
+
+#pagebreak()
+
+=== Operatività
+
+#align(center)[
+  #table(
+    ..table-style(palette-primary),
+    columns: (auto, auto, auto, auto, auto, auto),
+    inset: 8pt,
+    align: (x, y) => if x == 2 { left } else { center + horizon },
+
+    text(fill: readable-text(palette-primary))[*ID*],
+    text(fill: readable-text(palette-primary))[*Nome*],
+    text(fill: readable-text(palette-primary))[*Descrizione*],
+    text(fill: readable-text(palette-primary))[*Priorità*],
+    text(fill: readable-text(palette-primary))[*Difficoltà*],
+    text(fill: readable-text(palette-primary))[*Scenari / UC*],
+
+    [*RNF_O_01*], [Backup Automatico e Disaster Recovery], [L'infrastruttura deve eseguire backup completi cifrati del database ogni 24 ore, garantendo un RPO (Recovery Point Objective) massimo di 1 giorno.], [Elevata], [Media], [Tutti]
+  )
+]
+
+#v(1.5em)
+
+=== Rilascio
+
+#align(center)[
+  #table(
+    ..table-style(palette-primary),
+    columns: (auto, auto, auto, auto, auto, auto),
+    inset: 8pt,
+    align: (x, y) => if x == 2 { left } else { center + horizon },
+
+    text(fill: readable-text(palette-primary))[*ID*],
+    text(fill: readable-text(palette-primary))[*Nome*],
+    text(fill: readable-text(palette-primary))[*Descrizione*],
+    text(fill: readable-text(palette-primary))[*Priorità*],
+    text(fill: readable-text(palette-primary))[*Difficoltà*],
+    text(fill: readable-text(palette-primary))[*Scenari / UC*],
+
+    [*RNF_PK_01*], [Containerizzazione Docker], [L'intera applicazione deve essere pacchettizzata all'interno di container Docker per standardizzare i processi di rilascio, test e deploy in produzione.], [Media], [Facile], [Tutti],
+
+    [*RNF_PK_02*], [Automazione CI/CD], [Il processo di build, test delle API e preparazione degli artefatti (immagini Docker, pacchetti web e app mobile) deve essere gestito tramite pipeline automatizzate di Continuous Integration/Continuous Deployment.], [Media], [Media], [Tutti]
+  )
+]
+
+#v(1.5em)
+
+#pagebreak()
 
 === Legali 
 
 #align(center)[
   #table(
     ..table-style(palette-primary),
-    columns: (auto, auto, auto, auto, auto),
+    columns: (auto, auto, auto, auto, auto, auto),
     inset: 8pt,
     align: (x, y) => if x == 2 { left } else { center + horizon },
 
-    text(fill: readable-text(palette-primary))[*Identificativo*],
+    text(fill: readable-text(palette-primary))[*ID*],
     text(fill: readable-text(palette-primary))[*Nome*],
     text(fill: readable-text(palette-primary))[*Descrizione*],
     text(fill: readable-text(palette-primary))[*Priorità*],
     text(fill: readable-text(palette-primary))[*Difficoltà*],
+    text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RNF_L_01*], [Conformità IA (AI Act / GDPR)], [Il provider LLM del modulo di intelligenza artificiale non deve in alcun modo memorizzare i prompt in input né utilizzarli per il riaddestramento del modello.], [Elevata], [Difficile],
+    [*RNF_L_01*], [Conformità IA (AI Act / GDPR)], [Il provider LLM del modulo di intelligenza artificiale non deve in alcun modo memorizzare i prompt in input né utilizzarli per il riaddestramento del modello.], [Elevata], [Difficile], [SC_U_04],
     
-    [*RNF_L_02*], [Audit Log inalterabile], [Il sistema deve registrare in un log immodificabile (WORM) ogni singolo accesso e operazione effettuata dal CDF sui dati sensibili degli utenti.], [Elevata], [Media]
+    [*RNF_L_02*], [Audit Log inalterabile], [Il sistema deve registrare in un log immodificabile (WORM) ogni singolo accesso e operazione effettuata dal CDF sui dati sensibili degli utenti.], [Elevata], [Media], [SC_CDF_01, SC_CDF_02, UC_CDF_1, UC_CDF_2]
   )
 ]
