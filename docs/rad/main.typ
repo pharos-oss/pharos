@@ -53,3 +53,5 @@
 #include "sections/sistema_proposto.typ"
 
 #include "sections/modelli_sistema.typ"
+
+#include "sections/requisiti_sistema.typ"
