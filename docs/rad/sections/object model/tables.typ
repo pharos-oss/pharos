@@ -24,9 +24,9 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
       // ── ENTITY ──
 
-      [*UE*], [Entity],
+      [*Utente*], [Entity],
       [id, nome, cognome, \ email, ruolo],
-      [ottieniDati(), \ aggiornaDati()],
+      [ottieniProfilo(), \ aggiornaDati()],
       [Diario (1), \ Segnalazione (0..\*)],
       [RF_GU_01 – \ RF_GU_11],
       [Utente registrato sulla piattaforma Pharos (studente o dipendente).],
@@ -117,27 +117,27 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       inset: 7pt,
       align: (x, y) => if y == 0 { center + horizon } else if x == 0 or x == 1 or x == 5 { center + horizon } else { left + horizon },
 
-      text(fill: readable-text(palette-primary))[*NOME OGGETTO*],
-      text(fill: readable-text(palette-primary))[*TIPOLOGIA*],
-      text(fill: readable-text(palette-primary))[*ATTRIBUTI*],
-      text(fill: readable-text(palette-primary))[*METODI*],
-      text(fill: readable-text(palette-primary))[*RELAZIONI*],
-      text(fill: readable-text(palette-primary))[*REQUISITI*],
-      text(fill: readable-text(palette-primary))[*DESCRIZIONE*],
+      text(fill: readable-text(palette-primary))[*Nome*],
+      text(fill: readable-text(palette-primary))[*Tipologia*],
+      text(fill: readable-text(palette-primary))[*Attributi*],
+      text(fill: readable-text(palette-primary))[*Metodi*],
+      text(fill: readable-text(palette-primary))[*Relazioni*],
+      text(fill: readable-text(palette-primary))[*Requisiti*],
+      text(fill: readable-text(palette-primary))[*Descrizione*],
 
       // ── ENTITY ──
 
-      [*CDF*], [Entity],
+      [*Cdf*], [Entity],
       [id, nome, cognome, \ email, ruolo],
       [ottieniProfilo(), \ aggiornaStato()],
-      [Pratica (0..\), \ *PeriodoAssenza (0..\)*],
+      [Pratica (0..\), \ PeriodoAssenza (0..\)],
       [RF_GCDF_01 – \ RF_GCDF_09],
       [Consigliere di Fiducia che gestisce le segnalazioni degli utenti.],
 
       [*Pratica*], [Entity],
       [id, dataRicezione, \ tipologia],
       [impostaStato(), \ ottieniDettagli()],
-      [ConsigliereDiFiducia (1), \ Segnalazione (1), \ StatoPratica (1..\), \ *NotaCDF (0..\)*, \ EsitoPratica (0..1)],
+      [Cdf (1), \ Segnalazione (1), \ StatoPratica (1..\), \ NotaCDF (0..\*), \ EsitoPratica (0..1)],
       [RF_GCDF_01, \ RF_GCDF_03, \ RF_GCDF_04, \ RF_GCDF_06],
       [Pratica gestita dal CDF: segnalazione associata, storico stati e note.],
 
@@ -172,7 +172,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [*PeriodoAssenza*], [Entity],
       [id, dataInizio, \ dataFine, \ avvisoAttivo],
       [attivaAvviso(), \ disattivaAvviso()],
-      [CDF (1)],
+      [Cdf (1)],
       [RF_GCDF_07],
       [Periodo di indisponibilità del CDF con date di inizio e fine e avviso automatico.],
 
@@ -190,14 +190,14 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [*GestorePratiche*], [Control],
       [—],
       [prendiInCarico(), \ aggiornaStato(), \ chiudiPratica(), \ gestisciAssenza()],
-      [InterfacciaCDF (1), \ Pratica (0..\), \ *StatoPratica (0..\)*, \ NotaCDF (0..\), \ *EsitoPratica (0..\)*],
+      [InterfacciaCDF (1), \ Pratica (0..\), \ StatoPratica (0..\*), \ NotaCDF (0..\*), \ EsitoPratica (0..\*)],
       [RF_GCDF_01 – \ RF_GCDF_07],
       [Coordina la logica di avanzamento, integrazione, chiusura delle pratiche e assenze del CDF.],
 
       [*GestoreReport*], [Control],
       [—],
       [generaReport(), \ aggregaDati(), \ esportaDati()],
-      [InterfacciaCDF (1), \ ReportStatistico (0..\), \ *Pratica (0..\)*],
+      [InterfacciaCDF (1), \ ReportStatistico (0..\), \ Pratica (0..\*)],
       [RF_GCDF_08, \ RF_GCDF_09],
       [Si occupa dell'estrazione dei dati anonimizzati e della generazione dei documenti statistici.]
     )
