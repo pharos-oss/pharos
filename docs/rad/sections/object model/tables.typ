@@ -1,7 +1,5 @@
 #import "../../../templates/common.typ": palette-primary, readable-text, table-style
 
-#pagebreak()
-
 === Gestione Utente (MO_GU)
 
 La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati per la Gestione Utente, derivati dai requisiti funzionali RF_GU_01 – RF_GU_11 e dai casi d'uso UC_01 – UC_04. 
