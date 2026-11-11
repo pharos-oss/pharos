@@ -55,5 +55,3 @@
 #include "sections/requisiti_sistema.typ"
 
 #include "sections/modelli_sistema.typ"
-
-#include "sections/object model/tables.typ"

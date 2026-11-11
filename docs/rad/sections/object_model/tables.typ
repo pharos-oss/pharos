@@ -11,7 +11,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
     #table(
       ..table-style(palette-primary),
       columns: (1.4fr, 0.9fr, 1.4fr, 1.5fr, 1.5fr, 1.1fr, 1.7fr),
-      inset: 6pt,
+      inset: 5pt,
       align: (x, y) => if y == 0 { center + horizon } else if x == 0 or x == 1 or x == 5 { center + horizon } else { left + horizon },
 
       text(fill: readable-text(palette-primary))[*Nome*],
@@ -36,7 +36,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [impostaCifratura(), \ ottieniEventi()],
       [Utente (1), \ EventoDiario (0..\*)],
       [RF_GU_01, \ RF_GU_02],
-      [Diario personale dell'utente per annotare eventi in forma privata e cifrata.],
+      [Diario personale per annotare eventi in modo privato e cifrato.],
 
       [*EventoDiario*], [Entity],
       [id, data, ora, \ luogo, descrizione, \ dataCreazione],
@@ -101,7 +101,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [*GestoreSegn*], [Control],
       [—],
       [inviaSegnalazione(), \ interrompiIter(), \ avviaTriageIA(), \ anonimizzaTesto(), \ recuperaServizi()],
-      [InterfacciaUtente (1), \ Segnalazione (0..\*), \ Notifica (0..\*), \ ValutazioneIA (0..1), \ ServizioTerritoriale (0..\*)],
+      [InterfacciaUtente (1), \ Segnalazione (0..\*), \ Notifica (0..\*), \ ValutazioneIA (0..1), \ ServizioTerr. (0..\*)],
       [RF_GU_04 – \ RF_GU_11],
       [Coordina il ciclo di vita delle segnalazioni, l'interazione con l'IA e il recapito delle notifiche.]
     )
@@ -121,7 +121,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
     #table(
       ..table-style(palette-primary),
       columns: (1.2fr, 0.9fr, 1.4fr, 1.5fr, 1.4fr, 1.1fr, 1.7fr),
-      inset: 7pt,
+      inset: 5pt,
       align: (x, y) => if y == 0 { center + horizon } else if x == 0 or x == 1 or x == 5 { center + horizon } else { left + horizon },
 
       text(fill: readable-text(palette-primary))[*Nome*],
@@ -137,7 +137,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [*Cdf*], [Entity],
       [id, nome, cognome, \ email, ruolo],
       [ottieniProfilo(), \ aggiornaStato()],
-      [Pratica (0..\), \ PeriodoAssenza (0..\*)],
+      [Pratica (0..\*), \ PeriodoAssenza (0..\*)],
       [RF_GCDF_01 – \ RF_GCDF_09],
       [Consigliere di Fiducia che gestisce le segnalazioni degli utenti.],
 
@@ -206,7 +206,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [generaReport(), \ aggregaDati(), \ esportaDati()],
       [InterfacciaCDF (1), \ ReportStatistico (0..\*), \ Pratica (0..\*)],
       [RF_GCDF_08, \ RF_GCDF_09],
-      [Si occupa dell'estrazione dei dati anonimizzati e della generazione dei documenti statistici.]
+      [Si occupa di estrarre dati anonimizzati e generare documenti statistici.]
     )
   ]
 ]
