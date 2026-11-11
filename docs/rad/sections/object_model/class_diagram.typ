@@ -2,7 +2,7 @@
 
 #align(center)[
   #figure(
-    image("../../assets/images/CD_Class_Diagram.png", width: 94%), 
+    image("../../assets/images/CD_Class_Diagram.png", width: 110%), 
     caption: ["Class Diagram: Moduli Gestione Utente e Consigliere di Fiducia."]
   )
 ]
