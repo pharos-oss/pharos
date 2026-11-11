@@ -10,7 +10,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
   #align(center)[
     #table(
       ..table-style(palette-primary),
-      columns: (1.4fr, 0.9fr, 1.4fr, 1.5fr, 1.4fr, 1.1fr, 1.7fr),
+      columns: (1.4fr, 0.9fr, 1.4fr, 1.5fr, 1.5fr, 1.1fr, 1.7fr),
       inset: 7pt,
       align: (x, y) => if y == 0 { center + horizon } else if x == 0 or x == 1 or x == 5 { center + horizon } else { left + horizon },
 
@@ -73,11 +73,18 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [RF_GU_10, \ RF_GU_11],
       [Risultato del triage IA: gravità, tipologia di violenza, passi suggeriti.],
 
+      [*ServizioTerr.*], [Entity],
+      [id, nome, indirizzo, \ telefono, email, \ tipologia],
+      [ottieniDettaglio(), \ ottieniContatti()],
+      [ValutazioneIA (0..\*)],
+      [RF_GU_11],
+      [Struttura di assistenza territoriale (centri antiviolenza, sportelli, servizi legali) consultabile nella rubrica.],
+
       // ── BOUNDARY ──
 
       [*InterfacciaUtente*], [Boundary],
       [—],
-      [mostraDiario(), \ mostraFormSegn(), \ mostraTriage()],
+      [mostraDiario(), \ mostraFormSegn(), \ mostraTriage(), \ mostraRubrica()],
       [GestoreDiario (1), \ GestoreSegn (1)],
       [RF_GU_01 – \ RF_GU_11],
       [Interfaccia grafica unificata per la gestione del diario, l'invio delle segnalazioni e il triage IA.],
@@ -93,8 +100,8 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
       [*GestoreSegn*], [Control],
       [—],
-      [inviaSegnalazione(), \ interrompiIter(), \ avviaTriageIA(), \ anonimizzaTesto()],
-      [InterfacciaUtente (1), \ Segnalazione (0..\*), \ Notifica (0..\*), \ ValutazioneIA (0..1)],
+      [inviaSegnalazione(), \ interrompiIter(), \ avviaTriageIA(), \ anonimizzaTesto(), \ recuperaServizi()],
+      [InterfacciaUtente (1), \ Segnalazione (0..\*), \ Notifica (0..\*), \ ValutazioneIA (0..1), \ ServizioTerritoriale (0..\*)],
       [RF_GU_04 – \ RF_GU_11],
       [Coordina il ciclo di vita delle segnalazioni, l'interazione con l'IA e il recapito delle notifiche.]
     )
@@ -130,14 +137,14 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [*Cdf*], [Entity],
       [id, nome, cognome, \ email, ruolo],
       [ottieniProfilo(), \ aggiornaStato()],
-      [Pratica (0..\), \ PeriodoAssenza (0..\)],
+      [Pratica (0..\), \ PeriodoAssenza (0..\*)],
       [RF_GCDF_01 – \ RF_GCDF_09],
       [Consigliere di Fiducia che gestisce le segnalazioni degli utenti.],
 
       [*Pratica*], [Entity],
       [id, dataRicezione, \ tipologia],
       [impostaStato(), \ ottieniDettagli()],
-      [Cdf (1), \ Segnalazione (1), \ StatoPratica (1..\), \ NotaCDF (0..\*), \ EsitoPratica (0..1)],
+      [Cdf (1), \ Segnalazione (1), \ StatoPratica (1..\*), \ NotaCDF (0..\*), \ EsitoPratica (0..1)],
       [RF_GCDF_01, \ RF_GCDF_03, \ RF_GCDF_04, \ RF_GCDF_06],
       [Pratica gestita dal CDF: segnalazione associata, storico stati e note.],
 
@@ -190,14 +197,14 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [*GestorePratiche*], [Control],
       [—],
       [prendiInCarico(), \ aggiornaStato(), \ chiudiPratica(), \ gestisciAssenza()],
-      [InterfacciaCDF (1), \ Pratica (0..\), \ StatoPratica (0..\*), \ NotaCDF (0..\*), \ EsitoPratica (0..\*)],
+      [InterfacciaCDF (1), \ Pratica (0..\*), \ StatoPratica (0..\*), \ NotaCDF (0..\*), \ EsitoPratica (0..\*)],
       [RF_GCDF_01 – \ RF_GCDF_07],
       [Coordina la logica di avanzamento, integrazione, chiusura delle pratiche e assenze del CDF.],
 
       [*GestoreReport*], [Control],
       [—],
       [generaReport(), \ aggregaDati(), \ esportaDati()],
-      [InterfacciaCDF (1), \ ReportStatistico (0..\), \ Pratica (0..\*)],
+      [InterfacciaCDF (1), \ ReportStatistico (0..\*), \ Pratica (0..\*)],
       [RF_GCDF_08, \ RF_GCDF_09],
       [Si occupa dell'estrazione dei dati anonimizzati e della generazione dei documenti statistici.]
     )
