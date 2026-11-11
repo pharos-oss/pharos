@@ -11,7 +11,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
     #table(
       ..table-style(palette-primary),
       columns: (1.4fr, 0.9fr, 1.4fr, 1.5fr, 1.5fr, 1.1fr, 1.7fr),
-      inset: 5pt,
+      inset: 4.5pt,
       align: (x, y) => if y == 0 { center + horizon } else if x == 0 or x == 1 or x == 5 { center + horizon } else { left + horizon },
 
       text(fill: readable-text(palette-primary))[*Nome*],
@@ -121,7 +121,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
     #table(
       ..table-style(palette-primary),
       columns: (1.2fr, 0.9fr, 1.4fr, 1.5fr, 1.4fr, 1.1fr, 1.7fr),
-      inset: 5pt,
+      inset: 4pt,
       align: (x, y) => if y == 0 { center + horizon } else if x == 0 or x == 1 or x == 5 { center + horizon } else { left + horizon },
 
       text(fill: readable-text(palette-primary))[*Nome*],
