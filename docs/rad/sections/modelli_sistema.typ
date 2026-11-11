@@ -10,3 +10,6 @@ Nella presente sezione sono descritti i diversi modelli del sistema *Pharos*, or
 #include "use_cases/utente.typ"
 
 #include "use_cases/cdf.typ"
+
+== Tabella degli oggetti
+#include "object_model/tables.typ"
