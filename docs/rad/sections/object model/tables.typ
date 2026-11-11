@@ -100,3 +100,106 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
     )
   ]
 ]
+#v(4em)
+
+=== Gestione Consigliere di Fiducia (MO_GCDF)
+
+La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati per la Gestione Consigliere di Fiducia, derivati dai requisiti funzionali RF_GCDF_01 – RF_GCDF_09 e dai casi d'uso UC_CDF_1 – UC_CDF_2.
+
+#v(1em)
+
+#[
+  #set text(size: 8pt)
+  #align(center)[
+    #table(
+      ..table-style(palette-primary),
+      columns: (1.2fr, 0.9fr, 1.4fr, 1.5fr, 1.4fr, 1.1fr, 1.7fr),
+      inset: 7pt,
+      align: (x, y) => if y == 0 { center + horizon } else if x == 0 or x == 1 or x == 5 { center + horizon } else { left + horizon },
+
+      text(fill: readable-text(palette-primary))[*NOME OGGETTO*],
+      text(fill: readable-text(palette-primary))[*TIPOLOGIA*],
+      text(fill: readable-text(palette-primary))[*ATTRIBUTI*],
+      text(fill: readable-text(palette-primary))[*METODI*],
+      text(fill: readable-text(palette-primary))[*RELAZIONI*],
+      text(fill: readable-text(palette-primary))[*REQUISITI*],
+      text(fill: readable-text(palette-primary))[*DESCRIZIONE*],
+
+      // ── ENTITY ──
+
+      [*CDF*], [Entity],
+      [id, nome, cognome, \ email, ruolo],
+      [ottieniProfilo(), \ aggiornaStato()],
+      [Pratica (0..\), \ *PeriodoAssenza (0..\)*],
+      [RF_GCDF_01 – \ RF_GCDF_09],
+      [Consigliere di Fiducia che gestisce le segnalazioni degli utenti.],
+
+      [*Pratica*], [Entity],
+      [id, dataRicezione, \ tipologia],
+      [impostaStato(), \ ottieniDettagli()],
+      [ConsigliereDiFiducia (1), \ Segnalazione (1), \ StatoPratica (1..\), \ *NotaCDF (0..\)*, \ EsitoPratica (0..1)],
+      [RF_GCDF_01, \ RF_GCDF_03, \ RF_GCDF_04, \ RF_GCDF_06],
+      [Pratica gestita dal CDF: segnalazione associata, storico stati e note.],
+
+      [*StatoPratica*], [Entity],
+      [id, stato, \ dataTransizione, note],
+      [ottieniStato()],
+      [Pratica (1)],
+      [RF_GCDF_03, \ RF_GCDF_04],
+      [Stato corrente nel flusso (Inviata, Presa in carico, In lavorazione, Chiusa, Archiviata).],
+
+      [*NotaCDF*], [Entity],
+      [id, testo, \ dataInserimento, \ visibileUtente],
+      [ottieniTesto()],
+      [Pratica (1)],
+      [RF_GCDF_04],
+      [Nota o appuntamento inserito dal CDF, visibile all'utente nella cronologia.],
+
+      [*EsitoPratica*], [Entity],
+      [id, esito, \ notaConclusiva, \ dataChiusura],
+      [ottieniEsito()],
+      [Pratica (1)],
+      [RF_GCDF_06],
+      [Esito formale di chiusura (Risolta con procedura informale, Avviata procedura formale, Non procedibile).],
+
+      [*ReportStatistico*], [Entity],
+      [id, periodo, \ datiAggregati, \ dataGenerazione, \ formato],
+      [impostaDati(), \ ottieniReport()],
+      [—],
+      [RF_GCDF_08, \ RF_GCDF_09],
+      [Report aggregato e anonimizzato per il CUG (tipologia, componente accademica).],
+
+      [*PeriodoAssenza*], [Entity],
+      [id, dataInizio, \ dataFine, \ avvisoAttivo],
+      [attivaAvviso(), \ disattivaAvviso()],
+      [CDF (1)],
+      [RF_GCDF_07],
+      [Periodo di indisponibilità del CDF con date di inizio e fine e avviso automatico.],
+
+      // ── BOUNDARY ──
+
+      [*InterfacciaCDF*], [Boundary],
+      [—],
+      [mostraDashboard(), \ mostraDettPratica(), \ mostraReport()],
+      [GestorePratiche (1), \ GestoreReport (1)],
+      [RF_GCDF_01 – \ RF_GCDF_09],
+      [Interfaccia riservata al CDF per consultare le pratiche, aggiornare gli stati ed esportare i report.],
+
+      // ── CONTROL ──
+
+      [*GestorePratiche*], [Control],
+      [—],
+      [prendiInCarico(), \ aggiornaStato(), \ chiudiPratica(), \ gestisciAssenza()],
+      [InterfacciaCDF (1), \ Pratica (0..\), \ *StatoPratica (0..\)*, \ NotaCDF (0..\), \ *EsitoPratica (0..\)*],
+      [RF_GCDF_01 – \ RF_GCDF_07],
+      [Coordina la logica di avanzamento, integrazione, chiusura delle pratiche e assenze del CDF.],
+
+      [*GestoreReport*], [Control],
+      [—],
+      [generaReport(), \ aggregaDati(), \ esportaDati()],
+      [InterfacciaCDF (1), \ ReportStatistico (0..\), \ *Pratica (0..\)*],
+      [RF_GCDF_08, \ RF_GCDF_09],
+      [Si occupa dell'estrazione dei dati anonimizzati e della generazione dei documenti statistici.]
+    )
+  ]
+]
