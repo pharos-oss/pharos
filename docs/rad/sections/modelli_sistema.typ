@@ -13,3 +13,6 @@ Nella presente sezione sono descritti i diversi modelli del sistema *Pharos*, or
 
 == Tabella degli oggetti
 #include "object_model/tables.typ"
+
+== Class Diagram
+#include "object_model/class_diagram.typ"
