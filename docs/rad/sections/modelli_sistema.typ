@@ -21,4 +21,4 @@ Nella presente sezione sono descritti i diversi modelli del sistema *Pharos*, or
 #include "dynamic_model/sequence_diagram.typ"
 
 == Statechart Diagram 
-#include "object_model/statechart_diagram.typ"
+#include "dynamic_model/statechart_diagram.typ"
