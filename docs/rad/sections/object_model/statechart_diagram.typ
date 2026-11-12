@@ -12,7 +12,7 @@
 #align(center + horizon)[
   #figure(
     image("../../assets/images/Statechart_Evento_Diario.png", width: 120%), 
-    caption: ["Statechart Diagram: rappresentazione del ciclo relativo alla segnalazione"]
+    caption: ["Statechart Diagram: rappresentazione del ciclo relativo all'evento diario"]
   )
 ]
 
