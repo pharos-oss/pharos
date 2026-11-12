@@ -16,3 +16,6 @@ Nella presente sezione sono descritti i diversi modelli del sistema *Pharos*, or
 
 == Class Diagram
 #include "object_model/class_diagram.typ"
+
+== Sequence Diagram
+#include "dynamic_model/sequence_diagram.typ"
