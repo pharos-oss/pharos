@@ -9,7 +9,7 @@
 
 #align(center)[
   #figure(
-    image("../../assets/images/SD_Gestione_Segnalazione.png", width: 150%), 
+    image("../../assets/images/SD_Gestione_Segnalazione.png", width: 120%), 
     caption: ["Sequence Diagram: Gestione segnalazione lato CDF"]
   )
 ]
