@@ -1,0 +1,2 @@
+= Glossario <glossario>
+La seguente sezione definisce in modo univoco il vocabolario condiviso del sistema Pharos, raccogliendo i termini tecnici e di dominio estratti dai requisiti, dal modello degli oggetti e dai diagrammi comportamentali. Per ciascuna voce vengono riportate la definizione ufficiale, l'elenco dei sinonimi da evitare al fine di prevenire ambiguità terminologiche e i riferimenti agli artefatti in cui il concetto è impiegato.
