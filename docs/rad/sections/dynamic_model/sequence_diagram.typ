@@ -7,9 +7,11 @@
   )
 ]
 
+=== SD_Gestione_Segnalazione
+
 #align(center)[
   #figure(
-    image("../../assets/images/SD_Gestione_Segnalazione.png", width: 120%), 
+    image("../../assets/images/SD_Gestione_Segnalazione.png", width: 110%), 
     caption: ["Sequence Diagram: Gestione segnalazione lato CDF"]
   )
 ]
