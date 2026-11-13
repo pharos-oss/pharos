@@ -1,4 +1,4 @@
-=== Class Diagram 
+=== CD_Piattaforma 
 
 #align(center)[
   #figure(
