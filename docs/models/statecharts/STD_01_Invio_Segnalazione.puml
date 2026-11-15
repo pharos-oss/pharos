@@ -60,7 +60,7 @@ InLavorazione --> Archiviata : interrompiIter / archiviaPratica()
 InLavorazione --> Chiusa : chiudiPratica [esito definito] / registraEsito()
 
 InAttesaDiIntegrazioni --> InLavorazione : inviaIntegrazioni / allegaMateriale()
-InAttesaDiIntegrazioni --> Archiviata : after 30 giorni [integrazioni mancanti] / archiviaPratica()
+InAttesaDiIntegrazioni --> Archiviata : passati 30 giorni [integrazioni mancanti] / archiviaPratica()
 
 ' Sostituzione dei post-it collegando gli stati al nodo finale
 Archiviata --> [*]
