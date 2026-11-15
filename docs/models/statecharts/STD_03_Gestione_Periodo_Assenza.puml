@@ -1,0 +1,34 @@
+@startuml
+title Statechart Diagram: Ciclo di Vita "Periodo Assenza"
+top to bottom direction
+skinparam state {
+  BackgroundColor White
+  BorderColor #666666
+}
+
+[*] --> Programmato : programmaAssenza / crea()
+
+state Programmato {
+  Programmato : entry / impostaDate()
+  Programmato : modificaDate / aggiornaDate()
+  Programmato : any / ignora()
+}
+
+state Attivo {
+  Attivo : entry / attivaAvviso()
+  Attivo : exit / disattivaAvviso()
+  Attivo : any / ignora()
+}
+
+state Concluso {
+  Concluso : entry / storicizzaAssenza()
+  Concluso : any / ignora()
+}
+
+Programmato --> Attivo : when (dataOdierna >= dataInizio)
+Programmato --> [*] : annullaAssenza / elimina()
+
+Attivo --> Concluso : when (dataOdierna > dataFine)\nrientroAnticipato / terminaOra()
+
+Concluso --> [*] : puliziaPeriodica / elimina()
+@enduml

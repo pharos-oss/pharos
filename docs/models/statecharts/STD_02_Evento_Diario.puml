@@ -1,0 +1,32 @@
+@startuml
+title Statechart Diagram: Ciclo di Vita dell'Evento Diario
+top to bottom direction
+skinparam state {
+  BackgroundColor White
+  BorderColor #666666
+}
+
+[*] --> Registrato : creaEvento / salvaNelDiario()
+
+state Registrato {
+  Registrato : entry / cifraContenuto()
+  Registrato : aggiornaDati / cifraContenuto()
+}
+
+state AllegatoASegnalazione {
+  AllegatoASegnalazione : entry / associaBozza()
+}
+
+state Inviato {
+  Inviato : entry / bloccaModifiche()
+  Inviato : entry / rendiSolaLettura()
+}
+
+Registrato --> AllegatoASegnalazione : allegaASegnalazione / collegaSegnalazione()
+Registrato --> [*] : eliminaEvento / rimuoviDalDiario()
+
+AllegatoASegnalazione --> Registrato : rimuoviAllegato [segnalazione in bozza] / scollegaSegnalazione()\neliminaBozzaSegnalazione / scollegaSegnalazione()
+AllegatoASegnalazione --> Inviato : inviaSegnalazione / confermaAllegato()
+
+Inviato --> [*]
+@enduml

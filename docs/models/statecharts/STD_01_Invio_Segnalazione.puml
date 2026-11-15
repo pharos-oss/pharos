@@ -1,0 +1,69 @@
+@startuml
+title Statechart Diagram: Ciclo di Vita della Segnalazione / Pratica
+
+skinparam state {
+  BackgroundColor White
+  BorderColor #666666
+}
+
+[*] --> Bozza : salvaBozza / impostaStato("Bozza")
+[*] --> Inviata : inviaSegnalazione / impostaStato("Inviata")
+
+state Bozza {
+  Bozza : entry / cifraContenuto()
+  Bozza : any / ignora()
+}
+
+state Inviata {
+  Inviata : entry / assegnaCodice()
+  Inviata : entry / notificaCDF()
+  Inviata : any / ignora()
+}
+
+state PresaInCarico {
+  PresaInCarico : entry / notificaUtente()
+  PresaInCarico : any / ignora()
+}
+
+state InLavorazione {
+  InLavorazione : entry / aggiornaStato()
+  InLavorazione : any / ignora()
+}
+
+state InAttesaDiIntegrazioni {
+  InAttesaDiIntegrazioni : entry / notificaUtente()
+  InAttesaDiIntegrazioni : any / ignora()
+}
+
+state Archiviata {
+  Archiviata : entry / rendiSolaLettura()
+  Archiviata : any / ignora()
+}
+
+state Chiusa {
+  Chiusa : entry / creaEsitoPratica()
+  Chiusa : entry / rendiSolaLettura()
+  Chiusa : any / ignora()
+}
+
+Bozza --> Inviata : inviaSegnalazione / impostaStato("Inviata")
+Bozza --> [*] : eliminaBozza / eliminaDati()
+
+Inviata --> PresaInCarico : prendiInCarico / impostaStato("Presa in carico")
+Inviata --> Archiviata : interrompiIter / archiviaPratica()
+
+PresaInCarico --> InLavorazione : avviaLavorazione / inserisciNotaCDF()
+PresaInCarico --> Archiviata : interrompiIter / archiviaPratica()
+
+InLavorazione --> InAttesaDiIntegrazioni : richiediIntegrazioni / impostaStato("In attesa")
+InLavorazione --> Archiviata : interrompiIter / archiviaPratica()
+InLavorazione --> Chiusa : chiudiPratica [esito definito] / registraEsito()
+
+InAttesaDiIntegrazioni --> InLavorazione : inviaIntegrazioni / allegaMateriale()
+InAttesaDiIntegrazioni --> Archiviata : after 30 giorni [integrazioni mancanti] / archiviaPratica()
+
+' Sostituzione dei post-it collegando gli stati al nodo finale
+Archiviata --> [*]
+Chiusa --> [*]
+
+@enduml

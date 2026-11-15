@@ -1,0 +1,155 @@
+@startuml SD_Gestione_Segnalazione
+skinparam shadowing false
+skinparam defaultFontName "DejaVu Sans"
+skinparam defaultFontSize 11
+skinparam roundcorner 10
+skinparam BoxPadding 10
+
+skinparam sequence {
+    ArrowColor #4A4A5A
+    LifeLineBorderColor #1E2A4A
+    LifeLineBackgroundColor #E8E4F5
+    ParticipantBorderColor #1E2A4A
+    ParticipantBackgroundColor White
+    ParticipantFontColor #1E2A4A
+    BoxBackgroundColor #F8F9FA
+    BoxBorderColor #D0D0D0
+}
+
+autonumber
+
+actor "CDF\n(Elena)" as CDF
+boundary ":InterfacciaCDF" as IU
+control ":GestorePratiche" as GP
+entity ":Pratica" as P
+entity ":StatoPratica" as SP
+entity ":Segnalazione" as S
+entity ":Notifica" as N
+entity ":NotaCDF" as NC
+
+== Fase 1: Presa in carico della nuova segnalazione (SC_CDF_01, RF_GCDF_03) ==
+
+CDF -> IU : Seleziona e apre la\nnuova segnalazione
+activate IU
+
+|||
+IU -> GP : ottieniDettPratica(idPratica)
+activate GP
+
+GP -> P : ottieniDettagli()
+activate P
+
+P -> S : ottieniDettagli()
+activate S
+S --> P : Tipologia, descrizione,\neventi e allegati
+deactivate S
+
+P --> GP : Dettagli completi della pratica
+deactivate P
+
+GP --> IU : Restituisce dati
+deactivate GP
+
+IU --> CDF : Mostra tipologia, descrizione,\neventi del diario e allegati
+
+||20||
+
+CDF -> IU : Clicca "Prendi in carico"
+IU -> GP : prendiInCarico(idPratica)
+activate GP
+
+GP -> P : impostaStato("Presa in carico")
+activate P
+
+' Pratica delega la storicizzazione dello stato
+P -> SP : create("Presa in carico", data)
+activate SP
+SP --> P : Istanza stato creata
+deactivate SP
+
+' Pratica aggiorna l'entità Segnalazione associata
+P -> S : impostaStato("Presa in carico")
+activate S
+
+' Segnalazione genera la notifica (Pratica non ha relazione diretta con Notifica)
+S -> N : create(tipo="Stato",\nmessaggio="Presa in carico")
+activate N
+N --> S : Notifica registrata
+deactivate N
+
+S --> P : Conferma aggiornamento stato
+deactivate S
+
+P --> GP : Stato aggiornato
+deactivate P
+
+GP --> IU : Conferma presa in carico
+deactivate GP
+
+IU --> CDF : Mostra stato aggiornato
+
+||40||
+
+== Fase 2: Aggiornamento stato e inserimento nota (SC_CDF_02, RF_GCDF_04) ==
+
+CDF -> IU : Seleziona stato "In lavorazione"\ne inserisce nota
+
+IU -> GP : aggiornaStato(idPratica,\n"In lavorazione", testoNota)
+activate GP
+
+GP -> P : ottieniDettagli()
+activate P
+P --> GP : Dettagli (incluso stato attuale)
+deactivate P
+
+|||
+
+alt Pratica modificabile (Flusso principale)
+    
+    GP -> P : impostaStato("In lavorazione")
+    activate P
+    
+    P -> SP : create("In lavorazione", data)
+    activate SP
+    SP --> P : Istanza stato creata
+    deactivate SP
+    
+    P -> S : impostaStato("In lavorazione")
+    activate S
+    
+    S -> N : create(tipo="Stato",\nmessaggio="Colloquio fissato...")
+    activate N
+    N --> S : Notifica registrata
+    deactivate N
+    
+    S --> P : Conferma aggiornamento stato
+    deactivate S
+    
+    P --> GP : Stato aggiornato
+    deactivate P
+    
+    |||
+    
+    ' GestorePratiche crea e associa la nota
+    GP -> NC : create(testoNota,\nvisibileUtente=true)
+    activate NC
+    NC --> GP : Nota registrata
+    deactivate NC
+    
+    GP --> IU : Conferma aggiornamento
+    
+    IU --> CDF : Mostra pratica aggiornata\ncon nota visibile
+
+else Pratica archiviata (SC_CDF_02, flusso alternativo)
+    
+    GP --> IU : Pratica non modificabile
+
+deactivate GP
+
+    IU --> CDF : Mostra errore:\npratica archiviata
+
+deactivate IU
+    
+end
+
+@enduml
