@@ -1,0 +1,44 @@
+name: Discord Notifications
+
+on:
+  issues:
+    types: [assigned]
+  pull_request:
+    types: [review_requested]
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    # Secret lives in the environment "discord-notify" (Settings → Environments);
+    # falls back to the repo-level secret until the environment secret exists.
+    environment: discord-notify
+    steps:
+      - name: Send message
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_ID_MAPPING: ${{ vars.DISCORD_ID_MAPPING }}
+          LOGIN: ${{ github.event.assignee.login || github.event.requested_reviewer.login }}
+          TEAM: ${{ github.event.requested_team.name }}
+          TITLE: ${{ github.event.issue.title || github.event.pull_request.title }}
+          URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
+        run: |
+          [ -n "$DISCORD_WEBHOOK" ] || exit 0
+          KEY="${LOGIN:-$TEAM}"
+          # Mapping: org variable DISCORD_ID_MAPPING (case-insensitive keys;
+          # values must be pure Discord IDs). Empty/invalid → plain message.
+          PING=$(printf '%s' "$DISCORD_ID_MAPPING" | jq -r --arg l "$KEY" '($l | ascii_downcase) as $k | (with_entries(.key |= ascii_downcase))[$k] // empty' 2>/dev/null || true)
+          [[ "$PING" =~ ^[0-9]+$ ]] || PING=""
+          TITLE="${TITLE//[<>]/}"
+          if [ "$GITHUB_EVENT_NAME" = "issues" ]; then
+            MSG="📌 Issue assegnata: $TITLE — $URL"
+          else
+            MSG="👀 Richiesta revisione: $TITLE — $URL"
+          fi
+          if [ -n "$PING" ]; then
+            if [ -n "$TEAM" ]; then MSG="<@&$PING> $MSG"; else MSG="<@$PING> $MSG"; fi
+          fi
+          jq -n --arg content "$MSG" '{content: $content, allowed_mentions: {parse: ["users", "roles"]}}' \
+            | curl -fsS -X POST -H 'Content-Type: application/json' -d @- "$DISCORD_WEBHOOK"
