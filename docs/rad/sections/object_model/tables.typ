@@ -39,7 +39,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [Diario personale per annotare eventi in modo privato e cifrato.],
 
       [*EventoDiario*], [Entity],
-      [id, data, ora, \ luogo, descrizione, \ dataCreazione],
+      [id, data, ora, \ luogo, descrizione, \ dataCreazione, Stato],
       [ottieniDettagli(), \ aggiornaDati()],
       [Diario (1), \ Allegato (0..\*), \ Segnalazione (0..\*)],
       [RF_GU_01, \ RF_GU_03],
@@ -93,7 +93,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
       [*GestoreDiario*], [Control],
       [—],
-      [aggiungiEvento(), \ rimuoviEvento(), \ cifraContenuto(), \ validaAllegato()],
+      [aggiungiEvento(), \ rimuoviEvento(), \ cifraContenuto(), \ validaAllegato(), scollegaSegnalazione()],
       [InterfacciaUtente (1), \ Diario (1), \ EventoDiario (0..\*), \ Allegato (0..\*)],
       [RF_GU_01 – \ RF_GU_03],
       [Gestisce la logica di creazione, modifica, cifratura e validazione degli eventi e degli allegati.],
@@ -178,7 +178,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
       [*PeriodoAssenza*], [Entity],
       [id, dataInizio, \ dataFine, \ avvisoAttivo],
-      [attivaAvviso(), \ disattivaAvviso()],
+      [attivaAvviso(), \ disattivaAvviso(), aggiornaDate()],
       [Cdf (1)],
       [RF_GCDF_07],
       [Periodo di indisponibilità del CDF con date di inizio e fine e avviso automatico.],

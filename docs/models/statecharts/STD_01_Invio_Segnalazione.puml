@@ -10,7 +10,6 @@ skinparam state {
 [*] --> Inviata : inviaSegnalazione / impostaStato("Inviata")
 
 state Bozza {
-  Bozza : entry / cifraContenuto()
   Bozza : any / ignora()
 }
 
@@ -26,7 +25,6 @@ state PresaInCarico {
 }
 
 state InLavorazione {
-  InLavorazione : entry / aggiornaStato()
   InLavorazione : any / ignora()
 }
 
@@ -52,18 +50,17 @@ Bozza --> [*] : eliminaBozza / eliminaDati()
 Inviata --> PresaInCarico : prendiInCarico / impostaStato("Presa in carico")
 Inviata --> Archiviata : interrompiIter / archiviaPratica()
 
-PresaInCarico --> InLavorazione : avviaLavorazione / inserisciNotaCDF()
+PresaInCarico --> InLavorazione : avviaLavorazione / inserisciNotaCDF(), impostaStato("In lavorazione")
 PresaInCarico --> Archiviata : interrompiIter / archiviaPratica()
 
-InLavorazione --> InAttesaDiIntegrazioni : richiediIntegrazioni / impostaStato("In attesa")
+InLavorazione --> InAttesaDiIntegrazioni : richiediIntegrazioni / impostaStato("In attesa di integrazioni")
 InLavorazione --> Archiviata : interrompiIter / archiviaPratica()
 InLavorazione --> Chiusa : chiudiPratica [esito definito] / registraEsito()
 
-InAttesaDiIntegrazioni --> InLavorazione : inviaIntegrazioni / allegaMateriale()
+InAttesaDiIntegrazioni --> InLavorazione : inviaIntegrazioni / allegaMateriale(), impostaStato("In lavorazione")
 InAttesaDiIntegrazioni --> Archiviata : passati 30 giorni [integrazioni mancanti] / archiviaPratica()
 
-' Sostituzione dei post-it collegando gli stati al nodo finale
-Archiviata --> [*]
-Chiusa --> [*]
+Archiviata --> [*] : termineRetention / eliminaDati()
+Chiusa --> [*] : termineRetention / eliminaDati()
 
 @enduml

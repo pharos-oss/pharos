@@ -1,6 +1,7 @@
 @startuml
 title Statechart Diagram: Ciclo di Vita "Periodo Assenza"
 top to bottom direction
+
 skinparam state {
   BackgroundColor White
   BorderColor #666666

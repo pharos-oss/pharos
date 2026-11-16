@@ -1,4 +1,4 @@
-=== STD_Invio_Segnalazione 
+=== STD_01_Invio_Segnalazione 
 
 #align(center + horizon)[
   #figure(
@@ -9,7 +9,7 @@
 
 #pagebreak()
 
-=== STD_Evento_Diario
+=== STD_02_Evento_Diario
 
 #align(center + horizon)[
   #figure(
@@ -20,7 +20,7 @@
 
 #pagebreak()
 
-=== STD_Gestione_Periodo_Assenza
+=== STD_03_Gestione_Periodo_Assenza
 
 #align(center + horizon)[
   #figure(
