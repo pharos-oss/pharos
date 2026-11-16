@@ -5,8 +5,8 @@
 #v(6em)
 
 #figure(
- image("../../assets/images/UC_CDF.png", width: 115%),
-  caption: ["Diagramma Caso D'uso CDF"]
+ image("../../assets/images/UCD_02_CDF.png", width: 115%),
+  caption: ["Use Case Diagram: Diagramma Caso d'Uso CDF"]
 )
 
 #pagebreak()

@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+
+actor "Utente" as utente
+
+actor "Modulo AI" as ai <<Sistema>>
+actor "Consigliere di Fiducia" as cf
+actor "Sistema Notifiche" as sys <<Sistema>>
+
+package "Assistenza e Triage" as p1 {
+    usecase "UC_02: Esecuzione del triage\nguidato tramite IA" as uc02
+}
+
+package "Gestione Segnalazioni" as p2 {
+    usecase "UC_03: Composizione e inoltro\ndi una segnalazione" as uc03
+    usecase "UC_01: Invio di integrazioni\nper una segnalazione" as uc01
+    usecase "UC_04: Monitoraggio e interruzione\ndella segnalazione" as uc04
+}
+
+p1 -[hidden]> p2
+
+utente --> uc02
+utente --> uc04
+utente --> uc03
+utente --> uc01
+
+uc02 --> ai
+
+uc04 --> cf
+
+uc03 --> cf
+uc03 --> sys
+
+uc01 --> sys
+
+@enduml
