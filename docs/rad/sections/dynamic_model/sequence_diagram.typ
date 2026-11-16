@@ -7,20 +7,20 @@
   )
 ]
 
-=== SD_Richiesta e Invio Integrazione_Utente
-
-#align(center)[
-  #figure(
-    image("../../assets/images/SD_Richiesta_e_Invio_Integrazioni.png", width: 120%), 
-    caption: ["Sequence Diagram: Richiesta e Invio Integrazione"]
-  )
-]
-
 === SD_Gestione_Segnalazione
 
 #align(center)[
   #figure(
     image("../../assets/images/SD_Gestione_Segnalazione.png", width: 110%), 
     caption: ["Sequence Diagram: Gestione segnalazione lato CDF"]
+  )
+]
+
+=== SD_Richiesta e Invio Integrazione_Utente
+
+#align(center)[
+  #figure(
+    image("../../assets/images/SD_Richiesta_e_Invio_Integrazioni.png", width: 120%), 
+    caption: ["Sequence Diagram: Richiesta e Invio Integrazione"]
   )
 ]
