@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Consigliere\ndi Fiducia" as cdf
+actor "<<sistema>>\nServizio di\nnotifica" as sn
+
+package "Gestione Pratiche" {
+  usecase "UC_CDF_2\nChiudere una pratica" as uc2
+  usecase "UC_CDF_1\nPrendere in carico\nuna segnalazione" as uc1
+}
+
+cdf --> uc2
+cdf --> uc1
+
+uc2 --> sn
+uc1 --> sn
+
+@enduml

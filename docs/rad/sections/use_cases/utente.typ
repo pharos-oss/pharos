@@ -10,8 +10,8 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
 
 #align(center)[
   #figure(
-    image("../../assets/images/UD_Utente.png", width: 90%), 
-    caption: ["UD_Utente Use case diagram dell'utente"]
+    image("../../assets/images/UCD_01_Utente.png", width: 90%), 
+    caption: ["Use Case Diagram: Diagramma Caso d'Uso dell'Utente"]
   )
 ]
 

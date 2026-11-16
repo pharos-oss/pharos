@@ -33,7 +33,11 @@
   ("06/11/2026", "0.3", "Stesura degli scenari CDF", "Gianmarco Raimondi, Francesco Imbriaco"),
   ("07/11/2026", "0.4", "Definizione dei casi d'uso utente 1 - 2; Definizione dei casi d'uso utente 3 - 4", "Carmine Saggese, Alessia D'Amico, Gianmarco Raimondi, Leonardo Trotta"),
   ("07/11/2026", "0.4", "Definizione dei casi d'uso CDF", "Mario Senatore, Francesco Imbriaco"),
-  ("09/11/2026", "0.5", "Stesura dei requisiti funzionali e non funzionali", "Tutti")
+  ("09/11/2026", "0.5", "Stesura dei requisiti funzionali e non funzionali", "Tutti"),
+  ("12/11/2026", "0.6", "Stesura della tabella degli oggetti", "Francesco Imbriaco, Alessia D'Amico"),
+  ("12/11/2026", "0.6", "Stesura del diagramma delle classi", "Leonardo Trotta, Mario Senatore"),
+  ("13/11/2026", "0.7", "Stesura del diagramma di sequenza 1", "Mario Senatore, Gianmarco Raimondi"),
+  ("13/11/2026", "0.7", "Stesura del diagramma di sequenza 2", "Alessia D,Amico, Carmine Saggese"),
 )
 
 #show: doc-template.with(
