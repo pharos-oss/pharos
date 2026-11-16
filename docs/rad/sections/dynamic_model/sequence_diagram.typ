@@ -11,7 +11,7 @@
 
 #align(center)[
   #figure(
-    image("../../assets/images/SD_Richiesta_e_Invio_Integrazioni.png", width: 110%), 
+    image("../../assets/images/SD_Richiesta_e_Invio_Integrazioni.png", width: 120%), 
     caption: ["Sequence Diagram: Richiesta e Invio Integrazione"]
   )
 ]
