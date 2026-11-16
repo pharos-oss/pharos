@@ -77,5 +77,5 @@ Come evidenziato dall'analisi dei bisogni di business, questo modello presenta d
 
 #figure(
   image("../assets/images/AD_01_Sistema_Corrente.png", width: 130%),
-  caption: ["AD_Unico Activity Diagram dello scenario"]
+  caption: ["Activity Diagram: Diagramma delle Attività del Sistema Corrente"]
 )
