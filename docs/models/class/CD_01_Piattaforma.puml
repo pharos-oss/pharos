@@ -1,0 +1,268 @@
+@startuml CD_01_Piattaforma
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName "DejaVu Sans"
+skinparam defaultFontSize 12
+
+skinparam linetype ortho
+skinparam nodesep 70
+skinparam ranksep 90
+skinparam padding 6
+
+skinparam class {
+  BackgroundColor White
+  BorderColor #1E2A4A
+  FontColor #1E2A4A
+  HeaderBackgroundColor #E8E4F5
+  StereotypeFontColor #8273B4
+  StereotypeFontSize 10
+  AttributeFontColor #1E2A4A
+}
+
+skinparam package {
+  BackgroundColor #F8F9FA
+  BorderColor #D1D5DB
+  FontColor #1F2937
+  FontSize 14
+  FontStyle bold
+}
+
+skinparam arrow {
+  Color #4B5563
+  FontColor #374151
+  Thickness 1.5
+}
+
+top to bottom direction
+
+class InterfacciaUtente <<Boundary>> {
+  + mostraDiario()
+  + mostraFormSegn()
+  + mostraTriage()
+  + mostraRubrica()
+}
+
+class GestoreDiario <<Control>> {
+  + aggiungiEvento()
+  + rimuoviEvento()
+  + cifraContenuto()
+  + validaAllegato()
+}
+
+class GestoreSegn <<Control>> {
+  + inviaSegnalazione()
+  + interrompiIter()
+  + avviaTriageIA()
+  + anonimizzaTesto()
+  + recuperaServizi()
+}
+
+class Utente <<Entity>> {
+  - id: String
+  - nome: String
+  - cognome: String
+  - email: String
+  - ruolo: String
+  + ottieniProfilo()
+  + aggiornaDati()
+}
+
+class Diario <<Entity>> {
+  - id: String
+  - utenteId: String
+  - dataCreazione: Date
+  - cifrato: Boolean
+  + impostaCifratura()
+  + ottieniEventi()
+}
+
+class EventoDiario <<Entity>> {
+  - id: String
+  - data: Date
+  - ora: Time
+  - luogo: String
+  - descrizione: String
+  - dataCreazione: Date
+  + ottieniDettagli()
+  + aggiornaDati()
+}
+
+class Segnalazione <<Entity>> {
+  - id: String
+  - tipologia: String
+  - descrizione: String
+  - stato: String
+  - dataCreazione: Date
+  - dataInvio: Date
+  + impostaStato()
+  + ottieniDettagli()
+}
+
+class Allegato <<Entity>> {
+  - id: String
+  - nomeFile: String
+  - formato: String
+  - dimensione: Float
+  - contenutoCifrato: Boolean
+  + ottieniFile()
+  + impostaContenuto()
+}
+
+class Notifica <<Entity>> {
+  - id: String
+  - tipo: String
+  - messaggio: String
+  - dataInvio: Date
+  - letta: Boolean
+  + segnaComeLetta()
+  + ottieniMessaggio()
+}
+
+class ValutazioneIA <<Entity>> {
+  - id: String
+  - gravita: String
+  - tipologiaViolenza: String
+  - passiSuggeriti: String
+  - dataValutazione: Date
+  + impostaRisultato()
+  + ottieniValutazione()
+}
+
+class ServizioTerritoriale <<Entity>> {
+  - id: String
+  - nome: String
+  - indirizzo: String
+  - telefono: String
+  - email: String
+  - tipologia: String
+  + ottieniDettaglio()
+  + ottieniContatti()
+}
+
+class InterfacciaCDF <<Boundary>> {
+  + mostraDashboard()
+  + mostraDettPratica()
+  + mostraReport()
+}
+
+class GestorePratiche <<Control>> {
+  + prendiInCarico()
+  + aggiornaStato()
+  + chiudiPratica()
+  + gestisciAssenza()
+}
+
+class GestoreReport <<Control>> {
+  + generaReport()
+  + aggregaDati()
+  + esportaDati()
+}
+
+class Cdf <<Entity>> {
+  - id: String
+  - nome: String
+  - cognome: String
+  - email: String
+  - ruolo: String
+  + ottieniProfilo()
+  + aggiornaStato()
+}
+
+class Pratica <<Entity>> {
+  - id: String
+  - dataRicezione: Date
+  - tipologia: String
+  + impostaStato()
+  + ottieniDettagli()
+}
+
+class StatoPratica <<Entity>> {
+  - id: String
+  - stato: String
+  - dataTransizione: Date
+  - note: String
+  + ottieniStato()
+}
+
+class NotaCDF <<Entity>> {
+  - id: String
+  - testo: String
+  - dataInserimento: Date
+  - visibileUtente: Boolean
+  + ottieniTesto()
+}
+
+class EsitoPratica <<Entity>> {
+  - id: String
+  - esito: String
+  - notaConclusiva: String
+  - dataChiusura: Date
+  + ottieniEsito()
+}
+
+class ReportStatistico <<Entity>> {
+  - id: String
+  - periodo: String
+  - datiAggregati: String
+  - dataGenerazione: Date
+  - formato: String
+  + impostaDati()
+  + ottieniReport()
+}
+
+class PeriodoAssenza <<Entity>> {
+  - id: String
+  - dataInizio: Date
+  - dataFine: Date
+  - avvisoAttivo: Boolean
+  + attivaAvviso()
+  + disattivaAvviso()
+}
+
+InterfacciaUtente -down-> GestoreDiario : (1)
+InterfacciaUtente -down-> GestoreSegn : (1)
+
+GestoreDiario -down-> Diario
+GestoreDiario -down-> EventoDiario
+GestoreDiario -down-> Allegato
+
+GestoreSegn -down-> Segnalazione
+GestoreSegn -down-> Notifica
+GestoreSegn -down-> ValutazioneIA
+GestoreSegn -down-> ServizioTerritoriale
+
+Utente "1" -- "1" Diario
+Utente "1" -- "0..*" Segnalazione
+
+Diario "1" -- "0..*" EventoDiario
+EventoDiario "1" -- "0..*" Allegato
+EventoDiario "0..*" -- "0..*" Segnalazione
+
+Segnalazione "0..1" -- "0..*" Allegato
+Segnalazione "1" -- "0..*" Notifica
+Segnalazione "1" -- "0..1" ValutazioneIA
+ValutazioneIA "0..*" -- "0..*" ServizioTerritoriale
+
+InterfacciaCDF -down-> GestorePratiche : (1)
+InterfacciaCDF -down-> GestoreReport : (1)
+
+GestorePratiche -down-> Pratica
+GestorePratiche -down-> StatoPratica
+GestorePratiche -down-> NotaCDF
+GestorePratiche -down-> EsitoPratica
+GestorePratiche -down-> PeriodoAssenza
+
+GestoreReport -down-> ReportStatistico
+GestoreReport -down-> Pratica
+
+Cdf "1" -- "0..*" Pratica
+Cdf "1" -- "0..*" PeriodoAssenza
+
+Pratica "1" -- "1..*" StatoPratica
+Pratica "1" -- "0..*" NotaCDF
+Pratica "1" -- "0..1" EsitoPratica
+
+Pratica "1" -left- "1" Segnalazione : associata a >
+
+@enduml
