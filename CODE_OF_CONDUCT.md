@@ -30,4 +30,4 @@ Tutti i membri del team si impegnano formalmente a mantenere uno standard etico 
 7. **Spirito di collaborazione:** L'obiettivo del singolo è subordinato al successo del Progetto Pharos. È richiesta massima collaborazione e mutuo soccorso tra i team member.
 
 ## 3. Segnalazioni e responsabilità
-Eventuali comportamenti non in linea con questo documento o con il *Team Contract* andranno discussi internamente. I Project Manager  hanno la responsabilità di mediare e garantire il rispetto di queste regole per assicurare la salute del Team e del progetto stesso.
+Eventuali comportamenti non in linea con questo documento o con il Team Contract possono essere segnalati in modo strettamente confidenziale inviando un messaggio nella chat riservata su Discord con i PM, o contattandoli in privato. I Project Manager hanno la responsabilità di gestire la segnalazione con la massima discrezione, mediare il conflitto e garantire il rispetto di queste regole per assicurare la salute del team e del progetto stesso.

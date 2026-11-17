@@ -33,7 +33,7 @@ Il repository adotta una strategia Gitflow classica adattata alle nostre esigenz
 
 ## 4. Convenzioni per i messaggi di commit
 Per mantenere una *history* chiara e navigabile, ogni commit deve seguire rigorosamente la specifica **[Conventional Commits v1.0.0](https://www.conventionalcommits.org/it/v1.0.0/)**.
-La struttura base da utilizzare è: `azione -> descrizione dell'azione` (es. `docs -> Creazione e correzioni ortografiche svolte sul Class Diagram`).
+La struttura base da utilizzare è: tipo: descrizione (es. docs: Creazione e correzioni ortografiche svolte sul Class Diagram).
 
 
 ## 5. Pull Request (PR) e Code review
@@ -47,7 +47,7 @@ Ogni modifica al codice deve essere ispezionata. L'apertura di una PR deve rispe
 
 ## 6. Politiche di Merge
 Il merge effettivo della Pull Request è demandato al reviewer del codice o all'Accountable, il quale agirà solo dopo aver ottenuto il via libera dai PM. Le strategie di merge dipendono dal branch di destinazione:
-- **Verso `dev`:** È richiesto/consigliato l'utilizzo di **Merge commit classico**.
+- **Verso `dev`:** È obbligatorio l'utilizzo di un **Merge commit classico**.
 - **Verso `main`:** Si utilizza un **Merge Commit classico** per preservare l'integrità del rilascio integrato da `dev`.
 
 
