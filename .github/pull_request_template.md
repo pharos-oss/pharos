@@ -16,7 +16,7 @@ Risolve #
 
 ## Autovalutazione e controlli preliminari
 <!-- Conferma di aver eseguito le verifiche locali prima di richiedere la code review. -->
-- [ ] Il codice e/o i sorgenti documentali (`.typ`, `.puml`) compilano localmente senza errori né warning bloccanti.
+- [ ] Il codice e i documenti (`.typ`) compilano localmente senza errori né warning bloccanti, e i diagrammi (`.puml`) risultano correttamente renderizzati.
 - [ ] Il branch di lavoro (`feat/...` o `fix/...`) è allineato con il branch target (`dev` / `main`) e privo di conflitti.
 - [ ] Non sono presenti file temporanei, codice commentato o dati sensibili.
 

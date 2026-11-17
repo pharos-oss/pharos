@@ -25,8 +25,8 @@ assignees: ''
 ## Priorità stimata (SLA Review)
 <!-- Indica l'urgenza secondo le convenzioni CONV_REPO_Pharos (elimina le voci non pertinenti): -->
 - [ ] **Alta** (Bloccante — SLA review 24h)
-- [ ] **Media** (SLA review 48h)
-- [ ] **Bassa** (SLA review 48h)
+- [ ] **Media** (SLA review 36h)
+- [ ] **Bassa** (SLA review 36h)
 
 ## Contesto e Ambiente
 - **Branch / Commit hash:** [es. `dev`, `7308fc6`]
