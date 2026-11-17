@@ -38,12 +38,12 @@ La struttura base da utilizzare è: tipo: descrizione (es. docs: Creazione e cor
 
 ## 5. Pull Request (PR) e Code review
 Ogni modifica al codice deve essere ispezionata. L'apertura di una PR deve rispettare i seguenti requisiti:
-- **Assegnazione reviewer:** Sono obbligatori **sempre 2 reviewer** (sia per task minori che per core-features).
+- **Assegnazione reviewer:** Sono obbligatori **sempre 2 reviewer** (1 TM e 1 PM),sia per task minori che per core-features.
 - **Approvazione Project Manager (PM):** Il merge è subordinato all'autorizzazione finale esplicita da parte dei PM.
 - **SLA (Service Level Agreement) per le Code review:**
 
   - *Modifiche Critiche / Core:* La review deve essere completata entro **24 ore** dall'apertura della PR.
-  - *Modifiche Standard / Minori:* La review deve essere completata entro e non oltre **48 ore**.
+  - *Modifiche Standard / Minori:* La review deve essere completata entro e non oltre **36 ore**.
 
 ## 6. Politiche di Merge
 Il merge effettivo della Pull Request è demandato al reviewer del codice o all'Accountable, il quale agirà solo dopo aver ottenuto il via libera dai PM. Le strategie di merge dipendono dal branch di destinazione:
