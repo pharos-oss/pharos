@@ -9,7 +9,7 @@ assignees: ''
 ## Descrizione del bug
 <!-- Fornisci una descrizione chiara ed esaustiva del problema riscontrato. -->
 
-## 🔁 Passi per Riprodurre
+## Passi per riprodurre
 <!-- Elenca in modo sequenziale i passaggi esatti per riprodurre l'anomalia. -->
 1. Accedere a '...'
 2. Eseguire l'azione '...'
