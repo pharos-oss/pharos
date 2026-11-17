@@ -41,9 +41,11 @@ Come possiamo automatizzare il processo applicando il paradigma *Shift-Left*, bl
 
 Opzione scelta: **Architettura ibrida basata su `prek` per i git hook, `Just` come task runner universale, `CSpell` per il controllo ortografico, con pipeline GitHub Actions ottimizzata via Caching e PR Bot Commenting per il rilascio dei PDF.**
 
-La decisione evolve la proposta iniziale sostituendo `pre-commit` con `prek`. Essendo un binario Rust autonomo, `prek` annulla la dipendenza globale da Python garantendo al contempo il supporto all'isolamento degli ambienti (sandbox) per tool come `CSpell` (che necessita di Node.js confinato). 
-Per rispettare il principio DRY, introduciamo `Just`: tramite un singolo `justfile` centralizzato standardizziamo i comandi (es. `just lint`, `just build`). La CI invocherà direttamente le ricette di `Just`, eliminando la duplicazione della logica tra ambiente locale e remoto.
-Infine, `setup-typst` non solo validerà il codice, ma compilerà i file in PDF a ogni PR. I PDF verranno caricati come artefatti tramite GitHub Actions, consentendo ai revisori di scaricarli e ispezionarli immediatamente dal browser. Si conferma l'utilizzo di `commitizen` per i Conventional Commits e l'aggiornamento automatico del `CHANGELOG.md`.
+La decisione evolve la proposta iniziale sostituendo pre-commit con prek. Essendo un binario Rust autonomo, prek annulla la dipendenza globale da Python garantendo al contempo il supporto all'isolamento degli ambienti (sandbox) per tool come CSpell (che necessita di Node.js confinato).
+
+Per rispettare il principio DRY, introduciamo Just: tramite un singolo justfile centralizzato standardizziamo i comandi (es. just lint, just build). La CI invocherà direttamente le ricette di Just, eliminando la duplicazione della logica tra ambiente locale e remoto.
+
+Infine, l'azione setup-typst si occuperà di installare l'ambiente Typst nel runner CI, dopodiché verrà eseguito un comando esplicito di compilazione (invocando la relativa ricetta, es. just build-pdf) per generare effettivamente i file PDF a ogni PR. Questi PDF verranno poi caricati come artefatti tramite GitHub Actions, consentendo ai revisori di scaricarli e ispezionarli immediatamente dal browser. Si conferma l'utilizzo di commitizen per i Conventional Commits e l'aggiornamento automatico del CHANGELOG.md.
 
 Per migliorare le performance e l'usabilità della pipeline CI, integriamo due ottimizzazioni finali:
 1. **Caching degli Environment:** Implementiamo `actions/cache` per memorizzare la sandbox di `prek`. Questo evita il download ripetuto di Node.js e dei dizionari CSpell a ogni esecuzione, abbattendo i tempi di setup della CI.
@@ -61,7 +63,7 @@ Per migliorare le performance e l'usabilità della pipeline CI, integriamo due o
 
 ### Conseguenze negative
 
-- Leggero attrito inziale per il team di sviluppo che dovrà abituarsi a formattare rigidamente i messaggi di commit secondo le regole di `commitizen` e ad utilizzare i comandi tramite `Just`.
+- Leggero attrito iniziale per il team di sviluppo che dovrà abituarsi a formattare rigidamente i messaggi di commit secondo le regole di `commitizen` e ad utilizzare i comandi tramite `Just`.
 - L'upload dei PDF (Artifacts) allunga di qualche secondo i tempi di esecuzione della pipeline su GitHub Actions rispetto alla sola validazione a riga di comando.
 - Leggero aumento della verbosità del file YAML della GitHub Action per configurare correttamente le chiavi di cache e i permessi del bot per i commenti.
 
