@@ -22,3 +22,6 @@ Nella presente sezione sono descritti i diversi modelli del sistema *Pharos*, or
 
 == Statechart Diagram 
 #include "dynamic_model/statechart_diagram.typ"
+
+== Mockups
+#include "mockups/mockups.typ"
