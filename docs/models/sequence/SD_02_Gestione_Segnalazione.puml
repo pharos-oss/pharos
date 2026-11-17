@@ -1,4 +1,4 @@
-@startuml SD_Gestione_Segnalazione
+@startuml SD_02_Gestione_Segnalazione
 skinparam shadowing false
 skinparam defaultFontName "DejaVu Sans"
 skinparam defaultFontSize 11
