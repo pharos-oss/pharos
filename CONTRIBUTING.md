@@ -16,7 +16,7 @@ Il coordinamento e l'avanzamento dei lavori avvengono esclusivamente tramite la 
 ## 2. Nomenclatura, Etichette (Labels) e tipologie di Issue
 Ogni entità (Issue o PR) deve essere categorizzata con precisione utilizzando le seguenti label concordate:
 - `feat`: Sviluppo di una nuova funzionalità.
-- `bug`: Risoluzione di un comportamento inatteso o di un errore.
+- `fix`: Risoluzione di un comportamento inatteso o di un errore.
 - `docs`: Modifiche, aggiunte o refactoring della documentazione.
 - `test`: Creazione o aggiornamento di test (unit, integration, e2e).
 - `refactor`: Ristrutturazione del codice senza alterazione del comportamento esterno.
@@ -49,3 +49,32 @@ Ogni modifica al codice deve essere ispezionata. L'apertura di una PR deve rispe
 Il merge effettivo della Pull Request è demandato al reviewer del codice o all'Accountable, il quale agirà solo dopo aver ottenuto il via libera dai PM. Le strategie di merge dipendono dal branch di destinazione:
 - **Verso `dev`:** È richiesto/consigliato l'utilizzo di **Merge commit classico**.
 - **Verso `main`:** Si utilizza un **Merge Commit classico** per preservare l'integrità del rilascio integrato da `dev`.
+
+
+## 7. Pull Request review checklist (Criteri di Validazione)
+Per approvare una Pull Request, i reviewer devono accertarsi che rispetti i seguenti criteri definiti nel documento PRCheck_Pharos, dunque dovranno marcare come [x] se verificato o N/A se non applicabile (giustificando nei commenti).
+
+**P1 - Bloccanti e Automazione**
+- **RC1:** Pipeline CI/CD: tutti i check automatici (linter, formattatori, test, build) risultano verdi.
+- **RC2:** Compilabilità e Rendering: l'app e i documenti compilano senza errori o warning bloccanti.
+- **RC3:** Stato del Branch: aggiornato rispetto al target e senza conflitti.
+- **RC4:** Scope e Atomicità: risolve un singolo task, ha un titolo esplicativo e non include modifiche fuori contesto.
+
+**P2 - Requisiti e Coerenza**
+- **RC5:** Copertura Requisiti: soddisfatti i criteri di accettazione ed edge case gestiti.
+- **RC6:** Allineamento con l'Esistente: integrazione coerente senza contraddire docs/codice preesistenti.
+- **RC7:** Allineamento Testo/Diagrammi: flussi e componenti coincidono con i diagrammi PlantUML.
+- **RC8:** Allineamento Design/Implementazione: architettura e codice rispecchiano le specifiche (o doc aggiornata).
+
+**P3 - Correttezza Tecnica e Output**
+- **RC9:** Assenza Codice Morto: nuovo codice invocato e nuovi file inclusi correttamente.
+- **RC10:** Qualità e Leggibilità: codice modulare; prosa documentale chiara; diagrammi leggibili.
+- **RC11:** Correttezza Formale: rispetto principi architetturali, riferimenti dinamici Typst e UML 2.x.
+- **RC12:** Test e Tracciabilità: test automatici presenti e passanti; requisiti coperti.
+- **RC13:** Verifica Output: controllo pratico del risultato.
+
+**P4 - Standard e Igiene**
+- **RC14:** Uniformità e Template: registro e struttura coerenti, rispetto dei template Typst.
+- **RC15:** Naming e Glossario: identificatori e nomi file coerenti con il Glossario.
+- **RC16:** Metadati e Storico: aggiornamento della tabella revisioni/changelog se applicabile.
+- **RC17:** Igiene del Repository: assenza di file temporanei, codice commentato, TODO non tracciati.
