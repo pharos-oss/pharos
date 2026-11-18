@@ -85,17 +85,42 @@
 
 #pagebreak()
 
-=== MU_08: Segnalazione Inoltrata con Successo (UC_03, SC_U_03)
+=== MU_07: Segnalazione Inoltrata con Successo (UC_03, SC_U_03)
 == Schermata Conferma Invio
 
 #v(3em)
 
 #align(center)[
   #figure(
-    image("../../assets/images/MU_08_conferma_invio_mobile.png", width: 45%),
-    caption: ["MU_08 — Schermata di successo con codice pratica e prossimi passi (versione mobile)"]
+    image("../../assets/images/MU_07_conferma_invio_mobile.png", width: 45%),
+    caption: ["MU_07 — Schermata di successo con codice pratica e prossimi passi (versione mobile)"]
   )
 ]
 
 #pagebreak()
 
+=== MU_08: Dettaglio Pratica CDF (UC_CDF_1, SC_CDF_01)
+== Schermata Dettaglio Pratica
+
+#v(3em)
+
+#align(center)[
+  #figure(
+    image("../../assets/images/MU_08_dettaglio_pratica_cdf.png", width: 90%),
+    caption: ["MU_08 – Dettaglio pratica e presa in carico della segnalazione lato CDF (versione web)]
+  )
+]
+
+#pagebreak()
+
+=== MU_09: Richiesta Integrazione CDF (UC_01, SC_U_03)
+== Schermata Richiesta Integrazione CDF
+
+#v(3em)
+
+#align(center)[
+  #figure(
+    image("../../assets/images/MU_09_richiesta_integrazione_cdf.png", width: 90%),
+    caption: ["MU_09 – Modulo di richiesta documentazione integrativa lato CDF (versione web)"]
+  )
+]
