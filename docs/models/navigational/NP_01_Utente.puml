@@ -1,0 +1,60 @@
+@startuml NavigationalPath_Utente
+title Navigational path: Utente
+hide empty description
+skinparam DefaultFontName Arial
+skinparam nodesep 50
+skinparam ranksep 60
+skinparam StateStartColor Black
+skinparam StateEndColor Black
+skinparam state {
+    BackgroundColor #DEEBF7
+    BorderColor #2F528F
+}
+
+' Punto di ingresso principale (Verde per evidenziarlo)
+state "MU_01: Home Utente\n(Punto di Ingresso)" as Home #D5E8D4
+
+' Schermate operative
+state "Diario delle Evidenze" as Diario
+state "MU_05: Triage IA\n(Rif. SD_Triage)" as MU05
+state "MU_06: Esito Triage" as MU06
+state "MU_02: Composizione Segnalazione\n(Rif. SD_01)" as MU02
+state "MU_07: Conferma Invio" as MU07
+state "MU_03: Stato Segnalazione" as MU03
+state "Uscita Sicurezza\n(Panic Button)" as Panic #F8CECC
+
+' Nodi terminatori per il ritorno (Evitano l'effetto ragnatela)
+state "Torna a MU_01 (Home)" as R1 #D5E8D4
+state "Torna a MU_01 (Home)" as R2 #D5E8D4
+state "Torna a MU_01 (Home)" as R3 #D5E8D4
+
+[*] --> Home
+
+' --- FLUSSO 1: DIARIO ---
+Home --> Diario : Click "Apri diario"
+Diario --> R1 : Salva evento / Annulla inserimento
+
+' --- FLUSSO 2: TRIAGE IA ---
+Home --> MU05 : Click "Inizia Triage"
+MU05 --> MU06 : Completa questionario
+MU06 --> R1 : Click "Torna alla Home" [Fine percorso]
+MU06 --> MU02 : Click "Contatta CDF"
+
+' --- FLUSSO 3: COMPOSIZIONE E INVIO ---
+Home --> MU02 : Click "+ Nuova Segnalazione"
+MU02 --> R2 : Click "Salva bozza" [Sospendi iter]
+MU02 --> MU07 : Compila form e "Avanti"
+MU07 --> MU03 : Click "Vai al dettaglio"
+MU07 --> R2 : Click "Torna alla Home"
+
+' --- FLUSSO 4: MONITORAGGIO PRATICA ---
+Home --> MU03 : Click "Le mie segnalazioni"
+MU03 --> MU03 : Invia integrazioni (Rif. SD)
+MU03 --> R3 : Click "Interrompi iter" [Archivia pratica]
+
+' --- FLUSSO DI EMERGENZA (PANIC BUTTON) ---
+MU05 --> Panic : Click "Uscita rapida"
+MU03 --> Panic : Click "Uscita rapida"
+Panic --> [*] : Oscuramento App
+
+@enduml
