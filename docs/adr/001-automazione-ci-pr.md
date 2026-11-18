@@ -1,8 +1,8 @@
 # ADR 001: Standardizzazione dei Commit e Automazione della Pipeline CI per la Documentazione Typst
 
-- **Stato:** Proposto
-- **Autori:** Gianmarco Raimondi, Mario Senatore, Francesco Imbriaco
-- **Data:** 17-11-2026
+- **Stato:** Approvato
+- **Autori:** Gianmarco Raimondi
+- **Data:** 18-11-2026
 
 ## Contesto e enunciato del problema
 
