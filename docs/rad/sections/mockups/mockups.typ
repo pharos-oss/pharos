@@ -107,7 +107,7 @@
 #align(center)[
   #figure(
     image("../../assets/images/MU_08_dettaglio_pratica_cdf.png", width: 90%),
-    caption: ["MU_08 – Dettaglio pratica e presa in carico della segnalazione lato CDF (versione web)]
+    caption: ["MU_08 – Dettaglio pratica e presa in carico della segnalazione lato CDF (versione web)"]
   )
 ]
 
