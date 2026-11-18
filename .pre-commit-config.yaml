@@ -1,0 +1,34 @@
+# .pre-commit-config.yaml
+default_install_hook_types: [pre-commit, commit-msg]
+fail_fast: true
+
+repos:
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.19.3
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+
+  - repo: https://github.com/streetsidesoftware/cspell-cli
+    rev: v10.4.1
+    hooks:
+      - id: cspell
+        args: ["--no-progress", "--no-summary"]
+        additional_dependencies:
+          - "@cspell/dict-it-it"
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        name: check-added-large-files (immagini max 1MB)
+        args: ['--maxkb=1024']
+        files: (?i)\.(png|jpg|jpeg|gif|svg|webp)$
+
+      - id: check-added-large-files
+        name: check-added-large-files (altri file max 5MB)
+        args: ['--maxkb=5120']
+        exclude: (?i)\.(png|jpg|jpeg|gif|svg|webp)$
+
+      - id: check-case-conflict
+      - id: check-illegal-windows-names
