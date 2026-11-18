@@ -13,7 +13,15 @@ repos:
     rev: v10.4.1
     hooks:
       - id: cspell
-        args: ["--no-progress", "--no-summary"]
+        name: Controllo ortografico file
+        args: [--no-progress, --no-summary, --no-must-find-files]
+        additional_dependencies:
+          - "@cspell/dict-it-it"
+      
+      - id: cspell
+        name: Controllo ortografico messaggio di commit
+        stages: [commit-msg]
+        args: [--no-must-find-files, --no-progress, --no-summary, --language-id, commit-msg]
         additional_dependencies:
           - "@cspell/dict-it-it"
 
