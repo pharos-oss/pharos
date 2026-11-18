@@ -1,0 +1,44 @@
+@startuml NavigationalPath_CDF
+title Navigational path: CDF
+hide empty description
+
+skinparam DefaultFontName Arial
+skinparam nodesep 50
+skinparam ranksep 60
+skinparam StateStartColor Black
+skinparam StateEndColor Black
+
+skinparam state {
+    BackgroundColor #FFF2CC
+    BorderColor #D6B656
+}
+
+' Punto di ingresso
+state "MU_04: Dashboard\n(Lista Pratiche)" as Dashboard #D5E8D4
+
+' Schermate
+state "MU_10: Report Statistici" as MU10
+state "MU_08: Dettaglio Pratica\n(Rif. SD_02)" as MU08
+state "MU_09: Richiesta Integrazione" as MU09
+
+' Nodi terminatori per il ritorno
+state "Torna alla Dashboard" as R1 #D5E8D4
+state "Torna alla Dashboard" as R2 #D5E8D4
+
+[*] --> Dashboard
+
+' --- FLUSSO REPORTISTICA ---
+Dashboard --> MU10 : Seleziona menu "Statistiche"
+MU10 --> MU10 : Imposta filtri / Esporta PDF-CSV
+MU10 --> R1 : Torna indietro
+
+' --- FLUSSO GESTIONE SINGOLA PRATICA ---
+Dashboard --> MU08 : Seleziona singola pratica
+MU08 --> MU08 : Click "Prendi in carico" [Aggiorna stato]
+MU08 --> R2 : Click "Torna alla lista"
+
+' --- RICHIESTA INTEGRAZIONI (Sotto-flusso) ---
+MU08 --> MU09 : Click "Richiedi integrazione"
+MU09 --> MU08 : Invia richiesta [Conferma]\n/ Torna alla pratica [Annulla]
+
+@enduml
