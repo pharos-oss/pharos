@@ -1,0 +1,108 @@
+name: Typst CI/CD Documentazione
+
+on:
+  pull_request:
+    branches: ["dev"]
+    types: [opened, synchronize, reopened, edited]
+    paths:
+      - 'docs/**'
+      - 'templates/**'
+      - '.pre-commit-config.yaml'
+      - '.cspell.json'
+      - 'justfile'
+      - 'cz.yaml'
+      - '.github/workflows/**'
+
+jobs:
+  build-and-review:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      - name: Checkout del codice
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Analisi Titolo PR e Strategia di Build
+        id: extract-doc
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          if [[ "$PR_TITLE" =~ ^docs\[([a-zA-Z0-9_-]+)\]:[[:space:]].+ ]]; then
+            DOC_NAME="${BASH_REMATCH[1]}"
+            if [ -d "docs/$DOC_NAME" ]; then
+              echo "doc_name=$DOC_NAME" >> "$GITHUB_OUTPUT"
+              echo "build_mode=single" >> "$GITHUB_OUTPUT"
+              echo "Modalita SINGLE: compilo solo docs/$DOC_NAME"
+            else
+              echo "::error::La cartella docs/$DOC_NAME non esiste."
+              exit 1
+            fi
+          elif [[ "$PR_TITLE" =~ ^(docs|ci|chore)(\(.+\))?:[[:space:]].+ ]]; then
+            echo "build_mode=all" >> "$GITHUB_OUTPUT"
+            echo "Modalita ALL: compilo tutta la documentazione"
+          else
+            echo "build_mode=skip" >> "$GITHUB_OUTPUT"
+            echo "Modalita SKIP: PR di implementazione codice, nessuna compilazione Typst richiesta."
+          fi
+
+      - name: Installazione Just
+        uses: extractions/setup-just@v2
+
+      - name: Installazione prek
+        run: curl --proto '=https' --tlsv1.2 -LsSf https://github.com/j178/prek/releases/download/v0.5.11/prek-installer.sh | sh
+
+      - name: Caching Sandbox prek
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/prek
+          key: ${{ runner.os }}-prek-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-prek-
+
+      - name: Esecuzione Controlli di Qualita (File e Ortografia)
+        run: |
+          export PATH="$PATH:$HOME/.local/bin"
+          just lint
+
+      - name: Verifica Convenzione Commit PR (Commitizen)
+        run: |
+          pipx run commitizen cz check --rev-range origin/${{ github.base_ref }}..HEAD
+
+      - name: Setup Typst
+        if: steps.extract-doc.outputs.build_mode != 'skip'
+        uses: typst-community/setup-typst@v3
+
+      - name: Compilazione Dinamica PDF
+        if: steps.extract-doc.outputs.build_mode != 'skip'
+        run: |
+          if [ "${{ steps.extract-doc.outputs.build_mode }}" == "single" ]; then
+            just build ${{ steps.extract-doc.outputs.doc_name }}
+          else
+            just build-all
+          fi
+
+      - name: Caricamento Artefatto PDF
+        id: upload-pdf
+        if: steps.extract-doc.outputs.build_mode != 'skip'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.extract-doc.outputs.doc_name || 'tutti-i-documenti' }}-pdf
+          path: docs/out/*.pdf
+          retention-days: 7
+
+      - name: Zero-Click Review (PR Bot Comment)
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: github.event_name == 'pull_request' && steps.extract-doc.outputs.build_mode != 'skip'
+        with:
+          header: pr-pdf-review
+          message: |
+            ### Revisione Documentazione
+
+            I controlli di qualita sono passati con successo.
+            Puoi scaricare l'anteprima PDF dalla sezione **Artifacts**:
+
+            **[Scarica i file PDF (Artifact)](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})**
