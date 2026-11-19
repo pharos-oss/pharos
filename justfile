@@ -1,4 +1,4 @@
-# 
+# justfile commands
 
 # Imposta la shell di default
 set shell := ["bash", "-c"]

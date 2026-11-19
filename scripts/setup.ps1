@@ -31,7 +31,6 @@ if (Get-Command prek -ErrorAction SilentlyContinue) {
     Write-Host "✓ prek successfully installed.`n" -ForegroundColor $ColorSuccess
 }
 
-# Update PATH temporarily for the current session
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
 Write-Host "Initializing git hooks..." -ForegroundColor $ColorInfo
