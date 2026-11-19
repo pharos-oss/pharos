@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharos CDF - Richiesta Integrazione</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #FEF0E8; color: #1E2A4A; min-height: 100vh; }
+  .topbar { background: linear-gradient(135deg, #1E2A4A 0%, #2D3A5C 100%); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 60px; box-shadow: 0 2px 8px rgba(30,42,74,0.18); }
+  .topbar-left { display: flex; align-items: center; gap: 14px; }
+  .topbar-logo { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .topbar-brand { font-size: 20px; font-weight: 600; letter-spacing: 1px; }
+  .topbar-brand span { color: #C4B8E0; font-weight: 400; font-size: 13px; margin-left: 8px; }
+  .topbar-right { display: flex; align-items: center; gap: 20px; }
+  .topbar-notif { position: relative; width: 36px; height: 36px; background: rgba(255,255,255,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .topbar-notif svg { width: 18px; height: 18px; fill: #fff; }
+  .topbar-user { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+  .user-avatar { width: 34px; height: 34px; background: #5DA38A; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; color: #fff; }
+  .layout { display: flex; min-height: calc(100vh - 60px); }
+  .sidebar { width: 240px; background: #fff; border-right: 1px solid #E0DBF0; padding: 24px 0; flex-shrink: 0; }
+  .sidebar-nav { list-style: none; }
+  .sidebar-nav li a { display: flex; align-items: center; gap: 12px; padding: 12px 24px; color: #4A4A5A; text-decoration: none; font-size: 14px; font-weight: 500; border-left: 3px solid transparent; }
+  .sidebar-nav li a.active { background: #F5F3FF; color: #8273B4; border-left-color: #8273B4; font-weight: 600; }
+  .sidebar-nav li a svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+  .sidebar-section { font-size: 11px; font-weight: 600; color: #A09CB0; text-transform: uppercase; letter-spacing: 1px; padding: 20px 24px 8px; }
+  .main { flex: 1; padding: 32px; max-width: 860px; }
+  .breadcrumb { font-size: 13px; color: #8A869A; margin-bottom: 20px; }
+  .breadcrumb a { color: #8273B4; text-decoration: none; }
+  .breadcrumb span { margin: 0 6px; }
+  .page-title { font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+  .page-subtitle { font-size: 14px; color: #6B6780; margin-bottom: 24px; }
+
+  .badge { display: inline-block; padding: 4px 12px; border-radius: 16px; font-size: 12px; font-weight: 600; }
+  .badge-purple { background: #EBE7F6; color: #6C5FA7; }
+
+  .context-banner { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: #EDE7F6; border-radius: 10px; border: 1px solid #D1C4E9; margin-bottom: 24px; }
+  .context-banner svg { width: 20px; height: 20px; fill: #6C5FA7; flex-shrink: 0; }
+  .context-banner-text { font-size: 13px; color: #4A4A5A; line-height: 1.5; }
+  .context-banner-text strong { color: #1E2A4A; }
+
+  .card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(30,42,74,0.06); border: 1px solid #E8E4F5; padding: 24px; margin-bottom: 20px; }
+  .card-title { font-size: 16px; font-weight: 600; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #F0EDF6; }
+
+  .form-group { margin-bottom: 18px; }
+  .form-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #4A4A5A; }
+  .form-label .required { color: #E57373; }
+  .form-textarea { width: 100%; min-height: 140px; padding: 12px; border-radius: 8px; border: 1px solid #D0CDE0; font-family: inherit; font-size: 14px; color: #1E2A4A; background: #FAFAFE; resize: vertical; line-height: 1.6; }
+  .form-textarea:focus { outline: none; border-color: #8273B4; box-shadow: 0 0 0 3px rgba(130,115,180,0.15); }
+  .form-hint { font-size: 12px; color: #8A869A; margin-top: 4px; }
+  .form-select { width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid #D0CDE0; font-family: inherit; font-size: 14px; color: #1E2A4A; background: #FAFAFE; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238A869A' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+  .form-input { width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid #D0CDE0; font-family: inherit; font-size: 14px; color: #1E2A4A; background: #FAFAFE; }
+
+  .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; }
+  .checkbox-item { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: #F5F3FF; border-radius: 8px; border: 1px solid #E8E4F5; font-size: 13px; cursor: pointer; }
+  .checkbox-item.checked { background: #EBE7F6; border-color: #8273B4; }
+  .checkbox-item input { accent-color: #8273B4; }
+
+  .btn { padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; font-family: inherit; display: inline-flex; align-items: center; gap: 8px; }
+  .btn svg { width: 16px; height: 16px; fill: currentColor; }
+  .btn-primary { background: linear-gradient(135deg, #8273B4, #6C5FA7); color: #fff; box-shadow: 0 2px 8px rgba(130,115,180,0.3); }
+  .btn-secondary { background: #F0EDF6; color: #4A4A5A; border: 1px solid #D0CDE0; }
+  .form-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 8px; }
+
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: #A09CB0; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo"><img src="data:image/png;base64,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" alt="Pharos" style="height:34px;width:auto;"></div>
+    <div class="topbar-brand">PHAROS <span>Pannello Consigliere di Fiducia</span></div>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-notif"><svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></div>
+    <div class="topbar-user"><div class="user-avatar">EB</div><span>Dott.ssa Elena Bianchi</span></div>
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-section">Principale</div>
+    <ul class="sidebar-nav"><li><a href="#"><svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>Dashboard</a></li></ul>
+    <div class="sidebar-section">Gestione</div>
+    <ul class="sidebar-nav">
+      <li><a href="#" class="active"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM6 20V4h5v7h7v9H6z"/></svg>Pratiche</a></li>
+      <li><a href="#"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>Report</a></li>
+    </ul>
+    <div class="sidebar-section">Account</div>
+    <ul class="sidebar-nav"><li><a href="#"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Profilo</a></li></ul>
+  </nav>
+
+  <div class="main">
+    <div class="breadcrumb"><a href="#">Dashboard</a> <span>&rsaquo;</span> <a href="#">Pratiche</a> <span>&rsaquo;</span> <a href="#">SGN-2025-00142</a> <span>&rsaquo;</span> Richiedi integrazione</div>
+
+    <div class="page-title">Richiesta Integrazione</div>
+    <div class="page-subtitle">Pratica SGN-2025-00142 · <span class="badge badge-purple">Molestia morale</span></div>
+
+    <div class="context-banner">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      <div class="context-banner-text">
+        Stai richiedendo al segnalante di fornire <strong>documentazione o informazioni aggiuntive</strong> a supporto della segnalazione. Il segnalante riceverà una notifica e potrà rispondere dalla propria area riservata.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Dettagli richiesta</div>
+
+      <div class="form-group">
+        <label class="form-label">Oggetto della richiesta <span class="required">*</span></label>
+        <input class="form-input" type="text" value="Richiesta documentazione integrativa — colloqui e accesso strutture">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Descrizione della richiesta <span class="required">*</span></label>
+        <textarea class="form-textarea">Gentile segnalante,
+
+al fine di procedere con l'istruttoria della Sua segnalazione, Le chiedo cortesemente di fornire, ove disponibile, la seguente documentazione integrativa:
+
+1. Eventuali comunicazioni email o messaggi con il supervisore relativi ai fatti descritti
+2. La richiesta formale di accesso al laboratorio di ricerca inviata il 15 aprile
+3. Eventuali testimonianze scritte di colleghi presenti durante gli episodi segnalati
+
+La documentazione potrà essere caricata direttamente dalla Sua area riservata nella sezione "Integrazioni".</textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Tipologia documenti richiesti</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item checked"><input type="checkbox" checked> Email / Comunicazioni</label>
+          <label class="checkbox-item checked"><input type="checkbox" checked> Documenti ufficiali</label>
+          <label class="checkbox-item"><input type="checkbox"> Foto / Screenshot</label>
+          <label class="checkbox-item checked"><input type="checkbox" checked> Testimonianze</label>
+          <label class="checkbox-item"><input type="checkbox"> Altro</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Termine per la risposta</label>
+        <input class="form-input" type="text" value="30 Maggio 2025" style="max-width: 240px;">
+        <div class="form-hint">Il segnalante riceverà un promemoria 3 giorni prima della scadenza.</div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-secondary">← Torna alla pratica</button>
+        <button class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>Invia richiesta</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Pharos V0.5 · Pannello Consigliere di Fiducia</div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharos - Esito Triage (Mobile)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #FEF0E8; color: #1E2A4A;
+    min-height: 100vh; max-width: 100vw; overflow-x: hidden;
+  }
+  .quick-exit {
+    position: absolute; top: 14px; right: 16px;
+    background: #fff; border: 1px solid #E0DBF0;
+    border-radius: 20px; padding: 7px 16px;
+    font-size: 12px; font-weight: 500; color: #4A4A5A;
+    display: flex; align-items: center; gap: 6px;
+    z-index: 10; cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .quick-exit .x { font-size: 14px; color: #8A869A; }
+  .mobile-nav {
+    display: flex; align-items: center; gap: 12px;
+    padding: 52px 20px 16px; position: relative;
+  }
+  .back-arrow {
+    width: 38px; height: 38px; background: #fff;
+    border: 1px solid #E0DBF0; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: #4A4A5A; cursor: pointer; flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .nav-title { font-size: 18px; font-weight: 700; }
+  .content { padding: 0 20px; }
+  .disclaimer {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px 14px; background: #FFF8E1; border-radius: 12px;
+    border: 1px solid #FFE082; margin-bottom: 16px;
+  }
+  .disclaimer svg { width: 18px; height: 18px; fill: #F9A825; flex-shrink: 0; margin-top: 1px; }
+  .disclaimer-text { font-size: 12px; color: #5D4E37; line-height: 1.5; }
+  .card {
+    background: #fff; border-radius: 16px;
+    border: 1px solid #E8E4F5; padding: 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+  }
+  .card h3 {
+    font-size: 15px; font-weight: 700; margin-bottom: 16px;
+    padding-bottom: 10px; border-bottom: 1px solid #F0EDF6;
+  }
+  .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .result-item { padding: 12px; background: #FAFAFE; border-radius: 10px; border: 1px solid #F0EDF6; }
+  .result-label { font-size: 11px; color: #8A869A; font-weight: 500; margin-bottom: 4px; }
+  .result-value { font-size: 14px; font-weight: 600; }
+  .result-value.highlight { color: #E65100; }
+  .suggestion-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px; background: #F5F3FF; border-radius: 10px;
+    margin-bottom: 8px; border: 1px solid #E8E4F5;
+  }
+  .suggestion-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: #8273B4; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .suggestion-text { font-size: 13px; line-height: 1.5; }
+  .suggestion-text strong { color: #1E2A4A; }
+  .service-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px; background: #FAFAFE; border-radius: 10px;
+    margin-bottom: 8px; border: 1px solid #F0EDF6;
+  }
+  .service-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .service-icon.phone { background: #E8F5E9; }
+  .service-icon.phone svg { width: 16px; height: 16px; fill: #2E7D32; }
+  .service-icon.map { background: #E3F2FD; }
+  .service-icon.map svg { width: 16px; height: 16px; fill: #1565C0; }
+  .service-icon.school { background: #EDE7F6; }
+  .service-icon.school svg { width: 16px; height: 16px; fill: #6C5FA7; }
+  .service-name { font-size: 13px; font-weight: 600; }
+  .service-desc { font-size: 11px; color: #8A869A; }
+  .actions {
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 0 0 32px;
+  }
+  .btn {
+    padding: 15px; border-radius: 14px; font-size: 15px;
+    font-weight: 600; cursor: pointer; border: none;
+    font-family: inherit; text-align: center; width: 100%;
+  }
+  .btn-primary { background: linear-gradient(135deg, #8273B4, #6C5FA7); color: #fff; box-shadow: 0 2px 8px rgba(130,115,180,0.3); }
+  .btn-secondary { background: #fff; color: #4A4A5A; border: 1px solid #D0CDE0; }
+  .footer { text-align: center; padding: 18px 16px; font-size: 10px; color: #A09CB0; }
+</style>
+</head>
+<body>
+
+<div class="quick-exit"><span class="x">&times;</span> Uscita rapida</div>
+
+<div class="mobile-nav">
+  <div class="back-arrow">&larr;</div>
+  <div class="nav-title">Esito Triage</div>
+</div>
+
+<div class="content">
+  <div class="disclaimer">
+    <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+    <div class="disclaimer-text">La valutazione IA è indicativa e non costituisce una diagnosi. Il Consigliere di Fiducia effettuerà una valutazione indipendente.</div>
+  </div>
+
+  <div class="card">
+    <h3>Valutazione IA</h3>
+    <div class="result-grid">
+      <div class="result-item"><div class="result-label">Tipologia</div><div class="result-value">Molestia morale</div></div>
+      <div class="result-item"><div class="result-label">Gravità</div><div class="result-value highlight">Media-Alta</div></div>
+      <div class="result-item"><div class="result-label">Contesto</div><div class="result-value">Ambiente accademico</div></div>
+      <div class="result-item"><div class="result-label">Episodi</div><div class="result-value">3 in 5 settimane</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Suggerimenti</h3>
+    <div class="suggestion-item">
+      <div class="suggestion-num">1</div>
+      <div class="suggestion-text"><strong>Documenta gli episodi</strong> nel Diario Evidenze con date, orari e dettagli specifici</div>
+    </div>
+    <div class="suggestion-item">
+      <div class="suggestion-num">2</div>
+      <div class="suggestion-text"><strong>Contatta il CDF</strong> per un colloquio riservato, procedendo con la segnalazione formale</div>
+    </div>
+    <div class="suggestion-item">
+      <div class="suggestion-num">3</div>
+      <div class="suggestion-text"><strong>Supporto psicologico:</strong> il servizio di ascolto dell'ateneo è disponibile gratuitamente</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Centri e servizi di supporto</h3>
+    <div class="service-item">
+      <div class="service-icon phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+      <div><div class="service-name">1522 — Antiviolenza</div><div class="service-desc">Attivo 24/7 — Gratuito</div></div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon map"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+      <div><div class="service-name">Centro antiviolenza territoriale</div><div class="service-desc">Via esempio 15 — Consulenza gratuita</div></div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon school"><svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg></div>
+      <div><div class="service-name">Sportello Ascolto Ateneo</div><div class="service-desc">Servizio psicologico gratuito per studenti</div></div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary">Procedi con la segnalazione</button>
+    <button class="btn btn-secondary">Torna alla Home</button>
+  </div>
+</div>
+
+<div class="footer">Pharos V0.5</div>
+</body>
+</html>

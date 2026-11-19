@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharos - Stato Segnalazione (Mobile)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #FEF0E8; color: #1E2A4A;
+    min-height: 100vh; max-width: 100vw; overflow-x: hidden;
+  }
+
+  .quick-exit {
+    position: absolute; top: 14px; right: 16px;
+    background: #fff; border: 1px solid #E0DBF0;
+    border-radius: 20px; padding: 7px 16px;
+    font-size: 12px; font-weight: 500; color: #4A4A5A;
+    display: flex; align-items: center; gap: 6px;
+    z-index: 10; cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .quick-exit .x { font-size: 14px; color: #8A869A; }
+
+  .mobile-nav {
+    display: flex; align-items: center; gap: 12px;
+    padding: 52px 20px 16px; position: relative;
+  }
+  .back-arrow {
+    width: 38px; height: 38px; background: #fff;
+    border: 1px solid #E0DBF0; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: #4A4A5A; flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .nav-title { font-size: 18px; font-weight: 700; }
+
+  .content { padding: 0 20px 32px; }
+
+  .status-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .segn-code { font-size: 14px; color: #8A869A; margin-bottom: 16px; }
+  .stato-badge {
+    font-size: 12px; font-weight: 600; padding: 6px 16px;
+    border-radius: 20px; white-space: nowrap;
+  }
+  .stato-lavorazione { background: #FFF3E0; color: #B87A2A; }
+
+  .info-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px; margin-bottom: 18px;
+  }
+  .info-box {
+    background: #fff; border-radius: 12px;
+    border: 1px solid #E8E4F5; padding: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .info-label { font-size: 10px; font-weight: 600; color: #8A869A; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px; }
+  .info-value { font-size: 13px; font-weight: 700; }
+
+  .card {
+    background: #fff; border-radius: 16px;
+    border: 1px solid #E8E4F5; overflow: hidden;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+  }
+  .card-header {
+    padding: 16px 18px; border-bottom: 1px solid #F0EDF6;
+    font-size: 14px; font-weight: 700;
+  }
+  .card-body { padding: 18px; }
+
+  .timeline { padding-left: 28px; position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 10px; top: 4px;
+    bottom: 4px; width: 2px; background: #E0DBF0;
+  }
+  .tl-item { position: relative; padding-bottom: 22px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-dot {
+    position: absolute; left: -28px; top: 2px;
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; z-index: 1;
+  }
+  .tl-dot.active { background: #8273B4; box-shadow: 0 2px 8px rgba(130,115,180,0.4); }
+  .tl-dot.active::after { content: ''; width: 7px; height: 7px; background: #fff; border-radius: 50%; }
+  .tl-dot.done { background: #5DA38A; }
+  .tl-dot.done::after { content: '\2713'; color: #fff; font-size: 10px; font-weight: 700; }
+  .tl-status { font-size: 14px; font-weight: 600; }
+  .tl-date { font-size: 11px; color: #8A869A; margin-top: 2px; }
+  .tl-note {
+    margin-top: 8px; background: #F5F3FF; border-radius: 10px;
+    padding: 12px 14px; font-size: 12px; color: #4A4A5A;
+    border-left: 3px solid #8273B4; line-height: 1.5;
+  }
+  .tl-note strong { color: #1E2A4A; display: block; margin-bottom: 2px; font-size: 11px; }
+
+  .actions { display: flex; flex-direction: column; gap: 10px; }
+  .btn {
+    padding: 15px; border-radius: 14px;
+    font-size: 15px; font-weight: 600;
+    border: none; font-family: inherit;
+    text-align: center; cursor: pointer; width: 100%;
+  }
+  .btn-primary { background: linear-gradient(135deg, #8273B4, #6C5FA7); color: #fff; box-shadow: 0 4px 14px rgba(108,95,167,0.3); }
+  .btn-danger { background: #FFF0F0; color: #C0392B; border: 1px solid #F0C0C0; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+</style>
+</head>
+<body>
+
+<div class="quick-exit">Esci rapidamente <span class="x">&times;</span></div>
+
+<div class="mobile-nav">
+  <div class="back-arrow">&larr;</div>
+  <div class="nav-title">Dettaglio Segnalazione</div>
+</div>
+
+<div class="content">
+
+  <div class="status-header">
+    <span></span>
+    <div class="stato-badge stato-lavorazione">In lavorazione</div>
+  </div>
+  <div class="segn-code">#SGN-2026-0042</div>
+
+  <div class="info-row">
+    <div class="info-box">
+      <div class="info-label">Tipologia</div>
+      <div class="info-value">Molestia morale</div>
+    </div>
+    <div class="info-box">
+      <div class="info-label">Data invio</div>
+      <div class="info-value">05/11/2026</div>
+    </div>
+    <div class="info-box">
+      <div class="info-label">Eventi</div>
+      <div class="info-value">3 allegati</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Cronologia stati</div>
+    <div class="card-body">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot active"></div>
+          <div class="tl-status">In lavorazione</div>
+          <div class="tl-date">12 Nov 2026 · 09:45</div>
+          <div class="tl-note">
+            <strong>Nota del Consigliere di Fiducia:</strong>
+            Colloquio conoscitivo fissato per il 20/11 alle ore 10:00. Presentarsi presso lo studio della Consigliere di Fiducia, edificio principale, studio 12.
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot done"></div>
+          <div class="tl-status">Presa in carico</div>
+          <div class="tl-date">08 Nov 2026 · 14:30</div>
+          <div class="tl-note">
+            <strong>Nota del Consigliere di Fiducia:</strong>
+            Segnalazione ricevuta e presa in visione. Verranno valutati i materiali allegati.
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot done"></div>
+          <div class="tl-status">Inviata</div>
+          <div class="tl-date">05 Nov 2026 · 11:22</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary">Invia integrazioni</button>
+    <button class="btn btn-danger">Interrompi iter</button>
+  </div>
+
+</div>
+
+</body>
+</html>
