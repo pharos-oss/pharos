@@ -20,7 +20,7 @@ build-all:
     @echo "Compilazione massiva di tutti i documenti in corso..."
     @for file in docs/*/main.typ; do \
         nome_doc=$(basename $(dirname "$file")); \
-        typst compile -- root . "$file" docs/out/"$nome_doc".pdf; \
+        typst compile --root . "$file" docs/out/"$nome_doc".pdf; \
         echo "✓ $nome_doc.pdf generato"; \
     done
     @echo "Tutti i documenti sono stati compilati"
