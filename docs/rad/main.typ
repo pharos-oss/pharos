@@ -37,7 +37,9 @@
   ("12/11/2026", "0.6", "Stesura della tabella degli oggetti", "Francesco Imbriaco, Alessia D'Amico"),
   ("12/11/2026", "0.6", "Stesura del diagramma delle classi", "Leonardo Trotta, Mario Senatore"),
   ("13/11/2026", "0.7", "Stesura del diagramma di sequenza 1", "Mario Senatore, Gianmarco Raimondi"),
-  ("13/11/2026", "0.7", "Stesura del diagramma di sequenza 2", "Alessia D,Amico, Carmine Saggese"),
+  ("13/11/2026", "0.7", "Stesura del diagramma di sequenza 2", "Alessia D'Amico, Carmine Saggese"),
+  ("17/11/2026", "0.7", "Stesura del diagramma di sequenza 3", "Leonardo Trotta, Francesco Imbriaco"),
+  ("19/11/2026", "0.8", "Inserimento dei mockup", "Francesco Imbriaco, Alessia D'Amico"),
 )
 
 #show: doc-template.with(
