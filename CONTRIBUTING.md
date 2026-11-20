@@ -6,10 +6,10 @@ Questo documento illustra nel dettaglio gli standard operativi, il flusso Git e 
 ## 1. Board Kanban e gestione dei task (GitHub Projects)
 Il coordinamento e l'avanzamento dei lavori avvengono esclusivamente tramite la Kanban Board di GitHub Projects. Il ciclo di vita di ogni task attraversa obbligatoriamente le seguenti colonne:
 - **Backlog:** Issue pianificate ma non ancora avviate.
-- **Da fare (To Do):** Issue pronte per essere prese in carico nel breve termine.
-- **In corso (In Progress):** Issue attualmente in lavorazione da parte di uno o più assegnatari.
-- **In review:** Sviluppo terminato, Pull Request aperta e in attesa di approvazione/revisione.
-- **Fatto (Done):** PR mergiata, codice integrato e issue chiusa.
+- **To Do:** Issue pronte per essere prese in carico nel breve termine.
+- **In Progress:** Issue attualmente in lavorazione da parte di uno o più assegnatari.
+- **In Review:** Sviluppo terminato, Pull Request aperta e in attesa di approvazione/revisione.
+- **Done:** PR mergiata, codice integrato e issue chiusa.
 
 *Nota:* Le segnalazioni di bug o comportamenti inattesi devono essere aperte tempestivamente dai team member sotto forma di Issue, utilizzando l'apposito template, affinché possano essere classificate nel Backlog.
 
