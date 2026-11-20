@@ -26,9 +26,9 @@ state "Torna alla Dashboard" as R2 #D5E8D4
 [*] --> Dashboard
 
 ' --- FLUSSO REPORTISTICA ---
-Dashboard --> MU10 : Seleziona menu "Report"
+Dashboard --> MU10 : Seleziona menù "Report"
 MU10 --> MU10 : Click "Stampa" / "Esporta Report" / "Esporta CSV"
-MU10 --> R1 : Navigazione menu laterale
+MU10 --> R1 : Navigazione menù laterale
 
 ' --- FLUSSO GESTIONE SINGOLA PRATICA ---
 Dashboard --> MU08 : Click "Prendi in carico" / "Apri pratica"
@@ -36,8 +36,7 @@ MU08 --> MU08 : Click "Prendi in carico" / "Esporta PDF"
 MU08 --> R2 : Breadcrumbs "Dashboard > Pratiche"
 
 ' --- RICHIESTA INTEGRAZIONI (Sotto-flusso) ---
-MU08 --> MU09 : Click "Richiedi integrazione"
-MU09 --> MU08 : Click "Invia richiesta"
-MU09 --> MU08 : Click "Torna alla pratica" [Annulla]
+MU08 -down-> MU09 : Click "Richiedi integrazione"
+MU09 -up-> MU08 : Click "Invia richiesta"\n/ Click "Torna alla pratica" [Annulla]
 
 @enduml
