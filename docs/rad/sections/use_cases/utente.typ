@@ -184,6 +184,8 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   *Special Requirements:* I dati salvati nel diario e le bozze temporanee devono risultare inaccessibili al Consigliere di Fiducia fino all'invio definitivo.
 ]
 
+#pagebreak()
+
 #callout-box(title: "UC_04 Monitoraggio e interruzione della segnalazione")[
   *Identificativo*: UC_04 \
   *Nome*: Monitoraggio e interruzione della segnalazione \

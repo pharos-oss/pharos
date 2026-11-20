@@ -1,23 +1,23 @@
 @startuml
-|Vittima|
+|Utente|
 start
 :Cerca i contatti sul portale UniSa;
 :Annota l'e-mail del Consigliere di Fiducia;
 :Raccoglie le prove sul proprio dispositivo;
 :Invia l'e-mail con le prove;
 |Consigliere di Fiducia|
-:Analizza il caso;
+:Analizza la segnalazione;
 if (Le informazioni sono sufficienti?) then (no)
   :Chiede integrazioni;
-  |Vittima|
+  |Utente|
   :Invia il materiale mancante;
   |Consigliere di Fiducia|
   :Esamina le nuove informazioni;
 else (sì)
-  :Ritiene il caso completo;
+  :Ritiene la segnalazione completa;
 endif
 :Propone data e ora del colloquio;
-|Vittima|
+|Utente|
 :Conferma la disponibilità;
 |Consigliere di Fiducia|
 :Fissa l'appuntamento;

@@ -76,9 +76,9 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
 
     [*RF_GCDF_06*], [Chiusura e archiviazione], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di chiudere formalmente una pratica, indicandone l'esito finale e bloccando ulteriori modifiche bilaterali.]], [CDF], [Elevata], [SC_CDF_03, UC_CDF_2],
     
-    [*RF_GCDF_07*], [Gestione assenza temporanea], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di impostare un periodo di indisponibilità, attivando un avviso automatico per gli utenti riguardo all'allungamento dei tempi di risposta.]], [CDF], [Bassa], [Aggiuntivo],
+    [*RF_GCDF_07*], [Gestione assenza temporanea], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di impostare un periodo di assenza, attivando un avviso automatico per gli utenti riguardo all'allungamento dei tempi di risposta.]], [CDF], [Bassa], [Aggiuntivo],
     
-    [*RF_GCDF_08*], [Generazione report aggregati], [#block(breakable: false)[Il sistema deve permettere di generare report statistici anonimi indicando periodo di riferimento, tipologia di violenza e componente accademica.]], [CDF], [Bassa], [SC_CDF_04, UC_CDF_2],
+    [*RF_GCDF_08*], [Generazione report aggregati], [#block(breakable: false)[Il sistema deve permettere di generare report statistici anonimi indicando periodo di riferimento, tipologia di evento e componente accademica.]], [CDF], [Bassa], [SC_CDF_04, UC_CDF_2],
     
     [*RF_GCDF_09*], [Esportazione report], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di esportare i report statistici e i grafici generati in formato PDF e CSV.]], [CDF], [Bassa], [SC_CDF_04]
   )

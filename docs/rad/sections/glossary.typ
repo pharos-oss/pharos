@@ -38,7 +38,7 @@ La seguente sezione definisce in modo univoco il vocabolario condiviso del siste
       [Definizioni],
 
       [*Diario delle evidenze (o Diario)*],
-      [Spazio confidenziale all'interno della piattaforma in cui la vittima può registrare, datare e raccogliere prove relative agli episodi di mobbing o molestie. È un ambiente personale per annotare eventi in modo privato e cifrato.],
+      [Spazio confidenziale all'interno della piattaforma in cui l'utente può registrare, datare e raccogliere prove relative agli eventi di mobbing o molestie. È un ambiente personale per annotare eventi in modo privato e cifrato.],
       [Blocco note, \ Archivio personale, \ Spazio privato],
       [Definizioni, MO_GU, \ RF_GU_01 - RF_GU_03],
 
@@ -88,7 +88,7 @@ La seguente sezione definisce in modo univoco il vocabolario condiviso del siste
       [RF_GU_08, RF_GCDF_05],
 
       [*Triage Guidato*],
-      [Percorso interattivo iniziale che aiuta l'utente a classificare l'episodio e ad acquisire consapevolezza sulla sua natura.],
+      [Percorso interattivo iniziale che aiuta l'utente a classificare l'evento e ad acquisire consapevolezza sulla sua natura.],
       [Screening automatico],
       [Definizioni, RF_GU_10],
 

@@ -41,6 +41,7 @@
   ("17/11/2026", "0.7", "Stesura del diagramma di sequenza 3", "Leonardo Trotta, Francesco Imbriaco"),
   ("19/11/2026", "0.8", "Inserimento dei mockup", "Francesco Imbriaco, Alessia D'Amico"),
   ("20/11/2026", "0.8", "Inserimento dei diagrammi navigazionali", "Carmine Saggese, Leonardo Trotta"),
+  ("20/11/2026", "0.9", "Inserimento del glossario", "Gianmarco Raimondi"),
 )
 
 #show: doc-template.with(
