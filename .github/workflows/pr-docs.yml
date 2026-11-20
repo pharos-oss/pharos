@@ -84,7 +84,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-prek-
 
-      - name: Esecuzione Controlli di Qualita (File e Ortografia)
+      - name: Esecuzione Controlli di Qualità (File e Ortografia)
         run: |
           export PATH="$PATH:$HOME/.local/bin"
           just lint
@@ -129,7 +129,7 @@ jobs:
           message: |
             ### Revisione Documentazione
 
-            I controlli di qualita sono passati con successo.
+            I controlli di qualità sono passati con successo.
             Puoi scaricare l'anteprima PDF dalla sezione **Artifacts**:
 
             **[Scarica i file PDF (Artifact)](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})**
