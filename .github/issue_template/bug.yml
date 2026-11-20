@@ -1,0 +1,77 @@
+name: Segnalazione Bug
+description: Segnala un comportamento inatteso, un errore nel codice o un difetto nella documentazione
+type: Bug
+labels: ["status: needs triaging"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > [!WARNING]
+        > **Sicurezza dei dati:** Se questo bug espone dati personali o vulnerabilità critiche, contatta i PM in privato e non allegare log in chiaro.
+  - type: checkboxes
+    id: pre-checks
+    attributes:
+      label: Controlli preliminari
+      options:
+        - label: Il bug non è stato già segnalato in precedenza (cerca tra le issue aperte o chiuse).
+          required: true
+        - label: Il bug è replicabile nell'ultima versione o è ancora presente nella documentazione attuale.
+          required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrizione del bug
+      description: Fornisci una descrizione chiara ed esaustiva del problema.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passi per riprodurre
+      value: |
+        1. Accedere a '...'
+        2. Eseguire l'azione '...'
+        3. Inserire/selezionare '...'
+        4. Osservare l'errore: '...'
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento atteso
+      description: Cosa avrebbe dovuto fare il sistema?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamento attuale
+      description: Cosa accade effettivamente?
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priorità stimata
+      options:
+        - Alta 
+        - Media
+        - Bassa
+    validations:
+      required: true
+  - type: input
+    id: context-branch
+    attributes:
+      label: Branch / Commit hash
+      placeholder: es. dev, 7308fc6
+  - type: input
+    id: context-env
+    attributes:
+      label: Ambiente (Browser/Strumenti)
+      placeholder: es. Windows 11, Typst v0.12, Node.js
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log o Stack Trace
+      description: Incolla qui eventuali errori del terminale o del compilatore.
+      render: text

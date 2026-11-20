@@ -1,0 +1,47 @@
+name: Richiesta funzionalità (Feature)
+description: Specifica lo sviluppo di una nuova funzionalità per il sistema Pharos
+type: Feature
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Obiettivo
+      description: Spiega brevemente perché questa funzionalità è necessaria e quale problema risolve per l'utente o per il sistema.
+    validations:
+      required: true
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User story
+      description: Specifica il ruolo, l'azione desiderata e il beneficio atteso.
+      value: |
+        > **Come** *[ruolo: es. studente, utente del campus, amministratore]*,
+        > **vorrei** *[capacità o funzionalità desiderata]*,
+        > **affinché io possa** *[beneficio o obiettivo raggiunto]*.
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrizione dettagliata e contesto
+      description: Descrivi nel dettaglio la nuova funzionalità e i riferimenti ai documenti di analisi (RAD, SDD).
+    validations:
+      required: true
+  - type: checkboxes
+    id: dod
+    attributes:
+      label: Criteri di accettazione (Definition of Done)
+      options:
+        - label: La funzionalità soddisfa i requisiti descritti e gestisce correttamente gli edge case.
+          required: true
+        - label: I relativi test automatici (unit/integration) sono stati implementati e passano con successo.
+          required: true
+        - label: La documentazione (`.typ`) e i diagrammi UML (`.puml`) sono stati aggiornati.
+          required: true
+        - label: "**Codice di condotta:** La funzionalità supporta attivamente il benessere, la privacy e la sicurezza dell'utenza."
+          required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Riferimenti, Mockup o Diagrammi
+      description: Inserisci eventuali riferimenti a casi d'uso, wireframe o diagrammi PlantUML correlati.
