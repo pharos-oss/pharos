@@ -27,30 +27,47 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
-      - name: Analisi Titolo PR e Strategia di Build
+      - name: Analisi File Modificati e Strategia di Build
         id: extract-doc
-        env:
-          PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
-          if [[ "$PR_TITLE" =~ ^(docs|feat|fix|refactor)\(([a-zA-Z0-9_-]+)\)!?:[[:space:]].+ ]]; then
-            DOC_NAME="${BASH_REMATCH[2]}"
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          
+          DOCS_TO_BUILD=""
+          BUILD_ALL=false
+          
+          for FILE in $CHANGED_FILES; do
+            if [[ "$FILE" == "templates/"* ]] || [[ "$FILE" == "docs/templates/"* ]] || [[ "$FILE" == "justfile" ]]; then
+              echo "Modifica globale rilevata ($FILE). Trigger build-all."
+              BUILD_ALL=true
+              break
+              
+            elif [[ "$FILE" =~ ^docs/([^/]+)/ ]]; then
+              DOC_NAME="${BASH_REMATCH[1]}"
+              # Evita duplicati nella lista se più file della stessa cartella sono cambiati
+              if [[ ! " $DOCS_TO_BUILD " =~ " $DOC_NAME " ]]; then
+                DOCS_TO_BUILD="$DOCS_TO_BUILD $DOC_NAME"
+              fi
+            fi
+          done
+          
+          if [ "$BUILD_ALL" = true ]; then
+            echo "build_mode=all" >> "$GITHUB_OUTPUT"
+          elif [ -n "$DOCS_TO_BUILD" ]; then
+            CLEANED_DOCS=$(echo $DOCS_TO_BUILD | xargs)
             
-            if [ -d "docs/$DOC_NAME" ]; then
-              echo "doc_name=$DOC_NAME" >> "$GITHUB_OUTPUT"
-              echo "build_mode=single" >> "$GITHUB_OUTPUT"
-              echo "Modalita SINGLE: compilo solo docs/$DOC_NAME"
-            else
-              echo "La cartella docs/$DOC_NAME non esiste. Passo alla modalita ALL per sicurezza."
+            # Se la lista contiene spazi, sono presenti più documenti modificati
+            if [[ "$CLEANED_DOCS" == *" "* ]]; then
+              echo "Documenti multipli rilevati ($CLEANED_DOCS). Modalita ALL."
               echo "build_mode=all" >> "$GITHUB_OUTPUT"
+            else
+              echo "Un solo documento rilevato ($CLEANED_DOCS). Modalita Singolo Documento."
+              echo "doc_name=$CLEANED_DOCS" >> "$GITHUB_OUTPUT"
+              echo "build_mode=single" >> "$GITHUB_OUTPUT"
             fi
             
-          elif [[ "$PR_TITLE" =~ ^(docs|ci|chore)(\(.+\))?!?:[[:space:]].+ ]]; then
-            echo "build_mode=all" >> "$GITHUB_OUTPUT"
-            echo "Modalita ALL: compilo tutta la documentazione"
-            
           else
+            echo "Nessun documento rilevato. Trigger skip."
             echo "build_mode=skip" >> "$GITHUB_OUTPUT"
-            echo "Modalita SKIP: PR di implementazione codice generico, nessuna compilazione Typst richiesta."
           fi
 
       - name: Installazione Just
