@@ -1,12 +1,13 @@
 name: Segnalazione Bug
 description: Segnala un comportamento inatteso, un errore nel codice o un difetto nella documentazione
-labels: ["type: Bug", "status: needs triaging"]
+type: Bug
+labels: ["status: needs triaging"]
 body:
   - type: markdown
     attributes:
       value: |
         > [!WARNING]
-        > **Sicurezza dei Dati:** Se questo bug espone dati personali o vulnerabilità critiche, contatta i PM in privato e non allegare log in chiaro.
+        > **Sicurezza dei dati:** Se questo bug espone dati personali o vulnerabilità critiche, contatta i PM in privato e non allegare log in chiaro.
   - type: checkboxes
     id: pre-checks
     attributes:
@@ -66,11 +67,11 @@ body:
   - type: input
     id: context-env
     attributes:
-      label:  Ambiente (Browser/Strumenti)
+      label: Ambiente (Browser/Strumenti)
       placeholder: es. Windows 11, Typst v0.12, Node.js
   - type: textarea
     id: logs
     attributes:
-      label: Log o Stack trace
+      label: Log o Stack Trace
       description: Incolla qui eventuali errori del terminale o del compilatore.
       render: text
