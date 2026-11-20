@@ -36,8 +36,8 @@ repos:
         files: (?i)\.(png|jpg|jpeg|gif|svg|webp)$
 
       - id: check-added-large-files
-        name: Controllo grandezza dei file di testo (altri file max 5MB)
-        args: ['--maxkb=5120']
+        name: Controllo grandezza dei file di testo (altri file max 1MB)
+        args: ['--maxkb=1024']
         exclude: (?i)\.(png|jpg|jpeg|gif|svg|webp)$
 
       - id: check-case-conflict
