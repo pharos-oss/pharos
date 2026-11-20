@@ -1,18 +1,18 @@
 #import "../templates/common.typ" : table-style, palette-primary
 
 = Introduzione <introduzione>
-Il presente documento descrive la progettazione tecnica del sistema *"Pharos"*, una piattaforma web per il safeguarding accademico. L'SDD traduce i requisiti formalizzati nel Requirements Analysis Document (RAD) in decisioni architetturali concrete, definendo la decomposizione in sottosistemi, le strategie di mapping hardware/software e le politiche di sicurezza e persistenza dei dati.
+Il presente documento descrive la progettazione tecnica del sistema *"Pharos"*, una piattaforma web finalizzata a facilitare l'individuazione e la segnalazione di episodi di molestie in ambito accademico supportando il consigliere di fiducia nello svolgimento delle proprie attività. L'SDD traduce i requisiti formalizzati nel Requirements Analysis Document (RAD) in decisioni architetturali concrete, definendo la decomposizione in sottosistemi, le strategie di mapping hardware/software e le politiche di sicurezza e persistenza dei dati.
 
 == Obiettivi del sistema
-Il sistema Pharos è progettato per raggiungere i seguenti obiettivi di design, derivati dai requisiti funzionali e non funzionali specificati nel RAD:
+Il sistema Pharos è progettato per raggiungere i seguenti obiettivi, derivati dai requisiti funzionali e non funzionali specificati nel RAD:
 
-1. *Fornire un'interfaccia web accessibile e responsive che consenta agli utenti (studenti, personale docente e tecnico-amministrativo) di comporre e inviare segnalazioni relative a episodi di violenza di genere, stalking, mobbing, straining e abusi, in modo guidato e confidenziale.*
+1. *Fornire un'interfaccia web accessibile e responsive che consenta agli utenti (studenti, personale docente e tecnico-amministrativo) di comporre e inviare segnalazioni relative a episodi di violenza di genere, stalking, mobbing, straining e abusi, mediante un percorso guidato e riservato.*
 
-2. *Implementare un modulo di triage basato su intelligenza artificiale per la classificazione semantica automatica delle segnalazioni, supportando l'utente nell'inquadramento preliminare dell'episodio e riducendo l'esitazione psicologica antecedente alla denuncia.*
+2. *Implementare un modulo di triage basato su intelligenza artificiale per la classificazione semantica automatica delle segnalazioni, supportando l'utente nell'inquadramento preliminare dell'episodio e della sua gravità, senza sostituirsi alle figure istituzionali competenti*
 
 3. *Realizzare una dashboard riservata al Consigliere di Fiducia (CDF) per la gestione strutturata delle pratiche, il monitoraggio dello stato di avanzamento, la richiesta di integrazioni documentali e la generazione di report statistici aggregati.*
 
-4. *Garantire la protezione dei dati personali e sensibili attraverso meccanismi di crittografia, anonimizzazione e controllo degli accessi conformi al GDPR (Regolamento UE 2016/679).*
+4. *Adottare misure per protezione dei dati personali e sensibili attraverso meccanismi di crittografia, anonimizzazione e controllo degli accessi nel rispetto della normativa GDPR (Regolamento UE 2016/679).*
 
 5. *Assicurare la scalabilità e la manutenibilità dell'architettura, adottando pattern di decomposizione in sottosistemi che favoriscano l'indipendenza dei componenti e la possibilità di evoluzione incrementale.*
 
@@ -70,7 +70,7 @@ Il documento è strutturato in modo da fornire una scomposizione progressiva del
 
 - *Sezione 1: Introduzione*: Presenta gli obiettivi del sistema, i design goal e trade-off, le definizioni, i riferimenti bibliografici e la presente struttura documentale.
 
-- *Sezione 2: Architettura software corrente*: Analizza i processi attualmente in uso presso l'Ateneo per la gestione delle segnalazioni e le relative criticità architetturali.
+- *Sezione 2: Architettura software corrente*: Descrive l'eventuale architettura software preesistente e gli elementi rilevanti per la progettazione del nuovo sistema. In assenza di un sistema precedente, analizza le architetture di soluzioni simili attualmente in uso presso l'Ateneo.
 
 - *Sezione 3: Architettura software proposta*: Descrive la decomposizione in sottosistemi, il mapping hardware/software, la gestione della persistenza dei dati, le politiche di sicurezza e controllo degli accessi, il flusso di controllo e le condizioni al contorno.
 
