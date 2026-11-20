@@ -1,28 +1,16 @@
 ## Riepilogo delle modifiche
-<!-- Descrivi in modo chiaro e sintetico le modifiche apportate, le motivazioni tecniche e l'impatto sul sistema o sulla documentazione. -->
+<!-- Descrivi in modo chiaro e sintetico le modifiche apportate e il loro impatto.
+Nota CI/CD: La pipeline remota utilizzerà una strategia Diff-Driven, analizzando i file modificati per compilare solo il necessario o applicare lo "Skip Typst". -->
 
 ## Issue correlate
-<!-- Collega l'issue risolta da questa PR per attivare la chiusura automatica al merge (es. Risolve #24). -->
-Risolve #
-
-## Categoria dell'intervento (Label)
-<!-- Seleziona la categoria coerente con le convenzioni di progetto (CONV_REPO_Pharos). -->
-- [ ] `feat` — Implementazione di nuova funzionalità
-- [ ] `fix` — Correzione di bug o malfunzionamenti
-- [ ] `docs` — Aggiornamento documentazione (`.md`, `.typ`, `.puml`)
-- [ ] `test` — Aggiunta o modifica di test automatici
-- [ ] `refactor` — Ristrutturazione codice/documenti senza cambio di comportamento
-- [ ] `ci/cd` — Modifiche a workflow, automazioni o pipeline
+<!-- Collega l'issue per attivare la chiusura automatica al merge (es. Chiude #24). -->
+Chiude #
 
 ## Autovalutazione e controlli preliminari
-<!-- Conferma di aver eseguito le verifiche locali prima di richiedere la code review. -->
-- [ ] Il codice e i documenti (`.typ`) compilano localmente senza errori né warning bloccanti, e i diagrammi (`.puml`) risultano correttamente renderizzati.
-- [ ] Il branch di lavoro (`feat/...` o `fix/...`) è allineato con il branch target (`dev` / `main`) e privo di conflitti.
-- [ ] Non sono presenti file temporanei, codice commentato o dati sensibili.
-
----
-
-## Spazio riservato ai reviewer e Project Manager
-<!-- La revisione richiede obbligatoriamente almeno 2 Reviewer (1 Team member e 1 Project Manager) e l'autorizzazione finale dei PM (SLA: 24h priorità Alta, 48h Media/Bassa). -->
-- [ ] **Validazione tecnica (PRCheck_Pharos):** Confermo di aver verificato i 17 criteri di validazione (**RC1–RC17**, aree P1–P4) definiti nel `CONTRIBUTING.md`.
-- [ ] **Quorum & approvazione:** Revisione approvata da almeno **2 Reviewer**, autorizzazione dei **Project Manager** ottenuta e integrazione predisposta tramite **Merge commit**.
+- [ ] Il codice, i documenti o i diagrammi compilano localmente senza errori né warning bloccanti (es. testato con `just build-all`).
+- [ ] I controlli automatici di `prek` (es. `just lint`, correzione ortografica CSpell) passano con successo.
+- [ ] I messaggi di commit rispettano le regole di Commitizen (es. `feat:`, `fix:`, `docs:`).
+- [ ] I nuovi file rispettano le dimensioni massime (1MB per le immagini, 5MB per gli altri file) e le convenzioni cross-platform sui nomi.
+- [ ] Il branch di lavoro è allineato al branch target e privo di conflitti.
+- [ ] Non sono presenti file estranei o dati sensibili.
+- [ ] **Codice di Condotta:** Confermo che l'implementazione rispetta i principi di accessibilità, inclusione e sicurezza definiti nel `CODE_OF_CONDUCT.md`.
