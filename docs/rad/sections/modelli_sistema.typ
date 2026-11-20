@@ -25,3 +25,6 @@ Nella presente sezione sono descritti i diversi modelli del sistema *Pharos*, or
 
 == Mockups
 #include "mockups/mockups.typ"
+
+== Navigational Path 
+#include "navigational_path/navigational_path.typ"
