@@ -1,0 +1,19 @@
+%%{init: {'flowchart': {'curve': 'stepAfter', 'nodeSpacing': 45, 'rankSpacing': 70}}}%%
+flowchart TD
+    %% --- STILI ---
+    classDef home fill:#D5E8D4,stroke:#82B366,stroke-width:1.5px,color:#000
+    
+    classDef screen fill:#DEEBF7,stroke:#2F528F,stroke-width:1.5px,color:#000
+
+    %% --- NODI ---
+    Dashboard["Dashboard Segnalazioni<br/>(MU_07)"]:::home
+
+    MU10["Report Statistici<br/>(MU_10)"]:::screen
+    MU08["Dettaglio Pratica<br/>(MU_08 - Rif. SD_02)"]:::screen
+
+    MU09["Richiesta Integrazione<br/>(MU_09)"]:::screen
+
+    %% --- PROGRESSIONE DEI FLUSSI ---
+    Dashboard --> MU10
+    Dashboard --> MU08
+    MU08 --> MU09
