@@ -11,9 +11,9 @@
 
 === NP_02_Cdf
 
-#align(center)[
+#align(center + horizon)[
   #figure(
-    image("../../assets/images/NP_02_CDF.png", width: 120%), 
+    image("../../assets/images/NP_02_CDF.png", width: 80%), 
     caption: ["Navigational Path: Consigliere di fiducia"]
   )
 ]
