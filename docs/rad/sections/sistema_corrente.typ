@@ -76,6 +76,6 @@ Come evidenziato dall'analisi dei bisogni di business, questo modello presenta d
 #v(0.5em)
 
 #figure(
-  image("../assets/images/AD_01_Sistema_Corrente.png", width: 130%),
+  image("../assets/images/AD_01_Sistema_Corrente.png", width: 80%),
   caption: ["Activity Diagram: Diagramma delle Attività del Sistema Corrente"]
 )
