@@ -1,5 +1,4 @@
 @startuml CD_01_Piattaforma
-
 skinparam classAttributeIconSize 0
 skinparam shadowing false
 skinparam defaultFontName "DejaVu Sans"

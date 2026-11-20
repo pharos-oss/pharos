@@ -1,0 +1,175 @@
+@startuml SD_03_Richiesta_e_Invio_Integrazioni
+skinparam shadowing false
+skinparam defaultFontName "DejaVu Sans"
+skinparam defaultFontSize 11
+skinparam roundcorner 10
+skinparam BoxPadding 10
+
+skinparam sequence {
+    ArrowColor #4A4A5A
+    LifeLineBorderColor #1E2A4A
+    LifeLineBackgroundColor #E8E4F5
+    ParticipantBorderColor #1E2A4A
+    ParticipantBackgroundColor White
+    ParticipantFontColor #1E2A4A
+    BoxBackgroundColor #F8F9FA
+    BoxBorderColor #D0D0D0
+}
+
+autonumber
+
+actor "CDF\n(Elena)" as cdf
+boundary ":InterfacciaCDF" as intCDF
+control ":GestorePratiche" as gestPrat
+entity ":Pratica" as pratica
+entity ":StatoPratica" as statoPrat
+entity ":Segnalazione" as segnalazione
+entity ":Notifica" as notifica
+entity ":NotaCDF" as notaCDF
+actor "Utente\n(Marco)" as utente
+boundary ":InterfacciaUtente" as intUtente
+control ":GestoreSegn" as gestSegn
+control ":GestoreDiario" as gestDiario
+entity ":EventoDiario" as eventoDiario
+
+== Fase 1: Il CDF richiede integrazioni (RF_GCDF_05) ==
+
+cdf -> intCDF : Richiede integrazioni\n(es. "Inviare email settembre")
+activate intCDF
+
+intCDF -> gestPrat : aggiornaStato(idPratica,\n"In attesa", testoNota)
+activate gestPrat
+
+gestPrat -> pratica : ottieniDettagli()
+activate pratica
+pratica --> gestPrat : Dettagli (incluso stato attuale)
+deactivate pratica
+
+alt Pratica modificabile (Flusso principale)
+    gestPrat -> pratica : impostaStato(\n"In attesa di integrazioni",\ntestoNota)
+    activate pratica
+    
+    pratica -> statoPrat : create("In attesa\ndi integrazioni", data)
+    activate statoPrat
+    statoPrat --> pratica : Istanza stato creata
+    deactivate statoPrat
+    
+    pratica -> segnalazione : impostaStato(\n"In attesa di integrazioni",\ntestoNota)
+    activate segnalazione
+    
+    segnalazione -> notifica : create(tipo="Stato",\nmessaggio=testoNota)
+    activate notifica
+    notifica --> segnalazione : Notifica registrata
+    deactivate notifica
+    
+    segnalazione --> pratica : Conferma aggiornamento stato
+    deactivate segnalazione
+    
+    pratica --> gestPrat : Stato aggiornato
+    deactivate pratica
+    
+    gestPrat -> notaCDF : create(testoNota,\nvisibileUtente=true)
+    activate notaCDF
+    notaCDF --> gestPrat : Nota registrata
+    deactivate notaCDF
+    
+    gestPrat --> intCDF : Conferma aggiornamento
+    deactivate gestPrat
+    intCDF --> cdf : Mostra pratica\n"In attesa di integrazioni"
+    deactivate intCDF
+    
+else Pratica archiviata (flusso alternativo)
+    gestPrat --> intCDF : Pratica non modificabile
+    intCDF --> cdf : Mostra errore:\npratica archiviata
+end
+
+== Fase 2: L'Utente risponde con integrazioni (UC_01, SC_U_03) ==
+
+utente -> intUtente : Legge notifica (idNotifica)\ne apre segnalazione\n(idSegnalazione)
+activate intUtente
+
+intUtente -> gestSegn : ottieniDettagli(\nidSegnalazione, idNotifica)
+activate gestSegn
+
+gestSegn -> segnalazione : ottieniDettagli()
+activate segnalazione
+segnalazione --> gestSegn : Stato e dati segnalazione
+deactivate segnalazione
+
+gestSegn -> notifica : ottieniMessaggio()
+activate notifica
+notifica --> gestSegn : Testo richiesta del CDF
+deactivate notifica
+
+gestSegn --> intUtente : Restituisce richiesta
+deactivate gestSegn
+
+intUtente --> utente : Mostra testo della\nrichiesta del CDF
+
+utente -> intUtente : Seleziona eventi dal diario,\naggiunge nota e conferma invio
+
+intUtente -> gestDiario : ottieniEventi(listaId)
+activate gestDiario
+
+gestDiario -> eventoDiario : ottieniDettagli()
+activate eventoDiario
+eventoDiario --> gestDiario : Dati ed allegati cifrati
+deactivate eventoDiario
+
+loop Finché gli allegati non sono conformi (SC_U_07, RNF_U_02)
+    gestDiario -> gestDiario : validaAllegato(allegati)
+    
+    opt Allegato non conforme
+        gestDiario --> intUtente : Errore: formato o\ndimensione non validi
+        intUtente --> utente : Mostra errore,\nmantiene dati inseriti
+        utente -> intUtente : Allega versione conforme
+        intUtente -> gestDiario : aggiornaAllegati(allegati)
+    end
+end
+
+gestDiario --> intUtente : Restituisce materiale validato
+deactivate gestDiario
+
+intUtente -> gestSegn : aggiornaSegnalazione(\nidSegnalazione, integrazioni,\nallegati)
+activate gestSegn
+
+gestSegn -> segnalazione : aggiungiIntegrazioni(\nintegrazioni, allegati)
+activate segnalazione
+segnalazione --> gestSegn : Integrazioni associate\nalla segnalazione
+deactivate segnalazione
+
+gestSegn -> gestPrat : aggiornaStato(idPratica,\n"In lavorazione")
+activate gestPrat
+
+gestPrat -> pratica : impostaStato(\n"In lavorazione")
+activate pratica
+
+pratica -> statoPrat : create("Integrazioni\nricevute", data)
+activate statoPrat
+statoPrat --> pratica : Istanza stato creata
+deactivate statoPrat
+
+pratica -> segnalazione : impostaStato(\n"In lavorazione")
+activate segnalazione
+
+segnalazione -> notifica : create(tipo="Stato",\nmessaggio="Nuovi allegati ricevuti")
+activate notifica
+notifica --> segnalazione : Notifica registrata
+deactivate notifica
+
+segnalazione --> pratica : Conferma aggiornamento stato
+deactivate segnalazione
+
+pratica --> gestPrat : Stato aggiornato
+deactivate pratica
+
+gestPrat --> gestSegn : Conferma aggiornamento stato
+deactivate gestPrat
+
+gestSegn --> intUtente : Operazione completata
+deactivate gestSegn
+
+intUtente --> utente : Mostra avviso\n"Integrazioni inviate\ncon successo"
+deactivate intUtente
+
+@enduml

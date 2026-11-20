@@ -16,7 +16,7 @@ flowchart TD
     MU03["Esito Triage<br/>(MU_03)"]:::screen
     MU05["Conferma Invio<br/>(MU_05)"]:::screen
 
-    Panic["Uscita Sicurezza<br/>(Panic Button)"]:::panic
+    Panic["Chiusura Rapida<br/>(Panic Button)"]:::panic
 
     %% --- ALLINEAMENTO LIVELLI ---
     Home --> MU06
@@ -32,7 +32,7 @@ flowchart TD
     MU04 --> MU05
     MU05 --> MU06
 
-    %% --- USCITA DI EMERGENZA ---
+    %% --- Chiusura Rapida ---
     MU02 -.-> Panic
     MU03 -.-> Panic
     MU04 -.-> Panic

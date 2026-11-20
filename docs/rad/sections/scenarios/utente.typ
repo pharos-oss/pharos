@@ -15,7 +15,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
   *Flusso di eventi*:
 
-  + Giulia decide di segnalare gli episodi annotati nel diario e avvia la compilazione del modulo standardizzato di segnalazione.
+  + Giulia decide di segnalare gli eventi annotati nel diario e avvia la compilazione del modulo standardizzato di segnalazione.
   + Il sistema mostra il modulo: tipologia, descrizione ed eventi del diario da allegare.
   + Giulia seleziona la tipologia «molestia morale», scrive una breve descrizione e allega dal diario i tre eventi annotati, con i relativi allegati.
   + Il sistema mostra un riepilogo e informa Giulia che i suoi dati anagrafici restano separati dal contenuto e che la segnalazione sarà leggibile solo dal Consigliere di Fiducia.
@@ -24,7 +24,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
   + Il sistema mostra a Giulia il codice della segnalazione e le comunica che potrà seguirne lo stato dalla piattaforma.
 ]
 
-#v(1.5em)
+#v(0.5em)
 
 #callout-box(title:"SC_U_02 Annotazione di un evento nel diario")[
 
@@ -36,7 +36,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
   *Flusso di eventi*:
 
-  + Giulia, studentessa del terzo anno, ha vissuto un episodio spiacevole con un collega di laboratorio e vuole tenerne traccia, senza aver ancora deciso se segnalarlo. Accede a Pharos e apre il proprio diario delle evidenze.
+  + Giulia, studentessa del terzo anno, ha vissuto un evento spiacevole con un collega di laboratorio e vuole tenerne traccia, senza aver ancora deciso se segnalarlo. Accede a Pharos e apre il proprio diario delle evidenze.
   + Il sistema mostra gli eventi già annotati in ordine cronologico e la possibilità di aggiungerne uno nuovo.
   + Giulia aggiunge un nuovo evento: indica data, ora e luogo e descrive brevemente l’accaduto.
   + Giulia allega lo screenshot di un messaggio ricevuto in chat.
@@ -45,9 +45,8 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
   + Il sistema chiede a Giulia se desidera segnalare l’evento al Consigliere di Fiducia. Giulia sceglie di non farlo per il momento: l’evento resta salvato nel diario e il sistema la riporta alla Home.
 ]
 
-#pagebreak()
-
   #v(0.3em)
+  
 #callout-box(title:"SC_U_03 Risposta a una richiesta di integrazioni")[
   *Partecipanti*: Marco (Utente), Elena (Consigliere di Fiducia)
 
@@ -70,17 +69,20 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
   *Partecipanti*: Giulia (Utente)
 
-  *Obiettivo*: ottenere una valutazione orientativa tramite intelligenza artificiale sugli episodi annotati nel diario per comprendere la situazione e decidere se avviare una segnalazione formale.
+  *Obiettivo*: ottenere una valutazione orientativa tramite intelligenza artificiale sugli eventi annotati nel diario per comprendere la situazione e decidere se avviare una segnalazione formale.
 
   *Flusso di eventi*:
 
-  + Giulia ha annotato nel diario tre episodi che coinvolgono la stessa persona e non sa se possano essere considerati molestia. Seleziona gli eventi e avvia il triage guidato.
+  + Giulia ha annotato nel diario tre eventi che coinvolgono la stessa persona e non sa se possano essere considerati molestia. Seleziona gli eventi e avvia il triage guidato.
   + Il sistema informa Giulia che il triage è solo orientativo, che viene svolto da un sistema di intelligenza artificiale, non sostituisce il Consigliere di Fiducia e non comporta alcun invio, e le chiede conferma.
   + Giulia conferma.
   + Il sistema trasmette al modulo AI il testo degli eventi selezionati, privato dei dati identificativi.
   + Il sistema mostra a Giulia la valutazione della gravità, la tipologia di violenza più probabile («molestia morale») e i passi dell’iter di segnalazione.
   + Il sistema chiede a Giulia se desidera inviare una segnalazione al Consigliere di Fiducia. Giulia sceglie di procedere.
 ]
+
+#pagebreak()
+
 // da questa sezione si inseriscono gli scenari utente da 5-8
 #callout-box(title: "SC_U_05 Consultazione dello stato di una segnalazione")[
 
@@ -98,7 +100,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
   + Il sistema mostra la cronologia degli stati con le relative date («Inviata», «Presa in carico», «In lavorazione») e la nota del Consigliere di Fiducia: «Colloquio conoscitivo fissato per il 20/11 alle ore 10:00».
 ]
 
-#v(5em)
+#v(1em)
 
 #callout-box(title: "SC_U_06 Segnalazione salvata in bozza e ripresa")[
 
@@ -127,14 +129,14 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
   *Partecipanti:* Marco (Utente)
 
-  *Obiettivo:* registrare un nuovo evento nel diario personale allegando un file, gestendo la correzione in caso di errore per superamento della dimensione massima consentita.
+  *Obiettivo:* registrare un nuovo evento nel diario personale caricando un allegato, gestendo la correzione in caso di errore per superamento della dimensione massima consentita.
 
   *Flusso di eventi:*
 
   + Marco, dipendente tecnico amministrativo, vuole conservare nel diario la registrazione audio di una riunione in cui il proprio responsabile si è rivolto a lui in modo umiliante. Accede a Pharos e aggiunge un nuovo evento.
   + Il sistema mostra il modulo per l’inserimento dell’evento.
-  + Marco compila data, luogo e descrizione e allega il file audio, ma non è conforme.
-  + Il sistema rileva che il file supera la dimensione massima consentita e lo rifiuta, indicando il limite e i formati ammessi. I dati già inseriti restano nel modulo.
+  + Marco compila data, luogo e descrizione e carica l'allegato, ma non è conforme.
+  + Il sistema rileva che l'allegato supera la dimensione massima consentita e lo rifiuta, indicando il limite e i formati ammessi. I dati già inseriti restano nel modulo.
   + Marco allega una versione compressa della registrazione conforme.
   + Il sistema verifica il nuovo allegato, salva l’evento e lo mostra nel diario.
 ]
