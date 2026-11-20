@@ -1,29 +1,29 @@
 @startuml NavigationalPath_Utente
-title Navigational path: Utente
+title Navigational Path: CDF
 hide empty description
+
 skinparam DefaultFontName Arial
 skinparam nodesep 50
 skinparam ranksep 60
+
 skinparam StateStartColor Black
 skinparam StateEndColor Black
+
 skinparam state {
     BackgroundColor #DEEBF7
     BorderColor #2F528F
 }
 
-' Punto di ingresso principale (Verde per evidenziarlo)
 state "MU_01: Home Utente\n(Punto di Ingresso)" as Home #D5E8D4
 
-' Schermate operative
 state "Diario delle Evidenze" as Diario
-state "MU_05: Triage IA\n(Rif. SD_Triage)" as MU05
-state "MU_06: Esito Triage" as MU06
-state "MU_02: Composizione Segnalazione\n(Rif. SD_01)" as MU02
-state "MU_07: Conferma Invio" as MU07
-state "MU_03: Stato Segnalazione" as MU03
+state "MU_02: Triage IA\n(Rif. SD_Triage)" as MU02
+state "MU_03: Esito Triage" as MU03
+state "MU_04: Nuova Segnalazione\n(Rif. SD_01)" as MU04
+state "MU_05: Conferma Invio" as MU05
+state "MU_06: Dettaglio Segnalazione" as MU06
 state "Uscita Sicurezza\n(Panic Button)" as Panic #F8CECC
 
-' Nodi terminatori per il ritorno (Evitano l'effetto ragnatela)
 state "Torna a MU_01 (Home)" as R1 #D5E8D4
 state "Torna a MU_01 (Home)" as R2 #D5E8D4
 state "Torna a MU_01 (Home)" as R3 #D5E8D4
@@ -31,30 +31,33 @@ state "Torna a MU_01 (Home)" as R3 #D5E8D4
 [*] --> Home
 
 ' --- FLUSSO 1: DIARIO ---
-Home --> Diario : Click "Apri diario"
-Diario --> R1 : Salva evento / Annulla inserimento
+Home --> Diario : Click "Diario delle evidenze"
+Diario --> R1 : Chiusura / Ritorno
 
 ' --- FLUSSO 2: TRIAGE IA ---
-Home --> MU05 : Click "Inizia Triage"
-MU05 --> MU06 : Completa questionario
-MU06 --> R1 : Click "Torna alla Home" [Fine percorso]
-MU06 --> MU02 : Click "Contatta CDF"
+Home --> MU02 : Click "Inizia il triage guidato"
+MU02 --> MU03 : Elaborazione IA completata
+MU03 --> MU04 : Click "Procedi con la segnalazione"
+MU03 --> R1 : Click "Torna alla Home"
 
 ' --- FLUSSO 3: COMPOSIZIONE E INVIO ---
-Home --> MU02 : Click "+ Nuova Segnalazione"
-MU02 --> R2 : Click "Salva bozza" [Sospendi iter]
-MU02 --> MU07 : Compila form e "Avanti"
-MU07 --> MU03 : Click "Vai al dettaglio"
-MU07 --> R2 : Click "Torna alla Home"
+Home --> MU04 : Click "+ Nuova segnalazione"
+MU04 --> R2 : Click "Salva bozza"
+MU04 --> MU05 : Click "Avanti: Riepilogo" e invio
+MU05 --> MU06 : Click "Vai al dettaglio"
+MU05 --> R2 : Click "Torna alla Home"
 
-' --- FLUSSO 4: MONITORAGGIO PRATICA ---
-Home --> MU03 : Click "Le mie segnalazioni"
-MU03 --> MU03 : Invia integrazioni (Rif. SD)
-MU03 --> R3 : Click "Interrompi iter" [Archivia pratica]
+' --- FLUSSO 4: MONITORAGGIO ---
+Home --> MU06 : Click "Le mie segnalazioni"
+MU06 --> MU06 : Click "Invia integrazioni"
+MU06 --> R3 : Click "Interrompi iter"
 
-' --- FLUSSO DI EMERGENZA (PANIC BUTTON) ---
-MU05 --> Panic : Click "Uscita rapida"
+' --- FLUSSO DI EMERGENZA (USCITA RAPIDA) ---
+MU02 --> Panic : Click "Uscita rapida"
 MU03 --> Panic : Click "Uscita rapida"
+MU04 --> Panic : Click "Uscita rapida"
+MU05 --> Panic : Click "Uscita rapida"
+MU06 --> Panic : Click "Uscita rapida"
 Panic --> [*] : Oscuramento App
 
 @enduml
