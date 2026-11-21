@@ -8,7 +8,7 @@ Il sistema proposto supera queste limitazioni introducendo un processo interamen
 Il nuovo processo si articola in un flusso lineare, concepito per tutelare le parti coinvolte tramite i seguenti passaggi chiave:
 
 1. *Annotazione dell'evento sul diario delle evidenze:* In seguito all'evento, l'utente ha la possibilità di annotare sul proprio diario personale le dinamiche e le possibili prove dell'evento.
-2. *Consultazione con il modulo AI:* Successivamente, per inquadrare l'evento e ricevere una prima assistenza, l'utente può interagire con il modulo di intelligenza artificiale integrato per valutare la gravità dell'evento. Il modello, inoltre, classifica la tipologia di violenza e fornisce supporto sull'iter burocratico necessario per la compilazione del form di segnalazione.
+2. *Consultazione con il modulo IA:* Successivamente, per inquadrare l'evento e ricevere una prima assistenza, l'utente può interagire con il modulo IA integrato per valutare la gravità dell'evento. Il modello, inoltre, classifica la tipologia di violenza e fornisce supporto sull'iter burocratico necessario per la compilazione del form di segnalazione.
 3. *Inoltro della Segnalazione:* L'utente accede alla piattaforma e compila un modulo standardizzato. Il sistema acquisisce la segnalazione mantenendo i dati anagrafici del mittente strettamente confidenziali e logicamente separati dai fatti narrati.
 4. *Presa in Carico e Gestione:* Le segnalazioni inoltrate confluiscono in un'area riservata a disposizione del consigliere di fiducia. Il personale preposto può così esaminare le pratiche garantendo la massima riservatezza, analizzare i dati, creare report statistici e mantenere un registro ordinato senza dispersione documentale.
 

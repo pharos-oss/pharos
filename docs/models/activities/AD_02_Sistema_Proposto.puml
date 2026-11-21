@@ -2,7 +2,7 @@
 |Utente|
 start
 :annota le prove sul diario delle evidenze;
-:si consulta con il modulo AI per valutare la gravità,\nclassificare l'evento e ricevere supporto sull'iter;
+:si consulta con il modulo IA per valutare la gravità,\nclassificare l'evento e ricevere supporto sull'iter;
 if (vuole inviare la segnalazione al Consigliere?) then (no)
   :l'evento rimane salvato nel diario;
   :reindirizzamento alla Home;

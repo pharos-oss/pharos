@@ -23,14 +23,14 @@ La seguente sezione definisce in modo univoco il vocabolario condiviso del siste
       [MO_GU, \ RF_GU_01 - RF_GU_11],
 
       [*Consigliere di Fiducia (CDF)*],
-      [Figura istituzionale di riferimento a cui inviare segnalazioni protette relative a molestie o mobbing. Gestisce le segnalazioni degli utenti.],
+      [Figura istituzionale di riferimento a cui inviare segnalazioni protette relative a molestie, mobbing, violenza di genere, stalking, straining, discriminazione e abusi. Gestisce le segnalazioni degli utenti.],
       [Admin, Gestore, \ Operatore],
       [Definizioni, MO_GCDF, \ RF_GCDF_01 - RF_GCDF_09],
 
       [*Comitato Unico di Garanzia (CUG)*],
       [Organo accademico preposto alla tutela delle pari opportunità e al benessere lavorativo.],
       [Comitato],
-      [Definizioni],
+      [Definizioni, SC_CDF_04, \ MO_GCDF],
 
       [*Safeguarding accademico*],
       [Insieme delle misure preventive e di intervento progettate per tutelare la comunità universitaria contro abusi e violenze.],
@@ -38,24 +38,24 @@ La seguente sezione definisce in modo univoco il vocabolario condiviso del siste
       [Definizioni],
 
       [*Diario delle evidenze (o Diario)*],
-      [Spazio confidenziale all'interno della piattaforma in cui l'utente può registrare, datare e raccogliere prove relative agli eventi di mobbing o molestie. È un ambiente personale per annotare eventi in modo privato e cifrato.],
+      [Spazio confidenziale all'interno della piattaforma in cui l'utente può registrare, datare e raccogliere prove relative agli eventi di molestie, mobbing, violenza di genere, stalking, straining, discriminazione e abusi. È un ambiente personale per annotare eventi in modo privato e cifrato.],
       [Blocco note, \ Archivio personale, \ Spazio privato],
       [Definizioni, MO_GU, \ RF_GU_01 - RF_GU_03],
 
       [*Evento (EventoDiario)*],
       [Singolo evento annotato nel diario con data, ora, luogo, descrizione e allegati.],
       [Fatto, Annotazione, \ Episodio],
-      [MO_GU],
+      [MO_GU, \ RF_GU_01, RF_GU_03, \ STD_02],
 
-      [*Allegato*],
-      [File multimediale associato a un evento o a una segnalazione.],
+      [*Allegato Multimediale (o Allegato)*],
+      [File (inclusi documenti PDF, e-mail e file multimediali) associato a un evento o a una segnalazione.],
       [Documento extra, File],
-      [MO_GU],
+      [MO_GU, \ RF_GU_01, RF_GU_05, \ RF_GU_08, RNF_U_02, \ MU_04 - MU_08],
 
       [*Segnalazione*],
-      [Segnalazione formale inviata al Consigliere di Fiducia. I dati anagrafici del mittente restano strettamente confidenziali e logicamente separati dai fatti narrati.],
+      [Comunicazione formale inviata al Consigliere di Fiducia. I dati anagrafici del mittente restano strettamente confidenziali e logicamente separati dai fatti narrati.],
       [Denuncia, Reclamo, \ Ticket],
-      [MO_GU, \ RF_GU_05],
+      [MO_GU, \ RF_GU_04 - RF_GU_09, \ STD_01],
 
       [*Bozza*],
       [Stato di una segnalazione per il salvataggio temporaneo. Permette all'utente di salvare una segnalazione, così da completarla in un momento successivo.],
@@ -63,19 +63,19 @@ La seguente sezione definisce in modo univoco il vocabolario condiviso del siste
       [MO_GU, \ RF_GU_04],
 
       [*Pratica*],
-      [Pratica gestita dal Consigliere di Fiducia contenente la segnalazione associata, lo storico degli stati e le note.],
+      [Procedura di gestione a cura del Consigliere di Fiducia contenente la segnalazione associata, lo storico degli stati e le note.],
       [Fascicolo, Caso],
       [MO_GCDF, \ RF_GCDF_01 - RF_GCDF_06],
 
       [*Stato Pratica*],
-      [Stato corrente nel flusso della pratica (Inviata, Presa in carico, In lavorazione, Chiusa, Archiviata).],
+      [Stato corrente nel flusso della pratica (Inviata, Presa in carico, In lavorazione, In attesa di integrazioni, Chiusa, Archiviata).],
       [Fase],
-      [MO_GCDF],
+      [MO_GCDF, \ RF_GU_06, \ RF_GCDF_03 - RF_GCDF_06 - RF_GCDF_05, \ MO_GCDF, \ STD_01, \ SD_03, \ MU_07 \ UC_01],
 
       [*Nota CDF*],
       [Nota o appuntamento inserito dal Consigliere di Fiducia, visibile all'utente nella cronologia della pratica.],
       [Avviso, Messaggio],
-      [MO_GCDF, \ RF_GCDF_04],
+      [MO_GCDF, \ RF_GCDF_04, RF_GU_06],
 
       [*Esito Pratica*],
       [Esito formale di chiusura della pratica (Risolta con procedura informale, Avviata procedura formale, Non procedibile).],
@@ -92,9 +92,14 @@ La seguente sezione definisce in modo univoco il vocabolario condiviso del siste
       [Screening automatico],
       [Definizioni, RF_GU_10],
 
+      [*Modulo IA*],
+      [Componente software che analizza i dati del triage guidato per produrre la Valutazione IA.],
+      [Bot, AI generica, AI],
+      [UC_02, \ SD_01, \ MO_GU, \ RF_GU_10],
+
       [*Valutazione IA*],
-      [Risultato del triage IA contenente la valutazione della gravità, la tipologia di violenza e i passi suggeriti. I dati vengono resi anonimi dal sistema prima dell'invio al modulo.],
-      [Bot, AI generica],
+      [Risultato del triage IA contenente la valutazione della gravità, la tipologia di violenza e i passi suggeriti. I dati vengono resi anonimi dal sistema prima dell'invio al Modulo IA.],
+      [Output automatico, \ Esito automatico],
       [MO_GU, \ RF_GU_10],
 
       [*Servizio Territoriale*],
@@ -110,7 +115,7 @@ La seguente sezione definisce in modo univoco il vocabolario condiviso del siste
       [*Report Statistico*],
       [Report aggregato e anonimizzato generato per il Comitato Unico di Garanzia indicando tipologia di violenza e componente accademica.],
       [Statistiche, Resoconto],
-      [MO_GCDF, \ RF_GCDF_08],
+      [MO_GCDF, \ RF_GCDF_08, RF_GCDF_09],
 
       [*Panic Button (Chiusura rapida)*],
       [Funzionalità dell'app mobile che fornisce l'oscuramento o l'uscita immediata per proteggere la privacy dell'utente qualora venga interrotto durante l'uso.],

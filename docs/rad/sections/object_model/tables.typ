@@ -100,7 +100,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
       [*GestoreSegn*], [Control],
       [—],
-      [inviaSegnalazione(), \ interrompiIter(), \ avviaTriageIA(), \ anonimizzaTesto(), \ recuperaServizi()],
+      [inviaSegnalazione(), \ interrompiIter(), \ avviaTriageGuidato(), \ anonimizzaTesto(), \ recuperaServizi()],
       [InterfacciaUtente (1), \ Segnalazione (0..\*), \ Notifica (0..\*), \ ValutazioneIA (0..1), \ ServizioTerr. (0..\*)],
       [RF_GU_04 – \ RF_GU_11],
       [Coordina il ciclo di vita delle segnalazioni, l'interazione con l'IA e il recapito delle notifiche.]
@@ -153,7 +153,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [ottieniStato()],
       [Pratica (1)],
       [RF_GCDF_03, \ RF_GCDF_04],
-      [Stato corrente nel flusso (Inviata, Presa in carico, In lavorazione, Chiusa, Archiviata).],
+      [Stato corrente nel flusso (Inviata, Presa in carico, In lavorazione, In attesa di integrazioni, Chiusa, Archiviata).],
 
       [*NotaCDF*], [Entity],
       [id, testo, \ dataInserimento, \ visibileUtente],
