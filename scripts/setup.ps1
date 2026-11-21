@@ -19,7 +19,7 @@ if (Get-Command just -ErrorAction SilentlyContinue) {
     Write-Host "✓ Just is already installed.`n" -ForegroundColor $ColorSuccess
 } else {
     Write-Host "Just not found. Installing via Winget..." -ForegroundColor $ColorWarning
-    winget install jdx.just --accept-package-agreements --accept-source-agreements
+    winget install --id Casey.Just --exact
     Write-Host "✓ Just successfully installed.`n" -ForegroundColor $ColorSuccess
 }
 
