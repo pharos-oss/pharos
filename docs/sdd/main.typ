@@ -10,7 +10,7 @@
 )
 
 #let revision-history = (
-  ("21/11/2026", "0.1", "Stesura introduzione del documento", "Francesco Imbriaco"),
+  ("21/11/2026", "0.1", "Stesura introduzione del documento", "Francesco Imbriaco, Leonardo Trotta"),
 )
 
 #show: doc-template.with(

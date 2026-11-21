@@ -19,9 +19,6 @@ Il sistema Pharos è progettato per raggiungere i seguenti obiettivi, derivati d
 #pagebreak()
 
 == Design Goals e Trade-off
-// Questa sezione sarà completata nelle successive iterazioni del documento.
-// Conterrà i criteri di progettazione (performance, dependability, costo, manutenzione, end user criteria)
-// e la matrice dei trade-off secondo la metodologia Bruegge.
 
 == Definizioni, acronimi e abbreviazioni
 #table(
