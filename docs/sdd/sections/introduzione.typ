@@ -67,7 +67,7 @@ Il testo si rivolge al team di sviluppo e ai docenti del corso, fornendo una gui
 
 Il documento è strutturato in modo da fornire una scomposizione progressiva delle scelte progettuali, partendo dal contesto attuale per arrivare alla definizione dei servizi dei sottosistemi. I capitoli successivi sono organizzati come segue:
 
-- *Sezione 1: Introduzione*: Presenta gli obiettivi del sistema, i design goal e trade-off, le definizioni, i riferimenti bibliografici e la presente struttura documentale.
+- @introduzione: *Introduzione*: Presenta gli obiettivi del sistema, i design goal e trade-off, le definizioni, i riferimenti bibliografici e la presente struttura documentale.
 
 - *Sezione 2: Architettura software corrente*: Descrive l'eventuale architettura software preesistente e gli elementi rilevanti per la progettazione del nuovo sistema. In assenza di un sistema precedente, analizza le architetture di soluzioni simili attualmente in uso presso l'Ateneo.
 
