@@ -1,0 +1,21 @@
+{
+  "version": "0.2",
+  "import": [
+    "@cspell/dict-it-it/cspell-ext.json"
+  ],
+  "language": "it,en",
+  "words": [
+    "Typst",
+    "Pharos",
+    "justfile",
+    "prek",
+    "commitizen"
+  ],
+  "ignorePaths": [
+    "docs/out/**",
+    "scripts/**",
+    ".github/**",
+    ".gitignore",
+    ".pre-commit-config.yaml"
+  ]
+}

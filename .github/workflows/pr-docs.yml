@@ -1,0 +1,135 @@
+name: Typst CI/CD Documentazione
+
+on:
+  pull_request:
+    branches: ["dev"]
+    types: [opened, synchronize, reopened, edited]
+    paths:
+      - 'docs/**'
+      - 'templates/**'
+      - '.pre-commit-config.yaml'
+      - '.cspell.json'
+      - 'justfile'
+      - '.cz.yaml'
+      - '.github/workflows/**'
+
+jobs:
+  build-and-review:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      - name: Checkout del codice
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Analisi File Modificati e Strategia di Build
+        id: extract-doc
+        run: |
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          
+          DOCS_TO_BUILD=""
+          BUILD_ALL=false
+          
+          for FILE in $CHANGED_FILES; do
+            if [[ "$FILE" == "templates/"* ]] || [[ "$FILE" == "docs/templates/"* ]] || [[ "$FILE" == "justfile" ]]; then
+              echo "Modifica globale rilevata ($FILE). Trigger build-all."
+              BUILD_ALL=true
+              break
+              
+            elif [[ "$FILE" =~ ^docs/([^/]+)/ ]]; then
+              DOC_NAME="${BASH_REMATCH[1]}"
+              # Evita duplicati nella lista se più file della stessa cartella sono cambiati
+              if [[ ! " $DOCS_TO_BUILD " =~ " $DOC_NAME " ]]; then
+                DOCS_TO_BUILD="$DOCS_TO_BUILD $DOC_NAME"
+              fi
+            fi
+          done
+          
+          if [ "$BUILD_ALL" = true ]; then
+            echo "build_mode=all" >> "$GITHUB_OUTPUT"
+          elif [ -n "$DOCS_TO_BUILD" ]; then
+            CLEANED_DOCS=$(echo $DOCS_TO_BUILD | xargs)
+            
+            # Se la lista contiene spazi, sono presenti più documenti modificati
+            if [[ "$CLEANED_DOCS" == *" "* ]]; then
+              echo "Documenti multipli rilevati ($CLEANED_DOCS). Modalita ALL."
+              echo "build_mode=all" >> "$GITHUB_OUTPUT"
+            else
+              echo "Un solo documento rilevato ($CLEANED_DOCS). Modalita Singolo Documento."
+              echo "doc_name=$CLEANED_DOCS" >> "$GITHUB_OUTPUT"
+              echo "build_mode=single" >> "$GITHUB_OUTPUT"
+            fi
+            
+          else
+            echo "Nessun documento rilevato. Trigger skip."
+            echo "build_mode=skip" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Installazione Just
+        uses: extractions/setup-just@v2
+
+      - name: Installazione prek
+        run: curl --proto '=https' --tlsv1.2 -LsSf https://github.com/j178/prek/releases/download/v0.5.11/prek-installer.sh | sh
+
+      - name: Caching Sandbox prek
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/prek
+          key: ${{ runner.os }}-prek-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-prek-
+
+      - name: Esecuzione Controlli di Qualità (File e Ortografia)
+        run: |
+          export PATH="$PATH:$HOME/.local/bin"
+          just lint
+
+      - name: Verifica Convenzione Commit PR (Commitizen)
+        run: |
+          pipx run --spec commitizen cz check --rev-range origin/${{ github.base_ref }}..HEAD
+
+      - name: Installazione Font (Liberation Sans)
+        if: steps.extract-doc.outputs.build_mode != 'skip'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-liberation
+
+      - name: Setup Typst
+        if: steps.extract-doc.outputs.build_mode != 'skip'
+        uses: typst-community/setup-typst@v3
+
+      - name: Compilazione Dinamica PDF
+        if: steps.extract-doc.outputs.build_mode != 'skip'
+        run: |
+          if [ "${{ steps.extract-doc.outputs.build_mode }}" == "single" ]; then
+            just build ${{ steps.extract-doc.outputs.doc_name }}
+          else
+            just build-all
+          fi
+
+      - name: Caricamento Artefatto PDF
+        id: upload-pdf
+        if: steps.extract-doc.outputs.build_mode != 'skip'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.extract-doc.outputs.doc_name || 'tutti-i-documenti' }}-pdf
+          path: docs/out/*.pdf
+          retention-days: 7
+
+      - name: Zero-Click Review (PR Bot Comment)
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: github.event_name == 'pull_request' && steps.extract-doc.outputs.build_mode != 'skip' && github.event.pull_request.head.repo.full_name == github.repository
+        with:
+          header: pr-pdf-review
+          message: |
+            ### Revisione Documentazione
+
+            I controlli di qualità sono passati con successo.
+            Puoi scaricare l'anteprima PDF dalla sezione **Artifacts**:
+
+            **[Scarica i file PDF (Artifact)](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})**
