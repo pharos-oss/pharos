@@ -1,7 +1,7 @@
 #import "../../templates/common.typ" : table-style, palette-primary
 
 = Introduzione <introduzione>
-Il presente documento descrive la progettazione tecnica del sistema *"Pharos"*, una piattaforma web finalizzata a facilitare l'individuazione e la segnalazione di episodi di molestie in ambito accademico supportando il consigliere di fiducia nello svolgimento delle proprie attività. L'SDD traduce i requisiti formalizzati nel Requirements Analysis Document (RAD) in decisioni architetturali concrete, definendo la decomposizione in sottosistemi, le strategie di mapping hardware/software e le politiche di sicurezza e persistenza dei dati.
+Il presente documento descrive la progettazione tecnica del sistema *"Pharos"*, una piattaforma web finalizzata a facilitare l'individuazione e la segnalazione di episodi di molestie in ambito accademico supportando il Consigliere di Fiducia nello svolgimento delle proprie attività. L'SDD traduce i requisiti formalizzati nel Requirements Analysis Document (RAD) in decisioni architetturali concrete, definendo la decomposizione in sottosistemi, le strategie di mapping hardware/software e le politiche di sicurezza e persistenza dei dati.
 
 == Obiettivi del sistema
 Il sistema Pharos è progettato per raggiungere i seguenti obiettivi, derivati dai requisiti funzionali e non funzionali specificati nel RAD:
@@ -47,7 +47,7 @@ Il sistema Pharos è progettato per raggiungere i seguenti obiettivi, derivati d
 == Riferimenti
 - *Statement of Work (SoW) - Progetto Pharos:* Documento fondativo del progetto. Costituisce la fonte primaria per la definizione dello scope, dei vincoli, delle esclusioni e degli obiettivi di progetto concordati.
 
-- *Requirements Analysis Document (RAD) - Progetto Pharos, V0.7:* Documento di analisi dei requisiti del sistema Pharos. Definisce i requisiti funzionali e non funzionali, gli scenari, i casi d'uso e il modello di sistema.
+- *Requirements Analysis Document (RAD) - Progetto Pharos, V0.9:* Documento di analisi dei requisiti del sistema Pharos. Definisce i requisiti funzionali e non funzionali, gli scenari, i casi d'uso e il modello di sistema.
 
 - *UniSAFE Survey - Gender-based violence and institutional responses (Version 1.0.0):* Lipinsky, A., Schredl, C., Baumann, H., Humbert, A. L., Tanwar, J., Bondestam, F., Freund, F., & Lomazzi, V. (2022). [Data set]. GESIS, Cologne. DOI: #link("https://doi.org/10.7802/2475")[10.7802/2475].
 
@@ -65,11 +65,3 @@ Il testo si rivolge al team di sviluppo e ai docenti del corso, fornendo una gui
 Il documento è strutturato in modo da fornire una scomposizione progressiva delle scelte progettuali, partendo dal contesto attuale per arrivare alla definizione dei servizi dei sottosistemi. I capitoli successivi sono organizzati come segue:
 
 - @introduzione: *Introduzione*: Presenta gli obiettivi del sistema, i design goal e trade-off, le definizioni, i riferimenti bibliografici e la presente struttura documentale.
-
-- *Sezione 2: Architettura software corrente*: Descrive l'eventuale architettura software preesistente e gli elementi rilevanti per la progettazione del nuovo sistema. In assenza di un sistema precedente, analizza le architetture di soluzioni simili attualmente in uso presso l'Ateneo.
-
-- *Sezione 3: Architettura software proposta*: Descrive la decomposizione in sottosistemi, il mapping hardware/software, la gestione della persistenza dei dati, le politiche di sicurezza e controllo degli accessi, il flusso di controllo e le condizioni al contorno.
-
-- *Sezione 4: Servizi dei sottosistemi*: Dettaglia i servizi esposti da ciascun sottosistema e le relative interfacce.
-
-- *Sezione 5: Glossario*: Raccoglie le definizioni dei termini tecnici e di dominio utilizzati nel documento.
