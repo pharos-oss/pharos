@@ -55,7 +55,7 @@ cmake-build-*/
 # File-based project format
 *.iws
 
-# IntelliJ
+# IntelliJ and docs output
 out/
 
 # mpeltonen/sbt-idea plugin
@@ -141,11 +141,6 @@ Temporary Items
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
 
 # Local History for Visual Studio Code
 .history/
@@ -186,3 +181,4 @@ $RECYCLE.BIN/
 
 docs/**/*.pdf
 .texpile/
+*.pdf
