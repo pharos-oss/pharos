@@ -26,7 +26,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     
     [*RNF_U_03*], [Accessibilità WCAG 2.1], [#block(breakable: false)[L'interfaccia utente web/mobile deve rispettare i criteri di accessibilità WCAG 2.1 livello AA per garantire la corretta fruizione anche a utenti con disabilità.]], [Elevata], [Media], [Tutti],
 
-    [*RNF_U_04*], [Chiusura rapida (Panic Button)], [#block(breakable: false)[L'app mobile deve fornire una funzionalità di oscuramento o uscita immediata per proteggere la privacy dell'utente qualora venga interrotto durante la scrittura nel diario o la consultazione della pratica.]], [Elevata], [Media], [Generale, UC_03, UC_04]
+    [*RNF_U_04*], [Panic Button (Chiusura rapida)], [#block(breakable: false)[L'app mobile deve fornire una funzionalità di oscuramento o uscita immediata per proteggere la privacy dell'utente qualora venga interrotto durante la scrittura nel diario o la consultazione della pratica.]], [Elevata], [Media], [Generale, UC_03, UC_04]
   )
 ]
 
@@ -74,7 +74,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     text(fill: readable-text(palette-primary))[*Difficoltà*],
     text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RNF_P_01*], [Tempi di risposta Modulo IA], [#block(breakable: false)[L'interrogazione del modulo IA per il Triage Guidato deve restituire l'esito e la tipologia di violenza all'utente entro un tempo massimo di 5 secondi.]], [Bassa], [Media], [SC_U_04],
+    [*RNF_P_01*], [Tempi di risposta Modulo IA], [#block(breakable: false)[L'interrogazione del modulo IA per il Triage Guidato deve restituire l'esito e la tipologia di evento all'utente entro un tempo massimo di 5 secondi.]], [Bassa], [Media], [SC_U_04],
     
     [*RNF_P_02*], [Supporto alla concorrenza], [#block(breakable: false)[Il sistema deve essere in grado di gestire fluidamente il flusso di traffico previsto. Lato Consigliere di Fiducia, i tempi per il caricamento delle pratiche e delle pagine del gestionale non devono superare i 2 secondi]], [Elevata], [Media], [Tutti]
   )
@@ -219,3 +219,5 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     [*RNF_L_02*], [Audit Log inalterabile], [#block(breakable: false)[Il sistema deve registrare in un log immodificabile (WORM) ogni singolo accesso e operazione effettuata dal Consigliere di Fiducia sui dati sensibili degli utenti.]], [Elevata], [Media], [SC_CDF_01, SC_CDF_02, UC_CDF_1, UC_CDF_2]
   )
 ]
+
+#pagebreak()

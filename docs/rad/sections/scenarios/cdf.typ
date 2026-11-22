@@ -1,7 +1,5 @@
 #import "../../../templates/common.typ": callout-box
 
-#pagebreak()
-
 === Consigliere di Fiducia
 #callout-box(title: "SC_CDF_01 Presa in carico di una nuova segnalazione")[
 
@@ -30,7 +28,7 @@
 
   *Partecipanti:* Elena (Consigliere di Fiducia), Giulia (Utente)
 
-  *Obiettivo:* tenere informata la vittima sull'avanzamento della pratica, garantendo la trasparenza dell'iter.
+  *Obiettivo:* tenere informato l'utente sull'avanzamento della pratica, garantendo la trasparenza dell'iter.
 
   *Flusso di eventi:*
 
@@ -70,7 +68,7 @@
 
   *Partecipanti:* Elena (Consigliere di Fiducia)
 
-  *Obiettivo:* fornire al CUG dati aggregati sul fenomeno senza compromettere la riservatezza delle vittime.
+  *Obiettivo:* fornire al CUG dati aggregati sul fenomeno senza compromettere la riservatezza degli utenti.
 
   *Flusso di eventi:*
 
@@ -82,3 +80,5 @@
 
   *Flusso alternativo (passo 4):* se nel periodo selezionato non risultano segnalazioni, il sistema lo comunica e non genera il report.
 ]
+
+#pagebreak()

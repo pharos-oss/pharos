@@ -26,19 +26,19 @@ entity "ServizioTerritoriale" as ST
 entity "Segnalazione" as S
 entity "Notifica" as N
 
-== Fase 1: Compilazione Modulo e Triage IA Opzionale (RF_GU_05, RF_GU_10) ==
+== Fase 1: Compilazione Modulo Triage Guidato Opzionale tramite Modulo IA (RF_GU_05, RF_GU_10) ==
 
 U -> IU : Compila testo e seleziona eventi/allegati
 activate IU
 
 |||
 
-opt L'utente richiede lo screening IA orientativo (RNF_U_01)
-    U -> IU : Avvia Triage IA
+opt L'utente richiede lo screening orientativo (RNF_U_01)
+    U -> IU : Avvia Triage Guidato
     
     |||
     
-    IU -> GS : avviaTriageIA(testoSegnalazione)
+    IU -> GS : avviaTriageGuidato(testoSegnalazione)
     activate GS
     
     ' Garantisce l'anonimizzazione preventiva e la policy zero-retention (RNF_L_01, RNF_IM_02)
@@ -62,7 +62,7 @@ opt L'utente richiede lo screening IA orientativo (RNF_U_01)
     
     ||20||
     
-    GS --> IU : Restituisce esito Triage e contatti utili
+    GS --> IU : Restituisce esito Triage guidato e contatti utili
     deactivate GS
     
     |||

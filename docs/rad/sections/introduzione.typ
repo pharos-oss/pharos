@@ -4,18 +4,18 @@
 Il presente documento definisce le specifiche e i requisiti per *"Pharos"*, una piattaforma web progettata per abilitare il safeguarding all'interno del contesto accademico.
 
 == Scopo del sistema 
- Lo scopo primario del sistema è fornire all'intera comunità universitaria uno strumento digitale integrato e confidenziale per prevenire, documentare e contrastare fenomeni di violenza di genere, stalking, mobbing, straining e abusi. Offrendo un ambiente sicuro e procedurizzato, Pharos supporta le vittime nel percorso di presa di consapevolezza, tracciamento degli eventi e richiesta di assistenza istituzionale, concretizzando operativamente il principio fondante del progetto: "Mai più soli".
+ Lo scopo primario del sistema è fornire all'intera comunità universitaria uno strumento digitale integrato e confidenziale per prevenire, documentare e contrastare fenomeni di violenza di genere, stalking, mobbing, straining e abusi. Offrendo un ambiente sicuro e procedurizzato, Pharos supporta gli utenti nel percorso di presa di consapevolezza, tracciamento degli eventi e richiesta di assistenza istituzionale, concretizzando operativamente il principio fondante del progetto: "Mai più soli".
 
 == Ambito del sistema (Scope)
 Il sistema Pharos gestirà l'intero ciclo di tutela istituzionale interno all'ateneo. Pertanto, i confini del sistema includono le seguenti funzionalità:
 
 - *Un modulo di triage guidato, utile per l'inquadramento preliminare e consapevole dell'episodio da parte dell'utente.*
 
-- *Un "diario delle evidenze" personale, volto a consentire la storicizzazione cronologica e sicura di atti discriminatori o abusanti.*
+- *Un "diario delle evidenze" personale, volto a consentire la storicizzazione cronologica e sicura di eventi discriminatori o abusanti.*
 
 - *L'implementazione di un hub di assistenza diretta che centralizzi e faciliti il primo contatto, il supporto psicologico tramite counseling e l'inoltro di segnalazioni protette agli organi preposti.*
 
-- *L'integrazione di un modulo accessorio basato su intelligenza artificiale per la classificazione semantica automatica delle segnalazioni.*
+- *L'integrazione di un modulo accessorio basato su intelligenza artificiale per la classificazione della gravità degli eventi e ausilio nell'iter per effettuare le segnalazioni.*
 
 - *La realizzazione di un iter di gestione formale delle segnalazioni, per avviare e monitorare in modo strutturato le pratiche verso il Consigliere di Fiducia, garantendo trasparenza sullo stato di avanzamento*
 
@@ -28,13 +28,13 @@ La progettazione di Pharos risponde alle criticità sistemiche evidenziate dallo
 
 1. *Incrementare il tasso globale di segnalazione interna colmando il gap informativo, facilitando l'accesso alle informazioni, e quindi riducendo l'incidenza (attualmente pari al 17%) degli utenti che dichiarano di non sapere a quale figura di garanzia rivolgersi.*
  
-2. *Attenuare l'esitazione psicologica antecedente alla denuncia mediante il triage guidato, diminuendo la percentuale di vittime che non considerano l'episodio sufficientemente grave (47%) o che non riescono a riconoscere autonomamente il comportamento come abuso (31%).*
+2. *Attenuare l'esitazione psicologica antecedente alla segnalazione mediante il triage guidato, diminuendo la percentuale di utenti che non considerano l'evento sufficientemente grave (47%) o che non riescono a riconoscere autonomamente il comportamento come abuso (31%).*
 
-3. *Offrire un canale di comunicazione confidenziale e protetto capace di abbattere le resistenze legate al timore di ritorsioni, fattore che attualmente dissuade il 12% delle vittime.*
+3. *Offrire un canale di comunicazione confidenziale e protetto capace di abbattere le resistenze legate al timore di ritorsioni, fattore che attualmente dissuade il 12% degli utenti.*
 
-4. *Contrastare la percezione di inefficacia istituzionale, fattore che attualmente frena il 26% delle vittime, convinte dell'inutilità della segnalazione, garantendo la totale trasparenza dell'iter e la tracciabilità della pratica da parte dell'utente."*
+4. *Contrastare la percezione di inefficacia istituzionale, fattore che attualmente frena il 26% degli utenti, convinte dell'inutilità della segnalazione, garantendo la totale trasparenza dell'iter e la tracciabilità della pratica da parte dell'utente."*
 
-5. *Colmare il divario di segnalazione tra le diverse componenti accademiche, focalizzandosi sulle fasce più vulnerabili, in particolare gli studenti, il cui tasso di denuncia (7%) risulta attualmente molto inferiore rispetto a quello del personale universitario (23%).*
+5. *Colmare il divario di segnalazione tra le diverse componenti accademiche, focalizzandosi sulle fasce più vulnerabili, in particolare gli studenti, il cui tasso di segnalazione (7%) risulta attualmente molto inferiore rispetto a quello del personale universitario (23%).*
 
 == Definizioni, acronimi e abbreviazioni 
 #table(
@@ -47,11 +47,13 @@ La progettazione di Pharos risponde alle criticità sistemiche evidenziate dallo
    [*Definizione*],
   ),
   [Safeguarding accademico],  [Insieme delle misure preventive e di intervento progettate per tutelare la comunità universitaria contro abusi e violenze],
-  [Diario delle evidenze], [Spazio confidenziale all'interno della piattaforma in cui la vittima può registrare, datare e raccogliere prove relative agli episodi di mobbing o molestie],
-  [Triage guidato], [Percorso interattivo iniziale che aiuta l'utente a classificare l'episodio e ad acquisire consapevolezza sulla sua natura],
+  [Diario delle evidenze], [Spazio confidenziale all'interno della piattaforma in cui l'utente può registrare, datare e raccogliere prove relative agli eventi di mobbing o molestie],
+  [Triage guidato], [Percorso interattivo iniziale che aiuta l'utente a classificare l'evento e ad acquisire consapevolezza sulla sua natura],
   [CUG], [Comitato Unico di Garanzia, organo accademico preposto alla tutela delle pari opportunità e al benessere lavorativo],
   [Consigliere di Fiducia], [Figura istituzionale di riferimento a cui inviare segnalazioni protette relative a molestie o mobbing]
 )
+
+#pagebreak()
 
 == Riferimenti
 - *Statement of Work (SoW) - Progetto Pharos:* Documento fondativo del progetto. Costituisce la fonte primaria per la definizione dello scope, dei vincoli, delle esclusioni e degli obiettivi di progetto concordati.
@@ -79,4 +81,6 @@ Il documento è strutturato in modo da fornire una scomposizione progressiva del
 
 - @requisiti_sistema: *Requisiti di Sistema*: Riassume i requisiti del sistema proposto, formalizzando i Requisiti Funzionali e i Requisiti Non Funzionali.
 
-- @modelli_sistema: *Modello di Sistema*: descrive il comportamento e la struttura di Pharos attraverso scenari, casi d'uso, modello a oggetti, modello dinamico e mockup di interfaccia utente.
+- @modelli_sistema: *Modello di Sistema*: Descrive il comportamento e la struttura di Pharos attraverso scenari, casi d'uso, modello a oggetti, modello dinamico e mockup di interfaccia utente.
+
+- @glossario: *Glossario*: Definisce in modo univoco i termini tecnici e di dominio del progetto Pharos, fissando un vocabolario condiviso ed elencando i sinonimi da evitare per garantire la coerenza terminologica tra tutti gli artefatti e gli attori coinvolti.

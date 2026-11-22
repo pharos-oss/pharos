@@ -66,15 +66,15 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   *Special Requirements:* I materiali allegati tramite integrazione (inclusi gli eventi selezionati dal diario) devono risultare inaccessibili in chiaro e seguire le policy di cifratura del sistema.
 ]
 
-#callout-box(title: "UC_02 Esecuzione del triage guidato tramite IA")[
+#callout-box(title: "UC_02 Esecuzione del triage guidato tramite Modulo IA")[
   *Identificativo:* UC_02 \
-  *Nome:* Esecuzione del triage guidato tramite Intelligenza Artificiale \
+  *Nome:* Esecuzione del triage guidato tramite modulo IA \
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
   *Autore:* Alessia D'Amico, Carmine Saggese \
-  *Descrizione:* Lo UC descrive l'utilizzo del modulo di Intelligenza Artificiale da parte dell'Utente per ottenere una valutazione orientativa su episodi annotati nel diario, al fine di decidere se avviare una segnalazione formale. \
+  *Descrizione:* Lo UC descrive l'utilizzo del modulo IA da parte dell'Utente per ottenere una valutazione orientativa su episodi annotati nel diario, al fine di decidere se avviare una segnalazione formale. \
   *Attore Principale:* Utente (Interessato a comprendere la gravità di uno o più eventi e orientarsi sulle decisioni da prendere) \
-  *Attori secondari:* Sistema (Modulo AI)
+  *Attori secondari:* Sistema (Modulo IA)
 
   *Entry Condition:* \
   - Un Utente ha effettuato l'accesso al sistema \
@@ -85,7 +85,7 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   - L'Utente sceglie se procedere o meno con una segnalazione formale \
 
   *Exit condition (On failure):* \
-  - La valutazione non viene fornita a causa di un disservizio del modulo AI \
+  - La valutazione non viene fornita a causa di un disservizio del modulo IA \
   - Il Sistema mostra un messaggio di errore e ripristina lo stato iniziale \
 
   *Rilevanza/User Priority:* Media \
@@ -97,10 +97,10 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
 
   *FLUSSO DI EVENTI PRINCIPALE / MAIN SCENARIO*
   1. *Utente:* Accede al diario, seleziona gli eventi di interesse (Rif. SC_U_02) e avvia il triage guidato.
-  2. *Sistema:* Informa l'Utente che il triage è solo orientativo, svolto da un sistema di intelligenza artificiale, non sostituisce il Consigliere di Fiducia e non comporta alcun invio automatico. Richiede conferma.
+  2. *Sistema:* Informa l'Utente che il triage è solo orientativo, svolto da un modulo IA, e non sostituisce il Consigliere di Fiducia e non comporta alcun invio automatico. Richiede conferma.
   3. *Utente:* Conferma l'avviso per procedere.
-  4. *Sistema:* Rimuove i dati identificativi dagli eventi selezionati e trasmette il testo al modulo AI.
-  5. *Sistema (Modulo AI):* Analizza il testo e restituisce la valutazione.
+  4. *Sistema:* Rimuove i dati identificativi dagli eventi selezionati e trasmette il testo al modulo IA.
+  5. *Sistema (Modulo IA):* Analizza il testo e restituisce la valutazione.
   6. *Sistema:* Mostra all'Utente la valutazione della gravità, la tipologia di violenza più probabile e i passi dell'iter di segnalazione.
   7. *Sistema:* Chiede all'Utente se desidera inviare una segnalazione formale al Consigliere di Fiducia.
   8. *Utente:* Sceglie di procedere con l'invio della segnalazione.
@@ -115,7 +115,7 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   #v(0.5em)
 
   *Note:* N/A \
-  *Special requirments*: Il processo di anonimizzazione (rimozione dei dati identificativi) prima della trasmissione al modulo AI deve essere rigoroso per prevenire l'esposizione di dati personali sensibili. Inoltre, i dati inviati non devono essere memorizzati o utilizzati per l'addestramento del modello AI.
+  *Special requirments*: Il processo di anonimizzazione (rimozione dei dati identificativi) prima della trasmissione al modulo IA deve essere rigoroso per prevenire l'esposizione di dati personali sensibili. Inoltre, i dati inviati non devono essere memorizzati o utilizzati per l'addestramento del modello.
 ]
 
 #callout-box(title: "UC_03 Composizione e inoltro di una segnalazione")[
@@ -183,6 +183,8 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   *Note:* NA \
   *Special Requirements:* I dati salvati nel diario e le bozze temporanee devono risultare inaccessibili al Consigliere di Fiducia fino all'invio definitivo.
 ]
+
+#pagebreak()
 
 #callout-box(title: "UC_04 Monitoraggio e interruzione della segnalazione")[
   *Identificativo*: UC_04 \

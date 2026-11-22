@@ -1,5 +1,4 @@
 @startuml CD_01_Piattaforma
-
 skinparam classAttributeIconSize 0
 skinparam shadowing false
 skinparam defaultFontName "DejaVu Sans"
@@ -53,7 +52,7 @@ class GestoreDiario <<Control>> {
 class GestoreSegn <<Control>> {
   + inviaSegnalazione()
   + interrompiIter()
-  + avviaTriageIA()
+  + avviaTriageGuidato()
   + anonimizzaTesto()
   + recuperaServizi()
 }
