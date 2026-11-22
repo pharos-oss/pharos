@@ -9,7 +9,8 @@
     "Pharos",
     "justfile",
     "prek",
-    "commitizen"
+    "commitizen",
+    "Winget"
   ],
   "ignorePaths": [
     "docs/out/**",

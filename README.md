@@ -25,12 +25,23 @@ chmod +x scripts/setup.sh
 ./scripts/setup.sh
 ```
 
+**Post-Setup per Linux/macOS:**
+Se lo script ha dovuto installare manualmente `just` o `prek` (senza usare `brew`), questi sono stati scaricati nelle tue cartelle utente locali (`~/bin` e `~/.local/bin`). 
+Per poterli usare, **devi assicurarti che queste cartelle siano nel tuo `PATH` permanente**. 
+
+Aggiungi queste due righe in fondo al file di configurazione della tua shell (`~/.bashrc` oppure `~/.zshrc`):
+```bash
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.local/bin"
+```
+Salva il file e ricarica il terminale (oppure esegui `source ~/.bashrc` / `source ~/.zshrc`).
+
 ### Utenti Windows (PowerShell)
 ```powershell
 .\scripts\setup.ps1
 ```
 
-*(Lo script verificherà l'installazione dei binari e attiverà gli hook di `prek`)*.
+*(Lo script verificherà l'installazione dei binari e attiverà gli hook di `prek`. Non sono necessarie configurazioni manuali del PATH, Winget se ne occuperà automaticamente).*
 
 ---
 
