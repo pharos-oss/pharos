@@ -58,9 +58,10 @@ jobs:
               echo "Modifica globale rilevata ($FILE). Trigger build-all."
               BUILD_ALL=true
               break
-              
+            elif [[ "$FILE" =~ ^docs/([^/]+)/ ]]; then
               DOC_NAME="${BASH_REMATCH[1]}"
-              if [[ ! "$DOC_NAME" =~ ^[A-Za-z0-9_-]+$ ]]; then
+              # Allowlist validation: this name flows into GITHUB_OUTPUT, the artifact name and `just`
+              if [[ ! "$DOC_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]; then
                 echo "Nome documento non valido: $DOC_NAME" >&2
                 exit 1
               fi

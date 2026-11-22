@@ -8,11 +8,12 @@ default:
     @just --list
 
 # Compila un singolo documento. Uso: `just build rad` oppure `just build sdd`
-build doc:
+[arg('doc', pattern='[A-Za-z0-9][A-Za-z0-9._-]*')]
+build $doc:
     @mkdir -p docs/out
-    @echo "Compilazione di {{doc}} in corso..."
-    typst compile --root . docs/{{doc}}/main.typ docs/out/{{doc}}.pdf
-    @echo "✓ Compilazione completata: docs/out/{{doc}}.pdf"
+    @echo "Compilazione di $doc in corso..."
+    typst compile --root . "docs/$doc/main.typ" "docs/out/$doc.pdf"
+    @echo "✓ Compilazione completata: docs/out/$doc.pdf"
 
 # Compila TUTTI i documenti trovati nelle sottocartelle di docs/
 build-all:
@@ -37,7 +38,8 @@ lint:
     prek run --all-files
 
 # Avvia Typst in modalità "watch". Uso: `just watch rad`
-watch doc:
+[arg('doc', pattern='[A-Za-z0-9][A-Za-z0-9._-]*')]
+watch $doc:
     @mkdir -p docs/out
-    @echo "Modalità watch avviata per '{{doc}}' (Premi Ctrl+C per uscire)..."
-    typst watch docs/{{doc}}/main.typ docs/out/{{doc}}.pdf
+    @echo "Modalità watch avviata per '$doc' (Premi Ctrl+C per uscire)..."
+    typst watch "docs/$doc/main.typ" "docs/out/$doc.pdf"
