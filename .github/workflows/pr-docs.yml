@@ -1,9 +1,9 @@
-name: Typst CI/CD Documentazione
+name: Typst Documentation CI/CD
 
 on:
   pull_request:
     branches: ["dev"]
-    types: [opened, synchronize, reopened, edited]
+    types: [opened, synchronize, reopened]
     paths:
       - 'docs/**'
       - 'templates/**'
@@ -13,29 +13,47 @@ on:
       - '.cz.yaml'
       - '.github/workflows/**'
 
+# Minimal default permissions at the workflow level.
+# Each job grants additional permissions only when strictly necessary.
+permissions:
+  contents: read
+
+# Only one run per PR at a time: subsequent pushes cancel the in-progress run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-review:
+    name: Build PDF and quality checks
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Read-only: this job doesn't write anything to the PR.
+    # The pull-requests: write permission is confined to the `comment` job.
     permissions:
-      pull-requests: write
       contents: read
+    outputs:
+      build_mode: ${{ steps.extract-doc.outputs.build_mode }}
 
     steps:
-      - name: Checkout del codice
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
           submodules: recursive
+          persist-credentials: false
 
-      - name: Analisi File Modificati e Strategia di Build
+      - name: Analyze changed files and build strategy
         id: extract-doc
+        env:
+          BASE_REF: ${{ github.base_ref }}
         run: |
-          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          CHANGED_FILES=$(git diff --name-only "origin/$BASE_REF"...HEAD)
           
           DOCS_TO_BUILD=""
           BUILD_ALL=false
           
-          for FILE in $CHANGED_FILES; do
+          while IFS= read -r FILE; do
             if [[ "$FILE" == "templates/"* ]] || [[ "$FILE" == "docs/templates/"* ]] || [[ "$FILE" == "justfile" ]]; then
               echo "Modifica globale rilevata ($FILE). Trigger build-all."
               BUILD_ALL=true
@@ -43,19 +61,19 @@ jobs:
               
             elif [[ "$FILE" =~ ^docs/([^/]+)/ ]]; then
               DOC_NAME="${BASH_REMATCH[1]}"
-              # Evita duplicati nella lista se più file della stessa cartella sono cambiati
-              if [[ ! " $DOCS_TO_BUILD " =~ " $DOC_NAME " ]]; then
+              # Avoid duplicates in the list when multiple files in the same folder changed
+              if [[ " $DOCS_TO_BUILD " != *" $DOC_NAME "* ]]; then
                 DOCS_TO_BUILD="$DOCS_TO_BUILD $DOC_NAME"
               fi
             fi
-          done
+          done <<< "$CHANGED_FILES"
           
           if [ "$BUILD_ALL" = true ]; then
             echo "build_mode=all" >> "$GITHUB_OUTPUT"
           elif [ -n "$DOCS_TO_BUILD" ]; then
-            CLEANED_DOCS=$(echo $DOCS_TO_BUILD | xargs)
+            CLEANED_DOCS=$(echo "$DOCS_TO_BUILD" | xargs)
             
-            # Se la lista contiene spazi, sono presenti più documenti modificati
+            # If the list contains spaces, multiple documents were modified
             if [[ "$CLEANED_DOCS" == *" "* ]]; then
               echo "Documenti multipli rilevati ($CLEANED_DOCS). Modalita ALL."
               echo "build_mode=all" >> "$GITHUB_OUTPUT"
@@ -70,30 +88,34 @@ jobs:
             echo "build_mode=skip" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Installazione Just
-        uses: extractions/setup-just@v2
+      - name: Install Just
+        uses: extractions/setup-just@dd310ad5a97d8e7b41793f8ef055398d51ad4de6 # v2.0.0
+        with:
+          just-version: 1.59.0
 
-      - name: Installazione prek
-        run: curl --proto '=https' --tlsv1.2 -LsSf https://github.com/j178/prek/releases/download/v0.5.11/prek-installer.sh | sh
+      - name: Install prek
+        run: pipx install prek==0.5.11
 
-      - name: Caching Sandbox prek
-        uses: actions/cache@v4
+      - name: Cache prek sandbox
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.cache/prek
           key: ${{ runner.os }}-prek-${{ hashFiles('.pre-commit-config.yaml') }}
           restore-keys: |
             ${{ runner.os }}-prek-
 
-      - name: Esecuzione Controlli di Qualità (File e Ortografia)
+      - name: Run quality checks (files and spelling)
         run: |
           export PATH="$PATH:$HOME/.local/bin"
           just lint
 
-      - name: Verifica Convenzione Commit PR (Commitizen)
+      - name: Check PR commit convention (Commitizen)
+        env:
+          BASE_REF: ${{ github.base_ref }}
         run: |
-          pipx run --spec commitizen cz check --rev-range origin/${{ github.base_ref }}..HEAD
+          pipx run --spec commitizen==4.19.3 cz check --rev-range "origin/$BASE_REF"..HEAD
 
-      - name: Installazione Font (Liberation Sans)
+      - name: Install fonts (Liberation Sans)
         if: steps.extract-doc.outputs.build_mode != 'skip'
         run: |
           sudo apt-get update
@@ -101,29 +123,43 @@ jobs:
 
       - name: Setup Typst
         if: steps.extract-doc.outputs.build_mode != 'skip'
-        uses: typst-community/setup-typst@v3
+        uses: typst-community/setup-typst@f5c90506c7ae74fca20e339034af05c52e0eda92 # v3.1.0
 
-      - name: Compilazione Dinamica PDF
+      - name: Compile PDF (dynamic)
         if: steps.extract-doc.outputs.build_mode != 'skip'
+        env:
+          BUILD_MODE: ${{ steps.extract-doc.outputs.build_mode }}
+          DOC_NAME: ${{ steps.extract-doc.outputs.doc_name }}
         run: |
-          if [ "${{ steps.extract-doc.outputs.build_mode }}" == "single" ]; then
-            just build ${{ steps.extract-doc.outputs.doc_name }}
+          if [ "$BUILD_MODE" == "single" ]; then
+            just build "$DOC_NAME"
           else
             just build-all
           fi
 
-      - name: Caricamento Artefatto PDF
+      - name: Upload PDF artifact
         id: upload-pdf
         if: steps.extract-doc.outputs.build_mode != 'skip'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: ${{ steps.extract-doc.outputs.doc_name || 'tutti-i-documenti' }}-pdf
           path: docs/out/*.pdf
           retention-days: 7
 
+  comment:
+    name: PR comment (PDF preview)
+    needs: build-and-review
+    # Runs only if something was built and the PR doesn't come from a fork
+    # (forks get a read-only token and cannot comment).
+    if: needs.build-and-review.outputs.build_mode != 'skip' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      # No other write scope is granted to this job.
+      pull-requests: write # needed by sticky-pull-request-comment to post/update the PR comment
+    steps:
       - name: Zero-Click Review (PR Bot Comment)
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: github.event_name == 'pull_request' && steps.extract-doc.outputs.build_mode != 'skip' && github.event.pull_request.head.repo.full_name == github.repository
+        uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405 # v2.9.4
         with:
           header: pr-pdf-review
           message: |

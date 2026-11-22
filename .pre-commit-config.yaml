@@ -31,14 +31,8 @@ repos:
     rev: v6.0.0
     hooks:
       - id: check-added-large-files
-        name: Controllo grandezza delle immagini (immagini max 1MB)
+        name: Controllo grandezza dei file (max 1 MB)
         args: ['--maxkb=1024']
-        files: (?i)\.(png|jpg|jpeg|gif|svg|webp)$
-
-      - id: check-added-large-files
-        name: Controllo grandezza dei file di testo (altri file max 1MB)
-        args: ['--maxkb=1024']
-        exclude: (?i)\.(png|jpg|jpeg|gif|svg|webp)$
 
       - id: check-case-conflict
         name: Controllo case-insensitive
