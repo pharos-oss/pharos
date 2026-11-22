@@ -62,6 +62,6 @@ Il presente *System Design Document* (SDD) ha lo scopo di descrivere le decision
 
 Il testo si rivolge al team di sviluppo e ai docenti del corso, fornendo una guida architetturale per le successive fasi di implementazione e testing.
 
-Il documento è strutturato in modo da fornire una scomposizione progressiva delle scelte progettuali, partendo dal contesto attuale per arrivare alla definizione dei servizi dei sottosistemi. I capitoli successivi sono organizzati come segue:
+Il documento è strutturato in modo da fornire una scomposizione progressiva delle scelte progettuali, partendo dal contesto attuale per arrivare alla definizione dei servizi dei sottosistemi, e si estende fino al class diagram ristrutturato. I capitoli successivi sono organizzati come segue:
 
 - @introduzione: *Introduzione*: Presenta gli obiettivi del sistema, i design goal e trade-off, le definizioni, i riferimenti bibliografici e la presente struttura documentale.
