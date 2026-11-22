@@ -10,7 +10,7 @@ Chiude #
 - [ ] Il codice, i documenti o i diagrammi compilano localmente senza errori né warning bloccanti (es. testato con `just build-all`).
 - [ ] I controlli automatici di `prek` (es. `just lint`, correzione ortografica CSpell) passano con successo.
 - [ ] I messaggi di commit rispettano le regole di Commitizen (es. `feat:`, `fix:`, `docs:`).
-- [ ] I nuovi file rispettano le dimensioni massime (1MB per le immagini, 5MB per gli altri file) e le convenzioni cross-platform sui nomi.
+- [ ] I nuovi file rispettano la dimensione massima di 1 MB e le convenzioni cross-platform sui nomi.
 - [ ] Il branch di lavoro è allineato al branch target e privo di conflitti.
 - [ ] Non sono presenti file estranei o dati sensibili.
 - [ ] **Codice di Condotta:** Confermo che l'implementazione rispetta i principi di accessibilità, inclusione e sicurezza definiti nel `CODE_OF_CONDUCT.md`.
