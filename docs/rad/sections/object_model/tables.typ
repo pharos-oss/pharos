@@ -39,7 +39,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [Diario personale per annotare eventi in modo privato e cifrato.],
 
       [*EventoDiario*], [Entity],
-      [id, data, ora, \ luogo, descrizione, \ dataCreazione, Stato],
+      [id, data, ora, \ luogo, descrizione, \ dataCreazione, stato],
       [ottieniDettagli(), \ aggiornaDati()],
       [Diario (1), \ Allegato (0..\*), \ Segnalazione (0..\*)],
       [RF_GU_01, \ RF_GU_03],

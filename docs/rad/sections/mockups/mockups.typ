@@ -14,7 +14,7 @@
 
 == Schermata Triage IA
 
-=== MU_02: Triage IA — Screening Iniziale (UC_02, SC_U_02)
+=== MU_02: Triage IA — Screening Iniziale (UC_02, SC_U_04)
 
 #v(3em)
 
@@ -27,7 +27,7 @@
 
 == Schermata Valutazione AI 
 
-=== MU_03: Esito Triage IA — Valutazione e Suggerimenti (UC_02, SC_U_02)
+=== MU_03: Esito Triage IA — Valutazione e Suggerimenti (UC_02, SC_U_04)
 #v(3em)
 
 #align(center)[
@@ -52,7 +52,7 @@
 
 == Schermata Segnalazione Inviata
 
-=== MU_05: Segnalazione Inoltrata con Successo (UC_03, SC_U_03)
+=== MU_05: Segnalazione Inoltrata con Successo (UC_03, SC_U_01)
 
 #v(3em)
 

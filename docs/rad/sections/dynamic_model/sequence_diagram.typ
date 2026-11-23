@@ -1,4 +1,4 @@
-=== SD_01_Invio Segnalazione_Utente
+=== SD_01_Invio_Segnalazione_Utente
 
 #align(center)[
   #figure(

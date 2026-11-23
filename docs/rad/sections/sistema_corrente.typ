@@ -20,7 +20,7 @@ Come evidenziato dall'analisi dei bisogni di business, questo modello presenta d
 
 - *Scarsa tracciabilità*: le procedure non sono strutturate e l'utente non possiede alcuno strumento per verificare in modo trasparente lo stato di avanzamento della propria pratica.
 
-- *Gestione inefficiente delle evidenze*: la raccolta delle prove a supporto degli eventi lesivi avviene in maniera disordinata da parte del'utente, senza un sistema che ne certifichi l'ordine cronologico.
+- *Gestione inefficiente delle evidenze*: la raccolta delle prove a supporto degli eventi lesivi avviene in maniera disordinata da parte dell'utente, senza un sistema che ne certifichi l'ordine cronologico.
 
 - *Disorientamento e diffidenza*: l'assenza di un percorso guidato e confidenziale disincentiva le segnalazioni; i dati dimostrano infatti che il 17% degli utenti non sa a chi segnalare l'evento e il 26% ritiene che la segnalazione non porterebbe ad alcun risultato.
 

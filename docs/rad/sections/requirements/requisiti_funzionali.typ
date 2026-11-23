@@ -68,9 +68,9 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     
     [*RF_GCDF_02*], [Ricerca e filtri avanzati], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di filtrare le segnalazioni per stato, data, ID pratica e tipologia di violenza.]], [CDF], [Media], [Generale],
     
-    [*RF_GCDF_03*], [Presa in carico], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di visionare i dettagli e gli allegati di una nuova segnalazione e di modificarne lo stato in "Presa in carico".]], [CDF], [Elevata], [SC_CDF_02, UC_CDF_1],
+    [*RF_GCDF_03*], [Presa in carico], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di visionare i dettagli e gli allegati di una nuova segnalazione e di modificarne lo stato in "Presa in carico".]], [CDF], [Elevata], [SC_CDF_01, UC_CDF_1],
     
-    [*RF_GCDF_04*], [Avanzamento iter e note], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di aggiornare lo stato di una pratica e inserire note e appuntamenti che diverranno visibili all'utente.]], [CDF], [Elevata], [SC_CDF_01, UC_CDF_1],
+    [*RF_GCDF_04*], [Avanzamento iter e note], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di aggiornare lo stato di una pratica e inserire note e appuntamenti che diverranno visibili all'utente.]], [CDF], [Elevata], [SC_CDF_02, UC_CDF_1],
     
     [*RF_GCDF_05*], [Richiesta integrazioni], [#block(breakable: false)[Il sistema deve consentire al Consigliere di Fiducia di impostare lo stato su "In attesa di integrazioni" specificando le informazioni o i documenti mancanti all'utente.]], [CDF], [Media], [SC_U_03],
 

@@ -70,7 +70,7 @@ La seguente sezione definisce in modo univoco il vocabolario condiviso del siste
       [*Stato Pratica*],
       [Stato corrente nel flusso della pratica (Inviata, Presa in carico, In lavorazione, In attesa di integrazioni, Chiusa, Archiviata).],
       [Fase],
-      [MO_GCDF, \ RF_GU_06, \ RF_GCDF_03 - RF_GCDF_06 - RF_GCDF_05, \ MO_GCDF, \ STD_01, \ SD_03, \ MU_07 \ UC_01],
+      [MO_GCDF, RF_GU_06, \ RF_GCDF_03 - RF_GCDF_06 - RF_GCDF_05, \ STD_01, \ SD_03, \ MU_07 \ UC_01],
 
       [*Nota CDF*],
       [Nota o appuntamento inserito dal Consigliere di Fiducia, visibile all'utente nella cronologia della pratica.],
