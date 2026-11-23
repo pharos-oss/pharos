@@ -1,0 +1,43 @@
+name: Task tecnico / Documentazione
+description: Crea un task per documentazione, refactoring, testing o configurazione CI/CD
+type: Task
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Obiettivo e contesto della task
+      description: Descrivi in modo chiaro l'attività tecnica o documentale e la sua finalità.
+    validations:
+      required: true
+  - type: input
+    id: target-file
+    attributes:
+      label: File / Modulo target
+      placeholder: es. docs/rad/main.typ, src/auth/login.js
+    validations:
+      required: true
+  - type: input
+    id: expected-output
+    attributes:
+      label: Deliverable / Output atteso
+      placeholder: es. PDF aggiornato, pipeline CI funzionante
+    validations:
+      required: true
+  - type: input
+    id: dependencies
+    attributes:
+      label: Dipendenze (Issue bloccanti)
+      placeholder: es. #12, #45
+  - type: checkboxes
+    id: dod
+    attributes:
+      label: Criteri di completamento (Definition of Done)
+      options:
+        - label: L'attività rispetta il Glossario e la style guide di progetto.
+          required: true
+        - label: Compilazione e rendering verificati localmente senza errori/warning bloccanti.
+          required: true
+        - label: Riferimenti incrociati (es. `@label` in Typst) e diagrammi UML verificati e coerenti.
+          required: true
+        - label: Tabella delle revisioni / changelog aggiornata (se applicabile).
+          required: true

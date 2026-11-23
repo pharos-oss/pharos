@@ -1,0 +1,31 @@
+commitizen:
+  name: cz_customize
+  version: 0.1.0
+  tag_format: v$version
+  changelog_file: CHANGELOG.md
+  update_changelog_on_bump: true
+  allowed_prefixes:
+    - Merge
+    - Revert
+    - Initial commit
+  customize:
+    schema_pattern: '^(feat|fix|docs|chore|refactor|ci)(\([a-z0-9_-]+\))?!?: .+'
+    schema: '<tipo>(<documento>): <descrizione>'
+    example: 'docs(rad): aggiunta sezione requisiti funzionali'
+    bump_pattern: '^(feat|fix|docs|refactor)'
+    bump_map:
+      feat: MINOR
+      fix: PATCH
+      docs: PATCH
+      refactor: PATCH
+    changelog_pattern: '^(feat|fix|docs|refactor)'
+    change_type_order:
+      - 'Feature'
+      - 'Documentazione'
+      - 'BugFix'
+      - 'Refactor'
+    change_type_map:
+      feat: 'Feature'
+      docs: 'Documentazione'
+      fix: 'BugFix'
+      refactor: 'Refactor'
