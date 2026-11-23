@@ -60,7 +60,9 @@
     "SDLC",
     "Supportabilità",
     "Tanwar",
-    "WCAG"
+    "WCAG",
+    "lfs",
+    "LFS"
   ],
   "ignorePaths": [
     "docs/out/**",

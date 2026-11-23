@@ -42,6 +42,7 @@ jobs:
           fetch-depth: 0
           submodules: recursive
           persist-credentials: false
+          lfs: true
 
       - name: Analyze changed files and build strategy
         id: extract-doc
