@@ -16,7 +16,7 @@
 // No "Versione" row: the template adds it from the last revision-history entry.
 #let metadata = (
   ("Riferimento", "RAD_Pharos"),
-  ("Data", "01/11/2026"),
+  ("Data", "23/11/2026"),
   ("Destinatario", ""),
   ("Presentato da", ""),
   ("Approvato da", ""),

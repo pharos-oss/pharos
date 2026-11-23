@@ -12,7 +12,7 @@
 #pagebreak()
 
 #callout-box(title: "UC_CDF_01 Prendere in carico una segnalazione")[
-  *Identificativo:* UC_CDF_1 \
+  *Identificativo:* UC_CDF_01 \
   *Nome:* Prendere in carico una segnalazione \
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
@@ -60,7 +60,7 @@
 #pagebreak()
 
 #callout-box(title: "UC_CDF_02 Chiudere una pratica")[
-  *Identificativo:* UC_CDF_2 \
+  *Identificativo:* UC_CDF_02 \
   *Nome:* Chiudere una pratica \
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \

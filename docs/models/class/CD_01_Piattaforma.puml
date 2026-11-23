@@ -47,6 +47,7 @@ class GestoreDiario <<Control>> {
   + rimuoviEvento()
   + cifraContenuto()
   + validaAllegato()
+  + aggiornaAllegati()
 }
 
 class GestoreSegn <<Control>> {
@@ -55,6 +56,8 @@ class GestoreSegn <<Control>> {
   + avviaTriageGuidato()
   + anonimizzaTesto()
   + recuperaServizi()
+  + ottieniDettagli() 
+  + aggiornaSegnalazione()
 }
 
 class Utente <<Entity>> {
@@ -96,6 +99,7 @@ class Segnalazione <<Entity>> {
   - dataInvio: Date
   + impostaStato()
   + ottieniDettagli()
+  + aggiungiIntegrazioni()
 }
 
 class Allegato <<Entity>> {
@@ -150,6 +154,7 @@ class GestorePratiche <<Control>> {
   + aggiornaStato()
   + chiudiPratica()
   + gestisciAssenza()
+  + ottieniDettPratica()
 }
 
 class GestoreReport <<Control>> {
@@ -240,8 +245,7 @@ EventoDiario "0..*" -- "0..*" Segnalazione
 
 Segnalazione "0..1" -- "0..*" Allegato
 Segnalazione "1" -- "0..*" Notifica
-Segnalazione "1" -- "0..1" ValutazioneIA
-ValutazioneIA "0..*" -- "0..*" ServizioTerritoriale
+Segnalazione "0..1" -- "0..1" ValutazioneIA
 
 InterfacciaCDF -down-> GestorePratiche : (1)
 InterfacciaCDF -down-> GestoreReport : (1)
