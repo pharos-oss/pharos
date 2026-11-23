@@ -42,6 +42,7 @@
   ("19/11/2026", "0.8", "Inserimento dei mockup", "Francesco Imbriaco, Alessia D'Amico"),
   ("20/11/2026", "0.8", "Inserimento dei diagrammi navigazionali", "Carmine Saggese, Leonardo Trotta"),
   ("20/11/2026", "0.9", "Inserimento del glossario", "Gianmarco Raimondi"),
+  ("23/11/2026", "1.0", "Revisione finale", "Tutti"),
 )
 
 #show: doc-template.with(
