@@ -9,9 +9,9 @@ Il presente documento definisce le specifiche e i requisiti per *"Pharos"*, una 
 == Ambito del sistema (Scope)
 Il sistema Pharos gestirà l'intero ciclo di tutela istituzionale interno all'ateneo. Pertanto, i confini del sistema includono le seguenti funzionalità:
 
-- *Un modulo di triage guidato, utile per l'inquadramento preliminare e consapevole dell'episodio da parte dell'utente.*
+- *Un modulo di triage guidato, utile per l'inquadramento preliminare e consapevole dell'evento da parte dell'utente.*
 
-- *Un "diario delle evidenze" personale, volto a consentire la storicizzazione cronologica e sicura di eventi discriminatori o abusanti.*
+- *Un diario delle evidenze personale, volto a consentire la storicizzazione cronologica e sicura di eventi discriminatori o abusanti.*
 
 - *L'implementazione di un hub di assistenza diretta che centralizzi e faciliti il primo contatto, il supporto psicologico tramite counseling e l'inoltro di segnalazioni protette agli organi preposti.*
 
@@ -75,7 +75,7 @@ Il documento è strutturato in modo da fornire una scomposizione progressiva del
 
 - @introduzione: *Introduzione*: Definisce lo scopo del sistema, l'ambito di sistema, gli obiettivi e criteri di successo, definizioni, acronimi e abbreviazioni, riferimenti bibliografici e la presente struttura documentale.
 
-- @sis_corrente: *Sistema Attuale*: Analizza i processi attualmente in uso presso l'Ateneo per la gestione delle segnalazioni e le relative criticità. 
+- @sis_corrente: *Sistema Corrente*: Analizza i processi attualmente in uso presso l'Ateneo per la gestione delle segnalazioni e le relative criticità. 
 
 - @sis_proposto: *Sistema Proposto*: Descrive in dettaglio la panoramica della nuova architettura. 
 

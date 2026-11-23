@@ -178,7 +178,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
       [*PeriodoAssenza*], [Entity],
       [id, dataInizio, \ dataFine, \ avvisoAttivo],
-      [attivaAvviso(), \ disattivaAvviso()],
+      [attivaAvviso(), \ disattivaAvviso(), impostaDate(), aggiornaDate(), \ terminaOra(), \ storicizzaAssenza()],
       [Cdf (1)],
       [RF_GCDF_07],
       [Periodo di indisponibilità del CDF con date di inizio e fine e avviso automatico.],

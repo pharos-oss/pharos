@@ -65,7 +65,7 @@
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
   *Autore:* Mario Senatore, Francesco Imbriaco \
-  *Descrizione:* Lo UC descrive il processo mediante il quale il Consigliere di Fiducia chiude una pratica indicandone l'esito e la archivia in sola lettura.
+  *Descrizione:* Lo UC descrive il processo mediante il quale il Consigliere di Fiducia chiude una pratica indicandone l'esito e rendendola consultabile in sola lettura.
 
   *Attore Principale:* Consigliere di Fiducia (È interessato a concludere formalmente la lavorazione di una pratica e archiviarla) \
   *Attori secondari:* Sistema (Notifiche)
@@ -75,7 +75,7 @@
   - La pratica è stata presa in carico e non è chiusa né archiviata
 
   *Exit condition (On success):* \
-  - La pratica passa nello stato «Chiusa» e viene archiviata in sola lettura \
+  - La pratica passa nello stato «Chiusa» rendendola consultabile in sola lettura \
   - Il Sistema notifica l'Utente \
 
   *Exit condition (On failure):* \
@@ -91,7 +91,7 @@
   1. *Consigliere di Fiducia:* Apre la pratica e richiede la chiusura.
   2. *Sistema:* Chiede l'esito e una nota conclusiva.
   3. *Consigliere di Fiducia:* Seleziona l'esito, scrive la nota e conferma.
-  4. *Sistema:* Imposta lo stato «Chiusa» e archivia la pratica in sola lettura.
+  4. *Sistema:* Imposta lo stato «Chiusa» rendendola consultabile in sola lettura.
   5. *Sistema (Notifiche):* Notifica l'Utente.
 
   #v(1em)

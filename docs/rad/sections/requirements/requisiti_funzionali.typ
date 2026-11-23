@@ -22,7 +22,7 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
 
     [*RF_GU_01*], [Registrazione evento nel diario], [#block(breakable: false)[Il sistema deve consentire all'utente di annotare privatamente un evento nel proprio diario indicando data, ora, luogo, descrizione, e inserendo eventuali allegati multimediali.]], [Utente], [Elevata], [SC_U_02, SC_U_07, UC_03],
     
-    [*RF_GU_02*], [Cifratura del diario], [#block(breakable: false)[Il sistema deve salvare tutti gli eventi e gli allegati del diario in forma cifrata, rendendoli inaccessibili finché non viene inviata una segnalazione.]], [Sistema], [Elevata], [SC_U_02, UC_03],
+    [*RF_GU_02*], [Cifratura del diario], [#block(breakable: false)[Il sistema deve salvare tutti gli eventi e gli allegati del diario in forma cifrata, rendendoli inaccessibili al CDF finché non viene inviata una segnalazione.]], [Sistema], [Elevata], [SC_U_02, UC_03],
     
     [*RF_GU_03*], [Modifica ed eliminazione eventi], [#block(breakable: false)[Il sistema deve consentire all'utente di modificare o eliminare eventi dal diario personale prima che siano inclusi in una segnalazione formale.]], [Utente], [Media], [Generale],
     
@@ -40,7 +40,7 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     
     [*RF_GU_10*], [Triage IA anonimizzato], [#block(breakable: false)[Il sistema deve permettere all'utente di inviare eventi del diario a un modulo IA per una valutazione indicativa di gravità e tipologia di molestia. I dati devono essere automaticamente resi anonimi dal sistema prima dell'invio al modulo. ]], [Utente], [Bassa], [SC_U_04, UC_02],
     
-    [*RF_GU_11*], [Servizi territoriali e rubrica], [#block(breakable: false)[Il sistema deve fornire all'utente indicazioni sulle strutture territoriali di assistenza in zona (es. forze dell'ordine, centri antiviolenza) e una rubrica di primo contatto per supporto esterno all'Ateneo.]], [Sistema], [Elevata], 
+    [*RF_GU_11*], [Servizi territoriali e rubrica], [#block(breakable: false)[Il sistema deve fornire all'utente indicazioni sulle strutture territoriali di assistenza in zona (es. forze dell'ordine, centri antiviolenza) e una rubrica di primo contatto per supporto esterno all'Ateneo.]], [Sistema], [Elevata], [SC_U_04, \ UC_02, SD_01], 
   )
 ]
 
@@ -74,7 +74,7 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     
     [*RF_GCDF_05*], [Richiesta integrazioni], [#block(breakable: false)[Il sistema deve consentire al Consigliere di Fiducia di impostare lo stato su "In attesa di integrazioni" specificando le informazioni o i documenti mancanti all'utente.]], [CDF], [Media], [SC_U_03],
 
-    [*RF_GCDF_06*], [Chiusura e archiviazione], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di chiudere formalmente una pratica, indicandone l'esito finale e bloccando ulteriori modifiche bilaterali.]], [CDF], [Elevata], [SC_CDF_03, UC_CDF_2],
+    [*RF_GCDF_06*], [Chiusura formale della pratica], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di chiudere formalmente una pratica, indicandone l'esito finale e bloccando ulteriori modifiche bilaterali.]], [CDF], [Elevata], [SC_CDF_03, UC_CDF_2],
     
     [*RF_GCDF_07*], [Gestione assenza temporanea], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di impostare un periodo di assenza, attivando un avviso automatico per gli utenti riguardo all'allungamento dei tempi di risposta.]], [CDF], [Bassa], [Aggiuntivo],
     

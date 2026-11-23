@@ -63,7 +63,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
 #v(1.5em)
 
-#callout-box(title:"SC_U_04 Triage guidato tramite il modulo AI")[
+#callout-box(title:"SC_U_04 Triage guidato tramite il modulo IA")[
 
   #v(0.3em)
 
@@ -76,7 +76,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
   + Giulia ha annotato nel diario tre eventi che coinvolgono la stessa persona e non sa se possano essere considerati molestia. Seleziona gli eventi e avvia il triage guidato.
   + Il sistema informa Giulia che il triage è solo orientativo, che viene svolto da un sistema di intelligenza artificiale, non sostituisce il Consigliere di Fiducia e non comporta alcun invio, e le chiede conferma.
   + Giulia conferma.
-  + Il sistema trasmette al modulo AI il testo degli eventi selezionati, privato dei dati identificativi.
+  + Il sistema trasmette al modulo IA il testo degli eventi selezionati, privato dei dati identificativi.
   + Il sistema mostra a Giulia la valutazione della gravità, la tipologia di violenza più probabile («molestia morale») e i passi dell’iter di segnalazione.
   + Il sistema chiede a Giulia se desidera inviare una segnalazione al Consigliere di Fiducia. Giulia sceglie di procedere.
 ]

@@ -222,6 +222,10 @@ class PeriodoAssenza <<Entity>> {
   - avvisoAttivo: Boolean
   + attivaAvviso()
   + disattivaAvviso()
+  + impostaDate()
+  + aggiornaDate()
+  + terminaOra()
+  + storicizzaAssenza()
 }
 
 InterfacciaUtente -down-> GestoreDiario : (1)

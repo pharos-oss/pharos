@@ -72,13 +72,13 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
   *Autore:* Alessia D'Amico, Carmine Saggese \
-  *Descrizione:* Lo UC descrive l'utilizzo del modulo IA da parte dell'Utente per ottenere una valutazione orientativa su episodi annotati nel diario, al fine di decidere se avviare una segnalazione formale. \
+  *Descrizione:* Lo UC descrive l'utilizzo del modulo IA da parte dell'Utente per ottenere una valutazione orientativa su eventi annotati nel diario, al fine di decidere se avviare una segnalazione formale. \
   *Attore Principale:* Utente (Interessato a comprendere la gravità di uno o più eventi e orientarsi sulle decisioni da prendere) \
   *Attori secondari:* Sistema (Modulo IA)
 
   *Entry Condition:* \
   - Un Utente ha effettuato l'accesso al sistema \
-  - L'Utente ha annotato nel diario almeno un episodio \
+  - L'Utente ha annotato nel diario almeno un evento \
 
   *Exit condition (On success):* \
   - Il Sistema mostra all'Utente l'esito orientativo della valutazione \
