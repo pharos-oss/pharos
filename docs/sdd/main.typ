@@ -26,6 +26,7 @@
 // The last row's version is the one shown in the footer.
 #let revision-history = (
   ("21/11/2026", "0.1", "Stesura introduzione del documento", "Francesco Imbriaco, Leonardo Trotta"),
+    ("23/11/2026", "0.2", "Stesura sezioni design goals e trade offs", "Tutti i TM"),
   ("24/11/2026", "0.3", "Stesura dell'Architettura del sistema corrente e della Panoramica del sistema proposto", "Carmine Saggese"),
 )
 
