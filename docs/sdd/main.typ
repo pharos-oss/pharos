@@ -11,6 +11,7 @@
 
 #let revision-history = (
   ("21/11/2026", "0.1", "Stesura introduzione del documento", "Francesco Imbriaco, Leonardo Trotta"),
+  ("24/11/2026", "0.3", "Stesura dell'Architettura del sistema corrente e della Panoramica del sistema proposto", "Carmine Saggese"),
 )
 
 #show: doc-template.with(
@@ -25,4 +26,10 @@
 
 #include "sections/introduzione.typ"
 
+#pagebreak(weak: true)
+
 #include "sections/architettura_corrente.typ"
+
+#pagebreak(weak: true)
+
+#include "sections/architettura_proposta.typ"
