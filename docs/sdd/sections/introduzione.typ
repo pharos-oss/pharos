@@ -24,6 +24,8 @@ Il sistema Pharos è progettato per raggiungere i seguenti obiettivi, derivati d
 == Trade offs
 #include "design_goals/trade_offs.typ"
 
+#pagebreak()
+
 == Definizioni, acronimi e abbreviazioni
 #table(
   columns: 2,

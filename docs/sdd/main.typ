@@ -36,6 +36,7 @@
   reference: "SDD_Pharos",
   metadata: metadata,
   revision-history: revision-history,
+  cover-logo-height: 9cm,
 )
 #show link: it => text(fill: blue, underline(it)) 
 #show ref: set text(fill: blue)
