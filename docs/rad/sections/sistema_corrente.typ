@@ -1,26 +1,13 @@
-#import "../../templates/common.typ": palette-primary
-
-#let scenario-box = block.with(
-  width: 100%,
-  inset: 12pt,
-  radius: 4pt,
-  fill: palette-primary.lighten(93%),
-  stroke: (left: 3pt + palette-primary),
-)
+#import "../../templates/common.typ": palette-primary, callout-box
 
 = Sistema Corrente <sis_corrente>
-
-#v(1em)
-
-== Panoramica
-
 Il sistema attualmente in uso presso l'Università degli Studi di Salerno per la gestione delle segnalazioni di abusi, molestie, mobbing, straining e stalking è caratterizzato da processi non digitalizzati e da una netta frammentazione dei servizi di supporto. Gli utenti che desiderano cercare aiuto devono interfacciarsi in autonomia con le figure preposte, come il Comitato Unico di Garanzia (CUG) e il Consigliere di Fiducia (attualmente in fase di attivazione), avvalendosi di canali di comunicazione tradizionali (e-mail istituzionale).
 
-Come evidenziato dall'analisi dei bisogni di business, questo modello presenta diverse "barriere" strutturali, ovvero:
+Come evidenziato dall'analisi dei bisogni di business, questo modello presenta diverse barriere strutturali, ovvero:
 
 - *Scarsa tracciabilità*: le procedure non sono strutturate e l'utente non possiede alcuno strumento per verificare in modo trasparente lo stato di avanzamento della propria pratica.
 
-- *Gestione inefficiente delle evidenze*: la raccolta delle prove a supporto degli eventi lesivi avviene in maniera disordinata da parte del'utente, senza un sistema che ne certifichi l'ordine cronologico.
+- *Gestione inefficiente delle evidenze*: la raccolta delle prove a supporto degli eventi lesivi avviene in maniera disordinata da parte dell'utente, senza un sistema che ne certifichi l'ordine cronologico.
 
 - *Disorientamento e diffidenza*: l'assenza di un percorso guidato e confidenziale disincentiva le segnalazioni; i dati dimostrano infatti che il 17% degli utenti non sa a chi segnalare l'evento e il 26% ritiene che la segnalazione non porterebbe ad alcun risultato.
 
@@ -30,10 +17,7 @@ Come evidenziato dall'analisi dei bisogni di business, questo modello presenta d
 
 #v(0.5em)
 
-#scenario-box[
-  === SC_1 Segnalazione manuale via e-mail
-
-  #v(0.3em)
+#callout-box(title: "SC_1 Segnalazione manuale via e-mail")[
 
   *Partecipanti:* Utente (Studente/Dipendente), Consigliere di Fiducia
 
@@ -51,10 +35,7 @@ Come evidenziato dall'analisi dei bisogni di business, questo modello presenta d
 
 #pagebreak()
 
-#scenario-box[
-  === SC_1_ALT Segnalazione manuale con richiesta di integrazioni
-
-  #v(0.3em)
+#callout-box(title: "SC_1_ALT Segnalazione manuale con richiesta di integrazioni")[
 
   *Partecipanti:* Utente (Studente/Dipendente), Consigliere di Fiducia
 
@@ -72,6 +53,7 @@ Come evidenziato dall'analisi dei bisogni di business, questo modello presenta d
 #v(2em)
 
 == Activity Diagram
+In questa sezione viene mostrato il diagramma delle attività del sistema corrente, illustrando il flusso operativo attuale e le interazioni tra gli attori coinvolti nella gestione delle segnalazioni.
 
 #v(0.5em)
 

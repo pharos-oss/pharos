@@ -9,9 +9,9 @@ Il presente documento definisce le specifiche e i requisiti per *"Pharos"*, una 
 == Ambito del sistema (Scope)
 Il sistema Pharos gestirà l'intero ciclo di tutela istituzionale interno all'ateneo. Pertanto, i confini del sistema includono le seguenti funzionalità:
 
-- *Un modulo di triage guidato, utile per l'inquadramento preliminare e consapevole dell'episodio da parte dell'utente.*
+- *Un modulo di triage guidato, utile per l'inquadramento preliminare e consapevole dell'evento da parte dell'utente.*
 
-- *Un "diario delle evidenze" personale, volto a consentire la storicizzazione cronologica e sicura di eventi discriminatori o abusanti.*
+- *Un diario delle evidenze personale, volto a consentire la storicizzazione cronologica e sicura di eventi discriminatori o abusanti.*
 
 - *L'implementazione di un hub di assistenza diretta che centralizzi e faciliti il primo contatto, il supporto psicologico tramite counseling e l'inoltro di segnalazioni protette agli organi preposti.*
 
@@ -32,7 +32,7 @@ La progettazione di Pharos risponde alle criticità sistemiche evidenziate dallo
 
 3. *Offrire un canale di comunicazione confidenziale e protetto capace di abbattere le resistenze legate al timore di ritorsioni, fattore che attualmente dissuade il 12% degli utenti.*
 
-4. *Contrastare la percezione di inefficacia istituzionale, fattore che attualmente frena il 26% degli utenti, convinte dell'inutilità della segnalazione, garantendo la totale trasparenza dell'iter e la tracciabilità della pratica da parte dell'utente."*
+4. *Contrastare la percezione di inefficacia istituzionale, fattore che attualmente frena il 26% degli utenti, convinte dell'inutilità della segnalazione, garantendo la totale trasparenza dell'iter e la tracciabilità della pratica da parte dell'utente.*
 
 5. *Colmare il divario di segnalazione tra le diverse componenti accademiche, focalizzandosi sulle fasce più vulnerabili, in particolare gli studenti, il cui tasso di segnalazione (7%) risulta attualmente molto inferiore rispetto a quello del personale universitario (23%).*
 
@@ -69,13 +69,13 @@ La progettazione di Pharos risponde alle criticità sistemiche evidenziate dallo
 == Panoramica del documento 
 Il presente *Requirements Analysis Document* (RAD) ha lo scopo di formalizzare i requisiti funzionali e non funzionali della piattaforma *Pharos*, il comportamento atteso del sistema, stabilendo i confini del dominio applicativo, e fornendo una base concordata tra il team di sviluppo e gli stakeholder.
 
-Il testo si rivolge principalmente ai docenti e agli stakeholders interni ed esterni(studenti e personale accademico, Consigliere di Fiducia, CUG), nonché al team di sviluppo come guida architetturale per le successive fasi di progettazione, implementazione e testing.
+Il testo si rivolge principalmente ai docenti e agli stakeholders interni ed esterni (studenti e personale accademico, Consigliere di Fiducia, CUG), nonché al team di sviluppo come guida architetturale per le successive fasi di progettazione, implementazione e testing.
 
 Il documento è strutturato in modo da fornire una scomposizione progressiva delle specifiche della piattaforma Pharos, partendo dal contesto generale per arrivare alla formalizzazione tecnica dei modelli. I capitoli successivi sono organizzati come segue:
 
 - @introduzione: *Introduzione*: Definisce lo scopo del sistema, l'ambito di sistema, gli obiettivi e criteri di successo, definizioni, acronimi e abbreviazioni, riferimenti bibliografici e la presente struttura documentale.
 
-- @sis_corrente: *Sistema Attuale*: Analizza i processi attualmente in uso presso l'Ateneo per la gestione delle segnalazioni e le relative criticità. 
+- @sis_corrente: *Sistema Corrente*: Analizza i processi attualmente in uso presso l'Ateneo per la gestione delle segnalazioni e le relative criticità. 
 
 - @sis_proposto: *Sistema Proposto*: Descrive in dettaglio la panoramica della nuova architettura. 
 

@@ -1,5 +1,9 @@
 #import "../../../templates/common.typ": palette-primary, readable-text, table-style
 
+In questa sezione vengono mostrate le tabelle degli oggetti individuati per i moduli di gestione, illustrandone nome, tipologia, attributi, metodi e relazioni, requisiti e descrizione all'interno del sistema.
+
+#v(0.5em)
+
 === Gestione Utente (MO_GU)
 
 La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati per la Gestione Utente, derivati dai requisiti funzionali RF_GU_01 – RF_GU_11 e dai casi d'uso UC_01 – UC_04. 
@@ -11,7 +15,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
     #table(
       ..table-style(palette-primary),
       columns: (1.4fr, 0.9fr, 1.4fr, 1.5fr, 1.5fr, 1.1fr, 1.7fr),
-      inset: 4.5pt,
+      inset: (x: 4pt, y: 8pt),
       align: (x, y) => if y == 0 { center + horizon } else if x == 0 or x == 1 or x == 5 { center + horizon } else { left + horizon },
 
       text(fill: readable-text(palette-primary))[*Nome*],
@@ -39,7 +43,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [Diario personale per annotare eventi in modo privato e cifrato.],
 
       [*EventoDiario*], [Entity],
-      [id, data, ora, \ luogo, descrizione, \ dataCreazione, Stato],
+      [id, data, ora, \ luogo, descrizione, \ dataCreazione],
       [ottieniDettagli(), \ aggiornaDati()],
       [Diario (1), \ Allegato (0..\*), \ Segnalazione (0..\*)],
       [RF_GU_01, \ RF_GU_03],
@@ -47,8 +51,8 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
       [*Segnalazione*], [Entity],
       [id, tipologia, \ descrizione, stato, \ dataCreazione, dataInvio],
-      [impostaStato(), \ ottieniDettagli()],
-      [Utente (1), \ Allegato (0..\*), \ EventoDiario (0..\*), \ Notifica (0..\*), \ ValutazioneIA (0..1)],
+      [impostaStato(), \ ottieniDettagli(), aggiungiIntegrazioni()],
+      [Utente (1), \ Allegato (0..\*), \ EventoDiario (0..\*), \ Notifica (0..\*), \ ValutazioneIA (0..1), \ Pratica (1)],
       [RF_GU_04 – \ RF_GU_06, \ RF_GU_08, \ RF_GU_09],
       [Segnalazione formale inviata al CDF; include lo stato Bozza per il salvataggio temporaneo.],
 
@@ -69,14 +73,14 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [*ValutazioneIA*], [Entity],
       [id, gravita, \ tipologiaViolenza, \ passiSuggeriti, \ dataValutazione],
       [impostaRisultato(), \ ottieniValutazione()],
-      [Segnalazione (1)],
+      [Segnalazione (0..1)],
       [RF_GU_10, \ RF_GU_11],
       [Risultato del triage IA: gravità, tipologia di violenza, passi suggeriti.],
 
-      [*ServizioTerr.*], [Entity],
+      [*ServizioTerritoriale*], [Entity],
       [id, nome, indirizzo, \ telefono, email, \ tipologia],
       [ottieniDettaglio(), \ ottieniContatti()],
-      [ValutazioneIA (0..\*)],
+      [---],
       [RF_GU_11],
       [Struttura di assistenza territoriale (centri antiviolenza, sportelli, servizi legali) consultabile nella rubrica.],
 
@@ -93,14 +97,14 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
       [*GestoreDiario*], [Control],
       [—],
-      [aggiungiEvento(), \ rimuoviEvento(), \ cifraContenuto(), \ validaAllegato(), scollegaSegnalazione()],
+      [aggiungiEvento(), \ rimuoviEvento(), \ cifraContenuto(), \ validaAllegato(), aggiornaAllegati()],
       [InterfacciaUtente (1), \ Diario (1), \ EventoDiario (0..\*), \ Allegato (0..\*)],
       [RF_GU_01 – \ RF_GU_03],
       [Gestisce la logica di creazione, modifica, cifratura e validazione degli eventi e degli allegati.],
 
-      [*GestoreSegn*], [Control],
+      [*GestoreSegnalazione*], [Control],
       [—],
-      [inviaSegnalazione(), \ interrompiIter(), \ avviaTriageGuidato(), \ anonimizzaTesto(), \ recuperaServizi()],
+      [inviaSegnalazione(), \ interrompiIter(), \ avviaTriageGuidato(), \ anonimizzaTesto(), \ recuperaServizi(), ottieniDettagli(), aggiornaSegnalazione()],
       [InterfacciaUtente (1), \ Segnalazione (0..\*), \ Notifica (0..\*), \ ValutazioneIA (0..1), \ ServizioTerr. (0..\*)],
       [RF_GU_04 – \ RF_GU_11],
       [Coordina il ciclo di vita delle segnalazioni, l'interazione con l'IA e il recapito delle notifiche.]
@@ -111,7 +115,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
 === Gestione Consigliere di Fiducia (MO_GCDF)
 
-La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati per la Gestione Consigliere di Fiducia, derivati dai requisiti funzionali RF_GCDF_01 – RF_GCDF_09 e dai casi d'uso UC_CDF_1 – UC_CDF_2.
+La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati per la Gestione Consigliere di Fiducia, derivati dai requisiti funzionali RF_GCDF_01 – RF_GCDF_09 e dai casi d'uso UC_CDF_01 – UC_CDF_02.
 
 #v(1em)
 
@@ -121,7 +125,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
     #table(
       ..table-style(palette-primary),
       columns: (1.2fr, 0.9fr, 1.4fr, 1.5fr, 1.4fr, 1.1fr, 1.7fr),
-      inset: 4pt,
+      inset: (x: 4.5pt, y: 8pt),
       align: (x, y) => if y == 0 { center + horizon } else if x == 0 or x == 1 or x == 5 { center + horizon } else { left + horizon },
 
       text(fill: readable-text(palette-primary))[*Nome*],
@@ -178,7 +182,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
       [*PeriodoAssenza*], [Entity],
       [id, dataInizio, \ dataFine, \ avvisoAttivo],
-      [attivaAvviso(), \ disattivaAvviso(), aggiornaDate()],
+      [attivaAvviso(), \ disattivaAvviso(), impostaDate(), aggiornaDate(), \ terminaOra(), \ storicizzaAssenza()],
       [Cdf (1)],
       [RF_GCDF_07],
       [Periodo di indisponibilità del CDF con date di inizio e fine e avviso automatico.],
@@ -196,7 +200,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
       [*GestorePratiche*], [Control],
       [—],
-      [prendiInCarico(), \ aggiornaStato(), \ chiudiPratica(), \ gestisciAssenza()],
+      [prendiInCarico(), \ aggiornaStato(), \ chiudiPratica(), \ gestisciAssenza(), ottieniDettPratica(idPratica)],
       [InterfacciaCDF (1), \ Pratica (0..\*), \ StatoPratica (0..\*), \ NotaCDF (0..\*), \ EsitoPratica (0..\*)],
       [RF_GCDF_01 – \ RF_GCDF_07],
       [Coordina la logica di avanzamento, integrazione, chiusura delle pratiche e assenze del CDF.],
@@ -210,3 +214,5 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
     )
   ]
 ]
+
+#pagebreak()

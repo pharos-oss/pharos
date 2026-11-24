@@ -1,13 +1,11 @@
 #import "../../../templates/common.typ": callout-box
 
 // da questa sezione si inseriscono gli scenari utente da 1-4
-Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario gestione utente (SC_U) e Scenario gestione consigliere di fiducia (SC_CDF)
+Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario gestione utente (SC_U) e Scenario gestione consigliere di fiducia (SC_CDF).
 
 === Utente
 
 #callout-box(title:"SC_U_01 Invio di una segnalazione al Consigliere di Fiducia")[
-
-  #v(0.3em)
 
   *Partecipanti*: Giulia (Utente), Elena (Consigliere di Fiducia)
 
@@ -28,8 +26,6 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
 #callout-box(title:"SC_U_02 Annotazione di un evento nel diario")[
 
-  #v(0.3em)
-
   *Partecipanti*: Giulia (Utente)
 
   *Obiettivo*: tenere traccia di un evento nel proprio diario delle evidenze in modo privato, senza avviare una segnalazione.
@@ -48,6 +44,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
   #v(0.3em)
   
 #callout-box(title:"SC_U_03 Risposta a una richiesta di integrazioni")[
+  
   *Partecipanti*: Marco (Utente), Elena (Consigliere di Fiducia)
 
   *Obiettivo*: fornire le informazioni e i documenti aggiuntivi richiesti dal Consigliere di Fiducia per proseguire la lavorazione di una segnalazione.
@@ -63,9 +60,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
 #v(1.5em)
 
-#callout-box(title:"SC_U_04 Triage guidato tramite il modulo AI")[
-
-  #v(0.3em)
+#callout-box(title:"SC_U_04 Triage guidato tramite il modulo IA")[
 
   *Partecipanti*: Giulia (Utente)
 
@@ -76,7 +71,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
   + Giulia ha annotato nel diario tre eventi che coinvolgono la stessa persona e non sa se possano essere considerati molestia. Seleziona gli eventi e avvia il triage guidato.
   + Il sistema informa Giulia che il triage è solo orientativo, che viene svolto da un sistema di intelligenza artificiale, non sostituisce il Consigliere di Fiducia e non comporta alcun invio, e le chiede conferma.
   + Giulia conferma.
-  + Il sistema trasmette al modulo AI il testo degli eventi selezionati, privato dei dati identificativi.
+  + Il sistema trasmette al modulo IA il testo degli eventi selezionati, privato dei dati identificativi.
   + Il sistema mostra a Giulia la valutazione della gravità, la tipologia di violenza più probabile («molestia morale») e i passi dell’iter di segnalazione.
   + Il sistema chiede a Giulia se desidera inviare una segnalazione al Consigliere di Fiducia. Giulia sceglie di procedere.
 ]
@@ -85,8 +80,6 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
 // da questa sezione si inseriscono gli scenari utente da 5-8
 #callout-box(title: "SC_U_05 Consultazione dello stato di una segnalazione")[
-
-  #v(0.3em)
 
   *Partecipanti:* Giulia (Utente)
 
@@ -103,8 +96,6 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 #v(1em)
 
 #callout-box(title: "SC_U_06 Segnalazione salvata in bozza e ripresa")[
-
-  #v(0.3em)
 
   *Partecipanti:* Marco (Utente), Elena (Consigliere di Fiducia)
 
@@ -125,8 +116,6 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
 #callout-box(title: "SC_U_07 Annotazione di un evento con allegato non conforme")[
 
-  #v(0.3em)
-
   *Partecipanti:* Marco (Utente)
 
   *Obiettivo:* registrare un nuovo evento nel diario personale caricando un allegato, gestendo la correzione in caso di errore per superamento della dimensione massima consentita.
@@ -144,8 +133,6 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 #v(1.3em)
 
 #callout-box(title: "SC_U_08 Rinuncia al proseguimento dell’iter")[
-
-  #v(0.3em)
 
   *Partecipanti:* Giulia (Utente), Elena (Consigliere di Fiducia)
 

@@ -2,7 +2,11 @@
 |Utente|
 start
 :annota le prove sul diario delle evidenze;
-:si consulta con il modulo IA per valutare la gravità,\nclassificare l'evento e ricevere supporto sull'iter;
+if (vuole consultare il modulo IA?) then (si)
+  :si consulta con il modulo IA per valutare la gravità,\nclassificare l'evento e ricevere supporto sull'iter;
+else (no)
+endif
+
 if (vuole inviare la segnalazione al Consigliere?) then (no)
   :l'evento rimane salvato nel diario;
   :reindirizzamento alla Home;
@@ -11,15 +15,14 @@ else (si)
   :compila il modulo standardizzato di segnalazione;
   |Consigliere di fiducia|
   :presa in carico ed esame della segnalazione\nnell'area riservata;
-  :analisi dei dati e generazione dei report statistici;
   |Utente|
   if (vuole continuare con l'iter burocratico?) then (no)
-    :la segnalazione rimane archiviata;
-    stop
+    :interrompe l'iter e la segnalazione viene archiviata;
   else (si)
     |Consigliere di fiducia|
-    :si accorda privatamente con l'utente\nper la gestione dell'iter;
-    stop
+    :associa una pratica e si accorda privatamente\ncon l'utente per la gestione dell'iter;
+    :gestisce la pratica e al termine dell'iter\nla chiude definitivamente;
   endif
 endif
+stop
 @enduml

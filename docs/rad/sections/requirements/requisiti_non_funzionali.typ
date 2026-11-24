@@ -30,7 +30,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
   )
 ]
 
-#v(1.5em)
+#pagebreak()
 
 === Affidabilità
 
@@ -56,7 +56,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
   )
 ]
 
-#v(1.5em)
+#pagebreak()
 
 === Prestazioni
 
@@ -76,7 +76,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
 
     [*RNF_P_01*], [Tempi di risposta Modulo IA], [#block(breakable: false)[L'interrogazione del modulo IA per il Triage Guidato deve restituire l'esito e la tipologia di evento all'utente entro un tempo massimo di 5 secondi.]], [Bassa], [Media], [SC_U_04],
     
-    [*RNF_P_02*], [Supporto alla concorrenza], [#block(breakable: false)[Il sistema deve essere in grado di gestire fluidamente il flusso di traffico previsto. Lato Consigliere di Fiducia, i tempi per il caricamento delle pratiche e delle pagine del gestionale non devono superare i 2 secondi]], [Elevata], [Media], [Tutti]
+    [*RNF_P_02*], [Supporto alla concorrenza], [#block(breakable: false)[Il sistema deve essere in grado di gestire fluidamente il flusso di traffico previsto. Lato Consigliere di Fiducia, i tempi per il caricamento delle pratiche e delle pagine del gestionale non devono superare i 2 secondi.]], [Elevata], [Media], [Tutti]
   )
 ]
 
@@ -103,8 +103,6 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
 ]
 
 #v(1.5em)
-
-#pagebreak()
 
 === Implementazione 
 
@@ -172,7 +170,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
   )
 ]
 
-#v(1.5em)
+#pagebreak()
 
 === Rilascio
 
@@ -195,8 +193,6 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     [*RNF_PK_02*], [Automazione CI/CD], [#block(breakable: false)[Il processo di build, test delle API e preparazione degli artefatti (immagini Docker, pacchetti web e app mobile) deve essere gestito tramite pipeline automatizzate di Continuous Integration/Continuous Deployment.]], [Media], [Media], [Tutti]
   )
 ]
-
-#v(1.5em)
 
 === Legali 
 

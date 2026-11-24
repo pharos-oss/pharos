@@ -1,3 +1,4 @@
+In questa sezione vengono mostrati i mockup delle interfacce grafiche, illustrando il layout visivo e gli elementi interattivi delle schermate dedicate all'Utente e al Consigliere di Fiducia.
 
 == Schermata Home
 
@@ -14,7 +15,7 @@
 
 == Schermata Triage IA
 
-=== MU_02: Triage IA — Screening Iniziale (UC_02, SC_U_02)
+=== MU_02: Triage IA — Screening Iniziale (UC_02, SC_U_04)
 
 #v(3em)
 
@@ -27,7 +28,7 @@
 
 == Schermata Valutazione AI 
 
-=== MU_03: Esito Triage IA — Valutazione e Suggerimenti (UC_02, SC_U_02)
+=== MU_03: Esito Triage IA — Valutazione e Suggerimenti (UC_02, SC_U_04)
 #v(3em)
 
 #align(center)[
@@ -52,7 +53,7 @@
 
 == Schermata Segnalazione Inviata
 
-=== MU_05: Segnalazione Inoltrata con Successo (UC_03, SC_U_03)
+=== MU_05: Segnalazione Inoltrata con Successo (UC_03, SC_U_01)
 
 #v(3em)
 
@@ -80,7 +81,7 @@
 
 == Schermata Dashboard CDF
 
-=== MU_07: Dashboard CDF — Elenco Segnalazioni (UC_CDF_1, SC_CDF_01)
+=== MU_07: Dashboard CDF — Elenco Segnalazioni (UC_CDF_01, SC_CDF_01)
 
 #v(3em)
 
@@ -95,7 +96,7 @@
 
 == Schermata Dettaglio Pratica CDF
 
-=== MU_08: Dettaglio Pratica CDF (UC_CDF_1, SC_CDF_01)
+=== MU_08: Dettaglio Pratica CDF (UC_CDF_01, SC_CDF_01)
 
 #v(3em)
 
@@ -121,7 +122,7 @@
 
 == Schermata Report CDF
 
-=== MU_10: Report Statistici CDF (UC_CDF_2)
+=== MU_10: Report Statistici CDF (RF_GCDF_08, RF_GCDF_09)
 
 #v(3em)
 
@@ -131,3 +132,5 @@
   caption: ["MU_10 — Area report statistici con KPI, grafici e funzione di esportazione lato CDF (versione web)"]
 )
 ]
+
+#pagebreak()
