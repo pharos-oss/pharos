@@ -24,3 +24,5 @@
 #show ref: set text(fill: blue)
 
 #include "sections/introduzione.typ"
+
+#include "sections/architettura_corrente.typ"

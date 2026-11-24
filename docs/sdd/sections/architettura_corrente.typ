@@ -1,0 +1,10 @@
+= Architettura del Sistema Corrente <architettura_corrente>
+
+Attualmente, presso l'Università degli Studi di Salerno non è presente un'architettura software dedicata alla gestione delle segnalazioni di abusi, molestie, mobbing, straining e stalking. L'organizzazione esistente poggia su strumenti istituzionali generici non integrati tra loro e su flussi operativi manuali:
+
+- *Portale Web Istituzionale di Ateneo:* espone pagine informative statiche contenenti i regolamenti e i recapiti e-mail del Comitato Unico di Garanzia (CUG) e del Consigliere di Fiducia (CDF), senza offrire funzionalità interattive di compilazione guidata o inoltro protetto.
+- *Infrastruttura di Posta Elettronica Istituzionale:* costituisce l'unico canale digitale impiegato per l'invio delle segnalazioni, la trasmissione degli allegati e le comunicazioni successive (richieste di integrazione e fissazione dei colloqui conoscitivi).
+- *Dispositivi personali degli utenti:* utilizzati autonomamente dagli studenti e dal personale universitario per raccogliere e archiviare localmente le evidenze (screenshot, documenti PDF, e-mail, registrazioni audio) prive di cifratura dedicata e di marcatura cronologica certificata.
+- *Strumenti personali del Consigliere di Fiducia:* casella di posta elettronica istituzionale, archivio locale e calendario personale adottati dal CDF per esaminare le segnalazioni, pianificare i colloqui e predisporre manualmente i riepiloghi statistici destinati al CUG.
+
+L'interazione tra i componenti avviene esclusivamente in modalità punto-punto tramite messaggi e-mail, difatti l'utente reperisce il contatto sul portale web di Ateneo, raccoglie le prove sul proprio dispositivo e le trasmette via posta elettronica al CDF, il quale gestisce l'intero iter tramite risposte manuali. Tale assetto comporta l'esposizione immediata dell'identità del mittente nell'intestazione del messaggio, l'assenza di una base dati centralizzata per il tracciamento dello stato della pratica e la mancanza di qualsiasi supporto applicativo per l'inquadramento preliminare dell'episodio.
