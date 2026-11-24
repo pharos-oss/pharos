@@ -50,7 +50,7 @@ class GestoreDiario <<Control>> {
   + aggiornaAllegati()
 }
 
-class GestoreSegn <<Control>> {
+class GestoreSegnalazione <<Control>> {
   + inviaSegnalazione()
   + interrompiIter()
   + avviaTriageGuidato()
@@ -154,7 +154,7 @@ class GestorePratiche <<Control>> {
   + aggiornaStato()
   + chiudiPratica()
   + gestisciAssenza()
-  + ottieniDettPratica()
+  + ottieniDettaglioPratica()
 }
 
 class GestoreReport <<Control>> {
@@ -229,16 +229,16 @@ class PeriodoAssenza <<Entity>> {
 }
 
 InterfacciaUtente -down-> GestoreDiario : (1)
-InterfacciaUtente -down-> GestoreSegn : (1)
+InterfacciaUtente -down-> GestoreSegnalazione : (1)
 
 GestoreDiario -down-> Diario
 GestoreDiario -down-> EventoDiario
 GestoreDiario -down-> Allegato
 
-GestoreSegn -down-> Segnalazione
-GestoreSegn -down-> Notifica
-GestoreSegn -down-> ValutazioneIA
-GestoreSegn -down-> ServizioTerritoriale
+GestoreSegnalazione -down-> Segnalazione
+GestoreSegnalazione -down-> Notifica
+GestoreSegnalazione -down-> ValutazioneIA
+GestoreSegnalazione -down-> ServizioTerritoriale
 
 Utente "1" -- "1" Diario
 Utente "1" -- "0..*" Segnalazione

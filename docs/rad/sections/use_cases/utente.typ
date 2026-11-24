@@ -150,7 +150,7 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
 
   *FLUSSO DI EVENTI PRINCIPALE / MAIN SCENARIO*
   1. *Utente:* Richiede di aggiungere un nuovo evento al diario personale.
-  2. *Sistema:* Chiede di inserire i dettagli compilando un modulo (data, luogo, ora, descrizione, file allegato).
+  2. *Sistema:* Chiede di inserire i dettagli compilando un modulo (data, ora, luogo, descrizione, file allegato).
   3. *Utente:* Inserisce i dati richiesti, allega un file probatorio e clicca "Salva evento".
   4. *Sistema:* Controlla che i dati siano validi (campi obbligatori compilati, file < es. 50MB, formato ammesso).
   5. *Sistema:* Cifra l'evento e lo salva correttamente nel diario personale.

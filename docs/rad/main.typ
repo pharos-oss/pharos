@@ -33,16 +33,14 @@
   ("06/11/2026", "0.3", "Stesura degli scenari CDF", "Gianmarco Raimondi, Francesco Imbriaco"),
   ("07/11/2026", "0.4", "Definizione dei casi d'uso utente 1 - 2; Definizione dei casi d'uso utente 3 - 4", "Carmine Saggese, Alessia D'Amico, Gianmarco Raimondi, Leonardo Trotta"),
   ("07/11/2026", "0.4", "Definizione dei casi d'uso CDF", "Mario Senatore, Francesco Imbriaco"),
-  ("09/11/2026", "0.5", "Stesura dei requisiti funzionali e non funzionali", "Tutti"),
+  ("09/11/2026", "0.5", "Stesura dei requisiti funzionali e non funzionali", "Tutti i TM"),
   ("12/11/2026", "0.6", "Stesura della tabella degli oggetti", "Francesco Imbriaco, Alessia D'Amico"),
   ("12/11/2026", "0.6", "Stesura del diagramma delle classi", "Leonardo Trotta, Mario Senatore"),
-  ("13/11/2026", "0.7", "Stesura del diagramma di sequenza 1", "Mario Senatore, Gianmarco Raimondi"),
-  ("13/11/2026", "0.7", "Stesura del diagramma di sequenza 2", "Alessia D'Amico, Carmine Saggese"),
-  ("17/11/2026", "0.7", "Stesura del diagramma di sequenza 3", "Leonardo Trotta, Francesco Imbriaco"),
+  ("17/11/2026", "0.7", "Stesura dei diagrammi di sequenza", "Tutti i TM"),
   ("19/11/2026", "0.8", "Inserimento dei mockup", "Francesco Imbriaco, Alessia D'Amico"),
   ("20/11/2026", "0.8", "Inserimento dei diagrammi navigazionali", "Carmine Saggese, Leonardo Trotta"),
   ("20/11/2026", "0.9", "Inserimento del glossario", "Gianmarco Raimondi"),
-  ("23/11/2026", "1.0", "Revisione finale", "Tutti"),
+  ("23/11/2026", "1.0", "Revisione finale", "Tutti i TM"),
 )
 
 #show: doc-template.with(
@@ -51,18 +49,29 @@
   reference: "RAD_Pharos",
   metadata: metadata,
   revision-history: revision-history,
+  cover-logo-height: 9cm,
 )
 #show link: it => text(fill: blue, underline(it)) 
 #show ref: set text(fill: blue)
 
 #include "sections/introduzione.typ"
 
+#pagebreak(weak: true)
+
 #include "sections/sistema_corrente.typ"
+
+#pagebreak(weak: true)
 
 #include "sections/sistema_proposto.typ"
 
+#pagebreak(weak: true)
+
 #include "sections/requisiti_sistema.typ"
 
+#pagebreak(weak: true)
+
 #include "sections/modelli_sistema.typ"
+
+#pagebreak(weak: true)
 
 #include "sections/glossary.typ"

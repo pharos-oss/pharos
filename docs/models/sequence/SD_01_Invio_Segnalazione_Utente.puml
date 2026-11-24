@@ -20,7 +20,7 @@ autonumber
 
 actor "Utente" as U
 boundary "InterfacciaUtente" as IU
-control "GestoreSegn" as GS
+control "GestoreSegnalazione" as GS
 entity "ValutazioneIA" as VIA
 entity "ServizioTerritoriale" as ST
 entity "Segnalazione" as S

@@ -73,7 +73,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [RF_GU_10, \ RF_GU_11],
       [Risultato del triage IA: gravità, tipologia di violenza, passi suggeriti.],
 
-      [*ServizioTerr.*], [Entity],
+      [*ServizioTerritoriale*], [Entity],
       [id, nome, indirizzo, \ telefono, email, \ tipologia],
       [ottieniDettaglio(), \ ottieniContatti()],
       [---],
@@ -98,7 +98,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
       [RF_GU_01 – \ RF_GU_03],
       [Gestisce la logica di creazione, modifica, cifratura e validazione degli eventi e degli allegati.],
 
-      [*GestoreSegn*], [Control],
+      [*GestoreSegnalazione*], [Control],
       [—],
       [inviaSegnalazione(), \ interrompiIter(), \ avviaTriageGuidato(), \ anonimizzaTesto(), \ recuperaServizi(), ottieniDettagli(), aggiornaSegnalazione()],
       [InterfacciaUtente (1), \ Segnalazione (0..\*), \ Notifica (0..\*), \ ValutazioneIA (0..1), \ ServizioTerr. (0..\*)],
@@ -196,7 +196,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
       [*GestorePratiche*], [Control],
       [—],
-      [prendiInCarico(), \ aggiornaStato(), \ chiudiPratica(), \ gestisciAssenza(), ottieniDettPratica()],
+      [prendiInCarico(), \ aggiornaStato(), \ chiudiPratica(), \ gestisciAssenza(), ottieniDettaglioPratica()],
       [InterfacciaCDF (1), \ Pratica (0..\*), \ StatoPratica (0..\*), \ NotaCDF (0..\*), \ EsitoPratica (0..\*)],
       [RF_GCDF_01 – \ RF_GCDF_07],
       [Coordina la logica di avanzamento, integrazione, chiusura delle pratiche e assenze del CDF.],
