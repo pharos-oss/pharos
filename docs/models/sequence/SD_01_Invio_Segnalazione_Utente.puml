@@ -18,7 +18,7 @@ skinparam sequence {
 
 autonumber
 
-actor "Utente" as U
+actor "Utente\n(Marco)" as U
 boundary "InterfacciaUtente" as IU
 control "GestoreSegnalazione" as GS
 entity "ValutazioneIA" as VIA
