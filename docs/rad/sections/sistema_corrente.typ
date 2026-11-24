@@ -53,6 +53,7 @@ Come evidenziato dall'analisi dei bisogni di business, questo modello presenta d
 #v(2em)
 
 == Activity Diagram
+In questa sezione viene mostrato il diagramma delle attività del sistema corrente, illustrando il flusso operativo attuale e le interazioni tra gli attori coinvolti nella gestione delle segnalazioni.
 
 #v(0.5em)
 

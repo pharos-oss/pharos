@@ -46,8 +46,6 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
 
 #v(1.5em)
 
-#pagebreak()
-
 === Gestione Consigliere di Fiducia
 
 #align(center)[
@@ -83,3 +81,5 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     [*RF_GCDF_09*], [Esportazione report], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di esportare i report statistici e i grafici generati in formato PDF e CSV.]], [CDF], [Bassa], [SC_CDF_04]
   )
 ]
+
+#pagebreak()

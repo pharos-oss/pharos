@@ -30,7 +30,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
   )
 ]
 
-#v(1.5em)
+#pagebreak()
 
 === Affidabilità
 
@@ -56,7 +56,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
   )
 ]
 
-#v(1.5em)
+#pagebreak()
 
 === Prestazioni
 
@@ -103,8 +103,6 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
 ]
 
 #v(1.5em)
-
-#pagebreak()
 
 === Implementazione 
 
@@ -172,7 +170,7 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
   )
 ]
 
-#v(1.5em)
+#pagebreak()
 
 === Rilascio
 
@@ -195,8 +193,6 @@ Di seguito sono elencati i requisiti non funzionali del sistema, suddivisi per c
     [*RNF_PK_02*], [Automazione CI/CD], [#block(breakable: false)[Il processo di build, test delle API e preparazione degli artefatti (immagini Docker, pacchetti web e app mobile) deve essere gestito tramite pipeline automatizzate di Continuous Integration/Continuous Deployment.]], [Media], [Media], [Tutti]
   )
 ]
-
-#v(1.5em)
 
 === Legali 
 

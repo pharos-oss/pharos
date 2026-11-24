@@ -132,3 +132,5 @@ In questa sezione vengono mostrati i mockup delle interfacce grafiche, illustran
   caption: ["MU_10 — Area report statistici con KPI, grafici e funzione di esportazione lato CDF (versione web)"]
 )
 ]
+
+#pagebreak()
