@@ -81,7 +81,7 @@ In questa sezione vengono mostrati i mockup delle interfacce grafiche, illustran
 
 == Schermata Dashboard CDF
 
-=== MU_07: Dashboard CDF — Elenco Segnalazioni (UC_CDF_1, SC_CDF_01)
+=== MU_07: Dashboard CDF — Elenco Segnalazioni (UC_CDF_01, SC_CDF_01)
 
 #v(3em)
 
@@ -96,7 +96,7 @@ In questa sezione vengono mostrati i mockup delle interfacce grafiche, illustran
 
 == Schermata Dettaglio Pratica CDF
 
-=== MU_08: Dettaglio Pratica CDF (UC_CDF_1, SC_CDF_01)
+=== MU_08: Dettaglio Pratica CDF (UC_CDF_01, SC_CDF_01)
 
 #v(3em)
 
@@ -122,7 +122,7 @@ In questa sezione vengono mostrati i mockup delle interfacce grafiche, illustran
 
 == Schermata Report CDF
 
-=== MU_10: Report Statistici CDF (UC_CDF_2)
+=== MU_10: Report Statistici CDF (RF_GCDF_08, RF_GCDF_09)
 
 #v(3em)
 

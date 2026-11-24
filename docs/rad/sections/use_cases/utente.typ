@@ -194,7 +194,9 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   *Data*: 07/11/2026 \
   *Versione*: 1.0 \
   *Autore*: Leonardo Trotta, Gianmarco Raimondi \
-  *Descrizione*: Lo UC descrive la funzionalità di consultazione dello stato di avanzamento di una segnalazione attiva e la possibilità di ritirarla interrompendone l'iter ufficiale.
+  *Descrizione*: Lo UC descrive la funzionalità di consultazione dello stato di avanzamento di una segnalazione attiva e la possibilità di ritirarla interrompendone l'iter ufficiale. \
+  *Attore Principale:* Utente (È interessato a consultare lo stato di avanzamento delle segnalazioni effettuate) \
+  *Attori secondari:* Consigliere di Fiducia, Sistema (Notifiche)
 
   *Entry Condition*:
   - Un Utente ha effettuato l'accesso al sistema 

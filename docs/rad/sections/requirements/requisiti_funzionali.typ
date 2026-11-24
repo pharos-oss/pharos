@@ -40,7 +40,7 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     
     [*RF_GU_10*], [Triage IA anonimizzato], [#block(breakable: false)[Il sistema deve permettere all'utente di inviare eventi del diario a un modulo IA per una valutazione indicativa di gravità e tipologia di molestia. I dati devono essere automaticamente resi anonimi dal sistema prima dell'invio al modulo. ]], [Utente], [Bassa], [SC_U_04, UC_02],
     
-    [*RF_GU_11*], [Servizi territoriali e rubrica], [#block(breakable: false)[Il sistema deve fornire all'utente indicazioni sulle strutture territoriali di assistenza in zona (es. forze dell'ordine, centri antiviolenza) e una rubrica di primo contatto per supporto esterno all'Ateneo.]], [Sistema], [Elevata], [SC_U_04, \ UC_02, SD_01], 
+    [*RF_GU_11*], [Servizi territoriali e rubrica], [#block(breakable: false)[Il sistema deve fornire all'utente indicazioni sulle strutture territoriali di assistenza in zona (es. forze dell'ordine, centri antiviolenza) e una rubrica di primo contatto per supporto esterno all'Ateneo.]], [Sistema], [Elevata], [SC_U_04, SD_01], 
   )
 ]
 
@@ -76,7 +76,7 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     
     [*RF_GCDF_07*], [Gestione assenza temporanea], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di impostare un periodo di assenza, attivando un avviso automatico per gli utenti riguardo all'allungamento dei tempi di risposta.]], [CDF], [Bassa], [Aggiuntivo],
     
-    [*RF_GCDF_08*], [Generazione report aggregati], [#block(breakable: false)[Il sistema deve permettere di generare report statistici anonimi indicando periodo di riferimento, tipologia di evento e componente accademica.]], [CDF], [Bassa], [SC_CDF_04, UC_CDF_02],
+    [*RF_GCDF_08*], [Generazione report aggregati], [#block(breakable: false)[Il sistema deve permettere di generare report statistici anonimi indicando periodo di riferimento, tipologia di evento e componente accademica.]], [CDF], [Bassa], [SC_CDF_04],
     
     [*RF_GCDF_09*], [Esportazione report], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di esportare i report statistici e i grafici generati in formato PDF e CSV.]], [CDF], [Bassa], [SC_CDF_04]
   )

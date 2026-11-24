@@ -154,7 +154,7 @@ class GestorePratiche <<Control>> {
   + aggiornaStato()
   + chiudiPratica()
   + gestisciAssenza()
-  + ottieniDettaglioPratica()
+  + ottieniDettPratica(idPratica)
 }
 
 class GestoreReport <<Control>> {

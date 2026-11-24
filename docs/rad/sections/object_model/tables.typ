@@ -200,7 +200,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
       [*GestorePratiche*], [Control],
       [—],
-      [prendiInCarico(), \ aggiornaStato(), \ chiudiPratica(), \ gestisciAssenza(), ottieniDettaglioPratica()],
+      [prendiInCarico(), \ aggiornaStato(), \ chiudiPratica(), \ gestisciAssenza(), ottieniDettPratica(idPratica)],
       [InterfacciaCDF (1), \ Pratica (0..\*), \ StatoPratica (0..\*), \ NotaCDF (0..\*), \ EsitoPratica (0..\*)],
       [RF_GCDF_01 – \ RF_GCDF_07],
       [Coordina la logica di avanzamento, integrazione, chiusura delle pratiche e assenze del CDF.],
