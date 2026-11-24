@@ -1,5 +1,9 @@
 #import "../../../templates/common.typ": palette-primary, readable-text, table-style
 
+In questa sezione vengono mostrate le tabelle degli oggetti individuati per i moduli di gestione, illustrandone nome, tipologia, attributi, metodi e relazioni, requisiti e descrizione all'interno del sistema.
+
+#v(0.5em)
+
 === Gestione Utente (MO_GU)
 
 La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati per la Gestione Utente, derivati dai requisiti funzionali RF_GU_01 – RF_GU_11 e dai casi d'uso UC_01 – UC_04. 
@@ -11,7 +15,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
     #table(
       ..table-style(palette-primary),
       columns: (1.4fr, 0.9fr, 1.4fr, 1.5fr, 1.5fr, 1.1fr, 1.7fr),
-      inset: (x: 4.5pt, y: 8pt),
+      inset: (x: 4pt, y: 8pt),
       align: (x, y) => if y == 0 { center + horizon } else if x == 0 or x == 1 or x == 5 { center + horizon } else { left + horizon },
 
       text(fill: readable-text(palette-primary))[*Nome*],
@@ -210,3 +214,5 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
     )
   ]
 ]
+
+#pagebreak()

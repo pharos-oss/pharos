@@ -1,13 +1,11 @@
 #import "../../../templates/common.typ": callout-box
 
 // da questa sezione si inseriscono gli scenari utente da 1-4
-Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario gestione utente (SC_U) e Scenario gestione consigliere di fiducia (SC_CDF)
+Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario gestione utente (SC_U) e Scenario gestione consigliere di fiducia (SC_CDF).
 
 === Utente
 
 #callout-box(title:"SC_U_01 Invio di una segnalazione al Consigliere di Fiducia")[
-
-  #v(0.3em)
 
   *Partecipanti*: Giulia (Utente), Elena (Consigliere di Fiducia)
 
@@ -28,8 +26,6 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
 #callout-box(title:"SC_U_02 Annotazione di un evento nel diario")[
 
-  #v(0.3em)
-
   *Partecipanti*: Giulia (Utente)
 
   *Obiettivo*: tenere traccia di un evento nel proprio diario delle evidenze in modo privato, senza avviare una segnalazione.
@@ -48,6 +44,7 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
   #v(0.3em)
   
 #callout-box(title:"SC_U_03 Risposta a una richiesta di integrazioni")[
+  
   *Partecipanti*: Marco (Utente), Elena (Consigliere di Fiducia)
 
   *Obiettivo*: fornire le informazioni e i documenti aggiuntivi richiesti dal Consigliere di Fiducia per proseguire la lavorazione di una segnalazione.
@@ -64,8 +61,6 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 #v(1.5em)
 
 #callout-box(title:"SC_U_04 Triage guidato tramite il modulo IA")[
-
-  #v(0.3em)
 
   *Partecipanti*: Giulia (Utente)
 
@@ -86,8 +81,6 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 // da questa sezione si inseriscono gli scenari utente da 5-8
 #callout-box(title: "SC_U_05 Consultazione dello stato di una segnalazione")[
 
-  #v(0.3em)
-
   *Partecipanti:* Giulia (Utente)
 
   *Obiettivo:* verificare lo stato di avanzamento e la cronologia degli aggiornamenti della propria segnalazione.
@@ -103,8 +96,6 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 #v(1em)
 
 #callout-box(title: "SC_U_06 Segnalazione salvata in bozza e ripresa")[
-
-  #v(0.3em)
 
   *Partecipanti:* Marco (Utente), Elena (Consigliere di Fiducia)
 
@@ -125,8 +116,6 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 
 #callout-box(title: "SC_U_07 Annotazione di un evento con allegato non conforme")[
 
-  #v(0.3em)
-
   *Partecipanti:* Marco (Utente)
 
   *Obiettivo:* registrare un nuovo evento nel diario personale caricando un allegato, gestendo la correzione in caso di errore per superamento della dimensione massima consentita.
@@ -144,8 +133,6 @@ Gli identificativi degli scenari riportano la gestione di appartenenza: Scenario
 #v(1.3em)
 
 #callout-box(title: "SC_U_08 Rinuncia al proseguimento dell’iter")[
-
-  #v(0.3em)
 
   *Partecipanti:* Giulia (Utente), Elena (Consigliere di Fiducia)
 

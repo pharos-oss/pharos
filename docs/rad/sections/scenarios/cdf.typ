@@ -3,8 +3,6 @@
 === Consigliere di Fiducia
 #callout-box(title: "SC_CDF_01 Presa in carico di una nuova segnalazione")[
 
-  #v(0.5em)
-
   *Partecipanti:* Elena (Consigliere di Fiducia), Giulia (Utente)
 
   *Obiettivo:* prendere in carico una nuova segnalazione consultando in un unico punto la descrizione e le evidenze in ordine cronologico.
@@ -24,8 +22,6 @@
 
 #callout-box(title: "SC_CDF_02 Aggiornamento dello stato della pratica")[
 
-  #v(0.3em)
-
   *Partecipanti:* Elena (Consigliere di Fiducia), Giulia (Utente)
 
   *Obiettivo:* tenere informato l'utente sull'avanzamento della pratica, garantendo la trasparenza dell'iter.
@@ -44,8 +40,6 @@
 
 #callout-box(title: "SC_CDF_03 Chiusura della pratica")[
 
-  #v(0.3em)
-
   *Partecipanti:* Elena (Consigliere di Fiducia), Marco (Utente)
 
   *Obiettivo:* concludere formalmente la pratica, registrandone l'esito e conservandone traccia.
@@ -63,8 +57,6 @@
 #v(1.5em)
 
 #callout-box(title: "SC_CDF_04 Generazione di un report statistico")[
-
-  #v(0.3em)
 
   *Partecipanti:* Elena (Consigliere di Fiducia)
 

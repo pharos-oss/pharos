@@ -1,3 +1,7 @@
+In questa sezione vengono mostrati i diagrammi di sequenza relativi ai principali casi d'uso, illustrando le interazioni temporali e lo scambio di messaggi tra gli attori e gli oggetti del sistema.
+
+#v(0.5em)
+
 === SD_01_Invio_Segnalazione_Utente
 
 #align(center)[
@@ -24,3 +28,5 @@
     caption: ["Sequence Diagram: Richiesta e Invio Integrazioni"]
   )
 ]
+
+#pagebreak()

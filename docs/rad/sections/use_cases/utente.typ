@@ -80,6 +80,8 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   - Un Utente ha effettuato l'accesso al sistema \
   - L'Utente ha annotato nel diario almeno un evento \
 
+  #v(0.5em)
+
   *Exit condition (On success):* \
   - Il Sistema mostra all'Utente l'esito orientativo della valutazione \
   - L'Utente sceglie se procedere o meno con una segnalazione formale \

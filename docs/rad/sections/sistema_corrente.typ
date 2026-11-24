@@ -1,19 +1,6 @@
-#import "../../templates/common.typ": palette-primary
-
-#let scenario-box = block.with(
-  width: 100%,
-  inset: 12pt,
-  radius: 4pt,
-  fill: palette-primary.lighten(93%),
-  stroke: (left: 3pt + palette-primary),
-)
+#import "../../templates/common.typ": palette-primary, callout-box
 
 = Sistema Corrente <sis_corrente>
-
-#v(1em)
-
-== Panoramica
-
 Il sistema attualmente in uso presso l'Università degli Studi di Salerno per la gestione delle segnalazioni di abusi, molestie, mobbing, straining e stalking è caratterizzato da processi non digitalizzati e da una netta frammentazione dei servizi di supporto. Gli utenti che desiderano cercare aiuto devono interfacciarsi in autonomia con le figure preposte, come il Comitato Unico di Garanzia (CUG) e il Consigliere di Fiducia (attualmente in fase di attivazione), avvalendosi di canali di comunicazione tradizionali (e-mail istituzionale).
 
 Come evidenziato dall'analisi dei bisogni di business, questo modello presenta diverse barriere strutturali, ovvero:
@@ -30,10 +17,7 @@ Come evidenziato dall'analisi dei bisogni di business, questo modello presenta d
 
 #v(0.5em)
 
-#scenario-box[
-  === SC_1 Segnalazione manuale via e-mail
-
-  #v(0.3em)
+#callout-box(title: "SC_1 Segnalazione manuale via e-mail")[
 
   *Partecipanti:* Utente (Studente/Dipendente), Consigliere di Fiducia
 
@@ -51,10 +35,7 @@ Come evidenziato dall'analisi dei bisogni di business, questo modello presenta d
 
 #pagebreak()
 
-#scenario-box[
-  === SC_1_ALT Segnalazione manuale con richiesta di integrazioni
-
-  #v(0.3em)
+#callout-box(title: "SC_1_ALT Segnalazione manuale con richiesta di integrazioni")[
 
   *Partecipanti:* Utente (Studente/Dipendente), Consigliere di Fiducia
 

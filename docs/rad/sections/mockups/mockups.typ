@@ -1,3 +1,4 @@
+In questa sezione vengono mostrati i mockup delle interfacce grafiche, illustrando il layout visivo e gli elementi interattivi delle schermate dedicate all'Utente e al Consigliere di Fiducia.
 
 == Schermata Home
 
