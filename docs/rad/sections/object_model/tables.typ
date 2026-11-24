@@ -115,7 +115,7 @@ La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati pe
 
 === Gestione Consigliere di Fiducia (MO_GCDF)
 
-La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati per la Gestione Consigliere di Fiducia, derivati dai requisiti funzionali RF_GCDF_01 – RF_GCDF_09 e dai casi d'uso UC_CDF_1 – UC_CDF_2.
+La tabella seguente elenca gli oggetti Entity, Boundary e Control individuati per la Gestione Consigliere di Fiducia, derivati dai requisiti funzionali RF_GCDF_01 – RF_GCDF_09 e dai casi d'uso UC_CDF_01 – UC_CDF_02.
 
 #v(1em)
 

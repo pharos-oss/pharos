@@ -62,13 +62,13 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     text(fill: readable-text(palette-primary))[*Priorità*],
     text(fill: readable-text(palette-primary))[*Scenari / UC*],
 
-    [*RF_GCDF_01*], [Visualizzazione segnalazioni], [#block(breakable: false)[Il sistema deve mostrare al Consigliere di Fiducia l'elenco delle segnalazioni ricevute, evidenziando chiaramente le nuove richieste che devono essere prese in carico.]], [CDF], [Elevata], [SC_CDF_01, UC_CDF_1],
+    [*RF_GCDF_01*], [Visualizzazione segnalazioni], [#block(breakable: false)[Il sistema deve mostrare al Consigliere di Fiducia l'elenco delle segnalazioni ricevute, evidenziando chiaramente le nuove richieste che devono essere prese in carico.]], [CDF], [Elevata], [SC_CDF_01, UC_CDF_01],
     
     [*RF_GCDF_02*], [Ricerca e filtri avanzati], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di filtrare le segnalazioni per stato, data, ID pratica e tipologia di violenza.]], [CDF], [Media], [Generale],
     
-    [*RF_GCDF_03*], [Presa in carico], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di visionare i dettagli e gli allegati di una nuova segnalazione e di modificarne lo stato in "Presa in carico".]], [CDF], [Elevata], [SC_CDF_01, UC_CDF_1],
+    [*RF_GCDF_03*], [Presa in carico], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di visionare i dettagli e gli allegati di una nuova segnalazione e di modificarne lo stato in "Presa in carico".]], [CDF], [Elevata], [SC_CDF_01, UC_CDF_01],
     
-    [*RF_GCDF_04*], [Avanzamento iter e note], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di aggiornare lo stato di una pratica e inserire note e appuntamenti che diverranno visibili all'utente.]], [CDF], [Elevata], [SC_CDF_02, UC_CDF_1],
+    [*RF_GCDF_04*], [Avanzamento iter e note], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di aggiornare lo stato di una pratica e inserire note e appuntamenti che diverranno visibili all'utente.]], [CDF], [Elevata], [SC_CDF_02, UC_CDF_01],
     
     [*RF_GCDF_05*], [Richiesta integrazioni], [#block(breakable: false)[Il sistema deve consentire al Consigliere di Fiducia di impostare lo stato su "In attesa di integrazioni" specificando le informazioni o i documenti mancanti all'utente.]], [CDF], [Media], [SC_U_03],
 
@@ -76,7 +76,7 @@ Di seguito sono elencati i requisiti funzionali del sistema, suddivisi per gesti
     
     [*RF_GCDF_07*], [Gestione assenza temporanea], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di impostare un periodo di assenza, attivando un avviso automatico per gli utenti riguardo all'allungamento dei tempi di risposta.]], [CDF], [Bassa], [Aggiuntivo],
     
-    [*RF_GCDF_08*], [Generazione report aggregati], [#block(breakable: false)[Il sistema deve permettere di generare report statistici anonimi indicando periodo di riferimento, tipologia di evento e componente accademica.]], [CDF], [Bassa], [SC_CDF_04, UC_CDF_2],
+    [*RF_GCDF_08*], [Generazione report aggregati], [#block(breakable: false)[Il sistema deve permettere di generare report statistici anonimi indicando periodo di riferimento, tipologia di evento e componente accademica.]], [CDF], [Bassa], [SC_CDF_04, UC_CDF_02],
     
     [*RF_GCDF_09*], [Esportazione report], [#block(breakable: false)[Il sistema deve permettere al Consigliere di Fiducia di esportare i report statistici e i grafici generati in formato PDF e CSV.]], [CDF], [Bassa], [SC_CDF_04]
   )
