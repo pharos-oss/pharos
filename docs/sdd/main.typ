@@ -50,3 +50,7 @@
 #pagebreak(weak: true)
 
 #include "sections/architettura_proposta.typ"
+
+#pagebreak(weak: true)
+
+#include "sections/decomposizione_sottosistemi.typ"
