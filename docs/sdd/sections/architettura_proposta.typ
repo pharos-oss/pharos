@@ -27,3 +27,6 @@ Le interazioni principali tra i componenti si sviluppano lungo quattro flussi:
 3. *Inoltro e lavorazione della Pratica:* all'invio di una segnalazione, il client utente cifra localmente l'intero contenuto sensibile (cifratura End-to-End, decifrabile esclusivamente dall'utente e dal CDF) e trasmette separatamente i soli metadati statistici non identificativi (tipologia e componente accademica). Il Server Applicativo archivia separatamente identità, contenuto cifrato e metadati non identificativi senza poter leggere i fatti narrati, inizializza lo Stato Pratica e attiva il Servizio di Notifiche; il CDF gestisce l'avanzamento dall'Applicazione Web con registrazione di ogni accesso nell'Audit Log.
 
 4. *Generazione di Report Statistici:* su richiesta del CDF tramite Applicazione Web, il Server Applicativo aggrega esclusivamente i metadati statistici non identificativi, senza accedere al contenuto cifrato delle pratiche, per produrre i Report Statistici destinati al CUG.
+
+== Mappatura Hardware/Software
+#include "hardware_software_mapping/descrizione_mappatura.typ"

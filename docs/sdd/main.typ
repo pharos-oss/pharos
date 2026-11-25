@@ -53,5 +53,3 @@
 #include "sections/architettura_proposta.typ"
 
 #include "sections/system_decomposition/decomposizione_sottosistemi.typ"
-
-#include "sections/architettura_software_proposta.typ"
