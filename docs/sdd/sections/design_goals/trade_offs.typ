@@ -1,34 +1,29 @@
 Nella definizione dell'architettura, poiché raramente è possibile ottimizzare simultaneamente tutti gli obiettivi senza generare conflitti, sono stati valutati e risolti i seguenti compromessi (trade-offs):
 
 - *Sicurezza (Crittografia) vs. Prestazioni e Recupero Dati*
-  
-  - *Conflitto:* L'implementazione di algoritmi di crittografia avanzati (cifratura locale per il "Diario delle evidenze" e cifratura End-to-End per l'inoltro delle pratiche) richiede potenza di calcolo, impattando potenzialmente sulla reattività, e rende impossibile il recupero dei dati in caso di smarrimento delle credenziali da parte dell'utente.
-  - *Risoluzione:* Si assegna priorità assoluta alla sicurezza. Un lieve incremento dei tempi di latenza e l'impossibilità di decifrare i dati dal server sono considerati accettabili a fronte della garanzia di inviolabilità e della conformità al GDPR, data la natura estremamente sensibile dei dati trattati nel safeguarding accademico.
+  - *Conflitto:* L'implementazione di meccanismi di crittografia avanzati (cifratura locale per il *Diario delle evidenze* e cifratura End-to-End per le *Segnalazioni*) introduce un sovraccarico computazionale, incidendo potenzialmente sulla reattività, e impedisce la decifrazione lato server in caso di perdita delle chiavi da parte dell'*Utente*.
+  - *Risoluzione:* Si assegna priorità assoluta alla sicurezza. Un lieve incremento della latenza e l'impossibilità di recupero in chiaro lato server sono considerati accettabili a fronte della garanzia di inviolabilità e della piena conformità al GDPR, data la natura estremamente sensibile dei dati trattati nel safeguarding accademico.
 
 #v(1.5em)
 
-- *Usabilità vs. Autenticazione Forte (Controllo Accessi)*
-
-  - *Conflitto:* Meccanismi di sicurezza stringenti (es. Multi-Factor Authentication frequente, timeout di sessione molto brevi) prevengono l'accesso non autorizzato ai dispositivi lasciati incustoditi, ma generano attrito per l'utente, che si trova già in uno stato di vulnerabilità psicologica e necessita di immediatezza (obiettivo: attenuare l'esitazione).
-  - *Risoluzione:* Si bilanciano i due aspetti attraverso l'implementazione di un login sicuro ma "frictionless" per le operazioni di base, integrando una funzione rapida di "Panic Button" per l'oscuramento immediato in caso di interruzione. Verifiche di identità più rigorose saranno richieste esclusivamente all'inoltro formale della segnalazione.
-
-#v(1.5em)
-
-- *Tracciabilità Trasparente vs. Anonimato e Spazio di Archiviazione*
-  
-  - *Conflitto:* Da un lato, il sistema deve permettere alla vittima di tracciare in trasparenza l'iter della pratica; dall'altro, deve preservare la confidenzialità. Inoltre, tracciare ogni singola azione del Consigliere di Fiducia tramite un Audit Log inalterabile (WORM) per garantire responsabilità istituzionale, aumenta sensibilmente il carico di scrittura e archiviazione sul database.
-  - *Risoluzione:* L'architettura implementerà un disaccoppiamento dei dati. All'utente verrà fornito un identificativo di tracciamento univoco slegato dai propri dati anagrafici. Contestualmente, si accetta il maggior carico sul database pur di garantire la registrazione WORM e l'archiviazione delle pratiche in sola lettura, elementi legali imprescindibili per l'integrità del processo.
+- *Usabilità vs. Autenticazione (Controllo Accessi)*
+  - *Conflitto:* Procedure di registrazione dedicate o verifiche di identità ripetute e invasive aumentano la protezione contro accessi non autorizzati, ma introducono attrito per un *Utente* in condizione di vulnerabilità, rischiando di scoraggiare l'utilizzo della piattaforma.
+  - *Risoluzione:* Si adotta l'autenticazione federata *Single Sign-On (SSO)* tramite il *Provider di Identità di Ateneo* (protocollo SAML 2.0 / Shibboleth, federazione IDEM-GARR), che garantisce un controllo degli accessi istituzionale e basato sui ruoli senza richiedere la creazione di nuove credenziali. La tutela immediata durante l'uso su dispositivo personale è inoltre demandata al *Panic Button* per l'oscuramento e l'uscita rapida.
 
 #v(1.5em)
 
-- *Sviluppo del Modulo AI (Tempi/Costi) vs. Privacy e Accuratezza del Triage*
-  
-  - *Conflitto:* Sviluppare un modello AI personalizzato ex-novo richiederebbe costi e tempi elevati. D'altra parte, l'utilizzo di API cloud esterne standard violerebbe le normative sulla privacy (AI Act e GDPR), esponendo i dati a rischi di conservazione e riaddestramento.
-  - *Risoluzione:* Per ottimizzare i tempi (time-to-market) nel pieno rispetto normativo, si opterà per l'integrazione di modelli forniti tramite API enterprise strettamente "stateless" (Zero-Retention). Si accetta il maggior costo architetturale per garantire che i prompt in input non vengano mai memorizzati, mantenendo un livello di affidabilità supervisionata dal Consigliere di Fiducia.
+- *Tracciabilità Trasparente vs. Confidenzialità e Spazio di Archiviazione*
+  - *Conflitto:* Il sistema deve permettere all'*Utente* di monitorare in trasparenza lo *Stato Pratica* e al contempo tutelarne la riservatezza. Inoltre, registrare ogni accesso del *Consigliere di Fiducia* ai dati sensibili in un *Audit Log* inalterabile (WORM) e mantenere immutabili le *Pratiche* concluse aumenta sensibilmente il carico di scrittura e lo spazio di archiviazione sul database.
+  - *Risoluzione:* L'*Utente* monitora l'avanzamento della propria *Pratica* direttamente dalla dashboard autenticata via SSO, mentre a livello di persistenza il disaccoppiamento logico tra dati anagrafici e contenuto narrativo (protetto da cifratura End-to-End) preserva la confidenzialità. Contestualmente, si accetta il maggior onere di archiviazione per garantire la registrazione WORM e il blocco in sola lettura delle *Pratiche* nello stato *Chiusa* o *Archiviata*, requisiti imprescindibili per l'integrità del processo.
+
+#v(1.5em)
+
+- *Sviluppo del Modulo IA (Tempi/Costi) vs. Privacy e Accuratezza del Triage*
+  - *Conflitto:* Addestrare un modello di intelligenza artificiale proprietario ex-novo comporterebbe tempi e costi insostenibili; d'altra parte, l'impiego di API cloud standard violerebbe GDPR e AI Act, esponendo testi sensibili a rischi di conservazione e riaddestramento.
+  - *Risoluzione:* Si sceglie di integrare il *Modulo IA* tramite modelli ospitati in locale (*on-premise*) oppure API enterprise rigorosamente *stateless* in regime *Zero-Retention*, preceduti dalla rimozione automatica dei dati identificativi. Si accetta il maggior vincolo architetturale e di costo operativo pur di impedire qualsiasi memorizzazione dei prompt, mantenendo la *Valutazione IA* come supporto puramente orientativo che non sostituisce mai il *Consigliere di Fiducia*.
 
 #v(1.5em)
 
 - *Disponibilità Immediata (Supporto Offline) vs. Complessità di Sincronizzazione*
-  
-  - *Conflitto:* Consentire all'utente di registrare eventi nel diario e consultare la mappa dei servizi anche in assenza di connessione internet richiede lo sviluppo di logiche complesse lato client (caching locale, code di sincronizzazione, gestione dei conflitti).
-  - *Risoluzione:* Si sceglie di privilegiare il supporto continuo. Le vittime devono poter raccogliere evidenze nel momento esatto in cui si verificano, indipendentemente dalla copertura di rete universitaria, giustificando a pieno l'incremento della complessità implementativa.
+  - *Conflitto:* Consentire all'*Utente* di registrare *Eventi* e *Allegati* nel *Diario delle evidenze* e di consultare i *Servizi Territoriali* anche in assenza di connettività richiede logiche client-side più complesse (persistenza locale cifrata, code di sincronizzazione differita e gestione dei conflitti).
+  - *Risoluzione:* Si privilegia la continuità d'uso, ovvero gli *Utenti* devono poter raccogliere evidenze nel momento stesso in cui gli *Eventi* si verificano, indipendentemente dalla copertura di rete, giustificando pienamente l'incremento di complessità implementativa sull'Applicazione Mobile.
