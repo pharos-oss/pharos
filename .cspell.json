@@ -63,7 +63,9 @@
     "WCAG",
     "lfs",
     "LFS",
-    "anonimizzare"
+    "anonimizzare",
+    "pseudonimizza",
+    "pseudonimizzazione"
   ],
   "ignorePaths": [
     "docs/out/**",
