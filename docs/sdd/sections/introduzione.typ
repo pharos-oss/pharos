@@ -65,3 +65,5 @@ Il testo si rivolge al team di sviluppo e ai docenti del corso, fornendo una gui
 Il documento è strutturato in modo da fornire una scomposizione progressiva delle scelte progettuali, partendo dal contesto attuale per arrivare alla definizione dei servizi dei sottosistemi, e si estende fino al class diagram ristrutturato. I capitoli successivi sono organizzati come segue:
 
 - @introduzione: *Introduzione*: Presenta gli obiettivi del sistema, i design goal e trade-off, le definizioni, i riferimenti bibliografici e la presente struttura documentale.
+- @architettura_corrente: *Architettura del Sistema Corrente*: Descrive l'organizzazione attuale del sistema in uso presso l'Ateneo, i componenti coinvolti e i relativi limiti strutturali.
+- @architettura_proposta: *Architettura del Sistema Proposto*: Presenta la panoramica dell'architettura progettata per Pharos, evidenziandone i componenti principali e le relative interazioni.
