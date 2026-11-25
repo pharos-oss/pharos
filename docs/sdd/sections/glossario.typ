@@ -6,7 +6,7 @@ Di seguito sono riportati i termini specifici del dominio e i concetti tecnici r
 
 - *API (Application Programming Interface):* Interfaccia software che consente la comunicazione e lo scambio di dati tra diversi componenti o sottosistemi (ad esempio, tra il backend di Pharos e il provider del modulo AI).
 
-- *Audit Log (Log inalterabile / WORM):* Registro di sistema utilizzato per tracciare ogni operazione critica e ogni accesso ai dati sensibili da parte del personale preposto. È basato sul principio *WORM* (Write Once, Read Many) per garantire l'immodificabilità storica del dato e la responsabilità istituzionale.
+- *Audit Log (Log inalterabile / WORM):* Registro di sistema utilizzato per tracciare ogni operazione critica e ogni accesso ai dati sensibili da parte del personale preposto. È basato sul principio *WORM* (Write Once, Read Many) per garantire la sua impossibilità di modifica del dato e la responsabilità istituzionale.
 
 - *BCE (Boundary-Control-Entity):* Pattern architetturale adottato per la decomposizione orientata agli oggetti, che separa in modo netto le interfacce utente (Boundary), la logica di coordinamento e applicativa (Control) e i dati persistenti (Entity).
 
