@@ -62,7 +62,8 @@
     "Tanwar",
     "WCAG",
     "lfs",
-    "LFS"
+    "LFS",
+    "anonimizzare"
   ],
   "ignorePaths": [
     "docs/out/**",
