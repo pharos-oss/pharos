@@ -84,7 +84,8 @@
     "Notif",
     "spessorato",
     "dasharray",
-    "mmd"
+    "mmd",
+    "SMTPS"
   ],
   "ignorePaths": [
     "docs/out/**",
