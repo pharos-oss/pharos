@@ -62,7 +62,7 @@ La tabella seguente sintetizza i sottosistemi individuati, il livello architettu
   [*Gestione Notifiche*],
   [Applicativo],
   [Gestisce le Notifiche _in-app_ e coordina l'invio tramite il Servizio di Notifiche esterno per cambi di Stato Pratica, nuove Segnalazioni, richieste di Integrazione, ritiri e Periodi Assenza, garantendo l'assenza di dettagli riservati.],
-  [RF\_GU\_05, RF\_GU\_07..09, RF\_GCDF\_03..07, RNF\_L\_01],
+  [RF\_GU\_05, RF\_GU\_07..09,\ RF\_GCDF\_03..07, RNF\_L\_01],
   [*Persistenza Dati*],
   [Persistenza e Sicurezza],
   [Mantiene la separazione logica tra Dati Anagrafici, Pratiche e Metadati Statistici (con vincoli di sola lettura per Pratiche «Chiuse» o «Archiviate») e Contenuti Cifrati (Segnalazioni cifrate _End-to-End_, Allegati, Bozze e copia sincronizzata del Diario delle evidenze); supporta backup giornalieri cifrati.],
