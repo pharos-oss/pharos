@@ -2,7 +2,22 @@
 
 La presente sezione descrive la mappatura tra i sottosistemi software che compongono la piattaforma Pharos e le risorse hardware e infrastrutturali deputate alla loro esecuzione. L'obiettivo è definire la topologia di distribuzione del sistema, specificando l'allocazione degli artefatti software sui rispettivi nodi di elaborazione e i protocolli di comunicazione adottati per l'interazione tra di essi, garantendo il soddisfacimento dei requisiti non funzionali e dei design goals stabiliti in termini di prestazioni, affidabilità, scalabilità e costi.
 
-#v(1.5em)
+#v(0.5em)
+
+=== Descrizione generale e relazioni tra i nodi
+La topologia di distribuzione di Pharos adotta un'architettura multi-livello strutturata per domini di fiducia, in cui il server applicativo centrale coordina le comunicazioni tra client, persistenza e servizi esterni su canali cifrati (HTTPS/TLS 1.3, SAML 2.0), mantenendo le operazioni crittografiche e di de-identificazione lato client. Di seguito sono riassunti il ruolo e le interazioni di ciascun nodo:
+
+- *Dispositivo Utente (`:UserDevice`):* Ospita InterfacciaUtente, la logica locale di GestoreDiario, il modulo crittografico e il motore di de-identificazione on-device. Interagisce con :UniversityIdP tramite SAML 2.0 per l'autenticazione SSO e con :ApplicationServer su HTTPS (TLS 1.3) per l'invio delle segnalazioni cifrate, il triage guidato tramite modulo IA e la sincronizzazione della coda offline.
+- *Postazione CDF (`:CDFWorkstation`):* Esegue InterfacciaCDF e il modulo client per la decifratura E2EE. Comunica con :UniversityIdP per l'accesso SSO + MFA, con :HSM_KMS per l'utilizzo protetto della chiave privata istituzionale e con :ApplicationServer su HTTPS (TLS 1.3) per la gestione delle pratiche e la generazione dei report.
+- *Server Applicativo (`:ApplicationServer`):* Funge da nodo centrale di orchestrazione, ospitando i servizi di business (GestoreSegnalazione, GestorePratiche, GestoreReport) e gli adattatori di integrazione (SSOAdapter, TriageAIProxy, NotificationGateway, AuditLogClient). Media tutte le comunicazioni tra i nodi client, il livello di persistenza, i nodi di sicurezza e i servizi esterni, senza mai accedere in chiaro ai contenuti cifrati E2EE.
+- *Server di Persistenza (`:PersistenceServer`):* Comunica esclusivamente con :ApplicationServer su rete privata cifrata per la memorizzazione separata di anagrafiche, pratiche cifrate, metadati statistici e allegati. Alimenta inoltre i processi di replica cifrata verso :AuditBackupStorage.
+- *Storage Audit e Backup (`:AuditBackupStorage`):* Riceve in scrittura append-only i log di accesso inviati da AuditLogClient (:ApplicationServer) su storage WORM e conserva i backup giornalieri cifrati provenienti da :PersistenceServer, rimanendo isolato per garantire la separazione dei ruoli (Separation of Duties).
+- *Modulo HSM/KMS (`:HSM_KMS`):* custodisce la chiave privata istituzionale del CDF e dialoga su canale cifrato dedicato con ⁠ :CDFWorkstation ⁠ (previa verifica della sessione SSO + MFA) per abilitare la decifratura delle pratiche senza esporre la chiave al livello applicativo.
+- *Nodo Inferenza IA (`:AIInferenceNode`):* invocato in modalità sincrona e stateless da ⁠ TriageAIProxy ⁠ (⁠ :ApplicationServer ⁠) su HTTPS (TLS 1.3), riceve testi già redatti on-device e restituisce la valutazione orientativa (⁠ ValutazioneIA ⁠) senza persistenza dei dati
+- *idP di Ateneo (`:UniversityIdP`):* nodo esterno che interagisce via SAML 2.0 con i client (⁠ :UserDevice ⁠, ⁠ :CDFWorkstation ⁠) e con ⁠ SSOAdapter ⁠ (⁠ :ApplicationServer ⁠) per verificare le identità istituzionali e fornire gli attributi di ruolo (RBAC).
+- *Servizio Notifiche (`:NotificationService`):* nodo esterno invocato in modo asincrono da ⁠ NotificationGateway ⁠ (⁠ :ApplicationServer ⁠) su TLS/SMTPS o HTTPS per recapitare agli utenti gli avvisi di aggiornamento stato privi di contenuti sensibili.
+
+#pagebreak()
 
 === Tabella dei nodi
 
@@ -77,5 +92,3 @@ La tabella seguente riassume la mappatura tra i nodi hardware (o infrastruttural
     )
   ]
 ]
-
-#pagebreak()
