@@ -78,7 +78,13 @@
     "Mbps",
     "paginata",
     "sull'",
-    "dall'"
+    "dall'",
+    "Cifr",
+    "Anag",
+    "Notif",
+    "spessorato",
+    "dasharray",
+    "mmd"
   ],
   "ignorePaths": [
     "docs/out/**",

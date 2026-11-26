@@ -1,0 +1,63 @@
+%%{init: {"theme": "default", "fontFamily": "Arial, Liberation Sans, sans-serif", "flowchart": {"defaultRenderer": "elk", "htmlLabels": true}, "elk": {"mergeEdges": false}}}%%
+flowchart-elk TB
+  U(["Utente"])
+  C(["CDF"])
+  DPO(["DPO / Resp. Sicurezza / Autorità"])
+  subgraph PH["Sistema Pharos"]
+    direction TB
+    subgraph ND["Nodo: Dispositivo Utente"]
+      AU["Applicazione Web Utente (PWA)<br/>Interfaccia, Panic Button, Diario cifrato offline<br/>Servizi Territoriali e mappa offline, Supporto Counseling<br/>De-identificazione on-device, Cifratura E2E"]
+    end
+    subgraph NC["Nodo: Postazione CDF"]
+      AC["Applicazione Web CDF<br/>Interfaccia, Report, Decifratura E2E"]
+    end
+    subgraph NS["Nodo: Server Applicativo"]
+      CA["Controllo Accessi e Sicurezza"]
+      GU["Gestione Utente (MO_GU)"]
+      GC["Gestione CDF (MO_GCDF)"]
+      TG["Triage Guidato"]
+      RC["Reportistica CUG"]
+      GN["Gestione Notifiche"]
+    end
+    subgraph NI["Nodo: Modulo IA di Triage"]
+      IA["Modulo IA di Triage<br/>stateless, Zero-Retention"]
+      AD["Adattatore Provider IA"]
+    end
+    subgraph NP["Nodo: Persistenza e Sicurezza"]
+      PD[("Persistenza Dati<br/>Anagrafici, Pratiche e Metadati, Contenuti Cifrati")]
+      AL[("Audit Log Immodificabile")]
+    end
+  end
+  subgraph EXT["Sistemi esterni"]
+    IDP["Provider Identità Ateneo (SAML 2.0)"]
+    SN["Servizio di Notifiche"]
+    HSM["HSM/KMS istituzionale"]
+    PIA["Provider IA esterno (opzionale)"]
+  end
+  U --> AU
+  C --> AC
+  AU -->|"[F1–F3]"| CA
+  AC -->|"[F1, F3, F4]"| CA
+  CA --> GU & GC & TG & RC
+  GU -->|"[F2]: sync Diario, Servizi Territoriali"| PD
+  GC -->|"[F3]: Pratiche, Periodi di Assenza"| PD
+  GC -->|"[F3]"| AL
+  RC -->|"[F4]"| PD
+  GN -->|"[F3]"| PD
+  GU -->|"[F3]"| GN
+  GC -->|"[F3]"| GN
+  TG -->|"[F2]"| IA
+  IA --> AD
+  CA -->|"[F1]: SSO"| IDP
+  AC -->|"[F3]: chiave privata CDF"| HSM
+  AD -->|"[F2]"| PIA
+  GN -->|"[F3]: invio notifiche"| SN
+  DPO -->|"sola lettura"| AL
+  style PH fill:#F7F5FC,stroke:#1E2A4A
+  style ND fill:#E8E4F5,stroke:#1E2A4A
+  style NC fill:#E8E4F5,stroke:#1E2A4A
+  style NS fill:#DCE6F5,stroke:#1E2A4A
+  style NI fill:#FDEFD9,stroke:#1E2A4A
+  style NP fill:#E3F1E6,stroke:#1E2A4A
+  style EXT fill:#EFEFEF,stroke:#1E2A4A
+  linkStyle 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 stroke:#1E2A4A,stroke-width:1.5px,stroke-dasharray:5 4

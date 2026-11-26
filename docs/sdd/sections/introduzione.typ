@@ -76,3 +76,4 @@ Il documento è strutturato in modo da fornire una scomposizione progressiva del
 - @introduzione: *Introduzione*: Presenta gli obiettivi del sistema, i _design goal_ e _trade-off_, le definizioni, i riferimenti bibliografici e la presente struttura documentale.
 - @architettura_corrente: *Architettura del Sistema Corrente*: Descrive l'organizzazione attuale del sistema in uso presso l'Ateneo, i componenti coinvolti e i relativi limiti strutturali.
 - @architettura_proposta: *Architettura del Sistema Proposto*: Presenta la panoramica dell'architettura progettata per Pharos, evidenziandone i componenti principali e le relative interazioni.
+- @decomposizione_sottosistemi: *Decomposizione in sottosistemi*: Illustra l'articolazione a livelli del sistema, le responsabilità dei singoli sottosistemi e la tracciabilità rispetto ai requisiti del RAD, corredate dai diagrammi delle dipendenze e dell'architettura.
