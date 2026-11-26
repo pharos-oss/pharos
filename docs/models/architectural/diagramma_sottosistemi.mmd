@@ -1,0 +1,112 @@
+flowchart TB
+    %% Stili dei nodi
+    classDef pres fill:#D6EAF8,stroke:#1F4E79,stroke-width:1.5px,color:#1B2631
+    classDef app fill:#D4EFDF,stroke:#1E8449,stroke-width:1.5px,color:#1B2631
+    classDef data fill:#FCF3CF,stroke:#B7950B,stroke-width:1.5px,color:#1B2631
+    classDef iso fill:#E8DAEF,stroke:#7D3C98,stroke-width:1.5px,color:#1B2631
+    classDef ext fill:#EAECEE,stroke:#566573,stroke-width:1.5px,color:#1B2631
+    classDef boundInt fill:#FDFEFE,stroke:#1B4F72,stroke-width:2.5px,color:#1B2631
+    classDef boundExt fill:#F8F9F9,stroke:#7F8C8D,stroke-width:2px,stroke-dasharray: 6 4,color:#1B2631
+
+    subgraph Pharos["Sistema Pharos «system»"]
+        direction TB
+
+        subgraph TierPres["Livello di Presentazione"]
+            direction LR
+            AppUtente["Applicazione Web Utente (PWA)<br/>«subsystem»<br/><i>InterfacciaUtente · Panic Button · Cifratura locale ed End-to-End</i>"]:::pres
+            AppCDF["Applicazione Web Consigliere di Fiducia<br/>«subsystem»<br/><i>InterfacciaCDF · Decifratura End-to-End · Gestione Pratiche e Report</i>"]:::pres
+        end
+
+        subgraph TierApp["Livello Applicativo (Server Applicativo)"]
+            direction TB
+            AuthAccess["Controllo Accessi e Sicurezza<br/>«subsystem»<br/><i>Autenticazione SSO · Controllo accessi per ruoli · Logging tecnico</i>"]:::app
+
+            subgraph DominiServizi["Domini Funzionali e Servizi"]
+                direction LR
+                DomGU["Gestione Utente (MO_GU)<br/>«subsystem»<br/><i>GestoreDiario · GestoreSegnalazione</i>"]:::app
+                DomGCDF["Gestione Consigliere di Fiducia (MO_GCDF)<br/>«subsystem»<br/><i>GestorePratiche</i>"]:::app
+                SubTriage["Triage Guidato<br/>«subsystem»<br/><i>Adattatore stateless verso Modulo IA</i>"]:::app
+                SubReport["Reportistica CUG<br/>«subsystem»<br/><i>GestoreReport · Aggregazione anonima</i>"]:::app
+                SubNotif["Gestione Notifiche<br/>«subsystem»<br/><i>Notifiche in-app e coordinamento invio</i>"]:::app
+            end
+        end
+
+        subgraph TierData["Livello di Persistenza e Sicurezza"]
+            direction LR
+            PersistSeg["Persistenza Dati<br/>«subsystem»<br/><i>Separazione logica: dati anagrafici, pratiche/metadati, contenuti cifrati</i>"]:::data
+            AuditSub["Audit Log Immodificabile<br/>«subsystem»<br/><i>Registrazione accessi e operazioni del CDF</i>"]:::data
+        end
+    end
+
+    subgraph IsoBox["Componente Isolato (Stateless)"]
+        ModIA["Modulo IA di Triage<br/>«subsystem»<br/><i>On-premise o servizio esterno · Zero-Retention</i>"]:::iso
+    end
+
+    subgraph ExtBox["Sistemi Esterni Integrati"]
+        direction LR
+        IdP["Provider di Identità di Ateneo<br/>«external system»<br/><i>SSO SAML 2.0 / Shibboleth (IDEM-GARR)</i>"]:::ext
+        ExtNotif["Servizio di Notifiche<br/>«external system»<br/><i>Recapito notifiche in-app ed e-mail</i>"]:::ext
+    end
+
+    %% Dipendenze Presentazione -> Esterno & Controllo Accessi
+    AppUtente -. "«use» SSO" .-> IdP
+    AppCDF -. "«use» SSO" .-> IdP
+    AppUtente -. "«use» HTTPS" .-> AuthAccess
+    AppCDF -. "«use» HTTPS" .-> AuthAccess
+
+    %% Dipendenze Controllo Accessi -> Esterno, Domini e Persistenza
+    AuthAccess -. "«use» verifica asserzioni" .-> IdP
+    AuthAccess -. "«use»" .-> DomGU
+    AuthAccess -. "«use»" .-> DomGCDF
+    AuthAccess -. "«use»" .-> SubTriage
+    AuthAccess -. "«use»" .-> SubReport
+    AuthAccess -. "«use» dati anagrafici e ruoli" .-> PersistSeg
+
+    %% Dipendenze interne Livello Applicativo
+    DomGU -. "«use» Diario cifrato, Segnalazioni, Servizi Territoriali" .-> PersistSeg
+    DomGU -. "«use»" .-> SubNotif
+
+    DomGCDF -. "«use» Pratiche, Stato Pratica, Nota CDF, Esito Pratica, Periodo Assenza" .-> PersistSeg
+    DomGCDF -. "«use»" .-> SubNotif
+    DomGCDF -. "«use» tracciamento accessi e operazioni" .-> AuditSub
+
+    SubTriage -. "«use» testo privato dei dati identificativi" .-> ModIA
+
+    SubReport -. "«use» soli metadati statistici non identificativi" .-> PersistSeg
+    SubReport -. "«use» tracciamento esportazione" .-> AuditSub
+
+    SubNotif -. "«use» persistenza Notifiche" .-> PersistSeg
+    SubNotif -. "«use» notifiche prive di dettagli riservati" .-> ExtNotif
+
+    %% Legenda strutturata
+    subgraph Legenda["Legenda"]
+        direction TB
+
+        subgraph LegLivelli["Livelli e Tipologia dei Sottosistemi"]
+            direction LR
+            L_Pres["Livello di Presentazione<br/>Client Utente (PWA) e Web CDF"]:::pres
+            L_App["Livello Applicativo<br/>Sottosistemi del Server Applicativo"]:::app
+            L_Data["Livello di Persistenza e Sicurezza<br/>Persistenza Dati e Audit Log"]:::data
+            L_Iso["Componente Isolato<br/>Modulo IA stateless"]:::iso
+            L_Ext["Sistemi Esterni Integrati<br/>Servizi istituzionali fuori confine"]:::ext
+        end
+
+        subgraph LegNotazione["Notazione Confini e Dipendenze"]
+            direction LR
+            L_BoundInt["Bordo continuo spessorato<br/>Confine del Sistema Pharos"]:::boundInt
+            L_BoundExt["Bordo tratteggiato<br/>Confine componente isolato o esterno"]:::boundExt
+            L_Src["Sottosistema A"]:::app -. "«use» Dipendenza funzionale" .-> L_Dst["Sottosistema B"]:::data
+        end
+    end
+
+    %% Stile dei contenitori
+    style Pharos fill:#FDFEFE,stroke:#1B4F72,stroke-width:2.5px
+    style TierPres fill:#F4F9FD,stroke:#2E86C1,stroke-width:1.5px
+    style TierApp fill:#F4FBF7,stroke:#1E8449,stroke-width:1.5px
+    style DominiServizi fill:#F4FBF7,stroke:#82E0AA,stroke-width:1px
+    style TierData fill:#FEF9E7,stroke:#B7950B,stroke-width:1.5px
+    style IsoBox fill:#F5EEF8,stroke:#7D3C98,stroke-width:2px,stroke-dasharray: 6 4
+    style ExtBox fill:#F8F9F9,stroke:#7F8C8D,stroke-width:2px,stroke-dasharray: 6 4
+    style Legenda fill:#F8F9F9,stroke:#BDC3C7,stroke-width:1.5px
+    style LegLivelli fill:#FFFFFF,stroke:#E5E7E9,stroke-width:1px
+    style LegNotazione fill:#FFFFFF,stroke:#E5E7E9,stroke-width:1px
