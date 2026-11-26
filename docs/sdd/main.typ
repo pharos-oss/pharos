@@ -53,4 +53,4 @@
 
 #pagebreak(weak: true)
 
-#include "sections/decomposizione_sottosistemi.typ"
+#include "sections/system_decomposition/decomposizione_sottosistemi.typ"
