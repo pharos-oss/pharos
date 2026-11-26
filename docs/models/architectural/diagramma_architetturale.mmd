@@ -1,175 +1,63 @@
-flowchart TB
-    %% Stili dei nodi
-    classDef actor fill:#D6EAF8,stroke:#1B4F72,stroke-width:1.5px,color:#1B2631
-    classDef actorSec fill:#FADBD8,stroke:#922B21,stroke-width:1.5px,color:#1B2631
-    classDef client fill:#EBF5FB,stroke:#2E86C1,stroke-width:1.5px,color:#1B2631
-    classDef server fill:#D4EFDF,stroke:#1E8449,stroke-width:1.5px,color:#1B2631
-    classDef data fill:#FCF3CF,stroke:#B7950B,stroke-width:1.5px,color:#1B2631
-    classDef sec fill:#FDEBD0,stroke:#AF601A,stroke-width:1.5px,color:#1B2631
-    classDef iso fill:#E8DAEF,stroke:#7D3C98,stroke-width:1.5px,color:#1B2631
-    classDef ext fill:#EAECEE,stroke:#566573,stroke-width:1.5px,color:#1B2631
-    classDef boundInt fill:#FDFEFE,stroke:#1B4F72,stroke-width:2.5px,color:#1B2631
-    classDef boundExt fill:#F8F9F9,stroke:#7F8C8D,stroke-width:2px,stroke-dasharray: 6 4,color:#1B2631
-    classDef flowCard fill:#FFFFFF,stroke:#85929E,stroke-width:1px,color:#1B2631
-
-    %% Attori
-    Utente(["Utente<br/>(Studente / Dipendente)"]):::actor
-    CDF(["Consigliere di Fiducia (CDF)"]):::actor
-    DPO(["DPO / Responsabile Sicurezza<br/>di Ateneo"]):::actorSec
-
-    %% Nodi Client
-    subgraph DevU["Dispositivo Utente (Mobile / Browser)"]
-        subgraph PWA["Applicazione Web Utente (PWA)"]
-            direction TB
-            UI_U["InterfacciaUtente<br/>WCAG 2.1 livello AA · Panic Button"]:::client
-            LocalDB[("Persistenza Locale Cifrata<br/>Diario delle evidenze · Servizi Territoriali (Offline)")]:::client
-            Redact["De-identificazione sul Dispositivo<br/>Rimozione dati identificativi e revisione utente"]:::client
-            CryptoU["Modulo Crittografico Client<br/>Cifratura locale · Cifratura End-to-End"]:::client
-        end
+%%{init: {"theme": "default", "fontFamily": "Arial, Liberation Sans, sans-serif", "flowchart": {"defaultRenderer": "elk", "htmlLabels": true}, "elk": {"mergeEdges": false}}}%%
+flowchart-elk TB
+  U(["Utente"])
+  C(["CDF"])
+  DPO(["DPO / Resp. Sicurezza / Autorità"])
+  subgraph PH["Sistema Pharos"]
+    direction TB
+    subgraph ND["Nodo: Dispositivo Utente"]
+      AU["Applicazione Web Utente (PWA)<br/>Interfaccia, Panic Button, Diario cifrato offline<br/>Servizi Territoriali e mappa offline, Supporto Counseling<br/>De-identificazione on-device, Cifratura E2E"]
     end
-
-    subgraph DevCDF["Postazione Consigliere di Fiducia"]
-        subgraph WebCDF["Applicazione Web Consigliere di Fiducia"]
-            direction TB
-            UI_CDF["InterfacciaCDF<br/>Gestione Pratiche · Stato Pratica · Nota CDF · Periodo Assenza"]:::client
-            CryptoCDF["Modulo Decifratura End-to-End<br/>Decifratura Segnalazioni e Allegati riservata al CDF"]:::client
-            UI_CUG["Sezione Report Statistici<br/>Generazione ed esportazione PDF / CSV per CUG"]:::client
-        end
+    subgraph NC["Nodo: Postazione CDF"]
+      AC["Applicazione Web CDF<br/>Interfaccia, Report, Decifratura E2E"]
     end
-
-    %% Infrastruttura Server Pharos
-    subgraph PharosInfra["Confine Sistema Pharos — Infrastruttura Server (Container Docker)"]
-        direction TB
-        GW["Controllo Accessi e Sicurezza<br/>HTTPS · SAML 2.0 · Controllo accessi per ruoli · Logging tecnico"]:::server
-
-        subgraph AppSrv["Server Applicativo"]
-            direction LR
-            SrvU["Gestione Utente (MO_GU)<br/>GestoreDiario · GestoreSegnalazione"]:::server
-            SrvIA["Triage Guidato<br/>Adattatore stateless verso Modulo IA"]:::server
-            SrvCDF["Gestione Consigliere di Fiducia (MO_GCDF)<br/>GestorePratiche · Blocco sola lettura"]:::server
-            SrvCUG["Reportistica CUG<br/>GestoreReport"]:::server
-            SrvNotif["Gestione Notifiche<br/>Coordinamento Notifiche"]:::server
-        end
-
-        subgraph DataLayer["Livello di Persistenza e Sicurezza (Separazione Logica)"]
-            direction LR
-            DBAnag[("Dati Anagrafici<br/>Identità istituzionali e ruoli SSO")]:::data
-            DBPrat[("Pratiche e Metadati Statistici<br/>Stato Pratica · Nota CDF · Esito Pratica<br/>Periodo Assenza · Servizi Territoriali<br/>Metadati non identificativi · Vincolo sola lettura")]:::data
-            DBCifr[("Contenuti Cifrati<br/>Segnalazioni cifrate End-to-End · Allegati<br/>Bozze · Diario delle evidenze")]:::data
-            AuditLog[("Audit Log Immodificabile<br/>Tracciamento accessi e operazioni del CDF<br/>(Solo metadati operativi)")]:::sec
-        end
+    subgraph NS["Nodo: Server Applicativo"]
+      CA["Controllo Accessi e Sicurezza"]
+      GU["Gestione Utente (MO_GU)"]
+      GC["Gestione CDF (MO_GCDF)"]
+      TG["Triage Guidato"]
+      RC["Reportistica CUG"]
+      GN["Gestione Notifiche"]
     end
-
-    %% Ambiente Isolato IA
-    subgraph IsoCloud["Componente Isolato (Stateless)"]
-        ModIA["Modulo IA di Triage<br/>On-premise o servizio esterno<br/>Zero-Retention · Nessun riaddestramento"]:::iso
+    subgraph NI["Nodo: Modulo IA di Triage"]
+      IA["Modulo IA di Triage<br/>stateless, Zero-Retention"]
+      AD["Adattatore Provider IA"]
     end
-
-    %% Sistemi Esterni
-    subgraph ExtSys["Sistemi Esterni Integrati"]
-        direction LR
-        ExtIdP["Provider di Identità di Ateneo<br/>SSO SAML 2.0 / Shibboleth (IDEM-GARR)"]:::ext
-        ExtNotif["Servizio di Notifiche<br/>E-mail / Notifiche in-app (prive di dettagli riservati)"]:::ext
+    subgraph NP["Nodo: Persistenza e Sicurezza"]
+      PD[("Persistenza Dati<br/>Anagrafici, Pratiche e Metadati, Contenuti Cifrati")]
+      AL[("Audit Log Immodificabile")]
     end
-
-    %% Interazioni Attori -> Client
-    Utente --> UI_U
-    CDF --> UI_CDF
-    CDF --> UI_CUG
-
-    %% Flussi interni client
-    UI_U -->|"[F2] EventoDiario e Servizi Territoriali offline"| LocalDB
-    UI_U -->|"[F2] Testo selezionato per Triage Guidato"| Redact
-    UI_U -->|"[F3] Cifratura Diario, Bozze, Segnalazioni e Integrazioni"| CryptoU
-    UI_CDF -->|"[F3] Decifratura contenuti Pratica"| CryptoCDF
-
-    %% [F1] Autenticazione SSO
-    UI_U <-->|"[F1] Autenticazione SSO"| ExtIdP
-    UI_CDF <-->|"[F1] Autenticazione SSO"| ExtIdP
-    GW <-->|"[F1] Verifica asserzioni SAML 2.0"| ExtIdP
-    GW -->|"[F1] Verifica ruolo applicativo"| DBAnag
-
-    %% Client -> Controllo Accessi (HTTPS)
-    Redact -->|"[F2] Testo depurato dai dati identificativi (HTTPS)"| GW
-    CryptoU -->|"[F2/F3] Diario cifrato / Segnalazione End-to-End<br/>+ metadati statistici non identificativi (HTTPS)"| GW
-    UI_CDF <-->|"[F3] Gestione Pratica e dati cifrati (HTTPS)"| GW
-    UI_CUG -->|"[F4] Richiesta Report Statistico (HTTPS)"| GW
-
-    %% Controllo Accessi -> Server Applicativo
-    GW -->|"[F2/F3]"| SrvU
-    GW -->|"[F2]"| SrvIA
-    GW <-->|"[F3]"| SrvCDF
-    GW -->|"[F4]"| SrvCUG
-
-    %% [F2] Triage Guidato stateless
-    SrvIA <-->|"[F2] Testo depurato / Valutazione IA<br/>(Canale protetto · Stateless)"| ModIA
-
-    %% [F3] Persistenza segregata, Audit e Notifiche
-    SrvU -->|"[F3] Stato Pratica, metadati statistici,<br/>Servizi Territoriali"| DBPrat
-    SrvU -->|"[F2/F3] Contenuti cifrati<br/>(inaccessibili in chiaro al server)"| DBCifr
-    SrvU -->|"[F3] Nuova Segnalazione / Integrazione / Ritiro"| SrvNotif
-
-    SrvCDF -->|"[F3] Stato Pratica, Nota CDF, Esito Pratica,<br/>Periodo Assenza, sola lettura"| DBPrat
-    SrvCDF -->|"[F3] Lettura Segnalazione e Allegati cifrati"| DBCifr
-    SrvCDF -->|"[F3] Registrazione accessi e operazioni"| AuditLog
-    SrvCDF -->|"[F3] Aggiornamento Stato Pratica / Integrazione"| SrvNotif
-
-    %% [F4] Reportistica CUG
-    SrvCUG -->|"[F4] Lettura soli metadati statistici<br/>non identificativi"| DBPrat
-    SrvCUG -->|"[F4] Tracciamento esportazione"| AuditLog
-
-    %% Notifiche
-    SrvNotif -->|"Registrazione Notifica in-app"| DBPrat
-    SrvNotif -->|"[F3] Invio Notifica senza dettagli riservati"| ExtNotif
-
-    %% Controllo indipendente su Audit Log
-    DPO -->|"[Audit] Consultazione in sola lettura<br/>(Separazione dei ruoli)"| AuditLog
-
-    %% Legenda strutturata
-    subgraph Legenda["Legenda"]
-        direction TB
-
-        subgraph LegSimboli["Attori, Componenti e Notazione Grafica"]
-            direction LR
-            LA1(["Attore Operativo<br/>Utente · CDF"]):::actor
-            LA2(["Attore di Controllo<br/>DPO / Sicurezza"]):::actorSec
-            LC1["Client<br/>PWA Utente · Web CDF"]:::client
-            LC2["Server Applicativo<br/>Controllo Accessi e Domini"]:::server
-            LC3[("Persistenza Dati<br/>Dati separati logicamente")]:::data
-            LC4[("Audit Log<br/>Log immodificabile")]:::sec
-            LC5["Modulo IA<br/>Componente isolato"]:::iso
-            LC6["Sistemi Esterni<br/>IdP · Notifiche"]:::ext
-        end
-
-        subgraph LegConfini["Confini di Esecuzione e Connessioni"]
-            direction LR
-            LB1["Bordo continuo<br/>Nodi Client / Confine Server Pharos"]:::boundInt
-            LB2["Bordo tratteggiato<br/>Ambiente Isolato / Sistemi Esterni"]:::boundExt
-            LN1["A"]:::server -->|"Flusso unidirezionale"| LN2["B"]:::data
-            LN3["A"]:::client <-->|"Scambio bidirezionale"| LN4["B"]:::ext
-        end
-
-        subgraph LegFlussi["Flussi Operativi Principali"]
-            direction LR
-            LF1["[F1] Autenticazione SSO<br/>Accesso federato SAML 2.0 (IDEM-GARR)<br/>e risoluzione ruolo applicativo"]:::flowCard
-            LF2["[F2] Diario delle evidenze e Triage Guidato<br/>Cifratura locale, rimozione identificativi<br/>sul dispositivo e Valutazione IA stateless"]:::flowCard
-            LF3["[F3] Inoltro e lavorazione Pratica<br/>Cifratura End-to-End, separazione logica<br/>dati, Audit Log immodificabile e Notifiche"]:::flowCard
-            LF4["[F4] Reportistica CUG<br/>Aggregazione ed esportazione Report Statistici<br/>dai soli metadati non identificativi"]:::flowCard
-            LFA["[Audit] Verifica indipendente<br/>Consultazione in sola lettura dell'Audit Log<br/>riservata a DPO e Sicurezza (preclusa al CDF)"]:::flowCard
-        end
-    end
-
-    %% Stili dei contenitori
-    style DevU fill:#F4F9FD,stroke:#2E86C1,stroke-width:1.5px
-    style PWA fill:#EBF5FB,stroke:#2E86C1,stroke-width:1px
-    style DevCDF fill:#F4F9FD,stroke:#2E86C1,stroke-width:1.5px
-    style WebCDF fill:#EBF5FB,stroke:#2E86C1,stroke-width:1px
-    style PharosInfra fill:#FDFEFE,stroke:#1B4F72,stroke-width:2.5px
-    style AppSrv fill:#F4FBF7,stroke:#1E8449,stroke-width:1.5px
-    style DataLayer fill:#FEF9E7,stroke:#B7950B,stroke-width:1.5px
-    style IsoCloud fill:#F5EEF8,stroke:#7D3C98,stroke-width:2px,stroke-dasharray: 6 4
-    style ExtSys fill:#F8F9F9,stroke:#7F8C8D,stroke-width:2px,stroke-dasharray: 6 4
-    style Legenda fill:#F8F9F9,stroke:#BDC3C7,stroke-width:1.5px
-    style LegSimboli fill:#FFFFFF,stroke:#E5E7E9,stroke-width:1px
-    style LegConfini fill:#FFFFFF,stroke:#E5E7E9,stroke-width:1px
-    style LegFlussi fill:#FFFFFF,stroke:#E5E7E9,stroke-width:1px
+  end
+  subgraph EXT["Sistemi esterni"]
+    IDP["Provider Identità Ateneo (SAML 2.0)"]
+    SN["Servizio di Notifiche"]
+    HSM["HSM/KMS istituzionale"]
+    PIA["Provider IA esterno (opzionale)"]
+  end
+  U --> AU
+  C --> AC
+  AU -->|"[F1–F3]"| CA
+  AC -->|"[F1, F3, F4]"| CA
+  CA --> GU & GC & TG & RC
+  GU -->|"[F2]: sync Diario, Servizi Territoriali"| PD
+  GC -->|"[F3]: Pratiche, Periodi di Assenza"| PD
+  GC -->|"[F3]"| AL
+  RC -->|"[F4]"| PD
+  GN -->|"[F3]"| PD
+  GU -->|"[F3]"| GN
+  GC -->|"[F3]"| GN
+  TG -->|"[F2]"| IA
+  IA --> AD
+  CA -->|"[F1]: SSO"| IDP
+  AC -->|"[F3]: chiave privata CDF"| HSM
+  AD -->|"[F2]"| PIA
+  GN -->|"[F3]: invio notifiche"| SN
+  DPO -->|"sola lettura"| AL
+  style PH fill:#F7F5FC,stroke:#1E2A4A
+  style ND fill:#E8E4F5,stroke:#1E2A4A
+  style NC fill:#E8E4F5,stroke:#1E2A4A
+  style NS fill:#DCE6F5,stroke:#1E2A4A
+  style NI fill:#FDEFD9,stroke:#1E2A4A
+  style NP fill:#E3F1E6,stroke:#1E2A4A
+  style EXT fill:#EFEFEF,stroke:#1E2A4A
+  linkStyle 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 stroke:#1E2A4A,stroke-width:1.5px,stroke-dasharray:5 4
