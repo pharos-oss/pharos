@@ -13,7 +13,7 @@ flowchart-elk TB
       AC["Applicazione Web CDF<br/>Gestione Pratiche, Periodi di Assenza, Report CUG<br/>Decifratura E2EE client-side (Web Crypto)"]
     end
 
-    subgraph NS["«cloud managed» Server Applicativo (:ApplicationServer) — Server Cloud UE (Kong, Auth, Edge Functions, Realtime)"]
+    subgraph NS["«cloud managed» Server Applicativo (:ApplicationServer) — Server Cloud UE (API Gateway, Auth, Servizi applicativi, Realtime)"]
       CA["Controllo Accessi e Sicurezza<br/>(Ingresso unico, SSO/RBAC, verifica E2E, log/telemetria)"]
       GU["Gestione Utente (MO_GU)"]
       GC["Gestione CDF (MO_GCDF)"]
@@ -22,16 +22,16 @@ flowchart-elk TB
       GN["Gestione Notifiche"]
     end
 
-    subgraph NI["«serverless container» Nodo Modulo IA (:AIInferenceNode) — Google Cloud Run UE (FastAPI, Stateless)"]
+    subgraph NI["«serverless container» Nodo Modulo IA (:AIInferenceNode) — Container Serverless UE (Stateless)"]
       IA["Modulo IA di Triage<br/>(stateless, Zero-Retention)"]
-      AD["Adattatore Provider IA<br/>(OpenAI-compatible)"]
+      AD["Adattatore Provider IA<br/>(Interfaccia standard)"]
     end
 
-    subgraph NP["«cloud managed database» Server di Persistenza (:PersistenceServer) — Server Cloud UE (Database in cloud + Storage cifrato)"]
+    subgraph NP["«cloud managed database» Server di Persistenza (:PersistenceServer) — Server Cloud UE (Managed Database + Object Storage cifrato)"]
       PD[("Persistenza Dati<br/>Anagrafica | Contenuti cifrati E2EE e Diario<br/>Metadati statistici | Servizi Territoriali")]
     end
 
-    subgraph NAB["«cloud WORM storage» Storage Audit e Backup (:AuditBackupStorage) — AWS S3 UE Object Lock Compliance (IAM isolato)"]
+    subgraph NAB["«cloud WORM storage» Storage Audit e Backup (:AuditBackupStorage) — Object Storage WORM UE (Compliance, IAM isolato)"]
       AL[("Audit Log Immodificabile<br/>(WORM append-only, soli metadati CDF)")]
       BK[("Archivio Backup Cifrati<br/>(giornalieri off-site)")]
     end
@@ -39,9 +39,9 @@ flowchart-elk TB
 
   subgraph EXT["Sistemi esterni"]
     IDP["«external» Provider di Identità di Ateneo (:UniversityIdP)<br/>SAML 2.0 / OIDC (MVP: IdP Cloud + MFA)"]
-    HSM["«external» HSM/KMS istituzionale (:HSM_KMS)<br/>MVP: AWS KMS UE · Prod: HSM Ateneo"]
-    SN["«external» Servizio di Notifiche (:NotificationService)<br/>Resend + Web Push (VAPID)"]
-    PIA["«external, optional» Provider IA esterno (:ExternalAIProvider)<br/>Mistral AI / Azure OpenAI UE (DPA Zero-Retention)"]
+    HSM["«external» HSM/KMS istituzionale (:HSM_KMS)<br/>MVP: Cloud KMS UE · Prod: HSM Ateneo"]
+    SN["«external» Servizio di Notifiche (:NotificationService)<br/>Gateway e-mail UE + Web Push (VAPID)"]
+    PIA["«external, optional» Provider IA esterno (:ExternalAIProvider)<br/>Endpoint LLM gestito SEE (DPA Zero-Retention)"]
   end
 
   %% Comunicazioni interne a Pharos (frecce continue)
@@ -54,7 +54,7 @@ flowchart-elk TB
   GC -->|"TLS [F3]: Pratiche, Periodi di Assenza"| PD
   RC -->|"TLS [F4]: soli metadati"| PD
   GN -->|"TLS [F3]: soli dati di contatto"| PD
-  GC -->|"HTTPS/S3 API [F3]: append-only WORM"| AL
+  GC -->|"HTTPS/API WORM [F3]: append-only"| AL
   PD -->|"TLS: replica backup giornalieri cifrati"| BK
   TG -->|"HTTPS (TLS 1.3) [F2]: testo depurato"| IA
   IA --> AD
