@@ -41,12 +41,4 @@
 
 #include "sections/introduzione.typ"
 
-#pagebreak(weak: true)
-
-= Design Patterns 
-
-#include "sections/patterns/adapter.typ"
-
-#include "sections/patterns/state.typ"
-
-#include "sections/patterns/observer.typ"
+#include "sections/design_patterns.typ"

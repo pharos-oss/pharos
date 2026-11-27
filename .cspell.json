@@ -90,7 +90,10 @@
     "ONNX",
     "PostgREST"
     "DPD",
-    "dpd"
+    "dpd",
+    "adaptee",
+    "Vlissides",
+    "poichè"
   ],
   "ignorePaths": [
     "docs/out/**",
