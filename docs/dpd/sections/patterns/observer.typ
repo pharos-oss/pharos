@@ -43,4 +43,4 @@ I sottosistemi osservatori implementano l'interfaccia comune *Observer* e reagis
 
 - *Benefici:* disaccoppia `MO_GU` e `MO_GCDF` da Gestione Notifiche e Audit Log Immodificabile; impedisce strutturalmente la diffusione di dati riservati trasmettendo solo metadati operativi.
 
-- *Limiti:* richiede una gestione differenziata degli errori tra i due osservatori, poiché la registrazione sull'Audit Log Immodificabile deve essere garantita prima di completare l'operazione del CDF, mentre l'invio tramite il Servizio di Notifiche può avvenire in modo asincrono.
+- *Limiti:* richiede una gestione differenziata degli errori tra i due osservatori, poiché la registrazione sull'Audit Log Immodificabile deve essere garantita prima di completare l'operazione del CDF.
