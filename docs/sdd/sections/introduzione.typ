@@ -77,3 +77,4 @@ Il documento è strutturato in modo da fornire una scomposizione progressiva del
 - @architettura_corrente: *Architettura del Sistema Corrente*: Descrive l'organizzazione attuale del sistema in uso presso l'Ateneo, i componenti coinvolti e i relativi limiti strutturali.
 - @architettura_proposta: *Architettura del Sistema Proposto*: Presenta la panoramica dell'architettura progettata per Pharos, evidenziandone i componenti principali e le relative interazioni.
 - @decomposizione_sottosistemi: *Decomposizione in sottosistemi*: Illustra l'articolazione a livelli del sistema, le responsabilità dei singoli sottosistemi e la tracciabilità rispetto ai requisiti del RAD, corredate dai diagrammi delle dipendenze e dell'architettura.
+- @mappatura_hw_sw: *Mappatura Hardware/Software*: Chiarisce la distribuzione del sistema e le relazioni tra le sue componenti software e l’infrastruttura hardware, offrendo un riferimento per la progettazione e l’implementazione.

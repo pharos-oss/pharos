@@ -28,7 +28,8 @@
   ("21/11/2026", "0.1", "Stesura introduzione del documento", "Francesco Imbriaco, Leonardo Trotta"),
   ("23/11/2026", "0.2", "Stesura sezioni design goals e trade offs", "Tutti i TM"),
   ("24/11/2026", "0.3", "Stesura dell'Architettura del sistema corrente e della Panoramica del sistema proposto", "Carmine Saggese"),
-  ("26/11/2026", "0.4", "Decomposizione in sottosistemi", "Carmine Saggese, Francesco Imbriaco, Mario Senatore"),
+  ("26/11/2026", "0.4", "Sviluppo della sezione: Decomposizione in sottosistemi", "Carmine Saggese, Francesco Imbriaco, Mario Senatore"),
+  ("27/11/2026", "0.5", "Sviluppo della mappatura software/hardware", "Gianmarco Raimondi, Alessia D'Amico"),
 )
 
 #show: doc-template.with(
@@ -53,3 +54,5 @@
 #include "sections/architettura_proposta.typ"
 
 #include "sections/system_decomposition/decomposizione_sottosistemi.typ"
+
+#include "sections/hardware_software_mapping/descrizione_mappatura.typ"

@@ -84,7 +84,11 @@
     "Notif",
     "spessorato",
     "dasharray",
-    "mmd"
+    "mmd",
+    "SMTPS",
+    "Supabase",
+    "ONNX",
+    "PostgREST"
   ],
   "ignorePaths": [
     "docs/out/**",
