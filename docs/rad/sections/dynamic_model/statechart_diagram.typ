@@ -1,3 +1,7 @@
+In questa sezione vengono mostrati i diagrammi degli stati relativi alle principali entità del dominio, descrivendone il ciclo di vita e le transizioni al verificarsi di specifici eventi.
+
+#v(0.5em)
+
 === STD_01_Invio_Segnalazione 
 
 #align(center + horizon)[

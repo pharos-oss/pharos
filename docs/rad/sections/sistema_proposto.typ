@@ -1,6 +1,4 @@
 = Sistema Proposto <sis_proposto>
-
-== Panoramica del sistema proposto
 La piattaforma *Pharos* si pone l'obiettivo di modernizzare e rendere sicuro il processo di gestione delle segnalazioni all'interno dell'Ateneo. Attualmente, l'iter si basa su canali frammentati (moduli cartacei, email ordinarie, colloqui diretti), i quali presentano forti criticità per quanto riguarda la tutela dell'identità dell'utente, la tracciabilità delle pratiche e il carico burocratico.
 
 Il sistema proposto supera queste limitazioni introducendo un processo interamente digitale, progettato per garantire la totale confidenzialità dell'utente e, al contempo, offrire agli organi preposti (come il Consigliere di fiducia) uno strumento di analisi dei dati e relative funzioni di esportazione e creazione grafici. L'innovazione principale di Pharos consiste nel separare in modo netto l'identità di chi effettua la segnalazione dal contenuto della segnalazione stessa, assicurando che i dati personali siano rigorosamente protetti e accessibili solo al consigliere di fiducia per la presa in carico della pratica.
@@ -14,7 +12,13 @@ Il nuovo processo si articola in un flusso lineare, concepito per tutelare le pa
 
 In conclusione, Pharos agisce come un intermediario di fiducia: da un lato abbassa la barriera psicologica della segnalazione fornendo un ambiente sicuro per l'utente, dall'altro dota l'Istituzione di uno strumento organizzato per monitorare il benessere accademico e intervenire in modo tempestivo.
 
-== Diagramma delle attività
+#pagebreak()
+
+== Activity Diagram
+In questa sezione viene mostrato il diagramma delle attività del sistema proposto, illustrando il nuovo flusso operativo digitalizzato e le interazioni tra gli attori all'interno della piattaforma Pharos.
+
+#v(0.5em)
+
 #figure(
   image("../assets/images/AD_02_Sistema_Proposto.png"),
   caption: ["Activity Diagram: Diagramma delle Attività del Sistema Proposto"]

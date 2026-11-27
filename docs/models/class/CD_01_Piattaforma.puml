@@ -47,14 +47,17 @@ class GestoreDiario <<Control>> {
   + rimuoviEvento()
   + cifraContenuto()
   + validaAllegato()
+  + aggiornaAllegati()
 }
 
-class GestoreSegn <<Control>> {
+class GestoreSegnalazione <<Control>> {
   + inviaSegnalazione()
   + interrompiIter()
   + avviaTriageGuidato()
   + anonimizzaTesto()
   + recuperaServizi()
+  + ottieniDettagli() 
+  + aggiornaSegnalazione()
 }
 
 class Utente <<Entity>> {
@@ -96,6 +99,7 @@ class Segnalazione <<Entity>> {
   - dataInvio: Date
   + impostaStato()
   + ottieniDettagli()
+  + aggiungiIntegrazioni()
 }
 
 class Allegato <<Entity>> {
@@ -150,6 +154,7 @@ class GestorePratiche <<Control>> {
   + aggiornaStato()
   + chiudiPratica()
   + gestisciAssenza()
+  + ottieniDettPratica(idPratica)
 }
 
 class GestoreReport <<Control>> {
@@ -217,19 +222,23 @@ class PeriodoAssenza <<Entity>> {
   - avvisoAttivo: Boolean
   + attivaAvviso()
   + disattivaAvviso()
+  + impostaDate()
+  + aggiornaDate()
+  + terminaOra()
+  + storicizzaAssenza()
 }
 
 InterfacciaUtente -down-> GestoreDiario : (1)
-InterfacciaUtente -down-> GestoreSegn : (1)
+InterfacciaUtente -down-> GestoreSegnalazione : (1)
 
 GestoreDiario -down-> Diario
 GestoreDiario -down-> EventoDiario
 GestoreDiario -down-> Allegato
 
-GestoreSegn -down-> Segnalazione
-GestoreSegn -down-> Notifica
-GestoreSegn -down-> ValutazioneIA
-GestoreSegn -down-> ServizioTerritoriale
+GestoreSegnalazione -down-> Segnalazione
+GestoreSegnalazione -down-> Notifica
+GestoreSegnalazione -down-> ValutazioneIA
+GestoreSegnalazione -down-> ServizioTerritoriale
 
 Utente "1" -- "1" Diario
 Utente "1" -- "0..*" Segnalazione
@@ -240,8 +249,7 @@ EventoDiario "0..*" -- "0..*" Segnalazione
 
 Segnalazione "0..1" -- "0..*" Allegato
 Segnalazione "1" -- "0..*" Notifica
-Segnalazione "1" -- "0..1" ValutazioneIA
-ValutazioneIA "0..*" -- "0..*" ServizioTerritoriale
+Segnalazione "0..1" -- "0..1" ValutazioneIA
 
 InterfacciaCDF -down-> GestorePratiche : (1)
 InterfacciaCDF -down-> GestoreReport : (1)

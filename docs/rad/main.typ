@@ -16,7 +16,7 @@
 // No "Versione" row: the template adds it from the last revision-history entry.
 #let metadata = (
   ("Riferimento", "RAD_Pharos"),
-  ("Data", "01/11/2026"),
+  ("Data", "23/11/2026"),
   ("Destinatario", ""),
   ("Presentato da", ""),
   ("Approvato da", ""),
@@ -26,22 +26,15 @@
 // The last row's version is the one shown in the footer.
 #let revision-history = (
   ("01/11/2026", "0.1", "Stesura introduzione del documento", "Gianmarco Raimondi, Carmine Saggese"),
-  ("03/11/2026", "0.2", "Descrizione del sistema corrente", "Carmine Saggese, Francesco Imbriaco, Leonardo Trotta"),
-  ("03/11/2026", "0.2", "Definizione del sistema proposto", "Alessia D'Amico, Gianmarco Raimondi, Mario Senatore"),
-  ("06/11/2026", "0.3", "Stesura degli scenari utente 1 - 4", "Alessia D'Amico, Leonardo Trotta"),
-  ("06/11/2026", "0.3", "Stesura degli scenari utente 5 - 8", "Carmine Saggese, Mario Senatore"),
-  ("06/11/2026", "0.3", "Stesura degli scenari CDF", "Gianmarco Raimondi, Francesco Imbriaco"),
-  ("07/11/2026", "0.4", "Definizione dei casi d'uso utente 1 - 2; Definizione dei casi d'uso utente 3 - 4", "Carmine Saggese, Alessia D'Amico, Gianmarco Raimondi, Leonardo Trotta"),
-  ("07/11/2026", "0.4", "Definizione dei casi d'uso CDF", "Mario Senatore, Francesco Imbriaco"),
-  ("09/11/2026", "0.5", "Stesura dei requisiti funzionali e non funzionali", "Tutti"),
-  ("12/11/2026", "0.6", "Stesura della tabella degli oggetti", "Francesco Imbriaco, Alessia D'Amico"),
-  ("12/11/2026", "0.6", "Stesura del diagramma delle classi", "Leonardo Trotta, Mario Senatore"),
-  ("13/11/2026", "0.7", "Stesura del diagramma di sequenza 1", "Mario Senatore, Gianmarco Raimondi"),
-  ("13/11/2026", "0.7", "Stesura del diagramma di sequenza 2", "Alessia D'Amico, Carmine Saggese"),
-  ("17/11/2026", "0.7", "Stesura del diagramma di sequenza 3", "Leonardo Trotta, Francesco Imbriaco"),
-  ("19/11/2026", "0.8", "Inserimento dei mockup", "Francesco Imbriaco, Alessia D'Amico"),
-  ("20/11/2026", "0.8", "Inserimento dei diagrammi navigazionali", "Carmine Saggese, Leonardo Trotta"),
+  ("03/11/2026", "0.2", "Definizione sistema corrente e sistema proposto", "Tutti i TM"),
+  ("06/11/2026", "0.3", "Stesura degli scenari utente e CDF", "Tutti i TM"),
+  ("07/11/2026", "0.4", "Definizione dei casi d'uso utente e CDF", "Tutti i TM"),
+  ("09/11/2026", "0.5", "Stesura dei requisiti funzionali e non funzionali", "Tutti i TM"),
+  ("12/11/2026", "0.6", "Stesura della tabella degli oggetti e del diagramma delle classi", "Francesco Imbriaco, Alessia D'Amico, Leonardo Trotta, Mario Senatore"),
+  ("17/11/2026", "0.7", "Stesura dei diagrammi di sequenza", "Tutti i TM"),
+  ("20/11/2026", "0.8", "Inserimento dei mockup e dei diagrammi navigazionali", "Francesco Imbriaco, Alessia D'Amico, Carmine Saggese, Leonardo Trotta"),
   ("20/11/2026", "0.9", "Inserimento del glossario", "Gianmarco Raimondi"),
+  ("23/11/2026", "1.0", "Revisione finale", "Tutti i TM"),
 )
 
 #show: doc-template.with(
@@ -50,18 +43,31 @@
   reference: "RAD_Pharos",
   metadata: metadata,
   revision-history: revision-history,
+  cover-logo-height: 9cm,
 )
 #show link: it => text(fill: blue, underline(it)) 
 #show ref: set text(fill: blue)
 
+#pagebreak(weak: true)
+
 #include "sections/introduzione.typ"
+
+#pagebreak(weak: true)
 
 #include "sections/sistema_corrente.typ"
 
+#pagebreak(weak: true)
+
 #include "sections/sistema_proposto.typ"
+
+#pagebreak(weak: true)
 
 #include "sections/requisiti_sistema.typ"
 
+#pagebreak(weak: true)
+
 #include "sections/modelli_sistema.typ"
+
+#pagebreak(weak: true)
 
 #include "sections/glossary.typ"

@@ -72,13 +72,15 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   *Data:* 07/11/2026 \
   *Versione:* 1.0 \
   *Autore:* Alessia D'Amico, Carmine Saggese \
-  *Descrizione:* Lo UC descrive l'utilizzo del modulo IA da parte dell'Utente per ottenere una valutazione orientativa su episodi annotati nel diario, al fine di decidere se avviare una segnalazione formale. \
+  *Descrizione:* Lo UC descrive l'utilizzo del modulo IA da parte dell'Utente per ottenere una valutazione orientativa su eventi annotati nel diario, al fine di decidere se avviare una segnalazione formale. \
   *Attore Principale:* Utente (Interessato a comprendere la gravità di uno o più eventi e orientarsi sulle decisioni da prendere) \
   *Attori secondari:* Sistema (Modulo IA)
 
   *Entry Condition:* \
   - Un Utente ha effettuato l'accesso al sistema \
-  - L'Utente ha annotato nel diario almeno un episodio \
+  - L'Utente ha annotato nel diario almeno un evento \
+
+  #v(0.5em)
 
   *Exit condition (On success):* \
   - Il Sistema mostra all'Utente l'esito orientativo della valutazione \
@@ -115,7 +117,7 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   #v(0.5em)
 
   *Note:* N/A \
-  *Special requirments*: Il processo di anonimizzazione (rimozione dei dati identificativi) prima della trasmissione al modulo IA deve essere rigoroso per prevenire l'esposizione di dati personali sensibili. Inoltre, i dati inviati non devono essere memorizzati o utilizzati per l'addestramento del modello.
+  *Special Requirements:* Il processo di anonimizzazione (rimozione dei dati identificativi) prima della trasmissione al modulo IA deve essere rigoroso per prevenire l'esposizione di dati personali sensibili. Inoltre, i dati inviati non devono essere memorizzati o utilizzati per l'addestramento del modello.
 ]
 
 #callout-box(title: "UC_03 Composizione e inoltro di una segnalazione")[
@@ -143,14 +145,14 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
 
   *Rilevanza/User Priority:* Elevata \
   *Frequenza stimata:* Bassa (es. 2/settimana) \
-  *Extension point:* NA \
-  *Generalization of:* NA
+  *Extension point:* N/A \
+  *Generalization of:* N/A 
 
   #v(1em)
 
   *FLUSSO DI EVENTI PRINCIPALE / MAIN SCENARIO*
   1. *Utente:* Richiede di aggiungere un nuovo evento al diario personale.
-  2. *Sistema:* Chiede di inserire i dettagli compilando un modulo (data, luogo, descrizione, file allegato).
+  2. *Sistema:* Chiede di inserire i dettagli compilando un modulo (data, ora, luogo, descrizione, file allegato).
   3. *Utente:* Inserisce i dati richiesti, allega un file probatorio e clicca "Salva evento".
   4. *Sistema:* Controlla che i dati siano validi (campi obbligatori compilati, file < es. 50MB, formato ammesso).
   5. *Sistema:* Cifra l'evento e lo salva correttamente nel diario personale.
@@ -192,7 +194,9 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
   *Data*: 07/11/2026 \
   *Versione*: 1.0 \
   *Autore*: Leonardo Trotta, Gianmarco Raimondi \
-  *Descrizione*: Lo UC descrive la funzionalità di consultazione dello stato di avanzamento di una segnalazione attiva e la possibilità di ritirarla interrompendone l'iter ufficiale.
+  *Descrizione*: Lo UC descrive la funzionalità di consultazione dello stato di avanzamento di una segnalazione attiva e la possibilità di ritirarla interrompendone l'iter ufficiale. \
+  *Attore Principale:* Utente (È interessato a consultare lo stato di avanzamento delle segnalazioni effettuate) \
+  *Attori secondari:* Consigliere di Fiducia, Sistema (Notifiche)
 
   *Entry Condition*:
   - Un Utente ha effettuato l'accesso al sistema 
@@ -209,8 +213,8 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
 
   *Rilevanza/User Priority*: Elevata \
   *Frequenza stimata*: Media (es. 5/giorno) \
-  *Extension point*: NA \
-  *Generalization of*: NA
+  *Extension point*: N/A \
+  *Generalization of*: N/A
 
   #v(1em)
 
@@ -222,7 +226,7 @@ Nella presente sezione sono presentati i diversi casi d’uso del sistema, divis
 
   #v(1em)
 
- * I Scenario/Flusso di eventi Alternativo: Rinuncia al proseguimento dell'iter (Rif. SC_U_08)*
+ *I Scenario/Flusso di eventi Alternativo: Rinuncia al proseguimento dell'iter (Rif. SC_U_08)*
   - 3.a1 *Utente*: Clicca sul comando per interrompere l'iter e ritirare la segnalazione.
   - 3.a2 *Sistema*: Mostra un avviso informando che l'azione comporterà l'archiviazione definitiva e richiede conferma.
   - 3.a3 *Utente*: Conferma la volontà di procedere.

@@ -28,7 +28,7 @@ entity ":Notifica" as notifica
 entity ":NotaCDF" as notaCDF
 actor "Utente\n(Marco)" as utente
 boundary ":InterfacciaUtente" as intUtente
-control ":GestoreSegn" as gestSegn
+control ":GestoreSegnalazione" as gestSegn
 control ":GestoreDiario" as gestDiario
 entity ":EventoDiario" as eventoDiario
 
