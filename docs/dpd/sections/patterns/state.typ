@@ -19,8 +19,8 @@ Il pattern *State* incapsula le operazioni lecite e le transizioni di ciascuna f
     inset: 7pt,
     align: horizon,
     table.header([*Ruolo GoF*], [*Componente in Pharos*], [*Responsabilità*]),
-    [Context], [*Pratica* (`MO_GCDF`)], [Mantiene lo stato corrente e delega le operazioni del ciclo di vita allo stato attivo.],
-    [State], [*Stato Pratica* (classe astratta)], [Definisce le operazioni sul ciclo di vita e rifiuta in modo predefinito ogni modifica non consentita.],
+    [Context], [Pratica (`MO_GCDF`)], [Mantiene lo stato corrente e delega le operazioni del ciclo di vita allo stato attivo.],
+    [State], [Stato Pratica (classe astratta)], [Definisce le operazioni sul ciclo di vita e rifiuta in modo predefinito ogni modifica non consentita.],
     [ConcreteState (stati attivi)], [Stati `Inviata`, `Presa in carico`, `In lavorazione`, `In attesa di integrazioni`], [Abilitano esclusivamente le azioni e le transizioni valide nella rispettiva fase di lavorazione.],
     [ConcreteState (stati terminali)], [Stati `Chiusa`, `Archiviata`], [Consentono la sola consultazione e bloccano qualsiasi operazione di modifica (`RNF_A_02`).],
   )

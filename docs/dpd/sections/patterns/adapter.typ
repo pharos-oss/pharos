@@ -19,10 +19,10 @@ Si adotta il pattern *Adapter* (mediante composizione), realizzando il component
     inset: 7pt,
     align: horizon,
     table.header([*Ruolo GoF*], [*Componente in Pharos*], [*Responsabilità*]),
-    [Client], [*Triage Guidato*], [Inoltra il testo già depurato al Modulo IA di Triage e restituisce la Valutazione IA all'Utente.],
-    [Target], [*Modulo IA di Triage* (interfaccia interna)], [Definisce il contratto di valutazione _stateless_ del testo depurato, indipendente dalla modalità di esecuzione.],
-    [Adapter], [*Adattatore Provider IA* (interno al *Modulo IA di Triage*)], [Traduce richieste e risposte del fornitore esterno, impone i vincoli _Zero-Retention_ e gestisce errori e _timeout_.],
-    [Adaptee], [*Provider IA esterno*], [Servizio IA gestito opzionale, operante in area SEE sotto DPA con interfaccia proprietaria.],
+    [Client], [Triage Guidato], [Inoltra il testo già depurato al Modulo IA di Triage e restituisce la Valutazione IA all'Utente.],
+    [Target], [Modulo IA di Triage (interfaccia interna)], [Definisce il contratto di valutazione _stateless_ del testo depurato, indipendente dalla modalità di esecuzione.],
+    [Adapter], [Adattatore Provider IA (interno al Modulo IA di Triage)], [Traduce richieste e risposte del fornitore esterno, impone i vincoli _Zero-Retention_ e gestisce errori e _timeout_.],
+    [Adapter], [Provider IA esterno], [Servizio IA gestito opzionale, operante in area SEE sotto DPA con interfaccia proprietaria.],
   )
 ]
 

@@ -32,10 +32,10 @@ I sottosistemi osservatori implementano l'interfaccia comune *Observer* e reagis
     align: horizon,
     table.header([*Ruolo GoF*], [*Componente in Pharos*], [*Responsabilità*]),
     [Subject], [Interfaccia di notifica eventi (`MO_GU`, `MO_GCDF`)], [Consente di registrare e rimuovere gli osservatori e di notificare loro gli eventi relativi alla Pratica.],
-    [ConcreteSubject], [*Gestione Utente (`MO_GU`)*, *Gestione CDF (`MO_GCDF`)*], [Notificano agli osservatori i soli metadati operativi al completamento di ogni aggiornamento di Stato Pratica e, per `MO_GCDF`, a ogni accesso o operazione del CDF.],
-    [Observer], [Interfaccia di ricezione eventi], [Definisce il metodo di aggiornamento invocato alla ricezione di un evento di *Pratica*.],
-    [ConcreteObserver 1], [*Gestione Notifiche*], [Reagisce agli aggiornamenti di Stato Pratica, legge i soli dati di contatto dalla Persistenza Dati e invia la notifica tramite il Servizio di Notifiche senza dettagli riservati (`RF_GU_07`).],
-    [ConcreteObserver 2], [*Audit Log Immodificabile*], [Reagisce agli eventi di `MO_GCDF` registrando in sola aggiunta i metadati su storage WORM con _hash-chaining_ (`RNF_L_02`).],
+    [ConcreteSubject], [Gestione Utente (`MO_GU`), Gestione CDF (`MO_GCDF`)], [Notificano agli osservatori i soli metadati operativi al completamento di ogni aggiornamento di Stato Pratica e, per `MO_GCDF`, a ogni accesso o operazione del CDF.],
+    [Observer], [Interfaccia di ricezione eventi], [Definisce il metodo di aggiornamento invocato alla ricezione di un evento di Pratica.],
+    [ConcreteObserver 1], [Gestione Notifiche], [Reagisce agli aggiornamenti di Stato Pratica, legge i soli dati di contatto dalla Persistenza Dati e invia la notifica tramite il Servizio di Notifiche senza dettagli riservati (`RF_GU_07`).],
+    [ConcreteObserver 2], [Audit Log Immodificabile], [Reagisce agli eventi di `MO_GCDF` registrando in sola aggiunta i metadati su storage WORM con _hash-chaining_ (`RNF_L_02`).],
   )
 ]
 
