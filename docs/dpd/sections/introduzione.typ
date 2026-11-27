@@ -2,7 +2,8 @@
 
 = Introduzione <introduzione>
 
-Il presente *Design Pattern Document (DPD)* descrive i _design pattern_ orientati agli oggetti adottati nella progettazione dettagliata di Pharos, collegando la decomposizione in sottosistemi del System Design Document (SDD) all'implementazione, nel rispetto dei requisiti del Requirements Analysis Document (RAD). Per le definizioni e gli acronimi di dominio si rimanda al RAD e all'SDD; si utilizza inoltre la sigla *GoF* (_Gang of Four_).
+== Scopo e campo di applicazione
+Il presente *Design Pattern Document (DPD)* descrive i _design pattern_ orientati agli oggetti adottati nella progettazione dettagliata di Pharos, collegando la decomposizione in sottosistemi del System Design Document (SDD) all'implementazione, nel rispetto dei requisiti del Requirements Analysis Document (RAD). Il documento si concentra esclusivamente sui pattern selezionati per l'utilizzo nel sistema, illustrandone il problema affrontato, il ruolo svolto e l'integrazione nella soluzione progettuale. Per le definizioni e gli acronimi di dominio si rimanda al RAD e all'SDD; si utilizza inoltre la sigla *GoF* (_Gang of Four_).
 
 La tabella seguente riepiloga i tre pattern adottati, i sottosistemi dell'SDD coinvolti e i requisiti del RAD coperti.
 
@@ -27,7 +28,7 @@ La tabella seguente riepiloga i tre pattern adottati, i sottosistemi dell'SDD co
     [State (@pattern_state)],
     [Comportamentale],
     [Incapsula regole di transizione e operazioni consentite nei sei stati della Pratica, garantendo la sola lettura su `Chiusa` e `Archiviata`.],
-    [Gestione Utente (`MO_GU`), Gestione CDF (`MO_GCDF`), Persistenza Dati (`RF_GU_04`–`06`, `RF_GU_08`–`09`, `RF_GCDF_03`–`06`, `RNF_A_02`)],
+    [Gestione Utente (`MO_GU`), Gestione CDF (`MO_GCDF`), Persistenza Dati (`RF_GU_05`–`06`, `RF_GU_08`–`09`, `RF_GCDF_03`–`06`, `RNF_A_02`)],
     [Observer (@pattern_observer)],
     [Comportamentale],
     [Disaccoppia la gestione delle pratiche dall'invio di notifiche prive di dettagli riservati e dalla registrazione in sola aggiunta sull'Audit Log Immodificabile (WORM).],

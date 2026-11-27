@@ -93,6 +93,9 @@
     "dpd",
     "adaptee",
     "Vlissides",
+    "SDD",
+    "RNF",
+    "CUG"
   ],
   "ignorePaths": [
     "docs/out/**",
