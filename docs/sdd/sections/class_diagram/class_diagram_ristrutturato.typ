@@ -1,11 +1,12 @@
 #import "../../../templates/common.typ": palette-primary, readable-text, table-style
 
 = Class Diagram Ristrutturato <class_diagram_ristrutturato>
-La presente sezione illustra il Class Diagram ristrutturato di Pharos, ottenuto evolvendo il modello statico di analisi per riflettere la decomposizione in sottosistemi (@decomposizione_sottosistemi) e soddisfare gli obiettivi progettuali di sicurezza, privacy e manutenibilità. Rispetto al modello concettuale del RAD, le classi sono state partizionate nei livelli *Presentazione*, *Applicativo* e *Persistenza e Sicurezza*, affiancati dal componente isolato *Modulo IA* (_stateless_ e _Zero-Retention_) e dalle interfacce verso i servizi esterni (`IServizioSSO`, `IServizioHSM`, `IServizioNotifiche`). 
 
-L'accesso ai servizi applicativi avviene attraverso un punto di ingresso unico (`GestoreAccessiSicurezza`) dotato di controllo RBAC e telemetria pseudonimizzata (`LoggerApplicativo`), mentre le operazioni crittografiche E2EE (`GestoreCifraturaClient`, `ClientDecifraturaCDF`), la redazione preventiva del testo (`RedattoreOnDevice`) e l'archiviazione locale _offline-first_ (`ArchivioOfflineLocale`) restano confinate sui dispositivi client. A livello di dominio, le utenze istituzionali (`Utente`, `Cdf`) specializzano la classe astratta `AccountIstituzionale` e la persistenza separa logicamente anagrafica, contenuti cifrati e metadati anonimi (`MetadatoStatistico`), permettendo a `GestoreReport` di aggregare le statistiche per il CUG senza accedere ai testi riservati. 
+La presente sezione illustra il Class Diagram ristrutturato di Pharos, ottenuto evolvendo il modello statico di analisi per riflettere la decomposizione in sottosistemi (@decomposizione_sottosistemi), l'adozione dei _design pattern_ definiti nel DPD e gli obiettivi progettuali di sicurezza, privacy e manutenibilità. Rispetto al modello concettuale del RAD, le classi sono state partizionate nei livelli *Presentazione*, *Applicativo* e *Persistenza Dati*, affiancati dal nodo isolato *Audit Log Immodificabile (WORM)*, dal componente *Modulo IA di Triage* (_stateless_ e _Zero-Retention_) e dalle interfacce verso i servizi esterni (`IServizioSSO`, `IServizioHSM`, `IServizioNotifiche`, `ProviderIAEsterno`).
 
-Infine, il blocco in sola lettura delle pratiche chiuse o archiviate e la registrazione _append-only_ con _hash-chaining_ (`GestoreAuditLog`, `VoceAudit`), consultabile dal solo DPO tramite `InterfacciaAuditDPO`, garantiscono integrità legale e tracciabilità.
+L'accesso ai servizi applicativi avviene attraverso un punto di ingresso unico (`GestoreAccessiSicurezza`) dotato di autenticazione SAML 2.0, controllo RBAC e telemetria pseudonimizzata (`LoggerApplicativo`), attraverso il quale transita anche la sincronizzazione _offline-first_ (`ArchivioOfflineLocale`), mentre cifratura E2EE (`GestoreCifraturaClient`, `ClientDecifraturaCDF`) e redazione preventiva del testo (`RedattoreOnDevice`) restano confinate sui client. A livello applicativo sono integrati il pattern *Adapter* sul Modulo IA (`IModuloIATriage`, `ModuloIAOnPremise`, `AdattatoreProviderIA`) e il pattern *Observer* (`ISoggettoEventi`, `IOsservatoreEventi`, `EventoPratica`) per disaccoppiare la gestione delle pratiche dall'invio di notifiche prive di dettagli riservati (`GestoreNotifiche`) e dalla registrazione sincrona su storage WORM (`GestoreAuditLog`), che traccia anche le esportazioni dei report CUG prodotte da `GestoreReport`.
+
+A livello di persistenza, le utenze istituzionali (`Utente`, `Cdf`) specializzano `AccountIstituzionale` e i dati sono separati logicamente nei domini Anagrafica, Contenuti Cifrati e Metadati (`MetadatoStatistico`). Lo stato `BOZZA` è confinato alla sola `Segnalazione`, mentre il ciclo di vita della `Pratica` adotta il pattern *State* tramite la classe astratta `StatoPratica` e le sei sottoclassi concrete (`Inviata`, `PresaInCarico`, `InLavorazione`, `InAttesaIntegrazioni`, `Chiusa`, `Archiviata`), imponendo il blocco in sola lettura sugli stati terminali. Infine, la consultazione dell'Audit Log con _hash-chaining_ avviene esclusivamente tramite il canale separato in sola lettura (`InterfacciaAudit`), riservato a DPO, responsabile sicurezza di Ateneo e autorità competenti, con tracciamento autonomo degli accessi.
 
 La tabella seguente sintetizza la tracciabilità tra sottosistemi architetturali, classi principali, vincoli chiave e requisiti:
 
@@ -27,52 +28,63 @@ La tabella seguente sintetizza la tracciabilità tra sottosistemi architetturali
 
       [Applicazione Web Utente (PWA)],
       [InterfacciaUtente, GestoreCifraturaClient, RedattoreOnDevice, ArchivioOfflineLocale],
-      [Cifratura AES-256 locale ed E2EE _client-side_; redazione _on-device_ prima del Triage; cache offline per EventoDiario e ServizioTerritoriale; Panic Button.],
+      [Cifratura AES-256 locale ed E2EE _client-side_; redazione _on-device_ prima del Triage; cache offline sincronizzata esclusivamente tramite `GestoreAccessiSicurezza`; Panic Button.],
       [RF\_GU\_01–03, RF\_GU\_11, RNF\_U\_01–04, RNF\_A\_01, RNF\_A\_03],
 
       [Applicazione Web CDF],
       [InterfacciaCDF, ClientDecifraturaCDF],
-      [Decifratura E2EE tramite IServizioHSM senza esporre la chiave privata; nessuna dipendenza in lettura sull'Audit Log.],
+      [Decifratura E2EE tramite `IServizioHSM` senza esporre la chiave privata; nessuna dipendenza in lettura sull'Audit Log.],
       [RF\_GCDF\_01–09, RNF\_U\_03, RNF\_A\_01, RNF\_P\_02],
 
       [Controllo Accessi e Sicurezza],
       [GestoreAccessiSicurezza, Sessione, LoggerApplicativo, IServizioSSO],
-      [Punto di ingresso unico per le interfacce; autenticazione SAML 2.0 e RBAC (RuoloSistema); logging tecnico pseudonimizzato.],
+      [Punto di ingresso unico per tutte le richieste provenienti dalla Presentazione; autenticazione SAML 2.0 e RBAC (`RuoloSistema`); logging tecnico pseudonimizzato.],
       [RNF\_IF\_01, RNF\_A\_01, RNF\_S\_01],
 
       [Gestione Utente (MO\_GU)],
       [GestoreDiario, GestoreSegnalazione],
-      [Sincronizzazione cifrata di Diario/EventoDiario, validazione Allegato, bozze e inoltro Segnalazione, integrazioni (con propagazione a GestorePratiche) e interruzione iter.],
+      [Sincronizzazione cifrata di `Diario`/`EventoDiario`, validazione `Allegato`, bozze (`StatoSegnalazione`) e inoltro `Segnalazione`, integrazioni, interruzione iter e consultazione `ServizioTerritoriale`; `ConcreteSubject` nel pattern *Observer*.],
       [RF\_GU\_01–06, RF\_GU\_08, RF\_GU\_09, RF\_GU\_11],
 
       [Gestione CDF (MO\_GCDF)],
       [GestorePratiche],
-      [Presa in carico, avanzamento con StatoPratica e NotaCDF, richiesta integrazioni, chiusura con EsitoPratica (`solaLettura = true`), gestione PeriodoAssenza, tracciamento su GestoreAuditLog.],
+      [Presa in carico, gestione ciclo di vita tramite pattern *State* su `Pratica`, `NotaCDF`, richiesta integrazioni, chiusura con `EsitoPratica`, gestione `PeriodoAssenza`; `ConcreteSubject` nel pattern *Observer*.],
       [RF\_GCDF\_01–07, RNF\_A\_02, RNF\_L\_02],
 
-      [Triage Guidato & Modulo IA],
-      [GestoreTriage, ModuloIATriage, IProviderIA, AdattatoreProviderIA, ValutazioneIA],
-      [Ricezione solo di testo depurato; elaborazione _stateless_ con ValutazioneIA transiente (`<<DTO>>`); disaccoppiamento del provider esterno via Adapter.],
+      [Triage Guidato],
+      [GestoreTriage],
+      [Riceve il solo testo depurato dalla PWA e delega la valutazione all'interfaccia target `IModuloIATriage`, restituendo `ValutazioneIA` senza accedere alla Persistenza Dati.],
+      [RF\_GU\_10, RNF\_P\_01],
+
+      [Modulo IA di Triage],
+      [IModuloIATriage, ModuloIAOnPremise, AdattatoreProviderIA, ValutazioneIA, ProviderIAEsterno],
+      [Componente isolato _stateless_ e _Zero-Retention_; disaccoppiamento del fornitore esterno tramite pattern *Adapter* (`IModuloIATriage` come Target, `AdattatoreProviderIA` come Adapter) con soglia di risposta #sym.lt.eq 5 s.],
       [RF\_GU\_10, RNF\_P\_01, RNF\_IM\_02, RNF\_L\_01],
 
       [Reportistica CUG],
       [GestoreReport, MetadatoStatistico, ReportStatistico],
-      [Aggregazione dei soli metadati non identificativi senza accesso ai contenuti cifrati; tracciamento delle esportazioni su GestoreAuditLog.],
+      [Aggregazione dei soli metadati non identificativi senza accesso ai contenuti cifrati; `ConcreteSubject` per il tracciamento delle esportazioni sull'Audit Log WORM.],
       [RF\_GCDF\_08, RF\_GCDF\_09, RNF\_L\_02],
 
       [Gestione Notifiche],
       [GestoreNotifiche, Notifica, IServizioNotifiche],
-      [Invio notifiche generiche in-app ed e-mail senza contenuti riservati, leggendo i soli contatti da AccountIstituzionale.],
+      [`ConcreteObserver` asincrono su `EventoPratica`; invio notifiche generiche in-app ed e-mail senza dettagli riservati leggendo i soli contatti da `AccountIstituzionale`.],
       [RF\_GU\_07],
 
-      [Persistenza Dati e Audit WORM],
-      [AccountIstituzionale, Utente, Cdf, entità cifrate, GestoreAuditLog, VoceAudit, InterfacciaAuditDPO],
-      [Separazione logica in tre domini (Anagrafica, Contenuti Cifrati, Metadati); integrità _hash-chaining_ su VoceAudit e consultazione riservata a DPO/Sicurezza su canale separato.],
-      [RNF\_A\_01, RNF\_A\_02, RNF\_O\_01, RNF\_L\_02],
+      [Persistenza Dati],
+      [AccountIstituzionale, Utente, Cdf, Diario, EventoDiario, Allegato, Segnalazione, Pratica, StatoPratica (+ 6 stati concreti), StoricoTransizione, NotaCDF, EsitoPratica, PeriodoAssenza, ServizioTerritoriale],
+      [Separazione logica in tre domini (Anagrafica, Contenuti Cifrati, Metadati); pattern *State* sui sei stati di `Pratica` con blocco applicativo e DB in sola lettura su `Chiusa` e `Archiviata`.],
+      [RNF\_A\_01, RNF\_A\_02, RNF\_O\_01],
+
+      [Audit Log Immodificabile (WORM)],
+      [GestoreAuditLog, VoceAudit, InterfacciaAudit],
+      [`ConcreteObserver` sincrono e atomico su storage WORM con _hash-chaining_; consultazione in sola lettura su canale separato (`InterfacciaAudit`) riservata a DPO, responsabile sicurezza di Ateneo e autorità competenti.],
+      [RNF\_L\_02, RNF\_A\_01],
     )
   ]
 ]
+
 #figure(
-  image("../../assets/class_diagram_ristrutturato_svg.svg", width: 76%, height: 100%),
-  caption: [Diagramma architetturale di Pharos con i flussi principali.],
+  image("../../assets/CD_02_Piattaforma_Ristrutturato.svg", width: 81%, height: 100%),
+  caption: [Class Diagram ristrutturato di Pharos.],
 )
