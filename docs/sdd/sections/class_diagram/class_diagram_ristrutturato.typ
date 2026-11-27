@@ -10,10 +10,10 @@
       inset: 8pt,
       align: horizon,
 table.header(
-    [*Sottosistema SDD*],
+    [*Sottosistema*],
     [*Classi / Interfacce principali*],
     [*Relazioni e vincoli chiave*],
-    [*Requisiti coperti*],
+    [*Riferimenti*],
   ),
 
   [Applicazione Web Utente (PWA)],
