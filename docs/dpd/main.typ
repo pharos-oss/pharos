@@ -38,3 +38,15 @@
 )
 #show link: it => text(fill: blue, underline(it)) 
 #show ref: set text(fill: blue)
+
+#include "sections/introduzione.typ"
+
+#pagebreak(weak: true)
+
+= Design Patterns 
+
+#include "sections/patterns/adapter.typ"
+
+#include "sections/patterns/state.typ"
+
+#include "sections/patterns/observer.typ"
