@@ -1,0 +1,597 @@
+@startuml CD_02_Piattaforma_Ristrutturato
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName "DejaVu Sans"
+skinparam defaultFontSize 11
+
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 65
+skinparam padding 5
+
+skinparam class {
+  BackgroundColor White
+  BorderColor #1E2A4A
+  FontColor #1E2A4A
+  HeaderBackgroundColor #E8E4F5
+  StereotypeFontColor #8273B4
+  StereotypeFontSize 10
+  AttributeFontColor #1E2A4A
+}
+
+skinparam interface {
+  BackgroundColor White
+  BorderColor #1E2A4A
+  FontColor #1E2A4A
+}
+
+skinparam enum {
+  BackgroundColor #FDFCFF
+  BorderColor #1E2A4A
+  FontColor #1E2A4A
+  HeaderBackgroundColor #EDE9FE
+}
+
+skinparam package {
+  BorderColor #9CA3AF
+  FontColor #1F2937
+  FontSize 12
+  FontStyle bold
+}
+
+skinparam package<<Presentazione>> {
+  BackgroundColor #EAE8FA
+}
+skinparam package<<Applicativo>> {
+  BackgroundColor #D5E8F7
+}
+skinparam package<<Persistenza>> {
+  BackgroundColor #D5ECD9
+}
+skinparam package<<ModuloIA>> {
+  BackgroundColor #FCE8CC
+}
+skinparam package<<Esterni>> {
+  BackgroundColor #ECEEEF
+}
+
+skinparam arrow {
+  Color #4B5563
+  FontColor #374151
+  FontSize 10
+  Thickness 1.3
+}
+
+top to bottom direction
+
+' =========================================================
+' LIVELLO PRESENTAZIONE (MAX 3 COLONNE)
+' =========================================================
+package "Livello Presentazione" <<Presentazione>> {
+
+  package "Applicazione Web Utente (PWA)" {
+    class InterfacciaUtente <<Boundary>> {
+      + mostraDiario(): void
+      + mostraFormSegnalazione(): void
+      + mostraTriage(): void
+      + mostraStatoSegnalazioni(): void
+      + mostraRubricaECounseling(): void
+      + attivaPanicButton(): void
+    }
+
+    class GestoreCifraturaClient <<Control>> {
+      + cifraLocaleAES(dati: String): Byte[]
+      + decifraLocaleAES(payload: Byte[]): String
+      + cifraE2EE(dati: String, chiavePubCDF: Key): Byte[]
+      + gestisciRecoveryKey(): void
+    }
+
+    class RedattoreOnDevice <<Control>> {
+      + redigiTesto(testoChiaro: String): String
+      + sostituisciSegnaposto(testo: String): String
+      + applicaRevisioneUtente(bozza: String): String
+    }
+
+    class ArchivioOfflineLocale <<Service>> {
+      + salvaEventoLocale(payloadCifrato: Byte[]): void
+      + ottieniRubricaOffline(): List<ServizioTerritoriale>
+      + accodaSincronizzazione(idEvento: String): void
+      + sincronizzaConServer(): Boolean
+    }
+
+    ' Griglia interna 2x2
+    InterfacciaUtente -[hidden]down-> RedattoreOnDevice
+    GestoreCifraturaClient -[hidden]down-> ArchivioOfflineLocale
+  }
+
+  package "Applicazione Web CDF" {
+    class InterfacciaCDF <<Boundary>> {
+      + mostraDashboard(filtri: Map): void
+      + mostraDettaglioPratica(idPratica: String): void
+      + mostraGestioneAssenza(): void
+      + mostraReportCUG(): void
+    }
+
+    class ClientDecifraturaCDF <<Control>> {
+      + decifraContenutoE2EE(payload: Byte[]): String
+      + verificaIntegritaPayload(payload: Byte[]): Boolean
+    }
+
+    InterfacciaCDF -[hidden]down-> ClientDecifraturaCDF
+  }
+
+  package "Canale Audit Separato" {
+    class InterfacciaAuditDPO <<Boundary>> {
+      + consultaLogAudit(filtri: Map): List<VoceAudit>
+      + verificaCatenaHash(): Boolean
+    }
+  }
+
+  ' Impila Canale Audit sotto Web CDF (colonna 3)
+  ClientDecifraturaCDF -[hidden]down-> InterfacciaAuditDPO
+}
+
+' =========================================================
+' LIVELLO APPLICATIVO (3 FASCE VERTICALI DA MAX 3 COLONNE)
+' =========================================================
+package "Livello Applicativo" <<Applicativo>> {
+
+  package "Controllo Accessi e Sicurezza" {
+    class GestoreAccessiSicurezza <<Control>> {
+      + autenticaUtente(asserzioneSAML: String): Sessione
+      + verificaAutorizzazione(sessione: Sessione, ruolo: RuoloSistema): Boolean
+      + instradaRichiesta(sessione: Sessione, operazione: String): Object
+      + verificaTransitoCifrato(payload: Byte[]): Boolean
+    }
+
+    class Sessione <<Entity>> {
+      - idSessione: String
+      - idAccount: String
+      - ruolo: RuoloSistema
+      - tokenOpaco: String
+      - scadenza: DateTime
+      + isValida(): Boolean
+      + invalida(): void
+    }
+
+    class LoggerApplicativo <<Service>> {
+      + registraEventoTecnico(endpoint: String, esitoHTTP: Int, latenzaMs: Int): void
+      + ruotaTokenPseudonimo(): void
+    }
+
+    GestoreAccessiSicurezza -[hidden]down-> Sessione
+    GestoreAccessiSicurezza -[hidden]down-> LoggerApplicativo
+  }
+
+  package "Gestione Utente (MO_GU)" {
+    class GestoreDiario <<Control>> {
+      + sincronizzaEvento(idUtente: String, payloadCifrato: Byte[]): EventoDiario
+      + modificaEvento(idEvento: String, payloadCifrato: Byte[]): void
+      + rimuoviEvento(idEvento: String): void
+      + ottieniEventi(listaId: List<String>): List<EventoDiario>
+      + validaAllegato(allegato: Allegato): Boolean
+      + aggiornaAllegati(idEvento: String, allegati: List<Allegato>): void
+    }
+
+    class GestoreSegnalazione <<Control>> {
+      + salvaBozza(datiCifrati: Byte[]): Segnalazione
+      + inviaSegnalazione(datiCifrati: Byte[], metadati: MetadatoStatistico, allegati: List<Allegato>): Segnalazione
+      + ottieniDettagli(idSegnalazione: String, idNotifica: String): Segnalazione
+      + aggiornaSegnalazione(idSegnalazione: String, integrazioni: Byte[], allegati: List<Allegato>): void
+      + interrompiIter(idSegnalazione: String): void
+      + recuperaServiziECounseling(filtri: Map): List<ServizioTerritoriale>
+    }
+  }
+
+  package "Triage Guidato" {
+    class GestoreTriage <<Control>> {
+      + avviaTriageGuidato(testoDepurato: String): ValutazioneIA
+      + recuperaServiziConsigliati(tipologiaViolenza: String): List<ServizioTerritoriale>
+    }
+  }
+
+  package "Reportistica CUG" {
+    class GestoreReport <<Control>> {
+      + generaReport(periodo: String, filtri: Map): ReportStatistico
+      + aggregaMetadati(periodo: String): Map
+      + esportaReport(idReport: String, formato: String): Byte[]
+    }
+  }
+
+  package "Gestione CDF (MO_GCDF)" {
+    class GestorePratiche <<Control>> {
+      + ricercaPratiche(filtri: Map): List<Pratica>
+      + ottieniDettPratica(idPratica: String): Pratica
+      + prendiInCarico(idPratica: String, idCdf: String): void
+      + aggiornaStato(idPratica: String, nuovoStato: StatoIter, notaCifrata: Byte[]): void
+      + richiediIntegrazioni(idPratica: String, richiestaCifrata: Byte[]): void
+      + chiudiPratica(idPratica: String, esito: String, notaCifrata: Byte[]): void
+      + gestisciAssenza(idCdf: String, inizio: Date, fine: Date): PeriodoAssenza
+    }
+  }
+
+  package "Gestione Notifiche" {
+    class GestoreNotifiche <<Control>> {
+      + inviaNotificaStato(idDestinatario: String, tipo: String, messaggioGenerico: String): Notifica
+      + segnaLetta(idNotifica: String): void
+    }
+  }
+
+  ' Impilamento verticale interno su 3 fasce
+  Sessione -[hidden]down-> GestoreDiario
+  LoggerApplicativo -[hidden]down-> GestoreTriage
+  GestoreDiario -[hidden]down-> GestoreReport
+  GestoreSegnalazione -[hidden]down-> GestorePratiche
+  GestoreTriage -[hidden]down-> GestoreNotifiche
+}
+
+' =========================================================
+' FASCIA INTERMEDIA: MODULO IA (2 COL) + ESTERNI (1 COL)
+' =========================================================
+package "Modulo IA di Triage (Stateless / Zero-Retention)" <<ModuloIA>> {
+  class ModuloIATriage <<Service>> {
+    + valutaTestoDepurato(testoAnonimo: String): ValutazioneIA
+  }
+
+  class ValutazioneIA <<DTO>> {
+    - gravita: String
+    - tipologiaViolenza: String
+    - passiSuggeriti: String
+    - dataValutazione: DateTime
+    + ottieniValutazione(): Map
+  }
+
+  interface IProviderIA <<Interface>> {
+    + eseguiInferenzaStateless(promptDepurato: String): String
+  }
+
+  class AdattatoreProviderIA <<Adapter>> {
+    - endpointEsterno: String
+    - timeoutMs: Int
+    + eseguiInferenzaStateless(promptDepurato: String): String
+  }
+
+  ModuloIATriage -[hidden]down-> IProviderIA
+}
+
+package "Interfacce Sistemi Esterni" <<Esterni>> {
+  interface IServizioHSM <<Interface>> {
+    + decifraChiaveSessione(chiaveCifrata: Byte[]): Key
+  }
+
+  interface IServizioSSO <<Interface>> {
+    + validaAsserzioneSAML(token: String): Map
+    + ottieniRuoloIstituzionale(idUtente: String): RuoloSistema
+  }
+
+  interface IServizioNotifiche <<Interface>> {
+    + inviaEmail(destinatario: String, oggetto: String, testo: String): Boolean
+    + inviaPushInApp(idUtente: String, testo: String): Boolean
+  }
+
+  IServizioHSM -[hidden]down-> IServizioSSO
+  IServizioSSO -[hidden]down-> IServizioNotifiche
+}
+
+' =========================================================
+' LIVELLO PERSISTENZA E SICUREZZA (4 FASCE VERTICALI)
+' =========================================================
+package "Livello Persistenza e Sicurezza" <<Persistenza>> {
+
+  package "Persistenza Dati - Anagrafica" {
+    enum RuoloSistema {
+      UTENTE
+      CDF
+      DPO_AUDIT
+    }
+
+    abstract class AccountIstituzionale <<Entity>> {
+      # id: String
+      # nome: String
+      # cognome: String
+      # email: String
+      # ruolo: RuoloSistema
+      + ottieniProfilo(): Map
+      + ottieniContatto(): String
+    }
+
+    class Utente <<Entity>> {
+      - componenteAccademica: String
+      + aggiornaDati(): void
+    }
+
+    class Cdf <<Entity>> {
+      - attivo: Boolean
+      + aggiornaDisponibilita(stato: Boolean): void
+    }
+
+    RuoloSistema -[hidden]right-> AccountIstituzionale
+  }
+
+  package "Persistenza Dati - Contenuti Cifrati" {
+    enum StatoIter {
+      BOZZA
+      INVIATA
+      PRESA_IN_CARICO
+      IN_LAVORAZIONE
+      IN_ATTESA_INTEGRAZIONI
+      CHIUSA
+      ARCHIVIATA
+    }
+
+    class Diario <<Entity>> {
+      - id: String
+      - dataCreazione: Date
+      - cifrato: Boolean
+      + ottieniEventi(): List<EventoDiario>
+    }
+
+    class EventoDiario <<Entity>> {
+      - id: String
+      - dataEvento: Date
+      - oraEvento: Time
+      - payloadCifrato: Byte[]
+      - dataCreazione: DateTime
+      + ottieniDettagli(): Byte[]
+      + aggiornaPayload(nuovoPayload: Byte[]): void
+    }
+
+    class Allegato <<Entity>> {
+      - id: String
+      - nomeFile: String
+      - formato: String
+      - dimensioneMB: Float
+      - contenutoCifrato: Byte[]
+      + ottieniFile(): Byte[]
+      + isConforme(): Boolean
+    }
+
+    class Segnalazione <<Entity>> {
+      - id: String
+      - tipologia: String
+      - payloadCifrato: Byte[]
+      - stato: StatoIter
+      - solaLettura: Boolean
+      - dataCreazione: DateTime
+      - dataInvio: DateTime
+      + impostaStato(stato: StatoIter): void
+      + aggiungiIntegrazioni(payload: Byte[], allegati: List<Allegato>): void
+      + bloccaSolaLettura(): void
+    }
+
+    class Pratica <<Entity>> {
+      - id: String
+      - dataRicezione: DateTime
+      - tipologia: String
+      - statoCorrente: StatoIter
+      - solaLettura: Boolean
+      + impostaStato(stato: StatoIter): void
+      + isModificabile(): Boolean
+      + bloccaSolaLettura(): void
+    }
+
+    class StatoPratica <<Entity>> {
+      - id: String
+      - stato: StatoIter
+      - dataTransizione: DateTime
+      + ottieniStato(): StatoIter
+    }
+
+    class NotaCDF <<Entity>> {
+      - id: String
+      - payloadCifrato: Byte[]
+      - dataInserimento: DateTime
+      - visibileUtente: Boolean
+      + ottieniContenuto(): Byte[]
+    }
+
+    class EsitoPratica <<Entity>> {
+      - id: String
+      - esito: String
+      - notaConclusivaCifrata: Byte[]
+      - dataChiusura: DateTime
+      + ottieniEsito(): String
+    }
+
+    class PeriodoAssenza <<Entity>> {
+      - id: String
+      - dataInizio: Date
+      - dataFine: Date
+      - avvisoAttivo: Boolean
+      + attivaAvviso(): void
+      + disattivaAvviso(): void
+      + terminaOra(): void
+    }
+
+    ' Griglia interna su 3 colonne x 4 righe
+    Diario -[hidden]down-> EventoDiario
+    EventoDiario -[hidden]down-> Allegato
+    Allegato -[hidden]down-> StatoIter
+
+    Segnalazione -[hidden]down-> StatoPratica
+    StatoPratica -[hidden]down-> NotaCDF
+
+    Pratica -[hidden]down-> PeriodoAssenza
+    PeriodoAssenza -[hidden]down-> EsitoPratica
+  }
+
+  package "Persistenza Dati - Metadati e Supporto" {
+    class MetadatoStatistico <<Entity>> {
+      - id: String
+      - periodo: String
+      - tipologiaViolenza: String
+      - componenteAccademica: String
+      - statoFinale: StatoIter
+    }
+
+    class ReportStatistico <<Entity>> {
+      - id: String
+      - periodo: String
+      - datiAggregati: String
+      - dataGenerazione: DateTime
+      - formato: String
+      + ottieniReport(): Byte[]
+    }
+
+    class Notifica <<Entity>> {
+      - id: String
+      - tipo: String
+      - messaggioGenerico: String
+      - dataInvio: DateTime
+      - letta: Boolean
+      + segnaComeLetta(): void
+      + ottieniMessaggio(): String
+    }
+
+    class ServizioTerritoriale <<Entity>> {
+      - id: String
+      - nome: String
+      - indirizzo: String
+      - telefono: String
+      - email: String
+      - tipologia: String
+      + ottieniContatti(): Map
+    }
+
+    ' Griglia interna 2x2
+    MetadatoStatistico -[hidden]down-> ReportStatistico
+    Notifica -[hidden]down-> ServizioTerritoriale
+  }
+
+  package "Audit Log Immodificabile (WORM)" {
+    class GestoreAuditLog <<Service>> {
+      + registraOperazione(idOperatore: String, idPratica: String, azione: String, esito: String): VoceAudit
+      + consultaLog(filtri: Map): List<VoceAudit>
+      + verificaIntegritaCatena(): Boolean
+    }
+
+    class VoceAudit <<Entity>> {
+      - id: String
+      - timestamp: DateTime
+      - idOperatore: String
+      - idPratica: String
+      - azione: String
+      - esito: String
+      - hashPrecedente: String
+      - hashCorrente: String
+    }
+  }
+
+  ' Impilamento verticale dei 4 sotto-package di Persistenza
+  Utente -[hidden]down-> Diario
+  Cdf -[hidden]down-> Pratica
+  StatoIter -[hidden]down-> MetadatoStatistico
+  EsitoPratica -[hidden]down-> Notifica
+  ReportStatistico -[hidden]down-> GestoreAuditLog
+  ServizioTerritoriale -[hidden]down-> GestoreAuditLog
+}
+
+' =========================================================
+' SPINA DORSALE VERTICALE TRA I LIVELLI PRINCIPALI
+' =========================================================
+RedattoreOnDevice -[hidden]down-> GestoreAccessiSicurezza
+ArchivioOfflineLocale -[hidden]down-> GestoreAccessiSicurezza
+InterfacciaAuditDPO -[hidden]down-> GestoreAccessiSicurezza
+
+GestoreReport -[hidden]down-> ModuloIATriage
+GestorePratiche -[hidden]down-> ValutazioneIA
+GestoreNotifiche -[hidden]down-> IServizioHSM
+
+AdattatoreProviderIA -[hidden]down-> AccountIstituzionale
+IServizioNotifiche -[hidden]down-> RuoloSistema
+
+' =========================================================
+' RELAZIONI: PRESENTAZIONE -> SICUREZZA / CLIENT
+' =========================================================
+InterfacciaUtente -right-> GestoreCifraturaClient : cifra / decifra >
+InterfacciaUtente --> RedattoreOnDevice : depura testo >
+InterfacciaUtente --> ArchivioOfflineLocale : gestisce offline >
+InterfacciaUtente --> GestoreAccessiSicurezza : richieste autenticate >
+
+InterfacciaCDF --> ClientDecifraturaCDF : decifra E2EE >
+InterfacciaCDF --> GestoreAccessiSicurezza : richieste autenticate >
+ClientDecifraturaCDF ..> IServizioHSM : usa >
+
+InterfacciaAuditDPO --> GestoreAuditLog : consulta (sola lettura) >
+
+' =========================================================
+' RELAZIONI: CONTROLLO ACCESSI E ROUTING
+' =========================================================
+GestoreAccessiSicurezza ..> IServizioSSO : autentica >
+GestoreAccessiSicurezza "1" --> "0..*" Sessione : gestisce >
+GestoreAccessiSicurezza ..> LoggerApplicativo : traccia >
+
+GestoreAccessiSicurezza --> GestoreDiario : instrada >
+GestoreAccessiSicurezza --> GestoreSegnalazione : instrada >
+GestoreAccessiSicurezza --> GestoreTriage : instrada >
+GestoreAccessiSicurezza --> GestorePratiche : instrada >
+GestoreAccessiSicurezza --> GestoreReport : instrada >
+
+' =========================================================
+' RELAZIONI: APPLICATIVO -> PERSISTENZA / IA / NOTIFICHE / AUDIT
+' =========================================================
+GestoreDiario --> Diario
+GestoreDiario --> EventoDiario
+GestoreDiario --> Allegato
+ArchivioOfflineLocale ..> EventoDiario : sincronizza cifrato >
+ArchivioOfflineLocale ..> ServizioTerritoriale : cache offline >
+
+GestoreSegnalazione --> Segnalazione
+GestoreSegnalazione --> MetadatoStatistico : registra metadati >
+GestoreSegnalazione --> ServizioTerritoriale
+GestoreSegnalazione --> GestorePratiche : aggiorna su integrazioni >
+GestoreSegnalazione ..> GestoreNotifiche : attiva >
+
+GestoreTriage --> ModuloIATriage : invia testo depurato >
+GestoreTriage --> ServizioTerritoriale : suggerisce >
+GestoreTriage ..> ValutazioneIA : restituisce >
+
+ModuloIATriage ..> IProviderIA : usa (opzionale) >
+ModuloIATriage .right.> ValutazioneIA : genera (stateless) >
+IProviderIA <|.. AdattatoreProviderIA
+
+GestorePratiche --> Pratica
+GestorePratiche --> StatoPratica
+GestorePratiche --> NotaCDF
+GestorePratiche --> EsitoPratica
+GestorePratiche --> PeriodoAssenza
+GestorePratiche .right.> GestoreNotifiche : attiva >
+GestorePratiche ..> GestoreAuditLog : registra accesso >
+
+GestoreReport --> MetadatoStatistico : aggrega >
+GestoreReport --> ReportStatistico : produce >
+GestoreReport ..> GestoreAuditLog : registra esportazione >
+
+GestoreNotifiche --> Notifica : crea >
+GestoreNotifiche ..> AccountIstituzionale : legge contatti >
+GestoreNotifiche ..> IServizioNotifiche : inoltra >
+
+GestoreAuditLog "1" --> "0..*" VoceAudit : accoda (WORM) >
+
+' =========================================================
+' RELAZIONI DI DOMINIO (STRUTTURA DATI)
+' =========================================================
+AccountIstituzionale <|-- Utente
+AccountIstituzionale <|-- Cdf
+Sessione "0..*" -- "1" AccountIstituzionale
+
+Utente "1" *-- "1" Diario
+Utente "1" -- "0..*" Segnalazione : invia >
+
+Diario "1" *-- "0..*" EventoDiario
+EventoDiario "1" o-- "0..*" Allegato
+
+Segnalazione "0..1" o-- "0..*" Allegato
+Segnalazione "0..*" o-- "0..*" EventoDiario : include >
+Segnalazione "1" -- "0..*" Notifica : genera >
+
+Pratica "1" -left- "1" Segnalazione : associata a >
+Pratica "1" -- "0..1" MetadatoStatistico : proietta >
+Cdf "0..1" -- "0..*" Pratica : prende in carico >
+Cdf "1" *-- "0..*" PeriodoAssenza
+
+Pratica "1" *-- "1..*" StatoPratica
+Pratica "1" *-- "0..*" NotaCDF
+Pratica "1" *-- "0..1" EsitoPratica
+
+@enduml

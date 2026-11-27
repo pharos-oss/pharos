@@ -69,6 +69,7 @@
     "pseudonimizza",
     "pseudonimizzazione",
     "pseudonimizzato",
+    "pseudonimizzata",
     "CSPRNG",
     "riautentica",
     "dall'AI",
@@ -88,13 +89,15 @@
     "SMTPS",
     "Supabase",
     "ONNX",
-    "PostgREST"
+    "PostgREST",
+    "Impilamento"
   ],
   "ignorePaths": [
     "docs/out/**",
     "scripts/**",
     ".github/**",
     ".gitignore",
-    ".pre-commit-config.yaml"
+    ".pre-commit-config.yaml",
+    "docs/sdd/assets/*.svg"
   ]
 }
