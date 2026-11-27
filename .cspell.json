@@ -91,7 +91,7 @@
     "PostgREST"
     "DPD",
     "dpd",
-    "adaptee"
+    "adaptee",
     "Vlissides",
   ],
   "ignorePaths": [
