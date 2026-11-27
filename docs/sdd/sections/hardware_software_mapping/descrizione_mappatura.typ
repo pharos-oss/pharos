@@ -1,27 +1,44 @@
 #import "../../../templates/common.typ": palette-primary, readable-text, table-style
 
-La presente sezione descrive la mappatura tra i sottosistemi software che compongono la piattaforma Pharos e le risorse hardware e infrastrutturali deputate alla loro esecuzione. L'obiettivo è definire la topologia di distribuzione del sistema, specificando l'allocazione degli artefatti software sui rispettivi nodi di elaborazione e i protocolli di comunicazione adottati per l'interazione tra di essi, garantendo il soddisfacimento dei requisiti non funzionali e dei design goals stabiliti in termini di prestazioni, affidabilità, scalabilità e costi.
 
-#v(0.5em)
+= Mappatura Hardware/Software <mappatura_hw_sw>
+La presente sezione descrive la mappatura tra i sottosistemi software di Pharos (definiti in @decomposizione_sottosistemi e le risorse hardware e infrastrutturali deputate alla loro esecuzione. L'obiettivo è concretizzare la topologia di distribuzione del sistema per la realizzazione dell'MVP su infrastruttura cloud gestita in area UE (basata su Flutter Web e Supabase Cloud), specificando l'allocazione dei sottosistemi sui rispettivi nodi, i protocolli di comunicazione e la tracciabilità rispetto ai flussi architetturali `[F1]–[F4]`.
 
-=== Descrizione generale e relazioni tra i nodi
-La topologia di distribuzione di Pharos adotta un'architettura multi-livello strutturata per domini di fiducia, in cui il server applicativo centrale coordina le comunicazioni tra client, persistenza e servizi esterni su canali cifrati (HTTPS/TLS 1.3, SAML 2.0), mantenendo le operazioni crittografiche e di de-identificazione lato client. Di seguito sono riassunti il ruolo e le interazioni di ciascun nodo:
-
-- *Dispositivo Utente (`:UserDevice`):* Ospita InterfacciaUtente, la logica locale di GestoreDiario, il modulo crittografico e il motore di de-identificazione on-device. Interagisce con :UniversityIdP tramite SAML 2.0 per l'autenticazione SSO e con :ApplicationServer su HTTPS (TLS 1.3) per l'invio delle segnalazioni cifrate, il triage guidato tramite modulo IA e la sincronizzazione della coda offline.
-- *Postazione CDF (`:CDFWorkstation`):* Esegue InterfacciaCDF e il modulo client per la decifratura E2EE. Comunica con :UniversityIdP per l'accesso SSO + MFA, con :HSM_KMS per l'utilizzo protetto della chiave privata istituzionale e con :ApplicationServer su HTTPS (TLS 1.3) per la gestione delle pratiche e la generazione dei report.
-- *Server Applicativo (`:ApplicationServer`):* Funge da nodo centrale di orchestrazione, ospitando i servizi di business (GestoreSegnalazione, GestorePratiche, GestoreReport) e gli adattatori di integrazione (SSOAdapter, TriageAIProxy, NotificationGateway, AuditLogClient). Media tutte le comunicazioni tra i nodi client, il livello di persistenza, i nodi di sicurezza e i servizi esterni, senza mai accedere in chiaro ai contenuti cifrati E2EE.
-- *Server di Persistenza (`:PersistenceServer`):* Comunica esclusivamente con :ApplicationServer su rete privata cifrata per la memorizzazione separata di anagrafiche, pratiche cifrate, metadati statistici e allegati. Alimenta inoltre i processi di replica cifrata verso :AuditBackupStorage.
-- *Storage Audit e Backup (`:AuditBackupStorage`):* Riceve in scrittura append-only i log di accesso inviati da AuditLogClient (:ApplicationServer) su storage WORM e conserva i backup giornalieri cifrati provenienti da :PersistenceServer, rimanendo isolato per garantire la separazione dei ruoli (Separation of Duties).
-- *Modulo HSM/KMS (`:HSM_KMS`):* custodisce la chiave privata istituzionale del CDF e dialoga su canale cifrato dedicato con ⁠ :CDFWorkstation ⁠ (previa verifica della sessione SSO + MFA) per abilitare la decifratura delle pratiche senza esporre la chiave al livello applicativo.
-- *Nodo Inferenza IA (`:AIInferenceNode`):* invocato in modalità sincrona e stateless da ⁠ TriageAIProxy ⁠ (⁠ :ApplicationServer ⁠) su HTTPS (TLS 1.3), riceve testi già redatti on-device e restituisce la valutazione orientativa (⁠ ValutazioneIA ⁠) senza persistenza dei dati
-- *idP di Ateneo (`:UniversityIdP`):* nodo esterno che interagisce via SAML 2.0 con i client (⁠ :UserDevice ⁠, ⁠ :CDFWorkstation ⁠) e con ⁠ SSOAdapter ⁠ (⁠ :ApplicationServer ⁠) per verificare le identità istituzionali e fornire gli attributi di ruolo (RBAC).
-- *Servizio Notifiche (`:NotificationService`):* nodo esterno invocato in modo asincrono da ⁠ NotificationGateway ⁠ (⁠ :ApplicationServer ⁠) su TLS/SMTPS o HTTPS per recapitare agli utenti gli avvisi di aggiornamento stato privi di contenuti sensibili.
+In coerenza con il diagramma architetturale, la mappatura introduce due raffinamenti progettuali:
+- il nodo logico *Persistenza e Sicurezza* viene allocato su due nodi infrastrutturali distinti e amministrativamente separati (`:PersistenceServer` e `:AuditBackupStorage`), al fine di garantire la _Separation of Duties_ sull'*Audit Log Immodificabile* e la custodia _off-site_ dei backup;
+- per il *Modulo IA di Triage*, la configurazione MVP concretizza l'opzione di inferenza tramite container _stateless_ isolato e *Adattatore Provider IA* verso un *Provider IA esterno* in area SEE vincolato da DPA e policy _Zero-Retention_, preservando la possibilità di passare a un deployment _on-premise_ senza modificare *Triage Guidato* né gli altri sottosistemi.
 
 #pagebreak()
 
-=== Tabella dei nodi
+== Descrizione generale e relazioni tra i nodi
+La topologia di distribuzione di Pharos adotta un'architettura multi-livello organizzata per domini di fiducia e ospitata su servizi cloud gestiti in regione UE (GDPR-compliant), evitando dipendenze da infrastrutture _on-premise_ di Ateneo nella fase MVP pur mantenendo interfacce standard verso i servizi istituzionali. Tutte le comunicazioni avvengono su canali cifrati (HTTPS/TLS 1.3, SAML 2.0/OIDC), mentre la de-identificazione e le operazioni crittografiche End-to-End restano confinate sui dispositivi client. Di seguito sono descritti ruolo e interazioni di ciascun nodo:
 
-La tabella seguente riassume la mappatura tra i nodi hardware (o infrastrutturali) del sistema Pharos, la relativa piattaforma software di esecuzione (macchina virtuale), i componenti allocati e le principali connessioni di rete.
+- *Dispositivo Utente (`:UserDevice`):* Risorsa hardware mobile o desktop dell'Utente che esegue nel browser l'*Applicazione Web Utente (PWA)* realizzata in Flutter Web (artefatti statici distribuiti via CDN HTTPS), comprensiva di _Panic Button_, Diario delle evidenze cifrato _offline-first_, mappa e rubrica offline dei Servizi Territoriali, accesso al supporto di Counseling psicologico, motore di de-identificazione _on-device_ e cifratura/decifratura E2EE locale. Partecipa al flusso `[F1]` (autenticazione SSO via redirect browser verso `:UniversityIdP`) e comunica su HTTPS (TLS 1.3) con `:ApplicationServer` esclusivamente tramite il punto di ingresso unico *Controllo Accessi e Sicurezza* (`[F1–F3]`).
+
+- *Postazione CDF (`:CDFWorkstation`):* Risorsa hardware desktop del CDF che esegue nel browser l'*Applicazione Web CDF* (Flutter Web conforme a WCAG 2.1 AA) e il modulo client di decifratura E2EE. Partecipa al flusso `[F1]` (SSO + MFA verso `:UniversityIdP`), dialoga su canale cifrato dedicato con `:HSM_KMS` per l'utilizzo protetto della chiave privata del CDF (`[F3]`) e comunica su HTTPS (TLS 1.3) con `:ApplicationServer` esclusivamente tramite *Controllo Accessi e Sicurezza* (`[F1, F3, F4]`).
+
+- *Server Applicativo (`:ApplicationServer`):* Nodo cloud gestito (Supabase Cloud, regione UE) che ospita il livello applicativo. Espone *Controllo Accessi e Sicurezza* come punto di ingresso unico — responsabile di autenticazione SSO, autorizzazione RBAC, verifica che i dati sensibili transitino solo cifrati E2E, instradamento delle richieste e registrazione centralizzata di log applicativi e telemetria privi di dati riservati — e i sottosistemi *Gestione Utente (MO\_GU)*, *Gestione CDF (MO\_GCDF)*, *Triage Guidato*, *Reportistica CUG* e *Gestione Notifiche*. Al proprio interno, *Controllo Accessi e Sicurezza* instrada le richieste verso `MO_GU`, `MO_GCDF`, *Triage Guidato* e *Reportistica CUG*, mentre `MO_GU` e `MO_GCDF` invocano *Gestione Notifiche* (`[F3]`). Il nodo non accede mai in chiaro ai contenuti cifrati E2EE.
+
+- *Server di Persistenza (`:PersistenceServer`):* Nodo gestito di persistenza (Supabase Managed PostgreSQL e Supabase Storage in regione UE), accessibile esclusivamente dai sottosistemi di `:ApplicationServer` su canale cifrato. Ospita *Persistenza Dati*, mantenendo la separazione logica tra anagrafica, contenuti cifrati (Segnalazioni, Bozze, Pratiche, Note CDF, allegati e copia sincronizzata del Diario cifrata e inaccessibile sia al server sia al CDF), metadati statistici non identificativi e archivio dei Servizi Territoriali (`[F2–F4]`). In particolare, *Reportistica CUG* accede ai soli metadati statistici (`[F4]`) e *Gestione Notifiche* legge i soli dati di contatto (`[F3]`). Il nodo applica il vincolo di sola lettura alle Pratiche chiuse o archiviate e alimenta i backup giornalieri cifrati verso `:AuditBackupStorage`.
+
+- *Storage Audit e Backup (`:AuditBackupStorage`):* Servizio di object storage cloud WORM in regione UE (AWS S3 Object Lock in modalità _Compliance_), allocato su account/IAM isolato rispetto a `:PersistenceServer` (_Separation of Duties_). Ospita l'*Audit Log Immodificabile* (soli metadati di accessi e operazioni del CDF), scritto in modalità _append-only_ da *Gestione CDF (MO\_GCDF)* (`[F3]`) e consultabile in sola lettura — su canale separato, anch'esso tracciato — esclusivamente da DPO, responsabile sicurezza di Ateneo e autorità competenti (fuori dai flussi `[F1]–[F4]`). Conserva inoltre i backup giornalieri cifrati _off-site_.
+
+- *Nodo Modulo IA (`:AIInferenceNode`):* Container serverless _stateless_ in regione UE (Google Cloud Run / FastAPI), privo di persistenza locale e invocato in modalità sincrona con timeout da *Triage Guidato* (`:ApplicationServer`) su HTTPS (TLS 1.3) nel flusso `[F2]`. Ospita il *Modulo IA di Triage* (componente isolato interno a Pharos) e l'*Adattatore Provider IA*, elaborando esclusivamente testo già depurato _on-device_ e restituendo gravità, tipologia di violenza e passi dell'iter di segnalazione.
+
+#pagebreak()
+
+- *Provider di Identità di Ateneo (`:UniversityIdP`) \[Esterno\]:* Servizio esterno che gestisce l'autenticazione SSO (+ MFA per il CDF) e il rilascio degli attributi di ruolo (Utente / CDF) nel flusso `[F1]`, interagendo su HTTPS (TLS 1.3) con `:UserDevice`, `:CDFWorkstation` e *Controllo Accessi e Sicurezza* (`:ApplicationServer`). Basato sullo standard SAML 2.0 (Shibboleth / IDEM-GARR in esercizio; IdP federato cloud SAML 2.0/OIDC compatibile nella fase MVP).
+
+- *HSM/KMS istituzionale (`:HSM_KMS`) \[Esterno\]:* Servizio esterno deputato alla custodia e all'utilizzo protetto della chiave privata del CDF per la decifratura E2EE nel flusso `[F3]` (Cloud KMS hardware-backed in regione UE nell'MVP, sostituibile in esercizio con l'HSM/KMS istituzionale di Ateneo). Dialoga su canale cifrato dedicato esclusivamente con `:CDFWorkstation`, previa verifica della sessione SSO + MFA, senza esporre la chiave al livello applicativo.
+
+- *Servizio di Notifiche (`:NotificationService`) \[Esterno\]:* Servizio esterno invocato in modo asincrono da *Gestione Notifiche* (`:ApplicationServer`) su HTTPS o SMTPS/TLS nel flusso `[F3]` per il recapito di notifiche e-mail e Web Push prive di dettagli riservati sugli aggiornamenti di Stato Pratica.
+
+- *Provider IA esterno (`:ExternalAIProvider`) \[Esterno, opzionale\]:* Endpoint LLM gestito in area SEE vincolato da DPA art. 28 GDPR e policy _Zero-Retention_, invocato su HTTPS (TLS 1.3) nel flusso `[F2]` esclusivamente dall'*Adattatore Provider IA* (`:AIInferenceNode`) qualora il deployment del Modulo IA non sia _on-premise_.
+
+#v(0.5em)
+
+== Tabella dei nodi
+La tabella seguente riassume la mappatura tra i nodi hardware e infrastrutturali di Pharos nella configurazione MVP cloud gestita, la piattaforma software di esecuzione, i sottosistemi allocati, le responsabilità e le principali connessioni di rete.
 
 #v(0.5em)
 
@@ -38,57 +55,98 @@ La tabella seguente riassume la mappatura tra i nodi hardware (o infrastruttural
       inset: (x: 8pt, y: 8pt),
       align: (x, y) => if y == 0 or x == 0 { center + horizon } else { left },
 
-      text(fill: readable-text(palette-primary))[*Nodo Hardware / Infrastrutturale*],
-      text(fill: readable-text(palette-primary))[*Piattaforma / Macchina Virtuale*],
-      text(fill: readable-text(palette-primary))[*Componenti Software Allocati*],
-      text(fill: readable-text(palette-primary))[*Responsabilità e Connessioni*],
-
-      /* TODO: Da rivedere post revisione per la scelta finale della piattaforma utente (PWA/Nativa); in seguito riscrivere e riallineare i nomi delle componenti post approvazione scomposizione in sottosistemi, da rivedere le connessioni e le responsabilità */
+      table.header(
+        text(fill: readable-text(palette-primary))[*Nodo Hardware / Infrastrutturale*],
+        text(fill: readable-text(palette-primary))[*Piattaforma / Ambiente di Esecuzione*],
+        text(fill: readable-text(palette-primary))[*Sottosistemi e Componenti Allocati*],
+        text(fill: readable-text(palette-primary))[*Responsabilità e Connessioni*],
+      ),
 
       [*Dispositivo Utente* \ (`:UserDevice`)],
-      [#block(breakable: false)[OS Mobile/Desktop; Browser con _Service Worker_ e storage locale (PWA) _oppure_ runtime mobile con Android Keystore / iOS Keychain.]],
-      [#block(breakable: false)[Applicazione Utente (InterfacciaUtente, _Panic Button_, logica locale di GestoreDiario); modulo crittografico locale (AES-256 / E2EE); motore di de-identificazione _on-device_; cache locale cifrata (Diario, EventoDiario, ServizioTerritoriale) e coda di sincronizzazione _offline_.]],
-      [#block(breakable: false)[Erogazione UI accessibile (WCAG 2.1 AA), operatività _offline-first_, redazione testi e cifratura lato client. Connessione Wi-Fi o 4G/5G su HTTPS (TLS 1.3) verso `:ApplicationServer` e SAML 2.0 verso `:UniversityIdP`.]],
-      // guarda nota in cima alla tabella
-      [*Postazione CDF* \ (`:CDFWorkstation`)],
-      [#block(breakable: false)[OS Desktop; Web Browser moderno conforme WCAG 2.1 AA.]],
-      [#block(breakable: false)[Applicazione Web Consigliere di Fiducia (InterfacciaCDF); modulo client per la decifratura E2EE dei contenuti delle pratiche e visualizzazione dashboard/report.]],
-      [#block(breakable: false)[Presa in carico, avanzamento stato, inserimento note, gestione assenze e richiesta report CUG. Connessione Ethernet / rete di Ateneo su HTTPS (TLS 1.3) verso `:ApplicationServer` e SSO + MFA verso `:UniversityIdP` / \ `:HSM_KMS`.]],
-      // da rivedere quando si decide la tecnologia backend
-      [*Server Applicativo* \ (`:ApplicationServer`)],
-      [#block(breakable: false)[Linux Server; Docker Engine; Reverse Proxy e Runtime applicativo backend.]],
-      [#block(breakable: false)[Servizi applicativi dei domini `MO_GU` e `MO_GCDF` (GestoreSegnalazione, GestorePratiche, GestoreReport); adattatori di integrazione (SSOAdapter, TriageAIProxy, NotificationGateway, AuditLogClient).]],
-      [#block(breakable: false)[Coordinamento della logica di business, controllo accessi RBAC, aggregazione statistica e instradamento senza accesso ai testi in chiaro. Connessioni HTTPS/TLS 1.3 verso client, IA e servizi esterni; rete interna cifrata verso persistenza e sicurezza.]],
-      // da scegliere il database di persistenza (relazionale)
-      [*Server di Persistenza* \ (`:PersistenceServer`)],
-      [#block(breakable: false)[Linux Server; Docker Engine; DBMS Relazionale + Object Storage cifrato.]],
-      [#block(breakable: false)[Database con separazione logica tra anagrafica (Utente, Cdf), contenuti cifrati (Segnalazione, Pratica, StatoPratica, NotaCDF, EsitoPratica), metadati statistici (ReportStatistico), ServizioTerritoriale e PeriodoAssenza; storage cifrato per Allegato e sync cifrato del Diario.]],
-      [#block(breakable: false)[Persistenza transazionale sicura, paginazione indicizzata ($<$ 2 s p95) e blocco applicativo/DB in sola lettura (_read-only_) per pratiche «Chiuse» o «Archiviate». Accessibile esclusivamente da `:ApplicationServer` su rete privata cifrata.]],
-      // questo componente va bene
-      [*Storage Audit e Backup* \ (`:AuditBackupStorage`)],
-      [#block(breakable: false)[Storage WORM con _hash-chaining_; repository remoto cifrato _off-site_.]],
-      [#block(breakable: false)[`Audit Log` immodificabile (soli metadati operativi, accesso riservato a DPO/Sicurezza per _Separation of Duties_); archivio backup giornalieri cifrati.]],
-      [#block(breakable: false)[Garanzia di integrità dei log di accesso del CDF (retention 5 anni) e continuità operativa con RPO $<=$ 24 h (ripristino containerizzato con RTO $<=$ 4 h). Scrittura append-only da `:ApplicationServer` e replica cifrata automatizzata.]],
-      // questo componente va bene ma in revisione finale rivedrei le responsabilità della gestione della chiave CDF
-      [*Modulo HSM / KMS* \ (`:HSM_KMS`)],
-      [#block(breakable: false)[Hardware Security Module / Key Management Service istituzionale.]],
-      [#block(breakable: false)[Servizio di custodia, utilizzo protetto ed _escrow_ istituzionale della chiave privata del CDF.]],
-      [#block(breakable: false)[Protezione della chiave di decifratura E2EE del CDF e continuità in caso di avvicendamento del titolare. Accesso vincolato a sessione autenticata SSO + MFA su canale cifrato dedicato.]],
-      // da decidere la soluzione per l'implementazione del modello
-      [*Nodo Inferenza IA* \ (`:AIInferenceNode`)],
-      [#block(breakable: false)[Server _on-premise_ (Docker/GPU) _oppure_ endpoint IA gestito in area SEE (DPA art. 28 GDPR, _Zero-Retention_).]],
-      [#block(breakable: false)[Modulo IA di Triage _stateless_ (elaborazione semantica e generazione di ValutazioneIA).]],
-      [#block(breakable: false)[Classificazione orientativa su testi già redatti _on-device_, senza persistenza né riaddestramento. Invocazione sincrona con timeout ($<$ 5 s p95) da `:ApplicationServer` su HTTPS (TLS 1.3).]],
-      // questo componente va bene
-      [*IdP di Ateneo* \ (`:UniversityIdP`) \ _\[Esterno\]_],
-      [#block(breakable: false)[Shibboleth / SAML 2.0 (federazione IDEM-GARR).]],
-      [#block(breakable: false)[Servizio federato di autenticazione Single Sign-On e rilascio attributi di ruolo.]],
-      [#block(breakable: false)[Identificazione istituzionale degli utenti e del CDF senza duplicazione delle credenziali. Scambio asserzioni SAML 2.0 su HTTPS con i client e `:ApplicationServer`.]],
+      [#block(breakable: false)[OS Mobile/Desktop; Browser moderno con _Service Worker_, IndexedDB, Web Crypto API e WebAssembly (ONNX Runtime Web). Artefatti Flutter Web erogati via CDN HTTPS (Cloudflare Pages).]],
+      [#block(breakable: false)[*Applicazione Web Utente (PWA)*: UI accessibile (`Semantics`), _Panic Button_, Diario delle evidenze cifrato _offline-first_, mappa/rubrica offline dei Servizi Territoriali, accesso al Counseling, de-identificazione _on-device_, cifratura/decifratura E2EE locale.]],
+      [#block(breakable: false)[Erogazione UI (WCAG 2.1 AA), operatività offline, decifratura locale degli eventi selezionati per il Triage e crittografia client-side. Connessione Wi-Fi o 4G/5G: SSO SAML 2.0/OIDC verso `:UniversityIdP` (`[F1]`); HTTPS (TLS 1.3) verso `:ApplicationServer` solo tramite *Controllo Accessi e Sicurezza* (`[F1–F3]`).]],
 
-      [*Servizio Notifiche* \ (`:NotifyService`) \ _\[Esterno\]_],
-      [#block(breakable: false)[Server SMTP istituzionale / Gateway di notifica push.]],
-      [#block(breakable: false)[Servizio di inoltro asincrono per gli avvisi in-app ed e-mail (Notifica).]],
-      [#block(breakable: false)[Recapito notifiche di aggiornamento stato o richieste di integrazione prive di dati sensibili. Invocazione asincrona su TLS/SMTPS o HTTPS da `:ApplicationServer`.]],
+      [*Postazione CDF* \ (`:CDFWorkstation`)],
+      [#block(breakable: false)[OS Desktop; Browser moderno conforme WCAG 2.1 AA con Web Crypto API. Artefatti Flutter Web erogati via CDN HTTPS (Cloudflare Pages).]],
+      [#block(breakable: false)[*Applicazione Web CDF*: consultazione, ricerca e filtro Pratiche, presa in carico, Note CDF, Integrazioni, chiusura, Periodi di Assenza, Report Statistici ed esportazione; modulo client di decifratura E2EE.]],
+      [#block(breakable: false)[Lavorazione delle Pratiche e generazione report CUG. Connessione HTTPS (TLS 1.3): SSO + MFA verso `:UniversityIdP` (`[F1]`); canale cifrato dedicato verso `:HSM_KMS` per decifratura E2EE (`[F3]`); HTTPS verso `:ApplicationServer` solo tramite *Controllo Accessi e Sicurezza* (`[F1, F3, F4]`).]],
+
+      [*Server Applicativo* \ (`:ApplicationServer`)],
+      [#block(breakable: false)[Supabase Cloud (regione UE): API Gateway (Kong, TLS 1.3), Supabase Auth (GoTrue), PostgREST, Supabase Realtime e runtime serverless Deno/TypeScript (Edge Functions).]],
+      [#block(breakable: false)[*Controllo Accessi e Sicurezza* (punto di ingresso unico); *Gestione Utente (MO\_GU)*; *Gestione CDF (MO\_GCDF)*; *Triage Guidato*; *Reportistica CUG*; *Gestione Notifiche*.]],
+      [#block(breakable: false)[SSO/RBAC, verifica transito dati sensibili solo cifrati E2E, log applicativi/telemetria senza dati riservati, logica applicativa, notifiche in-app e orchestrazione (con `MO_GU` e `MO_GCDF` che invocano *Gestione Notifiche*). HTTPS/TLS 1.3 verso client, `:UniversityIdP` (`[F1]`), \ `:AIInferenceNode` (`[F2]`), \ `:NotificationService` (`[F3]`) e `:AuditBackupStorage` (`[F3]`); canale cifrato verso `:PersistenceServer` (`[F2–F4]`).]],
+
+      [*Server di Persistenza* \ (`:PersistenceServer`)],
+      [#block(breakable: false)[Supabase Cloud (regione UE): Managed PostgreSQL (schemi separati, RLS, trigger) e Supabase Storage cifrato (S3-backed).]],
+      [#block(breakable: false)[*Persistenza Dati*: archiviazione separata di anagrafica, contenuti cifrati (Segnalazioni, Bozze, Pratiche, Note CDF, allegati, copia sincronizzata del Diario), metadati statistici e archivio Servizi Territoriali.]],
+      [#block(breakable: false)[Persistenza transazionale sicura, paginazione indicizzata ($<$ 2 s p95), Diario cifrato inaccessibile a server e CDF, sola lettura su Pratiche chiuse/archiviate e snapshot cifrati. Accessibile solo da `:ApplicationServer` (`MO_GU`, `MO_GCDF`, *Reportistica CUG* per soli metadati, *Gestione Notifiche* per soli dati di contatto); replica backup cifrati verso `:AuditBackupStorage`.]],
+
+      [*Storage Audit e Backup* \ (`:AuditBackupStorage`)],
+      [#block(breakable: false)[Cloud Object Storage WORM in regione UE (AWS S3 `eu-central-1` con S3 Object Lock in modalità _Compliance_ e _hash-chaining_) su account/IAM isolato.]],
+      [#block(breakable: false)[*Audit Log Immodificabile* (soli metadati di accessi e operazioni del CDF); archivio backup giornalieri cifrati _off-site_. ]],
+      [#block(breakable: false)[Immutabilità WORM e non ripudio dei log del CDF (retention 5 anni, _Separation of Duties_) e continuità operativa (RPO $<=$ 24 h, RTO $<=$ 4 h). Scrittura _append-only_ da `MO_GCDF` (`:ApplicationServer`, `[F3]`), replica cifrata da `:PersistenceServer` e sola lettura tracciata su canale separato per DPO, responsabile sicurezza e autorità.]],
+
+      [*Nodo Modulo IA* \ (`:AIInferenceNode`)],
+      [#block(breakable: false)[Container serverless _stateless_ in regione UE (Google Cloud Run; runtime Python / FastAPI senza storage persistente).]],
+      [#block(breakable: false)[*Modulo IA di Triage* (componente isolato interno a Pharos) e *Adattatore Provider IA* (interfaccia OpenAI-compatible).]],
+      [#block(breakable: false)[Valutazione IA _stateless_ e _Zero-Retention_ (gravità, tipologia di violenza, passi dell'iter) su testo già depurato _on-device_. Invocazione sincrona con timeout ($<$ 5 s p95) da *Triage Guidato* (`:ApplicationServer`) su HTTPS/TLS 1.3 (`[F2]`); inoltro cifrato verso `:ExternalAIProvider` tramite adattatore.]],
+
+      [*Provider di Identità di Ateneo* \ (`:UniversityIdP`) \ _\[Esterno\]_],
+      [#block(breakable: false)[Standard SAML 2.0 (Shibboleth / IDEM-GARR in esercizio; IdP federato cloud SAML 2.0/OIDC con MFA nell'MVP).]],
+      [#block(breakable: false)[Servizio federato di autenticazione Single Sign-On (SSO + MFA) e fornitura dei ruoli (Utente / CDF).]],
+      [#block(breakable: false)[Identificazione istituzionale senza duplicazione delle credenziali (`[F1]`). Scambio asserzioni/token su HTTPS (TLS 1.3) con `:UserDevice`, \ `:CDFWorkstation` e *Controllo Accessi e Sicurezza* (`:ApplicationServer`).]],
+
+      [*HSM/KMS istituzionale* \ (`:HSM_KMS`) \ _\[Esterno\]_],
+      [#block(breakable: false)[Cloud KMS hardware-backed in regione UE (AWS KMS) nell'MVP; HSM/KMS istituzionale di Ateneo in esercizio.]],
+      [#block(breakable: false)[Servizio di custodia, utilizzo protetto ed _escrow_ della chiave privata del CDF.]],
+      [#block(breakable: false)[Custodia della chiave privata del CDF per la decifratura E2EE (`[F3]`) e continuità operativa in caso di avvicendamento. Invocazione su HTTPS (TLS 1.3) esclusivamente da `:CDFWorkstation`, vincolata a sessione SSO + MFA.]],
+
+      [*Servizio di Notifiche* \ (`:NotificationService`) \ _\[Esterno\]_],
+      [#block(breakable: false)[Gateway e-mail transazionale UE (Resend) e servizi Push dei browser tramite Web Push API (VAPID).]],
+      [#block(breakable: false)[Servizio esterno di recapito asincrono di notifiche e-mail e push.]],
+      [#block(breakable: false)[Recapito all'Utente di notifiche sugli aggiornamenti di Stato Pratica prive di dettagli riservati (`[F3]`). Invocazione asincrona su HTTPS/SMTPS (TLS 1.3) esclusivamente da *Gestione Notifiche* (`:ApplicationServer`).]],
+
+      [*Provider IA esterno* \ (`:ExternalAIProvider`) \ _\[Esterno, opzionale\]_],
+      [#block(breakable: false)[Endpoint LLM gestito in area SEE (Mistral AI EU / Azure OpenAI EU) con DPA art. 28 GDPR e policy _Zero-Retention_. ]],
+      [#block(breakable: false)[Modello LLM gestito per l'elaborazione della Valutazione IA.]],
+      [#block(breakable: false)[Utilizzato nell'MVP cloud in alternativa al deployment _on-premise_ (`[F2]`). Invocato su HTTPS (TLS 1.3) unicamente dall'*Adattatore Provider IA* (`:AIInferenceNode`) su testi già depurati _on-device_.]],
     )
   ]
+]
+
+== Diagramma di deployment
+
+#figure(
+  image("../../assets/diagramma_deployment.png", width: 120%),
+  caption: [Diagramma di deployment di Pharos (configurazione MVP su cloud gestito UE).],
+) <fig-deployment>
+
+#pagebreak()
+
+#[
+  #set text(size: 8pt)
+  #set par(justify: false)
+  #table(
+    columns: (auto, 1fr, auto, 1fr),
+    inset: 4.5pt,
+    align: horizon,
+    ..table-style(palette-primary),
+    table.header([*Notazione*], [*Significato*], [*Notazione*], [*Significato*]),
+
+    table.cell(fill: rgb("#E8E4F5"))[*Nodi Client*], [`:UserDevice` e `:CDFWorkstation` (Flutter Web)],
+    table.cell(fill: rgb("#DCE6F5"))[*Nodo Applicativo*], [`:ApplicationServer` (Supabase Cloud UE)],
+
+    table.cell(fill: rgb("#E3F1E6"))[*Nodi Persistenza/Audit*], [`:PersistenceServer` e `:AuditBackupStorage` (WORM)],
+    table.cell(fill: rgb("#FDEFD9"))[*Nodo Modulo IA*], [`:AIInferenceNode` (Cloud Run UE, stateless)],
+
+    table.cell(fill: rgb("#EFEFEF"))[*Sistemi esterni*], [IdP, HSM/KMS, Servizio Notifiche, Provider IA],
+    table.cell(fill: rgb("#F7F5FC"))[*Riquadro esterno*], [Confine del Sistema Pharos],
+
+    table.cell(fill: rgb("#ECECFF"))[*Componente* / *Cilindro*], [Sottosistema allocato / Archivio dati],
+    [*«stereotipo»*], [Tipologia del nodo infrastrutturale],
+
+    [*Freccia continua*], [Canale di comunicazione interno a Pharos (con protocollo)],
+    [*Freccia tratteggiata*], [Interazione verso sistema esterno o canale separato DPO],
+  )
 ]

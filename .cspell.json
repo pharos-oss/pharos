@@ -85,7 +85,10 @@
     "spessorato",
     "dasharray",
     "mmd",
-    "SMTPS"
+    "SMTPS",
+    "Supabase",
+    "ONNX",
+    "PostgREST"
   ],
   "ignorePaths": [
     "docs/out/**",
