@@ -1,6 +1,6 @@
 #import "../../../templates/common.typ": table-style, palette-primary
 
-== Observer - Notifiche di stato e Audit Log Immodificabile <pattern_observer>
+== 2.7 Observer - Notifiche di stato e Audit Log Immodificabile <pattern_observer>
 
 Nel flusso `[F3]` dell'SDD, le operazioni eseguite su una Pratica — sia gli aggiornamenti di Stato Pratica regolati tramite @pattern_state sia gli accessi in consultazione e decifratura da parte del Consigliere di Fiducia (CDF) — devono attivare due meccanismi indipendenti:
 
@@ -10,7 +10,7 @@ Nel flusso `[F3]` dell'SDD, le operazioni eseguite su una Pratica — sia gli ag
 
 Richiamare direttamente Gestione Notifiche e Audit Log Immodificabile all'interno di ogni singola operazione di Gestione Utente (`MO_GU`) e Gestione CDF (`MO_GCDF`) creerebbe una dipendenza rigida tra la gestione delle pratiche, il canale di notifica e l'archivio di audit.
 
-== Soluzione e ruoli
+== 2.8 Soluzione e ruoli - Observer
 
 Con il pattern *Observer*, i sottosistemi che eseguono le operazioni sulla Pratica non invocano direttamente i servizi di notifica e di audit, ma pubblicano un evento verso gli osservatori registrati. In particolare, Gestione Utente (`MO_GU`) e Gestione CDF (`MO_GCDF`) svolgono il ruolo di *ConcreteSubject* e trasmettono eventi composti esclusivamente da metadati operativi (identificativo della pratica, azione eseguita o nuovo Stato Pratica, identificativo dell'Utente o del CDF, _timestamp_ ed esito), senza mai includere contenuti sensibili in chiaro.
 
@@ -26,22 +26,28 @@ Per garantire `RNF_L_02` senza lacune in caso di guasto, la notifica verso *Audi
 
 #[
   #set par(justify: false)
+  #show figure: set block(breakable: true)
   #set table.cell(breakable: false)
-  #table(
-    columns: (1fr, 1.45fr, 2.05fr),
-    ..table-style(palette-primary),
-    inset: 7pt,
-    align: horizon,
-    table.header([*Ruolo GoF*], [*Componente in Pharos*], [*Responsabilità*]),
-    [Subject], [Interfaccia di notifica eventi (`MO_GU`, `MO_GCDF`)], [Consente di registrare e rimuovere gli osservatori e di notificare loro gli eventi relativi alla Pratica.],
-    [ConcreteSubject], [Gestione Utente (`MO_GU`), Gestione CDF (`MO_GCDF`)], [Notificano agli osservatori eventi composti esclusivamente da metadati operativi in corrispondenza di ogni aggiornamento di Stato Pratica e, per `MO_GCDF`, di ogni accesso o operazione del CDF.],
-    [Observer], [Interfaccia di ricezione eventi], [Definisce il contratto di aggiornamento invocato alla ricezione di un evento di Pratica.],
-    [ConcreteObserver 1], [Gestione Notifiche], [Reagisce agli aggiornamenti di Stato Pratica, legge i soli dati di contatto dalla Persistenza Dati e invia la notifica tramite il Servizio di Notifiche senza dettagli riservati (`RF_GU_07`).],
-    [ConcreteObserver 2], [Audit Log Immodificabile], [Reagisce in modo sincrono e atomico agli eventi di `MO_GCDF` registrando in sola aggiunta i metadati su storage WORM con _hash-chaining_ (`RNF_L_02`).],
+  #figure(
+    caption: [Ruoli GoF nel pattern Observer.],
+    table(
+      columns: (1.05fr, 1.35fr, 2.6fr),
+      ..table-style(palette-primary),
+      inset: 8pt,
+      align: left + horizon,
+      table.header([*Ruolo GoF*], [*Componente in Pharos*], [*Responsabilità*]),
+      [*Subject*], [Interfaccia di notifica eventi (`MO_GU`, `MO_GCDF`)], [Consente di registrare e rimuovere gli osservatori e di notificare loro gli eventi relativi alla Pratica.],
+      [*ConcreteSubject*], [Gestione Utente (`MO_GU`), Gestione CDF (`MO_GCDF`)], [Notificano agli osservatori eventi composti esclusivamente da metadati operativi in corrispondenza di ogni aggiornamento di Stato Pratica e, per `MO_GCDF`, di ogni accesso o operazione del CDF.],
+      [*Observer*], [Interfaccia di ricezione eventi], [Definisce il contratto di aggiornamento invocato alla ricezione di un evento di Pratica.],
+      [*ConcreteObserver 1*], [Gestione Notifiche], [Reagisce agli aggiornamenti di Stato Pratica, legge i soli dati di contatto dalla Persistenza Dati e invia la notifica tramite il Servizio di Notifiche senza dettagli riservati (`RF_GU_07`).],
+      [*ConcreteObserver 2*], [Audit Log Immodificabile], [Reagisce in modo sincrono e atomico agli eventi di `MO_GCDF` registrando in sola aggiunta i metadati su storage WORM con _hash-chaining_ (`RNF_L_02`).],
+    ),
   )
 ]
 
-== Conseguenze progettuali
+#v(3em)
+
+== 2.9 Conseguenze progettuali - Observer
 
 - *Benefici:* disaccoppia `MO_GU` e `MO_GCDF` da Gestione Notifiche e Audit Log Immodificabile; impedisce strutturalmente la diffusione di dati riservati trasmettendo eventi composti esclusivamente da metadati operativi e assicura l'atomicità della registrazione di audit.
 

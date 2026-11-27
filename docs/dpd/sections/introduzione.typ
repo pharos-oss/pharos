@@ -41,7 +41,7 @@ La tabella seguente riepiloga i tre pattern adottati, i sottosistemi dell'SDD co
 == Riferimenti
 - *RAD\_Pharos (V1.0, 23/11/2026):* requisiti funzionali (`RF`), requisiti non funzionali (`RNF`), casi d'uso, modello degli oggetti e diagrammi di stato.
 
-- *SDD\_Pharos (V0.4, 26/11/2026):* obiettivi di design, compromessi architetturali e decomposizione in sottosistemi.
+- *SDD\_Pharos (V0.5, 27/11/2026):* obiettivi di design, compromessi architetturali e decomposizione in sottosistemi, mapping hardware/software.
 
 - *Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994):* _Design Patterns: Elements of Reusable Object-Oriented Software_, Addison-Wesley.
 
