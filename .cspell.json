@@ -89,6 +89,8 @@
     "Supabase",
     "ONNX",
     "PostgREST"
+    "DPD",
+    "dpd"
   ],
   "ignorePaths": [
     "docs/out/**",
