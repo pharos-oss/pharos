@@ -13,8 +13,8 @@ flowchart-elk TB
       AC["Applicazione Web CDF<br/>Gestione Pratiche, Periodi di Assenza, Report CUG<br/>Decifratura E2EE client-side (Web Crypto)"]
     end
 
-    subgraph NS["«cloud managed» Server Applicativo (:ApplicationServer) — Server Cloud UE (API Gateway, Auth, Servizi applicativi, Realtime)"]
-      CA["Controllo Accessi e Sicurezza<br/>(Ingresso unico, SSO/RBAC, verifica E2E, log/telemetria)"]
+subgraph NS["«cloud managed» Server Applicativo (:ApplicationServer) — Server Cloud UE (API Gateway, Auth, Servizi applicativi, Realtime)"]
+      CA["Controllo Accessi e Sicurezza<br/>(Ingresso unico REST/Realtime, SSO/RBAC, verifica E2E, log minimizzati)"]
       GU["Gestione Utente (MO_GU)"]
       GC["Gestione CDF (MO_GCDF)"]
       TG["Triage Guidato"]
@@ -45,8 +45,8 @@ flowchart-elk TB
   end
 
   %% Comunicazioni interne a Pharos (frecce continue)
-  AU -->|"HTTPS (TLS 1.3) [F1–F3]"| CA
-  AC -->|"HTTPS (TLS 1.3) [F1, F3, F4]"| CA
+  AU -->|"HTTPS/WSS (TLS 1.3) [F1–F3]"| CA
+  AC -->|"HTTPS/WSS (TLS 1.3) [F1, F3, F4]"| CA
   CA --> GU & GC & TG & RC
   GU -->|"[F3]"| GN
   GC -->|"[F3]"| GN
