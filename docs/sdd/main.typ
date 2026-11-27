@@ -25,4 +25,4 @@
 
 #include "sections/introduzione.typ"
 
-#include "sections/glossario.typ"
+#include "sections/glossary.typ"
