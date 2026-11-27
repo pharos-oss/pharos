@@ -5,15 +5,15 @@ flowchart-elk TB
   subgraph PH["Confine del Sistema Pharos"]
     direction TB
 
-    subgraph ND["«device» Dispositivo Utente (:UserDevice) — Browser / Flutter Web PWA (CDN HTTPS)"]
+    subgraph ND["«device» Dispositivo Utente (:UserDevice) — Browser / Vue.js PWA (CDN HTTPS)"]
       AU["Applicazione Web Utente (PWA)<br/>UI WCAG 2.1 AA, Panic Button, Diario cifrato offline (IndexedDB)<br/>Servizi Territoriali offline, Counseling, De-identificazione (WASM), E2EE (Web Crypto)"]
     end
 
-    subgraph NC["«device» Postazione CDF (:CDFWorkstation) — Desktop Browser / Flutter Web (CDN HTTPS)"]
+    subgraph NC["«device» Postazione CDF (:CDFWorkstation) — Desktop Browser / Vue.js (CDN HTTPS)"]
       AC["Applicazione Web CDF<br/>Gestione Pratiche, Periodi di Assenza, Report CUG<br/>Decifratura E2EE client-side (Web Crypto)"]
     end
 
-    subgraph NS["«cloud managed» Server Applicativo (:ApplicationServer) — Supabase Cloud UE (Kong, Auth, Edge Functions, Realtime)"]
+    subgraph NS["«cloud managed» Server Applicativo (:ApplicationServer) — Server Cloud UE (Kong, Auth, Edge Functions, Realtime)"]
       CA["Controllo Accessi e Sicurezza<br/>(Ingresso unico, SSO/RBAC, verifica E2E, log/telemetria)"]
       GU["Gestione Utente (MO_GU)"]
       GC["Gestione CDF (MO_GCDF)"]
@@ -27,7 +27,7 @@ flowchart-elk TB
       AD["Adattatore Provider IA<br/>(OpenAI-compatible)"]
     end
 
-    subgraph NP["«cloud managed» Server di Persistenza (:PersistenceServer) — Supabase Cloud UE (PostgreSQL RLS + Storage cifrato)"]
+    subgraph NP["«cloud managed» Server di Persistenza (:PersistenceServer) — Server Cloud UE (Database in cloud + Storage cifrato)"]
       PD[("Persistenza Dati<br/>Anagrafica | Contenuti cifrati E2EE e Diario<br/>Metadati statistici | Servizi Territoriali")]
     end
 
