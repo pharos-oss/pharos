@@ -1,0 +1,40 @@
+%%{init: {'flowchart': {'curve': 'stepAfter', 'nodeSpacing': 45, 'rankSpacing': 70}}}%%
+flowchart TD
+    %% --- STILI ---
+    classDef home fill:#D5E8D4,stroke:#82B366,stroke-width:1.5px,color:#000
+    classDef screen fill:#DEEBF7,stroke:#2F528F,stroke-width:1.5px,color:#000
+    classDef panic fill:#F8CECC,stroke:#B85450,stroke-width:1.5px,color:#000
+
+    %% --- NODI ---
+    Home["Home Utente<br/>(MU_01)"]:::home
+
+    Diario["Diario delle Evidenze"]:::screen
+    MU02["Triage IA<br/>(MU_02)"]:::screen
+    MU04["Nuova Segnalazione<br/>(MU_04)"]:::screen
+    MU06["Dettaglio Segnalazione<br/>(MU_06)"]:::screen
+
+    MU03["Esito Triage<br/>(MU_03)"]:::screen
+    MU05["Conferma Invio<br/>(MU_05)"]:::screen
+
+    Panic["Chiusura Rapida<br/>(Panic Button)"]:::panic
+
+    %% --- ALLINEAMENTO LIVELLI ---
+    Home --> MU06
+    MU06 ~~~ MU05
+    Home --> MU04
+    MU04 ~~~ MU03
+    Home --> MU02
+    Home --> Diario
+
+    %% --- PROGRESSIONE DEI FLUSSI ---
+    MU02 --> MU03
+    MU03 --> MU04
+    MU04 --> MU05
+    MU05 --> MU06
+
+    %% --- Chiusura Rapida ---
+    MU02 -.-> Panic
+    MU03 -.-> Panic
+    MU04 -.-> Panic
+    MU05 -.-> Panic
+    MU06 -.-> Panic
