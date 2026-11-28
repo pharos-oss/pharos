@@ -26,7 +26,7 @@ jobs:
     uses: pharos-oss/management/.github/workflows/project-sync.yml@main
     with:
       automation-repo: pharos-oss/management
-      project-number: PROJECT_NUMBER
+      project-number: 1
     secrets:
       AUTOMATION_APP_ID: ${{ secrets.AUTOMATION_APP_ID }}
       AUTOMATION_APP_PRIVATE_KEY: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
