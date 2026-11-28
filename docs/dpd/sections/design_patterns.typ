@@ -4,10 +4,6 @@ In questa sezione vengono descritti i tre _design pattern_ utilizzati nella prog
 
 #include "patterns/adapter.typ"
 
-#v(5em)
-
 #include "patterns/state.typ"
-
-#v(5em)
 
 #include "patterns/observer.typ"

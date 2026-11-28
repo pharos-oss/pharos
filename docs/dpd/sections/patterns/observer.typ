@@ -1,8 +1,8 @@
 #import "../../../templates/common.typ": table-style, palette-primary
 
-== 2.7 Observer — Notifiche di stato e Audit Log Immodificabile <pattern_observer>
+== 2.3 Observer - Notifiche di stato e Audit Log Immodificabile <pattern_observer>
 
-Nel flusso `[F3]` dell'SDD, le operazioni eseguite su una Pratica — sia gli aggiornamenti di Stato Pratica regolati tramite @pattern_state sia gli accessi in consultazione e decifratura da parte del Consigliere di Fiducia (CDF) — devono attivare due meccanismi indipendenti:
+Nel flusso `[F3]` dell'SDD, le operazioni eseguite su una Pratica, quindi sia gli aggiornamenti di Stato Pratica regolati tramite @pattern_state sia gli accessi in consultazione e decifratura da parte del Consigliere di Fiducia (CDF), devono attivare due meccanismi indipendenti:
 
 1. l'invio all'Utente, tramite Gestione Notifiche, di notifiche in-app ed e-mail prive di dettagli riservati a ogni aggiornamento di Stato Pratica (`RF_GU_07`);
 
@@ -10,11 +10,7 @@ Nel flusso `[F3]` dell'SDD, le operazioni eseguite su una Pratica — sia gli ag
 
 Richiamare direttamente Gestione Notifiche e Audit Log Immodificabile all'interno di ogni singola operazione di Gestione Utente (`MO_GU`) e Gestione CDF (`MO_GCDF`) creerebbe una dipendenza rigida tra la gestione delle pratiche, il canale di notifica e l'archivio di audit.
 
-== 2.8 Soluzione e ruoli
-
 Con il pattern *Observer*, i sottosistemi che eseguono le operazioni sulla Pratica non invocano direttamente i servizi di notifica e di audit, ma pubblicano un evento verso gli osservatori registrati. In particolare, Gestione Utente (`MO_GU`) e Gestione CDF (`MO_GCDF`) svolgono il ruolo di *ConcreteSubject* e trasmettono eventi composti esclusivamente da metadati operativi (identificativo della pratica, azione eseguita o nuovo Stato Pratica, identificativo dell'Utente o del CDF, _timestamp_ ed esito), senza mai includere contenuti sensibili in chiaro.
-
-#pagebreak()
 
 Nell'ambito della gestione delle pratiche, gli osservatori implementano l'interfaccia comune *Observer* e reagiscono secondo il rispettivo vincolo di affidabilità:
 
@@ -46,8 +42,6 @@ Per garantire `RNF_L_02` senza lacune in caso di guasto, la scrittura verso *Aud
 ]
 
 #v(3em)
-
-== 2.9 Conseguenze progettuali
 
 - *Benefici:* disaccoppia `MO_GU` e `MO_GCDF` da Gestione Notifiche e Audit Log Immodificabile; impedisce strutturalmente la diffusione di dati riservati trasmettendo eventi composti esclusivamente da metadati operativi e garantisce la tracciabilità vincolante di ogni operazione del CDF.
 
