@@ -88,7 +88,14 @@
     "SMTPS",
     "Supabase",
     "ONNX",
-    "PostgREST"
+    "PostgREST",
+    "DPD",
+    "dpd",
+    "adaptee",
+    "Vlissides",
+    "SDD",
+    "RNF",
+    "CUG"
   ],
   "ignorePaths": [
     "docs/out/**",
