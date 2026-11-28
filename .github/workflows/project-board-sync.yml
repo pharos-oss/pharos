@@ -1,0 +1,32 @@
+name: Project board sync
+
+# ── TEMPLATE: Actions tab → New workflow ────────────────────────────────────────
+# Copy this file into .github/workflows/project-board-sync.yml of any repo whose
+# issues/PRs should appear on the org project board, then replace PROJECT_NUMBER
+# below with the board's number (Settings → Projects or the board URL).
+#
+# Note: jobs.<job_id>.uses does not accept contexts/expressions, so the
+# owner/repo below must be written out literally.
+#
+# The two App secrets are passed explicitly (not `secrets: inherit`) so this
+# stub exposes nothing beyond what project-sync.yml declares.
+# ────────────────────────────────────────────────────────────────────────────────
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, converted_to_draft, review_requested, closed]
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    name: Sync project board status
+    # zizmor: ignore[unpinned-uses] reason="reusable workflow; must track this repo's default branch so consumers receive fixes without editing every stub"
+    uses: pharos-oss/management/.github/workflows/project-sync.yml@main
+    with:
+      automation-repo: pharos-oss/management
+      project-number: PROJECT_NUMBER
+    secrets:
+      AUTOMATION_APP_ID: ${{ secrets.AUTOMATION_APP_ID }}
+      AUTOMATION_APP_PRIVATE_KEY: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
