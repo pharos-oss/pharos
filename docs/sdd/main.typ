@@ -56,3 +56,5 @@
 #include "sections/system_decomposition/decomposizione_sottosistemi.typ"
 
 #include "sections/hardware_software_mapping/descrizione_mappatura.typ"
+
+#include "sections/glossary.typ"
