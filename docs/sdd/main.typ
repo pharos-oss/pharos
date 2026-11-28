@@ -30,6 +30,7 @@
   ("24/11/2026", "0.3", "Stesura dell'Architettura del sistema corrente e della Panoramica del sistema proposto", "Carmine Saggese"),
   ("26/11/2026", "0.4", "Sviluppo della sezione: Decomposizione in sottosistemi", "Carmine Saggese, Francesco Imbriaco, Mario Senatore"),
   ("27/11/2026", "0.5", "Sviluppo della mappatura software/hardware", "Gianmarco Raimondi, Alessia D'Amico"),
+  ("27/11/2026", "0.6", "Elaborazione del diagramma delle classi ristrutturato", "Gianmarco Raimondi, Leonardo Trotta, Alessia D'Amico"),
 )
 
 #show: doc-template.with(
@@ -56,3 +57,5 @@
 #include "sections/system_decomposition/decomposizione_sottosistemi.typ"
 
 #include "sections/hardware_software_mapping/descrizione_mappatura.typ"
+
+#include "sections/class_diagram/class_diagram_ristrutturato.typ"
